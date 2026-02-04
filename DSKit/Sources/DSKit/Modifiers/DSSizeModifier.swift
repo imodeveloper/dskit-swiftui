@@ -26,25 +26,18 @@ public struct DSSizeModifier: ViewModifier {
     }
     
     private func modifiedContent(content: Content, geometry: GeometryProxy?) -> some View {
-        let width = geometry != nil ? calculateDimension(dimension: size.width, totalSize: geometry!.size.width) : calculateFixedDimension(dimension: size.width)
-        let height = geometry != nil ? calculateDimension(dimension: size.height, totalSize: geometry!.size.height) : calculateFixedDimension(dimension: size.height)
-        
+        let width = resolveDimension(dimension: size.width, totalSize: geometry?.size.width)
+        let height = resolveDimension(dimension: size.height, totalSize: geometry?.size.height)
+
         return content.frame(width: width, height: height)
     }
     
-    private func calculateDimension(dimension: DSDimension, totalSize: CGFloat) -> CGFloat? {
+    private func resolveDimension(dimension: DSDimension, totalSize: CGFloat?) -> CGFloat? {
         switch dimension {
         case .fillUpTheSpace:
             return totalSize
-        default:
-            return nil
-        }
-    }
-    
-    private func calculateFixedDimension(dimension: DSDimension) -> CGFloat? {
-        switch dimension {
         case .none:
-            return nil // No size set
+            return nil
         default:
             return dimension.value(appearance: appearance)
         }
