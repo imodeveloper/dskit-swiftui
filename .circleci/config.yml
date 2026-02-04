@@ -21,7 +21,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      - run: fastlane scan --device "iPhone 17 Pro" --result_bundle --output_directory test_output
+      - run: fastlane scan --scheme "DSKitExplorer" --project "DSKitExplorer.xcodeproj" --testplan "DSKitExplorer" --device "iPhone 17 Pro" --result_bundle --output_directory test_output
 
       # Collect XML test results data to show in the UI, and save the same XML
       # files under test-results folder in the Artifacts tab
