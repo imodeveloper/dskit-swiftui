@@ -47,10 +47,19 @@ extension DSAppearance {
 public extension DSAppearance {
     /// Override the system appearance settings (iOS only)
     func overrideTheSystemAppearance() {
+        overrideTheSystemAppearance(opaqueNavigationBar: true, opaqueTabBar: true)
+    }
+
+    /// Override the system appearance settings (iOS only)
+    func overrideTheSystemAppearance(opaqueNavigationBar: Bool, opaqueTabBar: Bool) {
         #if canImport(UIKit)
         // Configure Navigation Bar Appearance
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
+        if opaqueNavigationBar {
+            navigationBarAppearance.configureWithOpaqueBackground()
+        } else {
+            navigationBarAppearance.configureWithDefaultBackground()
+        }
         navigationBarAppearance.backgroundColor = self.navigationBar.bar
         
         navigationBarAppearance.titleTextAttributes = [
@@ -77,7 +86,11 @@ public extension DSAppearance {
         itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.tabBar.itemTint]
         
         let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
+        if opaqueTabBar {
+            tabBarAppearance.configureWithOpaqueBackground()
+        } else {
+            tabBarAppearance.configureWithDefaultBackground()
+        }
         tabBarAppearance.backgroundColor = self.tabBar.barTint
         tabBarAppearance.stackedLayoutAppearance = itemAppearance
         
@@ -91,8 +104,18 @@ public extension DSAppearance {
 
 public extension View {
     /// Apply the `DSAppearance` to the SwiftUI view
-    func dsAppearance(_ appearance: DSAppearance) -> some View {
-        appearance.overrideTheSystemAppearance()
+    func dsAppearance(
+        _ appearance: DSAppearance,
+        overrideSystemAppearance: Bool = false,
+        opaqueNavigationBar: Bool = false,
+        opaqueTabBar: Bool = false
+    ) -> some View {
+        if overrideSystemAppearance {
+            appearance.overrideTheSystemAppearance(
+                opaqueNavigationBar: opaqueNavigationBar,
+                opaqueTabBar: opaqueTabBar
+            )
+        }
         return self.environment(\.appearance, appearance)
     }
 }

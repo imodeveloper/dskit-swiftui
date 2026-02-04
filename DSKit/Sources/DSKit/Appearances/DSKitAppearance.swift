@@ -66,7 +66,7 @@ public struct LightBlueAppearance: DSAppearance {
         let separator: DSUIColor = .dynamic(light: 0xd0dbe3, dark: 0x38444d)
         
         // Corner radius
-        let cornerRadius: CGFloat = 10
+        let cornerRadius: CGFloat = 5
         
         // View
         primaryView = DSViewAppearance(

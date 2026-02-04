@@ -72,8 +72,8 @@ struct Testable_DSHScroll: View {
         Color.yellow
     ]
     var body: some View {
-        DSHScroll(spacing: .medium, data: colors, id: \.self) { color in
-            color.dsSize(60)
+        DSHScroll(spacing: .medium, data: Array(colors.enumerated()), id: \.offset) { item in
+            item.element.dsSize(60)
         }
     }
 }

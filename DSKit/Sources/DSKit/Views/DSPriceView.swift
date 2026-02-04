@@ -111,15 +111,17 @@ struct Testable_DSPriceView: View {
         discountBadge: "10% OFF"
     )
     var body: some View {
-        DSPriceView(price: price, size: .title1)
-        DSPriceView(price: price, size: .title2)
-        DSPriceView(price: price, size: .title3)
-        DSPriceView(price: price, size: .headline)
-        DSPriceView(price: price, size: .subheadline)
-        DSPriceView(price: price, size: .caption1, color: .green)
-        DSPriceView(price: price, size: .caption2, color: .green)
-        DSPriceView(price: price, size: .footnote)
-        DSPriceView(price: price, size: .fontWithSize(.headline, 20))
+        DSVStack(spacing: .regular) {
+            DSPriceView(price: price, size: .title1)
+            DSPriceView(price: price, size: .title2)
+            DSPriceView(price: price, size: .title3)
+            DSPriceView(price: price, size: .headline)
+            DSPriceView(price: price, size: .subheadline)
+            DSPriceView(price: price, size: .caption1, color: .green)
+            DSPriceView(price: price, size: .caption2, color: .green)
+            DSPriceView(price: price, size: .footnote)
+            DSPriceView(price: price, size: .fontWithSize(.headline, 20))
+        }
     }
 }
 

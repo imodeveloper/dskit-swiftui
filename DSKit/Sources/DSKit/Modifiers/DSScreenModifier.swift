@@ -11,6 +11,7 @@ public struct DSScreenModifier: ViewModifier {
     @Environment(\.appearance) var appearance: DSAppearance
     public func body(content: Content) -> some View {
         content
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .dsBackground(.primary)
             .dsContentMargins()
     }

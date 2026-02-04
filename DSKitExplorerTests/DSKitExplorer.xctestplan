@@ -31,6 +31,13 @@
         "identifier" : "60D46A052BCAF16600A6F7FC",
         "name" : "DSKitTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:DSKitExplorer.xcodeproj",
+        "identifier" : "A13AB2EBF9B24AEA9839D7CD",
+        "name" : "MNewsTests"
+      }
     }
   ],
   "version" : 1

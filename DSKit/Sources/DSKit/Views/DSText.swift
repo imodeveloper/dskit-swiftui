@@ -30,10 +30,12 @@ public struct DSText: View {
     
     let text: String
     let alignment: TextAlignment
+    let lineSpacing: CGFloat
     
-    public init(_ text: String, alignment: TextAlignment = .leading) {
+    public init(_ text: String, alignment: TextAlignment = .leading, lineSpacing: CGFloat = 0) {
         self.text = text
         self.alignment = alignment
+        self.lineSpacing = lineSpacing
     }
     
     public var body: some View {
@@ -41,6 +43,7 @@ public struct DSText: View {
             .font(textStyle.font(for: appearance))
             .foregroundStyle(textStyle.color(for: appearance, and: viewStyle))
             .multilineTextAlignment(alignment)
+            .lineSpacing(lineSpacing)
             .dsDebuggable(debugColor: Color.orange.opacity(0.3))
     }
 }

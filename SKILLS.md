@@ -27,5 +27,6 @@ Bundle ID:
 - DSKitExplorer: `dskit.app.DSKitExplorer.com`
 
 ## Notes
-- This repo is referenced by `../imodeveloperlab/Workspace.xcworkspace`.
+- This repo is referenced by `../imodeveloper/Workspace.xcworkspace`.
 - If CoreSimulator or log access errors occur, run the build command unsandboxed.
+- `Testable_DSImageView` uses a local demo image (from the app bundle) written to a temp file URL to keep snapshots deterministic.

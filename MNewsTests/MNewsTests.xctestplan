@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "D0B0A3E2-25D3-4D7D-8B03-5E0E4B0A5A49",
+      "name" : "Default",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "mainThreadCheckerEnabled" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:DSKitExplorer.xcodeproj",
+        "identifier" : "A13AB2EBF9B24AEA9839D7CD",
+        "name" : "MNewsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -14,37 +14,22 @@ public struct DSSizeModifier: ViewModifier {
     @Environment(\.appearance) var appearance: DSAppearance
     
     public func body(content: Content) -> some View {
-        Group {
-            if size.width == .fillUpTheSpace || size.height == .fillUpTheSpace {
-                GeometryReader { geometry in
-                    self.modifiedContent(content: content, geometry: geometry)
-                }
-            } else {
-                self.modifiedContent(content: content, geometry: nil)
-            }
-        }
-    }
-    
-    private func modifiedContent(content: Content, geometry: GeometryProxy?) -> some View {
-        let width = geometry != nil ? calculateDimension(dimension: size.width, totalSize: geometry!.size.width) : calculateFixedDimension(dimension: size.width)
-        let height = geometry != nil ? calculateDimension(dimension: size.height, totalSize: geometry!.size.height) : calculateFixedDimension(dimension: size.height)
+        let width = fixedDimension(for: size.width)
+        let height = fixedDimension(for: size.height)
+        let maxWidth = size.width == .fillUpTheSpace ? CGFloat.infinity : nil
+        let maxHeight = size.height == .fillUpTheSpace ? CGFloat.infinity : nil
         
-        return content.frame(width: width, height: height)
+        return content
+            .frame(width: width, height: height)
+            .frame(maxWidth: maxWidth, maxHeight: maxHeight)
     }
     
-    private func calculateDimension(dimension: DSDimension, totalSize: CGFloat) -> CGFloat? {
+    private func fixedDimension(for dimension: DSDimension) -> CGFloat? {
         switch dimension {
         case .fillUpTheSpace:
-            return totalSize
-        default:
             return nil
-        }
-    }
-    
-    private func calculateFixedDimension(dimension: DSDimension) -> CGFloat? {
-        switch dimension {
         case .none:
-            return nil // No size set
+            return nil
         default:
             return dimension.value(appearance: appearance)
         }

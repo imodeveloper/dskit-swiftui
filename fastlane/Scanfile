@@ -1,0 +1,7 @@
+scheme "DSKitExplorer"
+project "DSKitExplorer.xcodeproj"
+device "iPhone 17 Pro"
+testplan "DSKitExplorer"
+result_bundle true
+output_directory "test_output"
+clean true

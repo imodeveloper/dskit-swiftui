@@ -99,7 +99,7 @@ public struct DSButton: View {
             self.leftImage = DSImage(content: .image(image: DSUIImage(named: leftImageNamed)), size: .smallIcon)
         }
         
-        if let rightImageNamed {
+        if let rightImageNamed: String {
             self.rightImage = DSImage(content: .image(image: DSUIImage(named: rightImageNamed)), size: .smallIcon)
         }
         

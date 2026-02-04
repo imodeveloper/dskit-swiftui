@@ -37,3 +37,4 @@ Bundle ID:
 ## Notes
 - This repo is referenced by `../imodeveloperlab/Workspace.xcworkspace`.
 - If CoreSimulator access fails, run the build command unsandboxed.
+- `Testable_DSImageView` uses a local demo image (from the app bundle) written to a temp file URL to keep snapshots deterministic.

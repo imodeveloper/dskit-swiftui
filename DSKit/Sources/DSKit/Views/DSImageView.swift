@@ -112,11 +112,7 @@ public struct DSImageView: View {
                 .dsSize(image.size)
         case .image(image: let uiImage):
             
-            if unitTestMode {
-                Color.gray.opacity(0.1)
-                    .dsSize(image.size)
-                    .setDisplayShape(shape: image.displayShape)
-            } else if let uiImage {
+            if let uiImage {
                 Image(dsUIImage: uiImage)
                     .resizable()
                     .setImageTint(tint: image.tintColor)
@@ -129,49 +125,68 @@ public struct DSImageView: View {
                     .setDisplayShape(shape: image.displayShape)
             }
         case .imageURL(url: let url):
-            
-            GeometryReader(content: { geometry in
-                Group {
-                    if imageManager.image != nil {
-                        
-                        Color.gray.opacity(0.1)
-                            .overlay(alignment: .center) {
-                                Image(dsUIImage: imageManager.image!)
-                                    .resizable()
-                                    .setContentMode(mode: image.contentMode)
-                                    .opacity(imageLoaded ? 1 : 0)
-                                    .onAppear {
-                                        if imageManager.cacheType == .none {
-                                            withAnimation { imageLoaded = true }
-                                        } else {
-                                            imageLoaded = true
-                                        }
+            if unitTestMode {
+                if let uiImage = fileImage(for: url) {
+                    Color.gray.opacity(0.1)
+                        .overlay(alignment: .center) {
+                            Image(dsUIImage: uiImage)
+                                .resizable()
+                                .setContentMode(mode: image.contentMode)
+                        }
+                        .dsSize(image.size)
+                        .setDisplayShape(shape: image.displayShape)
+                } else {
+                    Color.gray.opacity(0.1)
+                        .dsSize(image.size)
+                        .setDisplayShape(shape: image.displayShape)
+                }
+            } else {
+                GeometryReader(content: { geometry in
+                    Group {
+                        if imageManager.image != nil {
+                            Color.gray.opacity(0.1)
+                                .overlay(alignment: .center) {
+                                    if let uiImage = imageManager.image {
+                                        Image(dsUIImage: uiImage)
+                                            .resizable()
+                                            .setContentMode(mode: image.contentMode)
+                                            .opacity(imageLoaded ? 1 : 0)
+                                            .onAppear {
+                                                if imageManager.cacheType == .none {
+                                                    withAnimation { imageLoaded = true }
+                                                } else {
+                                                    imageLoaded = true
+                                                }
+                                            }
                                     }
-                            }
-                            .setDisplayShape(shape: image.displayShape)
+                                }
+                                .setDisplayShape(shape: image.displayShape)
+                        } else {
+                            Color.gray.opacity(0.1)
+                                .setDisplayShape(shape: image.displayShape)
+                        }
+                    }
+                    .onAppear {
+                        let transformer = SDImageResizingTransformer(
+                            size: CGSize(width: geometry.size.width * 3, height:  geometry.size.height * 3),
+                            scaleMode: .aspectFill
+                        )
                         
-                    } else {
-                        Color.gray.opacity(0.1)
-                            .setDisplayShape(shape: image.displayShape)
+                        self.imageManager.load(url: url, context: [.imageTransformer: transformer])
                     }
-                }
-                .onAppear {
-                    if unitTestMode {
-                        return
+                    .onDisappear {
+                        self.imageManager.cancel()
                     }
-                
-                    let transformer = SDImageResizingTransformer(
-                        size: CGSize(width: geometry.size.width * 3, height:  geometry.size.height * 3),
-                        scaleMode: .aspectFill
-                    )
-                    
-                    self.imageManager.load(url: url, context: [.imageTransformer: transformer])
-                }
-                .onDisappear {
-                    self.imageManager.cancel()
-                }
-            }).dsSize(image.size)
+                }).dsSize(image.size)
+            }
         }
+    }
+    
+    private func fileImage(for url: URL?) -> DSUIImage? {
+        guard let url, url.isFileURL, let data = try? Data(contentsOf: url) else {
+            return nil
+        }
+        return DSUIImage(data: data)
     }
 }
 
@@ -277,15 +292,19 @@ extension DSImage {
 }
 
 struct Testable_DSImageView: View {
+    private static let localDemoImageURL: URL? = {
+        guard let image = DSUIImage(named: "demo", in: Bundle.main, with: nil),
+              let data = image.jpegData(compressionQuality: 0.9) else {
+            return nil
+        }
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("dskit-demo.jpg")
+        try? data.write(to: url, options: [.atomic])
+        return url
+    }()
     
-    let imageUrl = URL(string: "https://images.unsplash.com/photo-1702540122576-dd7d387f652f?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    )
+    let imageUrl = Testable_DSImageView.localDemoImageURL
     
-    let testImage = DSUIImage(
-        named: "demo",
-        in: Bundle(identifier: "app.DSKit"),
-        with: nil
-    )
+    let testImage = DSUIImage(named: "demo", in: Bundle.main, with: nil)
     
     var body: some View {
         DSVStack {
@@ -360,4 +379,3 @@ struct DSImageView_Previews: PreviewProvider {
         }
     }
 }
-
