@@ -35,7 +35,7 @@ To help you get started, DSKit includes demonstration screen code showcasing a w
 ## Get Started
 
 > [!Note]
-> If you're looking for the UIKit version of DSKit, you can find it here: [UIKit Version](https://github.com/imodeveloperlab/dskit).
+> If you're looking for the UIKit version of DSKit, you can find it here: [UIKit Version](https://github.com/imodeveloper/dskit).
 
 To get started with DSKit, you can integrate it into your projects using Swift Package Manager (SPM)
 
@@ -46,12 +46,12 @@ To add DSKit to your project, follow these steps:
 
 2. Add the package dependency:
    - Go to `File` > `Swift Packages` > `Add Package Dependency...`
-   - Enter the repository URL `git@github.com:imodeveloperlab/dskit-swiftui.git`.
+   - Enter the repository URL `git@github.com:imodeveloper/dskit-swiftui.git`.
    - Select the version of the package you wish to add. You can choose a specific release or the latest commit.
    - Xcode will download the package and ask which of your project's targets to add it to. Select the target where you want to use DSKit.
 
 ### Step 2: Set Up
-Once DSKit is added to your project, you can start using it by importing the package at the top of your Swift files where you intend to use the design system components. First, set up the appearance of your app by applying `.dsAppearance(RetroAppearance())`. the RetroAppearance is one of DSKit's appearances. You can create your own [appearance](https://github.com/imodeveloperlab/dskit-swiftui/blob/main/Content/Appearance-in-DSKit.md) by copying one that you like and then modifying it as needed.
+Once DSKit is added to your project, you can start using it by importing the package at the top of your Swift files where you intend to use the design system components. First, set up the appearance of your app by applying `.dsAppearance(RetroAppearance())`. the RetroAppearance is one of DSKit's appearances. You can create your own [appearance](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Appearance-in-DSKit.md) by copying one that you like and then modifying it as needed.
 
 ```swift
 import SwiftUI
@@ -69,7 +69,7 @@ struct DSKitDemoApp: App {
 ```
 
 ### Step 3: Using DSKit in Your Screens
-To integrate [DSKit components](https://github.com/imodeveloperlab/dskit-swiftui/blob/main/Content/Views.md) and modifiers into your SwiftUI views, simply use them like any other SwiftUI component or modifier. Here’s an example of how you might use DSKit:
+To integrate [DSKit components](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Views.md) and modifiers into your SwiftUI views, simply use them like any other SwiftUI component or modifier. Here’s an example of how you might use DSKit:
 
 ```swift
 import SwiftUI
@@ -96,7 +96,7 @@ struct ContentView: View {
 }
 ```
 
-In this example, [DSVStack](https://github.com/imodeveloperlab/dskit-swiftui/blob/main/Content/Views.md), [DSText](https://github.com/imodeveloperlab/dskit-swiftui/blob/main/Content/Views.md), and various modifiers like `dsPadding()` and `dsBackground()` are used. These components and modifiers are part of DSKit and help apply consistent styling and spacing as defined in your design system.
+In this example, [DSVStack](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Views.md), [DSText](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Views.md), and various modifiers like `dsPadding()` and `dsBackground()` are used. These components and modifiers are part of DSKit and help apply consistent styling and spacing as defined in your design system.
 
 ## Documentation
 
@@ -128,6 +128,6 @@ Since this is a very young project, it’s likely to have many limitations and m
 
 This project does not come with GitHub Issues-based support, and users are instead encouraged to become active participants in its continued development — by fixing any bugs that they encounter, or by improving the documentation wherever it’s found to be lacking.
 
-If you wish to make a change, open a [Pull Request](https://github.com/imodeveloperlab/dskit/pulls) — even if it just contains a draft of the changes you’re planning, or a test that reproduces an issue — and we can discuss it further from there.
+If you wish to make a change, open a [Pull Request](https://github.com/imodeveloper/dskit/pulls) — even if it just contains a draft of the changes you’re planning, or a test that reproduces an issue — and we can discuss it further from there.
 
 Hope you’ll enjoy using DSKit!
