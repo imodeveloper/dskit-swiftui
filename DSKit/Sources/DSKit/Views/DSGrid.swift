@@ -82,10 +82,10 @@ struct Testable_DSGrid: View {
         DSGrid(
             viewHeight: 50,
             columns: 3,
-            data: colors,
-            id: \.self,
-            content: { color in
-                color
+            data: Array(colors.enumerated()),
+            id: \.offset,
+            content: { item in
+                item.element
             }
         )
     }

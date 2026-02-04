@@ -112,11 +112,7 @@ public struct DSImageView: View {
                 .dsSize(image.size)
         case .image(image: let uiImage):
             
-            if unitTestMode {
-                Color.gray.opacity(0.1)
-                    .dsSize(image.size)
-                    .setDisplayShape(shape: image.displayShape)
-            } else if let uiImage {
+            if let uiImage {
                 Image(dsUIImage: uiImage)
                     .resizable()
                     .setImageTint(tint: image.tintColor)
@@ -129,49 +125,68 @@ public struct DSImageView: View {
                     .setDisplayShape(shape: image.displayShape)
             }
         case .imageURL(url: let url):
-            
-            GeometryReader(content: { geometry in
-                Group {
-                    if imageManager.image != nil {
-                        
-                        Color.gray.opacity(0.1)
-                            .overlay(alignment: .center) {
-                                Image(dsUIImage: imageManager.image!)
-                                    .resizable()
-                                    .setContentMode(mode: image.contentMode)
-                                    .opacity(imageLoaded ? 1 : 0)
-                                    .onAppear {
-                                        if imageManager.cacheType == .none {
-                                            withAnimation { imageLoaded = true }
-                                        } else {
-                                            imageLoaded = true
-                                        }
+            if unitTestMode {
+                if let uiImage = fileImage(for: url) {
+                    Color.gray.opacity(0.1)
+                        .overlay(alignment: .center) {
+                            Image(dsUIImage: uiImage)
+                                .resizable()
+                                .setContentMode(mode: image.contentMode)
+                        }
+                        .dsSize(image.size)
+                        .setDisplayShape(shape: image.displayShape)
+                } else {
+                    Color.gray.opacity(0.1)
+                        .dsSize(image.size)
+                        .setDisplayShape(shape: image.displayShape)
+                }
+            } else {
+                GeometryReader(content: { geometry in
+                    Group {
+                        if imageManager.image != nil {
+                            Color.gray.opacity(0.1)
+                                .overlay(alignment: .center) {
+                                    if let uiImage = imageManager.image {
+                                        Image(dsUIImage: uiImage)
+                                            .resizable()
+                                            .setContentMode(mode: image.contentMode)
+                                            .opacity(imageLoaded ? 1 : 0)
+                                            .onAppear {
+                                                if imageManager.cacheType == .none {
+                                                    withAnimation { imageLoaded = true }
+                                                } else {
+                                                    imageLoaded = true
+                                                }
+                                            }
                                     }
-                            }
-                            .setDisplayShape(shape: image.displayShape)
+                                }
+                                .setDisplayShape(shape: image.displayShape)
+                        } else {
+                            Color.gray.opacity(0.1)
+                                .setDisplayShape(shape: image.displayShape)
+                        }
+                    }
+                    .onAppear {
+                        let transformer = SDImageResizingTransformer(
+                            size: CGSize(width: geometry.size.width * 3, height:  geometry.size.height * 3),
+                            scaleMode: .aspectFill
+                        )
                         
-                    } else {
-                        Color.gray.opacity(0.1)
-                            .setDisplayShape(shape: image.displayShape)
+                        self.imageManager.load(url: url, context: [.imageTransformer: transformer])
                     }
-                }
-                .onAppear {
-                    if unitTestMode {
-                        return
+                    .onDisappear {
+                        self.imageManager.cancel()
                     }
-                
-                    let transformer = SDImageResizingTransformer(
-                        size: CGSize(width: geometry.size.width * 3, height:  geometry.size.height * 3),
-                        scaleMode: .aspectFill
-                    )
-                    
-                    self.imageManager.load(url: url, context: [.imageTransformer: transformer])
-                }
-                .onDisappear {
-                    self.imageManager.cancel()
-                }
-            }).dsSize(image.size)
+                }).dsSize(image.size)
+            }
         }
+    }
+    
+    private func fileImage(for url: URL?) -> DSUIImage? {
+        guard let url, url.isFileURL, let data = try? Data(contentsOf: url) else {
+            return nil
+        }
+        return DSUIImage(data: data)
     }
 }
 

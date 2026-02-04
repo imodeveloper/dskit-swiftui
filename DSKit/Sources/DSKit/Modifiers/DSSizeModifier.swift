@@ -14,28 +14,20 @@ public struct DSSizeModifier: ViewModifier {
     @Environment(\.appearance) var appearance: DSAppearance
     
     public func body(content: Content) -> some View {
-        Group {
-            if size.width == .fillUpTheSpace || size.height == .fillUpTheSpace {
-                GeometryReader { geometry in
-                    self.modifiedContent(content: content, geometry: geometry)
-                }
-            } else {
-                self.modifiedContent(content: content, geometry: nil)
-            }
-        }
+        let width = fixedDimension(for: size.width)
+        let height = fixedDimension(for: size.height)
+        let maxWidth = size.width == .fillUpTheSpace ? CGFloat.infinity : nil
+        let maxHeight = size.height == .fillUpTheSpace ? CGFloat.infinity : nil
+        
+        return content
+            .frame(width: width, height: height)
+            .frame(maxWidth: maxWidth, maxHeight: maxHeight)
     }
     
-    private func modifiedContent(content: Content, geometry: GeometryProxy?) -> some View {
-        let width = resolveDimension(dimension: size.width, totalSize: geometry?.size.width)
-        let height = resolveDimension(dimension: size.height, totalSize: geometry?.size.height)
-
-        return content.frame(width: width, height: height)
-    }
-    
-    private func resolveDimension(dimension: DSDimension, totalSize: CGFloat?) -> CGFloat? {
+    private func fixedDimension(for dimension: DSDimension) -> CGFloat? {
         switch dimension {
         case .fillUpTheSpace:
-            return totalSize
+            return nil
         case .none:
             return nil
         default:

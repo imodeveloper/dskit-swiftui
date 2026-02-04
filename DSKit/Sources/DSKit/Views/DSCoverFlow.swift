@@ -43,7 +43,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
     
-    @State private var currentElementID: Data.Element
+    @State private var currentElementID: Data.Element?
     
     public init(
         height: DSDimension,
@@ -59,27 +59,34 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
         self.data = data
         self.id = id
         self.content = content
-        _currentElementID = State(initialValue: data.first!)
+        _currentElementID = State(initialValue: data.first)
     }
     
     public var body: some View {
-        DSVStack(alignment: .center, spacing: .zero) {
-            GeometryReader { p in
-                DSPaginatedScrollView(
-                    pageWidth: p.size.width,
-                    interItemSpacing: appearance.spacing.value(for: spacing),
-                    data: data,
-                    id: id,
-                    currentPage: $currentElementID
-                ) { element in
-                    content(element)
+        Group {
+            if data.isEmpty {
+                Color.clear
+            } else {
+                DSVStack(alignment: .center, spacing: .zero) {
+                    GeometryReader { p in
+                        DSPaginatedScrollView(
+                            pageWidth: p.size.width,
+                            interItemSpacing: appearance.spacing.value(for: spacing),
+                            data: data,
+                            id: id,
+                            currentPage: $currentElementID
+                        ) { element in
+                            content(element)
+                        }
+                    }
+                    if showPaginationView {
+                        defaultPaginationIndicator()
+                            .dsPadding(.top)
+                    }
                 }
             }
-            if showPaginationView {
-                defaultPaginationIndicator()
-                    .dsPadding(.top)
-            }
-        }.dsHeight(height)
+        }
+        .dsHeight(height)
     }
     
     private func defaultPaginationIndicator() -> some View {
@@ -94,16 +101,12 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
     }
 }
 
-import SwiftUI
-
-import SwiftUI
-
 struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data: RandomAccessCollection, Data.Element: Equatable, ID: Hashable, Content: View {
     
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
-    @Binding var currentPage: Data.Element
+    @Binding var currentPage: Data.Element?
     let interItemSpacing: CGFloat
     let pageWidth: CGFloat
     
@@ -112,7 +115,7 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         interItemSpacing: CGFloat,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        currentPage: Binding<Data.Element>,
+        currentPage: Binding<Data.Element?>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.data = data
