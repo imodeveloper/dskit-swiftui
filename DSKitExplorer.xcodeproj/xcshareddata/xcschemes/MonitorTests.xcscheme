@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:MNewsTests/MNewsTests.xctestplan"
+            reference = "container:DSKitExplorerTests/DSKitExplorer.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -38,9 +38,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A13AB2EBF9B24AEA9839D7CD"
-               BuildableName = "MNewsTests.xctest"
-               BlueprintName = "MNewsTests"
+               BlueprintIdentifier = "60D469F82BCAF14000A6F7FC"
+               BuildableName = "DSKitExplorerTests.xctest"
+               BlueprintName = "DSKitExplorerTests"
                ReferencedContainer = "container:DSKitExplorer.xcodeproj">
             </BuildableReference>
          </TestableReference>

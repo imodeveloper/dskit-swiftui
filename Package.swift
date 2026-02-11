@@ -11,15 +11,15 @@ let package = Package(
         .library(name: "DSKit", targets: ["DSKit"]),
     ],
     dependencies: [
-        // Here, the .git suffix is acceptable because it's part of the URL
-        .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI.git", from: "3.0.4")
+        .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI.git", from: "3.0.4"),
+        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.19.2")
     ],
     targets: [
         .target(
             name: "DSKit",
             dependencies: [
-                // Corrected: Refer to the package by its name without the .git suffix
-                .product(name: "SDWebImageSwiftUI", package: "SDWebImageSwiftUI")
+                .product(name: "SDWebImageSwiftUI", package: "SDWebImageSwiftUI"),
+                .product(name: "SDWebImage", package: "SDWebImage")
             ],
             path: "DSKit/Sources"
         )

@@ -17,7 +17,7 @@
 ### DSKitExplorer
 ```
 /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild \
-  -project /Users/borinschi.ivan/Work/tmp/dskit-swiftui/DSKitExplorer.xcodeproj \
+  -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj \
   -scheme DSKitExplorer \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' \
   build
@@ -33,6 +33,7 @@ Bundle ID:
 ## Tests
 - Snapshot tests live in `DSKitTests` and `DSKitExplorerTests`.
 - Test plan: `DSKitExplorerTests/DSKitExplorer.xctestplan`.
+- Legacy `MNewsTests` target was removed from `DSKitExplorer.xcodeproj`.
 
 ## Notes
 - This repo is referenced by `../imodeveloperlab/Workspace.xcworkspace`.
