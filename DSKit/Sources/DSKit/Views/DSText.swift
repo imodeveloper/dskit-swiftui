@@ -190,9 +190,18 @@ struct DSText_Previews: PreviewProvider {
 }
 
 private let dsTextDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
-    ("Medium", .medium),
-    ("Accessibility Large", .accessibilityLarge),
-    ("Accessibility XXXL", .accessibilityExtraExtraExtraLarge)
+    ("extraSmall", .extraSmall),
+    ("small", .small),
+    ("medium", .medium),
+    ("large", .large),
+    ("extraLarge", .extraLarge),
+    ("extraExtraLarge", .extraExtraLarge),
+    ("extraExtraExtraLarge", .extraExtraExtraLarge),
+    ("accessibilityMedium", .accessibilityMedium),
+    ("accessibilityLarge", .accessibilityLarge),
+    ("accessibilityExtraLarge", .accessibilityExtraLarge),
+    ("accessibilityExtraExtraLarge", .accessibilityExtraExtraLarge),
+    ("accessibilityExtraExtraExtraLarge", .accessibilityExtraExtraExtraLarge)
 ]
 
 struct DSText_DynamicType_Previews: PreviewProvider {

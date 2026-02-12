@@ -141,12 +141,12 @@ public struct DSButton: View {
     ) {
         var leftImage: DSImage?
         if let leftSystemName {
-            leftImage = DSImage(content: .system(name: leftSystemName), size: .smallIcon)
+            leftImage = DSImage(content: .system(name: leftSystemName), size: .font(.headline))
         }
         
         var rightImage: DSImage?
         if let rightSystemName {
-            rightImage = DSImage(content: .system(name: rightSystemName), size: .smallIcon)
+            rightImage = DSImage(content: .system(name: rightSystemName), size: .font(.headline))
         }
         
         self.init(
@@ -198,7 +198,6 @@ public struct DSButton: View {
             if let leftImage {
                 DSImageView(dsImage: leftImage.imageWith(tint: titleColor))
                     .dsSize(leftImage.size)
-                    .font(.system(size: 25, weight: .semibold))
                 if pushContentToSides {
                     Spacer()
                 }
@@ -214,7 +213,6 @@ public struct DSButton: View {
                 }
                 DSImageView(dsImage: rightImage.imageWith(tint: titleColor))
                     .dsSize(rightImage.size)
-                    .font(.system(size: 25, weight: .semibold))
             }
         }
         .dsResetContentMargins()
@@ -275,7 +273,7 @@ public extension DSButton {
     static func sfSymbol(
         name: String,
         style: Style = .default,
-        size: DSSize = DSSize(.fontWithSize(.headline, 15)),
+        size: DSSize = DSSize(.headline),
         action: @escaping () -> Void
     ) -> DSButton {
         DSButton(
@@ -348,9 +346,18 @@ struct DSButton_Previews: PreviewProvider {
 }
 
 private let dsButtonDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
-    ("Medium", .medium),
-    ("Accessibility Large", .accessibilityLarge),
-    ("Accessibility XXXL", .accessibilityExtraExtraExtraLarge)
+    ("extraSmall", .extraSmall),
+    ("small", .small),
+    ("medium", .medium),
+    ("large", .large),
+    ("extraLarge", .extraLarge),
+    ("extraExtraLarge", .extraExtraLarge),
+    ("extraExtraExtraLarge", .extraExtraExtraLarge),
+    ("accessibilityMedium", .accessibilityMedium),
+    ("accessibilityLarge", .accessibilityLarge),
+    ("accessibilityExtraLarge", .accessibilityExtraLarge),
+    ("accessibilityExtraExtraLarge", .accessibilityExtraExtraLarge),
+    ("accessibilityExtraExtraExtraLarge", .accessibilityExtraExtraExtraLarge)
 ]
 
 struct DSButton_DynamicType_Previews: PreviewProvider {

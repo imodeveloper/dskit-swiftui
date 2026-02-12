@@ -38,11 +38,23 @@ final class DSKitTests: SnapshotTestCase {
     }
 
     func testDSButton_DynamicType() throws {
-        assertSnapshot(
-            for: Testable_DSButton()
-                .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge),
-            named: "DSButton_DynamicType"
-        )
+        for (categoryName, category) in dynamicTypeSnapshots {
+            assertSnapshot(
+                for: Testable_DSButton()
+                    .environment(\.sizeCategory, category),
+                named: "DSButton_DynamicType_\(categoryName)"
+            )
+        }
+    }
+    
+    func testDSButton_Symbols_DynamicType() throws {
+        for (categoryName, category) in dynamicTypeSnapshots {
+            assertSnapshot(
+                for: Testable_DSButtonSymbols()
+                    .environment(\.sizeCategory, category),
+                named: "DSButtonSymbols_DynamicType_\(categoryName)"
+            )
+        }
     }
     
     func testDSChevronView() throws {
@@ -90,11 +102,13 @@ final class DSKitTests: SnapshotTestCase {
     }
 
     func testDSTextField_DynamicType() throws {
-        assertSnapshot(
-            for: Testable_DSTextField()
-                .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge),
-            named: "DSTextField_DynamicType"
-        )
+        for (categoryName, category) in dynamicTypeSnapshots {
+            assertSnapshot(
+                for: Testable_DSTextField()
+                    .environment(\.sizeCategory, category),
+                named: "DSTextField_DynamicType_\(categoryName)"
+            )
+        }
     }
     
     func testDSToolbarSFSymbolButton() throws {
@@ -110,11 +124,13 @@ final class DSKitTests: SnapshotTestCase {
     }
 
     func testDSText_DynamicType() throws {
-        assertSnapshot(
-            for: Testable_DSText()
-                .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge),
-            named: "DSText_DynamicType"
-        )
+        for (categoryName, category) in dynamicTypeSnapshots {
+            assertSnapshot(
+                for: Testable_DSText()
+                    .environment(\.sizeCategory, category),
+                named: "DSText_DynamicType_\(categoryName)"
+            )
+        }
     }
     
     func testDSVStack() throws {
@@ -181,6 +197,40 @@ final class DSKitTests: SnapshotTestCase {
         RunLoop.main.run(until: Date().addingTimeInterval(0.05))
         wait(for: [expectation], timeout: timeout)
         return probe.measuredSize
+    }
+}
+
+private let dynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
+    ("extraSmall", .extraSmall),
+    ("small", .small),
+    ("medium", .medium),
+    ("large", .large),
+    ("extraLarge", .extraLarge),
+    ("extraExtraLarge", .extraExtraLarge),
+    ("extraExtraExtraLarge", .extraExtraExtraLarge),
+    ("accessibilityMedium", .accessibilityMedium),
+    ("accessibilityLarge", .accessibilityLarge),
+    ("accessibilityExtraLarge", .accessibilityExtraLarge),
+    ("accessibilityExtraExtraLarge", .accessibilityExtraExtraLarge),
+    ("accessibilityExtraExtraExtraLarge", .accessibilityExtraExtraExtraLarge)
+]
+
+private struct Testable_DSButtonSymbols: View {
+    var body: some View {
+        DSVStack {
+            DSButton.sfSymbol(name: "star.fill", action: {})
+            DSButton(
+                title: "Message",
+                leftSystemName: "message.fill",
+                action: {}
+            )
+            DSButton(
+                title: "Dual",
+                leftSystemName: "message.fill",
+                rightSystemName: "heart.fill",
+                action: {}
+            )
+        }
     }
 }
 

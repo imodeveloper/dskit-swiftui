@@ -59,7 +59,7 @@ public struct DSTextField: View {
             if let symbolName = leftSystemName {
                 DSImageView(
                     systemName: symbolName,
-                    size: 15,
+                    size: .font(.subheadline),
                     tint: hasText ? .view(.textField(.text)) : .view(.textField(.placeholder))
                 )
             }
@@ -78,12 +78,12 @@ public struct DSTextField: View {
             // Toggles visibility of the secure text entry (password visibility)
             if isSecureEntry {
                 let systemName = isSecureEntryVisible ? "eye.slash" : "eye"
-                DSImageView(systemName: systemName, size: 15, tint: .view(.textField(.text)))
+                DSImageView(systemName: systemName, size: .font(.subheadline), tint: .view(.textField(.text)))
                     .onTap {
                         isSecureEntryVisible.toggle()
                     }
             } else if isEditing && hasText {
-                DSImageView(systemName: "xmark.circle.fill", size: 15, tint: .view(.textField(.text))).onTapGesture {
+                DSImageView(systemName: "xmark.circle.fill", size: .font(.subheadline), tint: .view(.textField(.text))).onTapGesture {
                     model.text = ""
                 }
             }
@@ -187,9 +187,18 @@ struct DSTextField_Previews: PreviewProvider {
 }
 
 private let dsTextFieldDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
-    ("Medium", .medium),
-    ("Accessibility Large", .accessibilityLarge),
-    ("Accessibility XXXL", .accessibilityExtraExtraExtraLarge)
+    ("extraSmall", .extraSmall),
+    ("small", .small),
+    ("medium", .medium),
+    ("large", .large),
+    ("extraLarge", .extraLarge),
+    ("extraExtraLarge", .extraExtraLarge),
+    ("extraExtraExtraLarge", .extraExtraExtraLarge),
+    ("accessibilityMedium", .accessibilityMedium),
+    ("accessibilityLarge", .accessibilityLarge),
+    ("accessibilityExtraLarge", .accessibilityExtraLarge),
+    ("accessibilityExtraExtraLarge", .accessibilityExtraExtraLarge),
+    ("accessibilityExtraExtraExtraLarge", .accessibilityExtraExtraExtraLarge)
 ]
 
 struct DSTextField_DynamicType_Previews: PreviewProvider {
