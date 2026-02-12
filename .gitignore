@@ -99,3 +99,6 @@ iOSInjectionProject/
 DSKit.doccarchive/
 docs/
 node_modules/
+
+# macOS Finder
+.DS_Store
