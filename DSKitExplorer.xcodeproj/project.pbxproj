@@ -16,6 +16,7 @@
 		41A8581F2BF3415300375D4D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41A8581E2BF3415300375D4D /* SDWebImageSwiftUI */; };
 		41A858222BF3420000375D4D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858212BF3420000375D4D /* SDWebImage */; };
 		41A858242BF3421200375D4D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858232BF3421200375D4D /* SDWebImage */; };
+		542DDEF12F3D1A710064563A /* DSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604EED482BD23BE9009E3278 /* DSKit.framework */; };
 		604EED4B2BD23BE9009E3278 /* DSKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 604EED4A2BD23BE9009E3278 /* DSKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		604EED4F2BD23BE9009E3278 /* DSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 604EED482BD23BE9009E3278 /* DSKit.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		604EED602BD23D23009E3278 /* DSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604EED482BD23BE9009E3278 /* DSKit.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (Required, ); }; };
@@ -485,7 +486,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6092FE5C2BD2AC600016CB4A /* DSKit.framework in Frameworks */,
+				542DDEF12F3D1A710064563A /* DSKit.framework in Frameworks */,
 				41A858182BF340AF00375D4D /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

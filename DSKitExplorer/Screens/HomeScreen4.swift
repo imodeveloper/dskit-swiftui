@@ -34,11 +34,13 @@ struct HomeScreen4: View {
                         .onTap { viewModel.selectedCategory = category.id }
                 }.dsPadding(.top, .small)
                 
-                DSVStack {
-                    DSGrid(viewHeight: 190, data: viewModel.products, id: \.id) { product in
-                        ProductView(product: product).onTap { self.dismiss() }
-                    }
-                }.dsPadding(.top, .small)
+                DSGrid(viewHeight: 190, data: viewModel.products, id: \.id) { product in
+                    ProductView(product: product).onTap { self.dismiss() }
+                }
+                
+//                DSVStack {
+//                    
+//                }.dsPadding(.top, .small)
             }
         }.dsScreen()
     }
