@@ -100,5 +100,19 @@ DSKit.doccarchive/
 docs/
 node_modules/
 
+# Keep the agent-first knowledge files in docs/ (the rest of docs remains untracked).
+!docs/
+!docs/WORKFLOWS.md
+!docs/QUALITY.md
+!docs/PLANS.md
+!docs/design-docs/
+!docs/design-docs/index.md
+!docs/design-docs/core-principles.md
+!docs/exec-plans/
+!docs/exec-plans/active/
+!docs/exec-plans/active/README.md
+!docs/exec-plans/completed/
+!docs/exec-plans/completed/README.md
+
 # macOS Finder
 .DS_Store

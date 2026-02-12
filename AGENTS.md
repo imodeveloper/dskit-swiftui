@@ -1,41 +1,46 @@
 # Agent Instructions
 
-## Project Purpose
-- DSKit is a SwiftUI design system library.
-- DSKitExplorer is the demo app and snapshot-test surface for DSKit.
-- This repo is referenced by `../imodeveloperlab/Workspace.xcworkspace` to provide `DSKit.framework`.
+This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the full manual.
 
-## Architecture Pointers
-- Library sources: `DSKit/Sources/DSKit` (Views, Modifiers, Appearances, Helpers, Fonts).
-- Demo app: `DSKitExplorer/` with a screen catalog driven by `ScreenKey`.
-- Snapshot tests: `DSKitTests` and `DSKitExplorerTests` with goldens in `__Snapshots__`.
+## Read first (30–60 seconds)
+- `ARCHITECTURE.md`
+- `docs/design-docs/ds-wrapper-principles.md`
+- `docs/WORKFLOWS.md`
+- `docs/QUALITY.md`
+- `docs/PLANS.md`
+- Subscope entry points:
+  - `DSKit/AGENTS.md`
+  - `DSKitExplorer/AGENTS.md`
+  - `DSKitTests/AGENTS.md`
+  - `DSKitExplorerTests/AGENTS.md`
+  - `Scripts/AGENTS.md`
+  - `Content/AGENTS.md`
 
-## Build (simulator)
-- Project: `DSKitExplorer.xcodeproj`
-- Destination: `platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1`
+## Project map
+- DSKit library: `DSKit/Sources/DSKit`
+- Demo catalog app: `DSKitExplorer/`
+- Snapshot test surfaces:
+  - Component goldens in `DSKitTests/__Snapshots__/DSKitTests`
+  - Screen goldens in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`
+- Generated documentation: `Content/Views.md`
+- Determinism-sensitive tooling: `Scripts/documentation_generator.sh`
+- Workspace integration: this package is consumed by `../imodeveloperlab/Workspace.xcworkspace`.
 
-### DSKitExplorer
-```
-/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild \
-  -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj \
-  -scheme DSKitExplorer \
-  -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' \
-  build
-```
+## Runtime constraints
+- Build target: `DSKitExplorer` scheme in `DSKitExplorer.xcodeproj`
+- Primary simulator: `platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1`
+- Bundle ID: `dskit.app.DSKitExplorer.com`
+- Snapshot harness:
+  - Keep visual tests stable and deterministic
+  - Preserve local test fixtures used by image snapshots
+  - Update goldens only when behavior is intentionally changed
 
-## Run (simulator)
-- Preferred: open `DSKitExplorer.xcodeproj` in Xcode and run the `DSKitExplorer` scheme on **iPhone 17 Pro (iOS 26.1)**.
-- CLI alternative (if needed): install and launch from DerivedData.
+## Design tokens reference
+- `DSAppearance` is the source of theme, spacing, and typography tokens.
+- Spacing system: `DSSpacingSystem` and `DSPaddingSystem` expose `.small/.regular/.medium` scales from `appearance`.
+- Typography system: `DSFonts` + `DSTextFontKey`, resolved through `DSText` via `dsTextStyle(...)`.
+- Colors and surface tokens are exposed via `DSColorKey` and mapped through `DSViewStyle`/`DSAppearance`.
 
-Bundle ID:
-- DSKitExplorer: `dskit.app.DSKitExplorer.com`
-
-## Tests
-- Snapshot tests live in `DSKitTests` and `DSKitExplorerTests`.
-- Test plan: `DSKitExplorerTests/DSKitExplorer.xctestplan`.
-- Legacy `MNewsTests` target was removed from `DSKitExplorer.xcodeproj`.
-
-## Notes
-- This repo is referenced by `../imodeveloperlab/Workspace.xcworkspace`.
-- If CoreSimulator access fails, run the build command unsandboxed.
-- `Testable_DSImageView` uses a local demo image (from the app bundle) written to a temp file URL to keep snapshots deterministic.
+## Quick command
+- Build DSKitExplorer:
+  - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' build`
