@@ -15,6 +15,16 @@ struct ScreenView: View {
     
     var body: some View {
         switch screen {
+        case .designTokensPlayground:
+            DesignTokensPlaygroundScreen()
+                .environment(\.appearance, appearance)
+                .platformBasedNavigationBarTitleDisplayModeInline()
+                .navigationTitle("Design Tokens")
+        case .dynamicTypePlayground:
+            DynamicTypePlaygroundScreen()
+                .environment(\.appearance, appearance)
+                .platformBasedNavigationBarTitleDisplayModeInline()
+                .navigationTitle("Dynamic Type")
         case .foodCategoriesScreen1:
             FoodCategoriesScreen1()
                 .environment(\.appearance, appearance)
@@ -304,5 +314,152 @@ struct ScreenView: View {
                 .navigationTitle("Filters")
                 .environment(\.appearance, appearance)
         }
+    }
+}
+
+let dynamicTypeShowcaseSamples: [(String, ContentSizeCategory)] = [
+    ("System Size", .medium),
+    ("Accessibility Large", .accessibilityLarge),
+    ("Accessibility XXXL", .accessibilityExtraExtraExtraLarge)
+]
+
+struct DynamicTypePlaygroundScreen: View {
+    var body: some View {
+        ScrollView {
+            DSVStack(spacing: .regular) {
+                DSVStack(spacing: .small) {
+                    DSText("Native DSKit wrappers")
+                        .dsTextStyle(.largeTitle)
+                    DSText("This catalog screen demonstrates token-driven spacing, colors, typography, and dynamic type behavior using DSKit wrappers.")
+                        .dsTextStyle(.body)
+                }
+                .dsCardStyle(padding: .regular)
+                
+                ForEach(dynamicTypeShowcaseSamples, id: \.0) { label, category in
+                    DSVStack(spacing: .small) {
+                        DSText("Dynamic Type: \(label)")
+                            .dsTextStyle(.headline)
+                        DynamicTypePlaygroundRow(category: category)
+                    }
+                    .dsCardStyle(padding: .regular)
+                }
+            }
+            .dsPadding()
+        }
+        .dsBackground(.primary)
+    }
+}
+
+private struct DynamicTypePlaygroundRow: View {
+    let category: ContentSizeCategory
+    
+    @State private var name = DSTextFieldValue(value: "Alex Morgan")
+    @State private var email = DSTextFieldValue(value: "alex.morgan@dskit.app")
+    
+    var body: some View {
+        DSVStack(spacing: .small) {
+            DSText("Tokens stay semantic while scale adapts across wrappers.")
+                .dsTextStyle(.body)
+            
+            DSVStack(spacing: .small) {
+                DSButton(title: "Continue with Dynamic Type", action: {})
+                DSText("Long body text demonstrates wrapping and vertical rhythm in DS components.").dsTextStyle(.body)
+                DSTextField.name(value: name)
+                DSTextField.email(value: email)
+            }
+            .dsPadding()
+            .dsSecondaryBackground()
+            .dsCornerRadius()
+        }
+        .environment(\.sizeCategory, category)
+    }
+}
+
+struct DesignTokensPlaygroundScreen: View {
+    var body: some View {
+        ScrollView {
+            DSVStack(spacing: .regular) {
+                DSVStack(spacing: .small) {
+                    DSText("Design Tokens in DSKit")
+                        .dsTextStyle(.largeTitle)
+                    DSText("Wrappers use semantic tokens from appearance so spacing, colors, and typography remain consistent across every screen.")
+                        .dsTextStyle(.body)
+                }
+                .dsCardStyle()
+                
+                spacingShowcase
+                typographyShowcase
+                colorShowcase
+            }
+            .dsPadding()
+        }
+        .dsBackground(.primary)
+    }
+    
+    private var spacingShowcase: some View {
+        DSVStack(spacing: .small) {
+            DSText("Spacing")
+                .dsTextStyle(.headline)
+            spacingRow(title: "small", space: .small)
+            spacingRow(title: "regular", space: .regular)
+            spacingRow(title: "medium", space: .medium)
+        }
+        .dsCardStyle()
+    }
+    
+    private var typographyShowcase: some View {
+        DSVStack(spacing: .small) {
+            DSText("Typography")
+                .dsTextStyle(.headline)
+            DSText("title1").dsTextStyle(.title1)
+            DSText("headline").dsTextStyle(.headline)
+            DSText("body").dsTextStyle(.body)
+            DSText("caption1").dsTextStyle(.caption1)
+        }
+        .dsCardStyle()
+    }
+    
+    private var colorShowcase: some View {
+        DSVStack(spacing: .small) {
+            DSText("Theme surfaces")
+                .dsTextStyle(.headline)
+            DSVStack(spacing: .small) {
+                colorShowcaseRow(title: "Primary Surface", style: .primary)
+                colorShowcaseRow(title: "Secondary Surface", style: .secondary)
+            }
+        }
+        .dsCardStyle()
+    }
+    
+    private func spacingRow(title: String, space: DSSpace) -> some View {
+        DSVStack(spacing: space) {
+            DSText(title)
+                .dsTextStyle(.smallSubheadline)
+            DSHStack(spacing: space) {
+                Color.clear
+                    .frame(width: 36, height: 30)
+                Color.clear
+                    .frame(width: 36, height: 30)
+                Color.clear
+                    .frame(width: 36, height: 30)
+            }
+            .padding(1)
+            .background(Color.secondary.opacity(0.2))
+            .cornerRadius(8)
+        }
+    }
+    
+    private func colorShowcaseRow(title: String, style: DSViewStyle) -> some View {
+        DSVStack(spacing: .small) {
+            DSText(title)
+                .dsTextStyle(.subheadline)
+            DSText("These wrappers inherit view style and color tokens automatically.")
+                .dsTextStyle(.body)
+            DSButton(title: "Action", style: .light, maxWidth: false, action: {})
+        }
+        .environment(\.viewStyle, style)
+        .dsPadding()
+        .dsBackground(style)
+        .dsCornerRadius()
     }
 }

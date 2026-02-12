@@ -230,3 +230,39 @@
 //    }
 //    
 //}
+
+import SwiftUI
+import XCTest
+import SnapshotTesting
+@testable import DSKitExplorer
+
+final class DSKitExplorerDynamicTypeTests: SnapshotTestCase {
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        recordAll = false
+    }
+    
+    func testDesignTokensPlaygroundScreen() throws {
+        assertSnapshot(
+            for: DesignTokensPlaygroundScreen(),
+            named: "DesignTokensPlaygroundScreen",
+            layout: .screen(traits: .init(preferredContentSizeCategory: .medium))
+        )
+    }
+    
+    func testDynamicTypePlaygroundScreen() throws {
+        assertSnapshot(
+            for: DynamicTypePlaygroundScreen()
+                .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge),
+            named: "DynamicTypePlaygroundScreen",
+            layout: .screen(
+                traits: .init(
+                    traitsFrom: [
+                        .iPhone(.portrait),
+                        .init(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge)
+                    ]
+                )
+            )
+        )
+    }
+}

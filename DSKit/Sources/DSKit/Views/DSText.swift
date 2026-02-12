@@ -189,3 +189,22 @@ struct DSText_Previews: PreviewProvider {
     }
 }
 
+private let dsTextDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
+    ("Medium", .medium),
+    ("Accessibility Large", .accessibilityLarge),
+    ("Accessibility XXXL", .accessibilityExtraExtraExtraLarge)
+]
+
+struct DSText_DynamicType_Previews: PreviewProvider {
+    static var previews: some View {
+        ForEach(dsTextDynamicTypeSnapshots, id: \.0) { label, category in
+            DSPreviewForEachAppearance {
+                DSPreview {
+                    Testable_DSText()
+                        .environment(\.sizeCategory, category)
+                }
+            }
+            .previewDisplayName("DSText (\(label))")
+        }
+    }
+}

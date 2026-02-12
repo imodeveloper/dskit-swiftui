@@ -205,8 +205,7 @@ public struct DSButton: View {
             }
             
             if !title.isEmpty {
-                DSText(title).dsTextStyle(.headline, 15, titleColor)
-                    .dsHeight(.font(.fontWithSize(.headline, 15)))
+                DSText(title).dsTextStyle(.headline, titleColor)
             }
             
             if let rightImage {
@@ -219,7 +218,6 @@ public struct DSButton: View {
             }
         }
         .dsResetContentMargins()
-        .dsHeight(15)
     }
     
     var backgroundColor: Color {
@@ -345,6 +343,26 @@ struct DSButton_Previews: PreviewProvider {
             DSPreview {
                 Testable_DSButton()
             }
+        }
+    }
+}
+
+private let dsButtonDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
+    ("Medium", .medium),
+    ("Accessibility Large", .accessibilityLarge),
+    ("Accessibility XXXL", .accessibilityExtraExtraExtraLarge)
+]
+
+struct DSButton_DynamicType_Previews: PreviewProvider {
+    static var previews: some View {
+        ForEach(dsButtonDynamicTypeSnapshots, id: \.0) { label, category in
+            DSPreviewForEachAppearance {
+                DSPreview {
+                    Testable_DSButton()
+                        .environment(\.sizeCategory, category)
+                }
+            }
+            .previewDisplayName("DSButton (\(label))")
         }
     }
 }

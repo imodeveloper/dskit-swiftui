@@ -8,6 +8,8 @@
 import Foundation
 
 enum ScreenKey: String, CaseIterable, Identifiable {
+    case designTokensPlayground
+    case dynamicTypePlayground
     case foodCategoriesScreen1
     case foodDetailsScreen1
     case foodNearbyRestaurantScreen1
@@ -78,6 +80,8 @@ enum ScreenKey: String, CaseIterable, Identifiable {
     var id: Self { self }
     var displayName: String {
         switch self {
+        case .designTokensPlayground: return "Design Tokens"
+        case .dynamicTypePlayground: return "Dynamic Type"
         case .filters1: return "Filters 1"
         case .filters2: return "Filters 2"
         case .filters3: return "Filters 3"

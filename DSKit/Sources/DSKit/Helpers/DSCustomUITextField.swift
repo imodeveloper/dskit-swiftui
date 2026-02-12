@@ -44,6 +44,7 @@ struct DSCustomUITextField: DSViewRepresentable {
             attributes: [NSAttributedString.Key.foregroundColor: viewStyle.colors(from: appearance).textField.placeHolder]
         )
         textField.font = appearance.fonts.subheadline
+        textField.adjustsFontForContentSizeCategory = true
         textField.isSecureTextEntry = isSecureEntry
         textField.keyboardType = keyboardType
         textField.textContentType = textContentType

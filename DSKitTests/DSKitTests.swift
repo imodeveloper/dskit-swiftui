@@ -36,6 +36,14 @@ final class DSKitTests: SnapshotTestCase {
     func testDSButton() throws {
         assertSnapshot(for: Testable_DSButton(), named: "DSButton")
     }
+
+    func testDSButton_DynamicType() throws {
+        assertSnapshot(
+            for: Testable_DSButton()
+                .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge),
+            named: "DSButton_DynamicType"
+        )
+    }
     
     func testDSChevronView() throws {
         assertSnapshot(for: Testable_DSChevronView(), named: "DSChevronView")
@@ -80,6 +88,14 @@ final class DSKitTests: SnapshotTestCase {
     func testDSTextField() throws {
         assertSnapshot(for: Testable_DSTextField(), named: "DSTextField")
     }
+
+    func testDSTextField_DynamicType() throws {
+        assertSnapshot(
+            for: Testable_DSTextField()
+                .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge),
+            named: "DSTextField_DynamicType"
+        )
+    }
     
     func testDSToolbarSFSymbolButton() throws {
         assertSnapshot(for: Testable_DSToolbarSFSymbolButton(), named: "DSToolbarSFSymbolButton")
@@ -91,6 +107,14 @@ final class DSKitTests: SnapshotTestCase {
     
     func testDSText() throws {
         assertSnapshot(for: Testable_DSText(), named: "DSText")
+    }
+
+    func testDSText_DynamicType() throws {
+        assertSnapshot(
+            for: Testable_DSText()
+                .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge),
+            named: "DSText_DynamicType"
+        )
     }
     
     func testDSVStack() throws {
