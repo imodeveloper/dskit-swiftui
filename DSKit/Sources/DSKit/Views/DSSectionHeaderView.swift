@@ -25,6 +25,7 @@ Initializes a `DSSectionHeaderView` with a title, action title, and a closure fo
 
 public struct DSSectionHeaderView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.dsSectionHeaderSpacingKey) var sectionHeaderSpacing
     let title: String
     let actionTitle: String
     let action: () -> Void
@@ -41,7 +42,9 @@ public struct DSSectionHeaderView: View {
                 .dsTextStyle(.headline)
             Spacer()
             DSButton.callToActionLink(title: actionTitle, action: action)
-        }.dsHeight(20)
+        }
+        .dsHeight(20)
+        .padding(.bottom, sectionHeaderSpacing)
     }
 }
 

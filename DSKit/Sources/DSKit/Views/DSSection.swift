@@ -41,10 +41,11 @@ public struct DSSection<Content: View>: View {
 
     public var body: some View {
         Section {
-            content()
-                .dsResetContentMargins()
+            VStack(alignment: .leading, spacing: 0) {
+                content()
+            }
+            .dsResetContentMargins()
         }
-        .dsDebuggable(debugColor: Color.yellow)
         .background(Color(viewStyle.colors(from: appearance).background))
         .listRowSeparator(.hidden)
         .listRowInsets(EdgeInsets(top: 0, leading: contentMargin, bottom: 0, trailing: contentMargin))

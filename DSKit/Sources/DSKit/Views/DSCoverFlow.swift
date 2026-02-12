@@ -69,8 +69,10 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
             } else {
                 DSVStack(alignment: .center, spacing: .zero) {
                     GeometryReader { p in
+                        let itemWidth = max(1, p.size.width)
                         DSPaginatedScrollView(
-                            pageWidth: p.size.width,
+                            viewportWidth: p.size.width,
+                            itemWidth: itemWidth,
                             interItemSpacing: appearance.spacing.value(for: spacing),
                             data: data,
                             id: id,
@@ -108,10 +110,12 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
     let id: KeyPath<Data.Element, ID>
     @Binding var currentPage: Data.Element?
     let interItemSpacing: CGFloat
-    let pageWidth: CGFloat
+    let viewportWidth: CGFloat
+    let itemWidth: CGFloat
     
     init(
-        pageWidth: CGFloat,
+        viewportWidth: CGFloat,
+        itemWidth: CGFloat,
         interItemSpacing: CGFloat,
         data: Data,
         id: KeyPath<Data.Element, ID>,
@@ -122,7 +126,8 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         self.content = content
         self.id = id
         self.interItemSpacing = interItemSpacing
-        self.pageWidth = pageWidth
+        self.viewportWidth = viewportWidth
+        self.itemWidth = itemWidth
         self._currentPage = currentPage
     }
     
@@ -136,10 +141,13 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         let scrollView = DSUIScrollView()
         setupScrollView(scrollView, context: context)
         addContentView(to: scrollView, context: context)
+        applyCenteringInsets(to: scrollView)
         return scrollView
     }
     
-    func updateUIView(_ uiView: DSUIScrollView, context: Context) {}
+    func updateUIView(_ uiView: DSUIScrollView, context: Context) {
+        applyCenteringInsets(to: uiView)
+    }
     #elseif canImport(AppKit)
     func makeNSView(context: Context) -> DSUIScrollView {
         let scrollView = DSUIScrollView()
@@ -154,16 +162,26 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
     // MARK: - Setup Methods
     private func setupScrollView(_ scrollView: DSUIScrollView, context: Context) {
         #if canImport(UIKit)
-        scrollView.isPagingEnabled = true
+        scrollView.isPagingEnabled = false
+        scrollView.decelerationRate = .fast
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .clear
         scrollView.delegate = context.coordinator
+        scrollView.clipsToBounds = false
         #elseif canImport(AppKit)
         scrollView.hasHorizontalScroller = true
         scrollView.hasVerticalScroller = false
         scrollView.drawsBackground = false
         scrollView.backgroundColor = .clear
+        #endif
+    }
+
+    private func applyCenteringInsets(to scrollView: DSUIScrollView) {
+        #if canImport(UIKit)
+        let horizontalInset = max((viewportWidth - itemWidth) / 2, 0)
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
+        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
         #endif
     }
     
@@ -189,7 +207,7 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         HStack(spacing: interItemSpacing) {
             ForEach(data, id: id) { element in
                 content(element)
-                    .frame(width: pageWidth)
+                    .frame(width: itemWidth)
             }
         }
     }
@@ -197,18 +215,84 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
     // MARK: - Coordinator
     class Coordinator: NSObject, DSScrollViewDelegate {
         var parent: DSPaginatedScrollView
+        private var dragStartOffsetX: CGFloat = .zero
+        private var pendingTargetIndex: Int?
         
         init(parent: DSPaginatedScrollView) {
             self.parent = parent
         }
         
         #if canImport(UIKit)
-        func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            let pageIndex = Int(round(scrollView.contentOffset.x / parent.pageWidth))
-            if pageIndex >= 0 && pageIndex < parent.data.count {
-                let index = parent.data.index(parent.data.startIndex, offsetBy: pageIndex)
-                parent.currentPage = parent.data[index]
+        private var itemStride: CGFloat {
+            parent.itemWidth + parent.interItemSpacing
+        }
+
+        private func clampedIndex(_ index: Int) -> Int {
+            guard parent.data.isEmpty == false else { return 0 }
+            return min(max(index, 0), parent.data.count - 1)
+        }
+
+        private func pageIndex(for offsetX: CGFloat, insetLeft: CGFloat) -> Int {
+            guard itemStride > 0 else { return 0 }
+            let rawIndex = (offsetX + insetLeft) / itemStride
+            return clampedIndex(Int(round(rawIndex)))
+        }
+
+        private func targetOffset(for index: Int, insetLeft: CGFloat) -> CGFloat {
+            CGFloat(index) * itemStride - insetLeft
+        }
+
+        private func syncCurrentPage(for scrollView: UIScrollView) {
+            let index = pageIndex(for: scrollView.contentOffset.x, insetLeft: scrollView.contentInset.left)
+            let dataIndex = parent.data.index(parent.data.startIndex, offsetBy: index)
+            parent.currentPage = parent.data[dataIndex]
+        }
+
+        func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+            dragStartOffsetX = scrollView.contentOffset.x
+        }
+
+        func scrollViewWillEndDragging(
+            _ scrollView: UIScrollView,
+            withVelocity velocity: CGPoint,
+            targetContentOffset: UnsafeMutablePointer<CGPoint>
+        ) {
+            let insetLeft = scrollView.contentInset.left
+            let currentIndex = pageIndex(for: dragStartOffsetX, insetLeft: insetLeft)
+            let releasedOffsetX = scrollView.contentOffset.x
+            let dragDistance = releasedOffsetX - dragStartOffsetX
+            let velocityThreshold: CGFloat = 0.22
+            let dragThreshold = itemStride * 0.33
+
+            let targetIndex: Int
+            if abs(velocity.x) > velocityThreshold {
+                targetIndex = clampedIndex(currentIndex + (velocity.x > 0 ? 1 : -1))
+            } else if abs(dragDistance) > dragThreshold {
+                targetIndex = clampedIndex(currentIndex + (dragDistance > 0 ? 1 : -1))
+            } else {
+                targetIndex = currentIndex
             }
+
+            pendingTargetIndex = targetIndex
+            targetContentOffset.pointee.x = targetOffset(for: targetIndex, insetLeft: insetLeft)
+        }
+
+        func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+            if decelerate == false {
+                let insetLeft = scrollView.contentInset.left
+                let targetIndex = pendingTargetIndex ?? pageIndex(for: scrollView.contentOffset.x, insetLeft: insetLeft)
+                scrollView.setContentOffset(
+                    CGPoint(x: targetOffset(for: targetIndex, insetLeft: insetLeft), y: scrollView.contentOffset.y),
+                    animated: true
+                )
+                pendingTargetIndex = nil
+                syncCurrentPage(for: scrollView)
+            }
+        }
+
+        func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            pendingTargetIndex = nil
+            syncCurrentPage(for: scrollView)
         }
         #endif
     }
