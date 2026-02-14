@@ -45,7 +45,17 @@ public final class DSScaledFont {
     ///   in the main bundle that contains the style dictionary used to
     ///   scale fonts for each text style.
     public init(fontName: String) {
-        if let url = Bundle(for: DSScaledFont.self).url(forResource: fontName, withExtension: "plist"),
+        let normalizedName = fontName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let usesSystemFallback =
+            normalizedName.isEmpty ||
+            normalizedName.caseInsensitiveCompare("default") == .orderedSame ||
+            normalizedName.caseInsensitiveCompare("system") == .orderedSame
+
+        guard !usesSystemFallback else {
+            return
+        }
+
+        if let url = Bundle(for: DSScaledFont.self).url(forResource: normalizedName, withExtension: "plist"),
            let data = try? Data(contentsOf: url) {
             let decoder = PropertyListDecoder()
             styleDictionary = try? decoder.decode(DSStyleDictionary.self, from: data)

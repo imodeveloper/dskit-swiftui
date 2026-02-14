@@ -12,6 +12,7 @@ public struct DSSizeModifier: ViewModifier {
     
     let size: DSSize
     @Environment(\.appearance) var appearance: DSAppearance
+    @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
     
     public func body(content: Content) -> some View {
         let width = fixedDimension(for: size.width)
@@ -31,7 +32,7 @@ public struct DSSizeModifier: ViewModifier {
         case .none:
             return nil
         default:
-            return dimension.value(appearance: appearance)
+            return dimension.value(appearance: appearance, sizeCategory: sizeCategory)
         }
     }
 }

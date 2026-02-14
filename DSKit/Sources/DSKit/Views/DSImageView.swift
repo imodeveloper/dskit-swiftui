@@ -372,10 +372,98 @@ struct Testable_DSImageView: View {
 
 struct DSImageView_Previews: PreviewProvider {
     static var previews: some View {
-        DSPreviewForEachAppearance {
-            DSPreview {
-                Testable_DSImageView()
-            }
+        DSPreview {
+            DSImageViewInteractivePreview()
         }
+        .previewDisplayName("DSImageView Interactive")
+    }
+}
+
+private struct DSImageViewInteractivePreview: View {
+    private static let localDemoImageURL: URL? = {
+        guard let image = DSUIImage(named: "demo", in: Bundle.main, with: nil),
+              let data = image.jpegData(compressionQuality: 0.9) else {
+            return nil
+        }
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("dskit-demo-preview.jpg")
+        try? data.write(to: url, options: [.atomic])
+        return url
+    }()
+
+    @State private var selectedIndex: Double = 3
+    private let demoImage = DSUIImage(named: "demo", in: Bundle.main, with: nil)
+
+    private var dynamicTypeSnapshots: [(String, ContentSizeCategory)] {
+        [
+            ("extraSmall", .extraSmall),
+            ("small", .small),
+            ("medium", .medium),
+            ("large", .large),
+            ("extraLarge", .extraLarge),
+            ("extraExtraLarge", .extraExtraLarge),
+            ("extraExtraExtraLarge", .extraExtraExtraLarge),
+            ("accessibilityMedium", .accessibilityMedium),
+            ("accessibilityLarge", .accessibilityLarge),
+            ("accessibilityExtraLarge", .accessibilityExtraLarge),
+            ("accessibilityExtraExtraLarge", .accessibilityExtraExtraLarge),
+            ("accessibilityExtraExtraExtraLarge", .accessibilityExtraExtraExtraLarge)
+        ]
+    }
+
+    private var clampedIndex: Int {
+        min(max(Int(selectedIndex.rounded()), 0), dynamicTypeSnapshots.count - 1)
+    }
+
+    private var selectedCategory: ContentSizeCategory {
+        dynamicTypeSnapshots[clampedIndex].1
+    }
+
+    private var selectedLabel: String {
+        dynamicTypeSnapshots[clampedIndex].0
+    }
+
+    var body: some View {
+        ZStack {
+            DSVStack {
+                DSText("Size Category: \(selectedLabel)").dsTextStyle(.subheadline)
+                Slider(
+                    value: $selectedIndex,
+                    in: 0...Double(dynamicTypeSnapshots.count - 1),
+                    step: 1
+                )
+            }.offset(y: -200)
+
+            DSVStack {
+                DSHStack {
+                    DSImageView(
+                        uiImage: demoImage,
+                        displayShape: .circle,
+                        size: .size(50)
+                    )
+                    DSImageView(
+                        uiImage: demoImage,
+                        displayShape: .capsule,
+                        size: .size(
+                            width: 100,
+                            height: 50
+                        )
+                    )
+                    DSImageView(
+                        url: Self.localDemoImageURL,
+                        style: .none,
+                        size: .size(50)
+                    )
+                }
+
+                DSHStack {
+                    DSImageView(systemName: "sun.rain.fill", size: .font(.title1), tint: .color(.red))
+                    DSImageView(systemName: "heart.fill", size: .font(.headline), tint: .color(.pink))
+                    DSImageView(systemName: "bell.fill", size: .font(.subheadline), tint: .color(.blue))
+                }
+            }
+            .environment(\.sizeCategory, selectedCategory)
+            .id(selectedLabel)
+        }
+        .dsHeight(300)
     }
 }

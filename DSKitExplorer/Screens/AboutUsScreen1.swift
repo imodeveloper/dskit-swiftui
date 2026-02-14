@@ -67,7 +67,8 @@ struct AboutUsScreen1: View {
                     }
                 }.dsCardStyle()
             }
-        }.dsScreen()
+        }
+        .dsScreen()
     }
 }
 

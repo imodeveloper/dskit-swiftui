@@ -28,11 +28,60 @@ public indirect enum DSTextFontKey: Equatable, Hashable {
     case largeHeadline
     
     public func pointSize(for appearance: DSAppearance) -> CGFloat {
-        uiFont(for: appearance).pointSize
+        pointSize(for: appearance, sizeCategory: nil)
+    }
+
+    public func pointSize(
+        for appearance: DSAppearance,
+        sizeCategory: ContentSizeCategory?
+    ) -> CGFloat {
+        uiFont(for: appearance, sizeCategory: sizeCategory).pointSize
     }
     
     public func font(for appearance: DSAppearance) -> Font {
-        return Font(uiFont(for: appearance))
+        let baseFont = uiFont(for: appearance)
+        #if canImport(UIKit)
+        guard let textStyle = swiftUITextStyle() else {
+            return Font(baseFont)
+        }
+        if isSystemFontName(baseFont.fontName) {
+            return Font(baseFont)
+        }
+        return .custom(baseFont.fontName, size: baseFont.pointSize, relativeTo: textStyle)
+        #else
+        return Font(baseFont)
+        #endif
+    }
+
+    public func font(
+        for appearance: DSAppearance,
+        sizeCategory: ContentSizeCategory?
+    ) -> Font {
+        Font(uiFont(for: appearance, sizeCategory: sizeCategory))
+    }
+
+    private func uiFont(
+        for appearance: DSAppearance,
+        sizeCategory: ContentSizeCategory?
+    ) -> DSFont {
+        let baseFont = uiFont(for: appearance)
+
+        #if canImport(UIKit)
+        guard let sizeCategory,
+              let textStyle = uiTextStyle()
+        else {
+            return baseFont
+        }
+
+        let traits = UITraitCollection(
+            preferredContentSizeCategory: sizeCategory.uiContentSizeCategory
+        )
+        let scaledSize = UIFontMetrics(forTextStyle: textStyle)
+            .scaledValue(for: baseFont.pointSize, compatibleWith: traits)
+        return baseFont.withSize(scaledSize)
+        #else
+        return baseFont
+        #endif
     }
     
     public func uiFont(for appearance: DSAppearance) -> DSFont {
@@ -109,3 +158,118 @@ public indirect enum DSTextFontKey: Equatable, Hashable {
         }
     }
 }
+
+#if canImport(UIKit)
+private extension ContentSizeCategory {
+    var uiContentSizeCategory: UIContentSizeCategory {
+        switch self {
+        case .extraSmall:
+            .extraSmall
+        case .small:
+            .small
+        case .medium:
+            .medium
+        case .large:
+            .large
+        case .extraLarge:
+            .extraLarge
+        case .extraExtraLarge:
+            .extraExtraLarge
+        case .extraExtraExtraLarge:
+            .extraExtraExtraLarge
+        case .accessibilityMedium:
+            .accessibilityMedium
+        case .accessibilityLarge:
+            .accessibilityLarge
+        case .accessibilityExtraLarge:
+            .accessibilityExtraLarge
+        case .accessibilityExtraExtraLarge:
+            .accessibilityExtraExtraLarge
+        case .accessibilityExtraExtraExtraLarge:
+            .accessibilityExtraExtraExtraLarge
+        @unknown default:
+            .large
+        }
+    }
+}
+
+private extension DSTextFontKey {
+    func isSystemFontName(_ name: String) -> Bool {
+        name.hasPrefix(".SFUI") ||
+        name.hasPrefix(".SFUIText") ||
+        name.hasPrefix(".SFUIDisplay") ||
+        name.hasPrefix("SFUI") ||
+        name.hasPrefix("SFPro")
+    }
+
+    func swiftUITextStyle() -> Font.TextStyle? {
+        switch self {
+        case .largeTitle:
+            return .largeTitle
+        case .title1:
+            return .title
+        case .title2:
+            return .title2
+        case .title3:
+            return .title3
+        case .headline:
+            return .headline
+        case .subheadline:
+            return .subheadline
+        case .body:
+            return .body
+        case .callout:
+            return .callout
+        case .caption1:
+            return .caption
+        case .caption2:
+            return .caption2
+        case .footnote:
+            return .footnote
+        case .custom:
+            return nil
+        case .fontWithSize(let style, _):
+            return style.swiftUITextStyle()
+        case .smallHeadline, .largeHeadline:
+            return .headline
+        case .smallSubheadline:
+            return .subheadline
+        }
+    }
+
+    func uiTextStyle() -> UIFont.TextStyle? {
+        switch self {
+        case .largeTitle:
+            return .largeTitle
+        case .title1:
+            return .title1
+        case .title2:
+            return .title2
+        case .title3:
+            return .title3
+        case .headline:
+            return .headline
+        case .subheadline:
+            return .subheadline
+        case .body:
+            return .body
+        case .callout:
+            return .callout
+        case .caption1:
+            return .caption1
+        case .caption2:
+            return .caption2
+        case .footnote:
+            return .footnote
+        case .custom:
+            return nil
+        case .fontWithSize(let style, _):
+            return style.uiTextStyle()
+        case .smallHeadline, .largeHeadline:
+            return .headline
+        case .smallSubheadline:
+            return .subheadline
+        }
+    }
+}
+#endif

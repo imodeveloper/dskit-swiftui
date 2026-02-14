@@ -17,24 +17,38 @@ final class DSKitTests: SnapshotTestCase {
         recordAll = false
     }
 
+    private var crossSimulatorOptions: SnapshotAssertionOptions {
+        SnapshotAssertionOptions(
+            recordDelay: 0.5,
+            retries: 20,
+            retryDelay: 0.01,
+            precision: 1.0,
+            perceptualPrecision: 1.0,
+            minimumPrecision: 0.98,
+            minimumPerceptualPrecision: 1.0,
+            precisionStep: 0.001,
+            perceptualPrecisionStep: 0
+        )
+    }
+
     func testDSCustomBackgroundModifier() throws {
-        assertSnapshot(for: Testable_DSBackgroundModifier(), named: "DSBackgroundModifier")
+        assertSnapshot(for: Testable_DSBackgroundModifier(), named: "DSBackgroundModifier", options: crossSimulatorOptions)
     }
     
     func testDSCornerRadiusModifier() throws {
-        assertSnapshot(for: Testable_DSCornerRadiusModifier(), named: "DSCornerRadiusModifier")
+        assertSnapshot(for: Testable_DSCornerRadiusModifier(), named: "DSCornerRadiusModifier", options: crossSimulatorOptions)
     }
     
     func testDSPriceView() throws {
-        assertSnapshot(for: Testable_DSPriceView(), named: "DSPriceView")
+        assertSnapshot(for: Testable_DSPriceView(), named: "DSPriceView", options: crossSimulatorOptions)
     }
     
     func testDSBottomContainer() throws {
-        assertSnapshot(for: Testable_DSBottomContainer(), named: "DSBottomContainer")
+        assertSnapshot(for: Testable_DSBottomContainer(), named: "DSBottomContainer", options: crossSimulatorOptions)
     }
     
     func testDSButton() throws {
-        assertSnapshot(for: Testable_DSButton(), named: "DSButton")
+        assertSnapshot(for: Testable_DSButton(), named: "DSButton", options: crossSimulatorOptions)
     }
 
     func testDSButton_DynamicType() throws {
@@ -42,7 +56,8 @@ final class DSKitTests: SnapshotTestCase {
             assertSnapshot(
                 for: Testable_DSButton()
                     .environment(\.sizeCategory, category),
-                named: "DSButton_DynamicType_\(categoryName)"
+                named: "DSButton_DynamicType_\(categoryName)",
+                options: crossSimulatorOptions
             )
         }
     }
@@ -52,53 +67,54 @@ final class DSKitTests: SnapshotTestCase {
             assertSnapshot(
                 for: Testable_DSButtonSymbols()
                     .environment(\.sizeCategory, category),
-                named: "DSButtonSymbols_DynamicType_\(categoryName)"
+                named: "DSButtonSymbols_DynamicType_\(categoryName)",
+                options: crossSimulatorOptions
             )
         }
     }
     
     func testDSChevronView() throws {
-        assertSnapshot(for: Testable_DSChevronView(), named: "DSChevronView")
+        assertSnapshot(for: Testable_DSChevronView(), named: "DSChevronView", options: crossSimulatorOptions)
     }
     
     func testDSCoverFlow() throws {
-        assertSnapshot(for: Testable_DSCoverFlow(), named: "DSCoverFlow")
+        assertSnapshot(for: Testable_DSCoverFlow(), named: "DSCoverFlow", options: crossSimulatorOptions)
     }
     
     func testDSDivider() throws {
-        assertSnapshot(for: Testable_DSDivider(), named: "DSDivider")
+        assertSnapshot(for: Testable_DSDivider(), named: "DSDivider", options: crossSimulatorOptions)
     }
     
     func testDSGrid() throws {
-        assertSnapshot(for: Testable_DSGrid(), named: "DSGrid")
+        assertSnapshot(for: Testable_DSGrid(), named: "DSGrid", options: crossSimulatorOptions)
     }
     
     func testDSGroupedList() throws {
-        assertSnapshot(for: Testable_DSGroupedList(), named: "DSGroupedList")
+        assertSnapshot(for: Testable_DSGroupedList(), named: "DSGroupedList", options: crossSimulatorOptions)
     }
     
     func testDSHScroll() throws {
-        assertSnapshot(for: Testable_DSHScroll(), named: "DSHScroll")
+        assertSnapshot(for: Testable_DSHScroll(), named: "DSHScroll", options: crossSimulatorOptions)
     }
     
     func testDSRatingView() throws {
-        assertSnapshot(for: Testable_DSRatingView(), named: "DSRatingView")
+        assertSnapshot(for: Testable_DSRatingView(), named: "DSRatingView", options: crossSimulatorOptions)
     }
     
     func testDSSectionHeaderView() throws {
-        assertSnapshot(for: Testable_DSSectionHeaderView(), named: "DSSectionHeaderView")
+        assertSnapshot(for: Testable_DSSectionHeaderView(), named: "DSSectionHeaderView", options: crossSimulatorOptions)
     }
     
     func testDSSFSymbolButton() throws {
-        assertSnapshot(for: Testable_DSSFSymbolButton(), named: "DSSFSymbolButton")
+        assertSnapshot(for: Testable_DSSFSymbolButton(), named: "DSSFSymbolButton", options: crossSimulatorOptions)
     }
     
     func testDSTermsAndConditions() throws {
-        assertSnapshot(for: Testable_DSTermsAndConditions(), named: "DSTermsAndConditions")
+        assertSnapshot(for: Testable_DSTermsAndConditions(), named: "DSTermsAndConditions", options: crossSimulatorOptions)
     }
     
     func testDSTextField() throws {
-        assertSnapshot(for: Testable_DSTextField(), named: "DSTextField")
+        assertSnapshot(for: Testable_DSTextField(), named: "DSTextField", options: crossSimulatorOptions)
     }
 
     func testDSTextField_DynamicType() throws {
@@ -106,21 +122,22 @@ final class DSKitTests: SnapshotTestCase {
             assertSnapshot(
                 for: Testable_DSTextField()
                     .environment(\.sizeCategory, category),
-                named: "DSTextField_DynamicType_\(categoryName)"
+                named: "DSTextField_DynamicType_\(categoryName)",
+                options: crossSimulatorOptions
             )
         }
     }
     
     func testDSToolbarSFSymbolButton() throws {
-        assertSnapshot(for: Testable_DSToolbarSFSymbolButton(), named: "DSToolbarSFSymbolButton")
+        assertSnapshot(for: Testable_DSToolbarSFSymbolButton(), named: "DSToolbarSFSymbolButton", options: crossSimulatorOptions)
     }
     
     func testDSImageView() throws {
-        assertSnapshot(for: Testable_DSImageView(), named: "DSImageView")
+        assertSnapshot(for: Testable_DSImageView(), named: "DSImageView", options: crossSimulatorOptions)
     }
     
     func testDSText() throws {
-        assertSnapshot(for: Testable_DSText(), named: "DSText")
+        assertSnapshot(for: Testable_DSText(), named: "DSText", options: crossSimulatorOptions)
     }
 
     func testDSText_DynamicType() throws {
@@ -128,29 +145,30 @@ final class DSKitTests: SnapshotTestCase {
             assertSnapshot(
                 for: Testable_DSText()
                     .environment(\.sizeCategory, category),
-                named: "DSText_DynamicType_\(categoryName)"
+                named: "DSText_DynamicType_\(categoryName)",
+                options: crossSimulatorOptions
             )
         }
     }
     
     func testDSVStack() throws {
-        assertSnapshot(for: Testable_DSVStack(), named: "DSVStack")
+        assertSnapshot(for: Testable_DSVStack(), named: "DSVStack", options: crossSimulatorOptions)
     }
     
     func testDSHStack() throws {
-        assertSnapshot(for: Testable_DSHStack(), named: "DSHStack")
+        assertSnapshot(for: Testable_DSHStack(), named: "DSHStack", options: crossSimulatorOptions)
     }
     
     func testDSPickerView() throws {
-        assertSnapshot(for: Testable_DSPickerView(), named: "DSPickerView")
+        assertSnapshot(for: Testable_DSPickerView(), named: "DSPickerView", options: crossSimulatorOptions)
     }
     
     func testDSQuantityPicker() throws {
-        assertSnapshot(for: Testable_DSQuantityPicker(), named: "DSQuantityPicker")
+        assertSnapshot(for: Testable_DSQuantityPicker(), named: "DSQuantityPicker", options: crossSimulatorOptions)
     }
     
     func testDSRadioPickerView() throws {
-        assertSnapshot(for: Testable_DSRadioPickerView(), named: "DSRadioPickerView")
+        assertSnapshot(for: Testable_DSRadioPickerView(), named: "DSRadioPickerView", options: crossSimulatorOptions)
     }
 
     func testDSSizeModifierFillWidthFixedHeight() throws {

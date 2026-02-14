@@ -24,7 +24,7 @@ public class DSFonts: DSFontsProtocol {
     
     var fontName: String
     
-    public init(fontName: String = "Default") {
+    public init(fontName: String = "") {
         self.fontName = fontName
     }
     

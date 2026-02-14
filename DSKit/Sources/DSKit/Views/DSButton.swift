@@ -171,18 +171,18 @@ public struct DSButton: View {
                 buttonView
                     .frame(maxWidth: maxWidth ? .infinity : .none)
                     .dsPadding(.horizontal, .medium)
-                    .dsHeight(.custom(appearance.actionElementHeight))
+                    .dsMinHeight(.custom(appearance.actionElementHeight))
                     .background(backgroundColor)
                     .dsCornerRadius()
             case .clear:
                 buttonView
                     .frame(maxWidth: maxWidth ? .infinity : .none)
                     .background(backgroundColor)
-                    .dsHeight(.custom(appearance.actionElementHeight))
+                    .dsMinHeight(.custom(appearance.actionElementHeight))
             case .borderedLight:
                 buttonView
                     .frame(maxWidth: maxWidth ? .infinity : .none)
-                    .dsHeight(.custom(appearance.actionElementHeight))
+                    .dsMinHeight(.custom(appearance.actionElementHeight))
                     .background(backgroundColor)
                     .dsCornerRadius()
                     .overlay(
@@ -335,16 +335,6 @@ struct Testable_DSButton: View {
     }
 }
 
-struct DSButton_Previews: PreviewProvider {
-    static var previews: some View {
-        DSPreviewForEachAppearance { 
-            DSPreview {
-                Testable_DSButton()
-            }
-        }
-    }
-}
-
 private let dsButtonDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
     ("extraSmall", .extraSmall),
     ("small", .small),
@@ -362,14 +352,40 @@ private let dsButtonDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
 
 struct DSButton_DynamicType_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(dsButtonDynamicTypeSnapshots, id: \.0) { label, category in
-            DSPreviewForEachAppearance {
-                DSPreview {
-                    Testable_DSButton()
-                        .environment(\.sizeCategory, category)
-                }
-            }
-            .previewDisplayName("DSButton (\(label))")
+        DSPreview {
+            DSButtonDynamicTypeInteractivePreview()
+        }
+        .previewDisplayName("DSButton")
+    }
+}
+
+private struct DSButtonDynamicTypeInteractivePreview: View {
+    @State private var selectedIndex: Double = 3
+
+    private var clampedIndex: Int {
+        min(max(Int(selectedIndex.rounded()), 0), dsButtonDynamicTypeSnapshots.count - 1)
+    }
+
+    private var selectedCategory: ContentSizeCategory {
+        dsButtonDynamicTypeSnapshots[clampedIndex].1
+    }
+
+    private var selectedLabel: String {
+        dsButtonDynamicTypeSnapshots[clampedIndex].0
+    }
+
+    var body: some View {
+        DSVStack(spacing: .small) {
+            DSText("Size Category: \(selectedLabel)").dsTextStyle(.subheadline)
+            Slider(
+                value: $selectedIndex,
+                in: 0...Double(dsButtonDynamicTypeSnapshots.count - 1),
+                step: 1
+            )
+            Testable_DSButton()
+                .environment(\.sizeCategory, selectedCategory)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .id(selectedLabel)
         }
     }
 }

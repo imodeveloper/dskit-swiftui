@@ -117,38 +117,16 @@ public indirect enum DSTextStyle: Equatable, Hashable {
     }
     
     func font(for appearance: DSAppearance) -> Font {
-        font(for: appearance, sizeCategory: nil)
+        dsTextFont.font(for: appearance)
     }
-    
+
     func font(
         for appearance: DSAppearance,
         sizeCategory: ContentSizeCategory?
     ) -> Font {
-        Font(uiFont(for: appearance, sizeCategory: sizeCategory))
+        dsTextFont.font(for: appearance, sizeCategory: sizeCategory)
     }
-    
-    private func uiFont(
-        for appearance: DSAppearance,
-        sizeCategory: ContentSizeCategory?
-    ) -> DSFont {
-        #if canImport(UIKit)
-        let uiFont = dsTextFont.uiFont(for: appearance)
-        guard let sizeCategory,
-              let textStyle = dsTextFont.uiTextStyle()
-        else {
-            return uiFont
-        }
-        
-        return UIFontMetrics(forTextStyle: textStyle)
-            .scaledFont(
-                for: uiFont,
-                compatibleWith: UITraitCollection(preferredContentSizeCategory: sizeCategory.uiContentSizeCategory)
-            )
-        #else
-        return dsTextFont.uiFont(for: appearance)
-        #endif
-    }
-    
+
     func color(for appearance: DSAppearance, and viewStyle: DSViewStyle) -> Color {
         textStyle(for: appearance).color.color(for: appearance, and: viewStyle)
     }
@@ -157,78 +135,6 @@ public indirect enum DSTextStyle: Equatable, Hashable {
         dsTextFont.uiFont(for: appearance).pointSize
     }
 }
-
-#if canImport(UIKit)
-private extension ContentSizeCategory {
-    var uiContentSizeCategory: UIContentSizeCategory {
-        switch self {
-        case .extraSmall:
-            .extraSmall
-        case .small:
-            .small
-        case .medium:
-            .medium
-        case .large:
-            .large
-        case .extraLarge:
-            .extraLarge
-        case .extraExtraLarge:
-            .extraExtraLarge
-        case .extraExtraExtraLarge:
-            .extraExtraExtraLarge
-        case .accessibilityMedium:
-            .accessibilityMedium
-        case .accessibilityLarge:
-            .accessibilityLarge
-        case .accessibilityExtraLarge:
-            .accessibilityExtraLarge
-        case .accessibilityExtraExtraLarge:
-            .accessibilityExtraExtraLarge
-        case .accessibilityExtraExtraExtraLarge:
-            .accessibilityExtraExtraExtraLarge
-        @unknown default:
-            .medium
-        }
-    }
-}
-
-private extension DSTextFontKey {
-    func uiTextStyle() -> UIFont.TextStyle? {
-        switch self {
-        case .largeTitle:
-            return .largeTitle
-        case .title1:
-            return .title1
-        case .title2:
-            return .title2
-        case .title3:
-            return .title3
-        case .headline:
-            return .headline
-        case .subheadline:
-            return .subheadline
-        case .body:
-            return .body
-        case .callout:
-            return .callout
-        case .caption1:
-            return .caption1
-        case .caption2:
-            return .caption2
-        case .footnote:
-            return .footnote
-        case .custom:
-            return nil
-        case .fontWithSize(let style, _):
-            return style.uiTextStyle()
-        case .smallHeadline, .largeHeadline:
-            return .headline
-        case .smallSubheadline:
-            return .subheadline
-        }
-    }
-}
-#endif
 
 struct DSTextStyleEnvironment: EnvironmentKey {
     static let defaultValue: DSTextStyle = .textFont(.body)
@@ -281,16 +187,6 @@ struct Testable_DSText: View {
     }
 }
 
-struct DSText_Previews: PreviewProvider {
-    static var previews: some View {
-        DSPreviewForEachAppearance {
-            DSPreview {
-                Testable_DSText()
-            }
-        }
-    }
-}
-
 private let dsTextDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
     ("extraSmall", .extraSmall),
     ("small", .small),
@@ -308,14 +204,41 @@ private let dsTextDynamicTypeSnapshots: [(String, ContentSizeCategory)] = [
 
 struct DSText_DynamicType_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(dsTextDynamicTypeSnapshots, id: \.0) { label, category in
-            DSPreviewForEachAppearance {
-                DSPreview {
-                    Testable_DSText()
-                        .environment(\.sizeCategory, category)
-                }
-            }
-            .previewDisplayName("DSText (\(label))")
+        DSPreview {
+            DSTextDynamicTypeInteractivePreview()
+        }
+        .previewDisplayName("DSText Dynamic Type Interactive")
+    }
+}
+
+private struct DSTextDynamicTypeInteractivePreview: View {
+    @State private var selectedIndex: Double = 2
+
+    private var clampedIndex: Int {
+        min(max(Int(selectedIndex.rounded()), 0), dsTextDynamicTypeSnapshots.count - 1)
+    }
+
+    private var selectedCategory: ContentSizeCategory {
+        dsTextDynamicTypeSnapshots[clampedIndex].1
+    }
+
+    private var selectedLabel: String {
+        dsTextDynamicTypeSnapshots[clampedIndex].0
+    }
+
+    var body: some View {
+        DSVStack(spacing: .small) {
+            DSText("Size Category: \(selectedLabel)")
+                .dsTextStyle(.subheadline)
+            Slider(
+                value: $selectedIndex,
+                in: 0...Double(dsTextDynamicTypeSnapshots.count - 1),
+                step: 1
+            )
+            Testable_DSText()
+                .environment(\.sizeCategory, selectedCategory)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .id(selectedLabel)
         }
     }
 }

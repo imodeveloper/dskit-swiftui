@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public enum DSDimension: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equatable {
     
@@ -26,7 +27,10 @@ public enum DSDimension: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral,
 }
 
 extension DSDimension {
-    public func value(appearance: DSAppearance) -> CGFloat {
+    public func value(
+        appearance: DSAppearance,
+        sizeCategory: ContentSizeCategory? = nil
+    ) -> CGFloat {
         switch self {
         case .custom(let number):
             number
@@ -37,7 +41,7 @@ extension DSDimension {
         case .zero:
             0
         case .font(let font):
-            font.pointSize(for: appearance)
+            font.pointSize(for: appearance, sizeCategory: sizeCategory)
         case .actionElement:
             40
         }
