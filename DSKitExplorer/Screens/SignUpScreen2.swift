@@ -84,9 +84,18 @@ final class SignUpScreen2Model: ObservableObject {
 
 struct Testable_SignUpScreen2: View {
     var body: some View {
-        NavigationView {
-            SignUpScreen2()
-                .platformBasedNavigationBarTitleDisplayModeInline()
+        Group {
+            if #available(iOS 16.0, *) {
+                NavigationStack {
+                    SignUpScreen2()
+                        .platformBasedNavigationBarTitleDisplayModeInline()
+                }
+            } else {
+                NavigationView {
+                    SignUpScreen2()
+                        .platformBasedNavigationBarTitleDisplayModeInline()
+                }
+            }
         }
     }
 }

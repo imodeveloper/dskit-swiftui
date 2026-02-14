@@ -26,18 +26,36 @@ struct SnapshotAssertionOptions {
     var retryDelay: TimeInterval = 0.2
     var precision: Float = 0.96
     var perceptualPrecision: Float = 0.96
+    var minimumPrecision: Float = 0.96
+    var minimumPerceptualPrecision: Float = 0.96
+    var precisionStep: Float = 0
+    var perceptualPrecisionStep: Float = 0
 }
 
 enum SnapshotLayout {
+    static let deterministicScreenTraits: UITraitCollection = .init(
+        traitsFrom: [
+            .iPhone(.portrait),
+            .init(displayScale: 3)
+        ]
+    )
+    
+    static let deterministicComponentTraits: UITraitCollection = .init(
+        traitsFrom: [
+            .iPhone(.portrait, userInterfaceStyle: .dark),
+            .init(displayScale: 3)
+        ]
+    )
+
     case component(
         width: CGFloat = 400,
         padding: CGFloat = 12,
         background: DSViewStyle = .primary,
-        traits: UITraitCollection = .init()
+        traits: UITraitCollection = SnapshotLayout.deterministicComponentTraits
     )
     case screen(
         config: ViewImageConfig = .iPhone15Pro(.portrait),
-        traits: UITraitCollection = .iPhone(.portrait),
+        traits: UITraitCollection = SnapshotLayout.deterministicScreenTraits,
         appearance: DSAppearance = LightBlueAppearance()
     )
 }
@@ -81,17 +99,26 @@ extension XCTestCase {
         hostingController.view.setNeedsLayout()
         hostingController.view.layoutIfNeeded()
 
-        let snapshotting = Snapshotting<UIImage, UIImage>.image(
-            precision: options.precision,
-            perceptualPrecision: options.perceptualPrecision,
-            scale: prepared.traits.displayScale
-        )
-        .pullback { view in
-            renderSnapshot(view: view, traits: prepared.traits)
-        }
-
         var failure: String?
         for attempt in 0...max(options.retries, 0) {
+            let attemptPrecision = max(
+                options.precision - (Float(attempt) * options.precisionStep),
+                options.minimumPrecision
+            )
+            let attemptPerceptualPrecision = max(
+                options.perceptualPrecision - (Float(attempt) * options.perceptualPrecisionStep),
+                options.minimumPerceptualPrecision
+            )
+
+            let snapshotting = Snapshotting<UIImage, UIImage>.image(
+                precision: attemptPrecision,
+                perceptualPrecision: attemptPerceptualPrecision,
+                scale: prepared.traits.displayScale
+            )
+            .pullback { view in
+                renderSnapshot(view: view, traits: prepared.traits)
+            }
+
             failure = verifySnapshot(
                 matching: hostingController.view,
                 as: snapshotting,
@@ -105,6 +132,10 @@ extension XCTestCase {
             )
 
             if failure == nil {
+                if attempt > 0 {
+                    let warning = "Snapshot matched with reduced precision \(attemptPrecision)/\(attemptPerceptualPrecision) on attempt \(attempt + 1)"
+                    XCTContext.runActivity(named: warning) { _ in }
+                }
                 break
             }
 
@@ -152,11 +183,37 @@ private func renderSnapshot(view: UIView, traits: UITraitCollection) -> UIImage 
     } else {
         renderer = UIGraphicsImageRenderer(bounds: bounds)
     }
-    return renderer.image { context in
+    let image = renderer.image { context in
         if !view.drawHierarchy(in: bounds, afterScreenUpdates: true) {
             view.layer.render(in: context.cgContext)
         }
     }
+    return normalizeTo8Bit(image)
+}
+
+private func normalizeTo8Bit(_ image: UIImage) -> UIImage {
+    guard let cgImage = image.cgImage else { return image }
+    let width = cgImage.width
+    let height = cgImage.height
+    let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) ?? CGColorSpaceCreateDeviceRGB()
+    let alphaInfo = CGImageAlphaInfo.premultipliedLast.rawValue
+    let bitmapInfo = CGBitmapInfo(rawValue: alphaInfo)
+
+    guard let context = CGContext(
+        data: nil,
+        width: width,
+        height: height,
+        bitsPerComponent: 8,
+        bytesPerRow: 0,
+        space: colorSpace,
+        bitmapInfo: bitmapInfo.rawValue
+    ) else {
+        return image
+    }
+
+    context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+    guard let normalized = context.makeImage() else { return image }
+    return UIImage(cgImage: normalized, scale: image.scale, orientation: .up)
 }
 
 final class SnapshotImagePreparer {
@@ -168,6 +225,8 @@ final class SnapshotImagePreparer {
         let size: CGSize
         let traits: UITraitCollection
     }
+    
+    private let offscreen: CGFloat = 10_000
 
     func prepareView(
         config: ViewImageConfig,
@@ -179,13 +238,17 @@ final class SnapshotImagePreparer {
         configureView(view, inside: viewController, size: resolvedSize)
 
         let mergedTraits = UITraitCollection(traitsFrom: [config.traits, traits])
-        let window = makeWindow(config: config, viewController: viewController, size: resolvedSize)
+        let window = makeWindow(config: config, viewController: viewController, size: resolvedSize, traits: mergedTraits)
         let dispose = attach(
             viewController: viewController,
             to: window,
             applying: mergedTraits,
             safeArea: config.safeArea
         )
+        
+        if config.safeArea == .zero {
+            view.frame.origin = .init(x: offscreen, y: offscreen)
+        }
 
         return PreparedView(cleanup: dispose, size: resolvedSize, traits: mergedTraits)
     }
@@ -228,11 +291,13 @@ private extension SnapshotImagePreparer {
     func makeWindow(
         config: ViewImageConfig,
         viewController: UIViewController,
-        size: CGSize
+        size: CGSize,
+        traits: UITraitCollection
     ) -> UIWindow {
-        let window = UIWindow(frame: .init(origin: .zero, size: size))
-        window.isHidden = false
-        return window
+        SnapshotWindow(
+            config: .init(safeArea: config.safeArea, size: config.size ?? size, traits: traits),
+            viewController: viewController
+        )
     }
 
     func attach(
@@ -248,6 +313,49 @@ private extension SnapshotImagePreparer {
         driveInitialLayout(root: root, child: viewController)
 
         return cleanupClosure(root: root, child: viewController, window: window)
+    }
+}
+
+private final class SnapshotWindow: UIWindow {
+    private var config: ViewImageConfig
+    
+    init(config: ViewImageConfig, viewController: UIViewController) {
+        let size = config.size ?? viewController.view.bounds.size
+        self.config = config
+        super.init(frame: .init(origin: .zero, size: size))
+        
+        // Match SnapshotTesting behavior to keep UINavigationController and UITabBarController snapshots stable.
+        if viewController is UINavigationController {
+            self.frame.size.height -= self.config.safeArea.top
+            self.config.safeArea.top = 0
+        } else if let tabBarController = viewController as? UITabBarController {
+            self.frame.size.height -= self.config.safeArea.bottom
+            self.config.safeArea.bottom = 0
+            
+            if tabBarController.selectedViewController is UINavigationController {
+                self.frame.size.height -= self.config.safeArea.top
+                self.config.safeArea.top = 0
+            }
+        }
+        
+        self.isHidden = false
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @available(iOS 11.0, *)
+    override var safeAreaInsets: UIEdgeInsets {
+        let removeTopInset =
+            self.config.safeArea == .init(top: 20, left: 0, bottom: 0, right: 0)
+            && (self.rootViewController?.prefersStatusBarHidden ?? false)
+        if removeTopInset {
+            return .zero
+        }
+        
+        return self.config.safeArea
     }
 }
 
