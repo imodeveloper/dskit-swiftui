@@ -120,7 +120,7 @@ struct Testable_BookingScreen4: View {
     var body: some View {
         NavigationView {
             BookingScreen4()
-                .navigationTitle("Select specialist")
+                .navigationTitle("Specialist")
         }
     }
 }

@@ -15,19 +15,20 @@ struct BookingScreen5: View {
     var body: some View {
         DSList {
             DSSection {
-            Barber(barber: viewModel.barber)
-                .onTap { dismiss() }
-            
-            DSVStack(spacing: .zero) {
-                DSVStack {
-                    ForEach(viewModel.feedbackArray) { feedback in
-                        FeedbackView(feedback: feedback)
+                Barber(barber: viewModel.barber)
+                    .dsFullWidth(alignment: .center)
+                    .onTap { dismiss() }
+                
+                DSVStack(spacing: .zero) {
+                    DSVStack {
+                        ForEach(viewModel.feedbackArray) { feedback in
+                            FeedbackView(feedback: feedback)
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
             }
-        
-            }}
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Leave Feedback", rightSystemName: "message.fill") {}
