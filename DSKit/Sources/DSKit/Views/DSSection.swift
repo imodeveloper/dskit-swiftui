@@ -41,10 +41,8 @@ public struct DSSection<Content: View>: View {
 
     public var body: some View {
         Section {
-            VStack(alignment: .leading, spacing: 0) {
-                content()
-            }
-            .dsResetContentMargins()
+            // Keep section children as native List rows to preserve virtualization.
+            content()
         }
         .background(Color(viewStyle.colors(from: appearance).background))
         .listRowSeparator(.hidden)

@@ -35,6 +35,11 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - Preserve local test fixtures used by image snapshots
   - Update goldens only when behavior is intentionally changed
 
+## List Virtualization Pitfall
+- Do not wrap full `DSSection` content in a `VStack` when the content contains many rows (`ForEach`) intended for `List` virtualization.
+- Wrapping all rows in one container can collapse the section into a single giant list cell, causing freeze/memory spikes in consuming apps.
+- Preserve native `Section { content() }` row structure for large feeds.
+
 ## Design tokens reference
 - `DSAppearance` is the source of theme, spacing, and typography tokens.
 - Spacing system: `DSSpacingSystem` and `DSPaddingSystem` expose `.small/.regular/.medium` scales from `appearance`.
