@@ -12,17 +12,15 @@ struct FoodNearbyRestaurantScreen1: View {
     
     @StateObject var viewModel = FoodNearbyRestaurantScreen1Model()
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(viewModel.popularProducts) { product in
                     PopularProductView(product: product)
                 }
-            .dsPadding(.bottom)
-        
-            }}
+            }
+        }
     }
 }
 
@@ -61,16 +59,16 @@ extension FoodNearbyRestaurantScreen1 {
                             }
                         }
                     }
-                    
+
                     DSText(product.description)
                         .dsTextStyle(.subheadline)
-                    
+
                 }.dsPadding()
             }
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String

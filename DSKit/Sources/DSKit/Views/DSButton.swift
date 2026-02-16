@@ -49,6 +49,7 @@ public struct DSButton: View {
         case borderedLight
         case custom(color: Color)
         case clear
+        case toolbar
     }
     
     @Environment(\.appearance) var appearance: DSAppearance
@@ -179,6 +180,12 @@ public struct DSButton: View {
                     .frame(maxWidth: maxWidth ? .infinity : .none)
                     .background(backgroundColor)
                     .dsMinHeight(.custom(appearance.actionElementHeight))
+            case .toolbar:
+                buttonView
+                    .frame(maxWidth: .none)
+                    .background(backgroundColor)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
             case .borderedLight:
                 buttonView
                     .frame(maxWidth: maxWidth ? .infinity : .none)
@@ -237,6 +244,8 @@ public struct DSButton: View {
             return .color(color)
         case .clear:
             return .color(.clear)
+        case .toolbar:
+            return .color(.clear)
         case .borderedLight:
             return .viewStyle(.primary, .button(.supportColor))
         }
@@ -251,6 +260,8 @@ public struct DSButton: View {
         case .custom(color: _):
             return .color(.white)
         case .clear:
+            return .view(.button(.accentColor))
+        case .toolbar:
             return .view(.button(.accentColor))
         case .borderedLight:
             return .viewStyle(.primary, .button(.accentColor))

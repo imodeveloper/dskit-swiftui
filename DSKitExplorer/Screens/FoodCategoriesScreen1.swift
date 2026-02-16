@@ -31,7 +31,6 @@ struct FoodCategoriesScreen1: View {
 
 extension FoodCategoriesScreen1 {
     
-    
     // MARK: - CategoryView View
     struct CategoryView: View {
         let category: Data

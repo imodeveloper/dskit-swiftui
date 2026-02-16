@@ -60,8 +60,8 @@ struct Filters2: View {
                 )
             }
         }.toolbar {
-            ToolbarItem(placement: .platformBasedTrailing) {
-                DSButton(title: "Reset", style: .clear, action: {})
+            ToolbarItem(placement: .automatic) {
+                DSButton(title: "Reset", style: .toolbar, action: {})
             }
         }
     }

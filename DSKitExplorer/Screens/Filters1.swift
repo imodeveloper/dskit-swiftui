@@ -38,9 +38,7 @@ struct Filters1: View {
             }
         }.toolbar {
             ToolbarItem(placement: .automatic) {
-                DSButton(title: "Reset", style: .clear, maxWidth: false, action: {})
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
+                DSButton(title: "Reset", style: DSButton.Style.toolbar, action: {})
             }
         }
     }

@@ -113,10 +113,13 @@ public struct DSImageView: View {
         case .image(image: let uiImage):
             
             if let uiImage {
-                Image(dsUIImage: uiImage)
-                    .resizable()
-                    .setImageTint(tint: image.tintColor)
-                    .setContentMode(mode: image.contentMode)
+                Color.clear
+                    .overlay(alignment: .center) {
+                        Image(dsUIImage: uiImage)
+                            .resizable()
+                            .setImageTint(tint: image.tintColor)
+                            .setContentMode(mode: image.contentMode)
+                    }
                     .dsSize(image.size)
                     .setDisplayShape(shape: image.displayShape)
             } else {

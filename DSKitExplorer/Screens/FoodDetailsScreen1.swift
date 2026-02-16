@@ -16,7 +16,7 @@ struct FoodDetailsScreen1: View {
     var body: some View {
         DSList {
             DSSection {
-            
+                
                 DSImageView(named: "Food_menu_1", displayShape: .capsule)
                     .dsHeight(260)
                     .dsCornerRadius()
@@ -99,9 +99,9 @@ struct FoodDetailsScreen1: View {
                         }.dsCardStyle()
                     }
                 }
-            .dsPadding(.bottom)
-        
-            }}
+                .dsPadding(.bottom)
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Add to cart") { dismiss() }

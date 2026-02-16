@@ -43,19 +43,19 @@ public struct DSSection<Content: View>: View {
         Section {
             // Keep section children as native List rows to preserve virtualization.
             content()
+                .listRowSeparator(.hidden)
+                .listRowInsets(
+                    EdgeInsets(
+                        top: 0,
+                        leading: contentMargin,
+                        bottom: appearance.spacing.value(for: spacing),
+                        trailing: contentMargin
+                    )
+                )
+                .listRowBackground(Color(viewStyle.colors(from: appearance).background))
         }
         .background(Color(viewStyle.colors(from: appearance).background))
-        .listRowSeparator(.hidden)
-        .listRowInsets(
-            EdgeInsets(
-                top: 0,
-                leading: contentMargin,
-                bottom: appearance.spacing.value(for: spacing),
-                trailing: contentMargin
-            )
-        )
         .listSectionSeparator(.hidden)
-        .listRowBackground(Color(viewStyle.colors(from: appearance).background))
         .environment(\.dsScreenMarginsAlreadyApplied, true)
     }
 }
