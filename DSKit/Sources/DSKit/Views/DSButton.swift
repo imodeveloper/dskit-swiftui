@@ -42,7 +42,7 @@ Extensions on `DSButton` provide convenient static methods to create commonly us
 */
 
 public struct DSButton: View {
-    
+
     public enum Style {
         case `default`
         case light
@@ -51,10 +51,10 @@ public struct DSButton: View {
         case clear
         case toolbar
     }
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
-    
+
     let title: String
     var leftImage: DSImage? = nil
     var rightImage: DSImage? = nil
@@ -63,7 +63,7 @@ public struct DSButton: View {
     var maxWidth: Bool
     var spacing: DSSpace
     let action: () -> Void
-    
+
     public init(
         title: String,
         leftImage: DSImage? = nil,
@@ -83,7 +83,7 @@ public struct DSButton: View {
         self.action = action
         self.spacing = spacing
     }
-    
+
     public init(
         title: String,
         leftImageNamed: String? = nil,
@@ -95,22 +95,22 @@ public struct DSButton: View {
         action: @escaping () -> Void
     ) {
         self.title = title
-        
+
         if let leftImageNamed {
             self.leftImage = DSImage(content: .image(image: DSUIImage(named: leftImageNamed)), size: .smallIcon)
         }
-        
+
         if let rightImageNamed: String {
             self.rightImage = DSImage(content: .image(image: DSUIImage(named: rightImageNamed)), size: .smallIcon)
         }
-        
+
         self.pushContentToSides = pushContentToSides
         self.style = style
         self.maxWidth = maxWidth
         self.action = action
         self.spacing = spacing
     }
-    
+
     public init(
         title: String,
         pushContentToSides: Bool = false,
@@ -129,7 +129,7 @@ public struct DSButton: View {
             action: action
         )
     }
-    
+
     public init(
         title: String,
         leftSystemName: String? = nil,
@@ -144,12 +144,12 @@ public struct DSButton: View {
         if let leftSystemName {
             leftImage = DSImage(content: .system(name: leftSystemName), size: .font(.headline))
         }
-        
+
         var rightImage: DSImage?
         if let rightSystemName {
             rightImage = DSImage(content: .system(name: rightSystemName), size: .font(.headline))
         }
-        
+
         self.init(
             title: title,
             leftImage: leftImage,
@@ -160,15 +160,15 @@ public struct DSButton: View {
             action: action
         )
     }
-    
+
     public var body: some View {
         styledButton.dsDebuggable(debugColor: Color.mint.opacity(0.3))
     }
-    
+
     var styledButton: some View {
         Button(action: action, label: {
             switch style {
-            case .default, .light, .custom(color: _):
+            case .default, .light, .custom:
                 buttonView
                     .frame(maxWidth: maxWidth ? .infinity : .none)
                     .dsPadding(.horizontal, .medium)
@@ -199,7 +199,7 @@ public struct DSButton: View {
             }
         }).buttonStyle(.plain)
     }
-    
+
     var buttonView: some View {
         DSHStack(spacing: spacing) {
             if let leftImage {
@@ -209,11 +209,11 @@ public struct DSButton: View {
                     Spacer()
                 }
             }
-            
+
             if !title.isEmpty {
                 DSText(title).dsTextStyle(.headline, titleColor)
             }
-            
+
             if let rightImage {
                 if pushContentToSides {
                     Spacer()
@@ -224,7 +224,7 @@ public struct DSButton: View {
         }
         .dsResetContentMargins()
     }
-    
+
     var backgroundColor: Color {
         switch style {
         case .light:
@@ -233,7 +233,7 @@ public struct DSButton: View {
             dsBackgroundColor.color(for: appearance, and: viewStyle)
         }
     }
-    
+
     var dsBackgroundColor: DSColorKey {
         switch style {
         case .default:
@@ -250,14 +250,14 @@ public struct DSButton: View {
             return .viewStyle(.primary, .button(.supportColor))
         }
     }
-    
+
     var titleColor: DSColorKey {
         switch style {
         case .default:
             return .view(.button(.supportColor))
         case .light:
             return .view(.button(.accentColor))
-        case .custom(color: _):
+        case .custom:
             return .color(.white)
         case .clear:
             return .view(.button(.accentColor))
@@ -270,7 +270,7 @@ public struct DSButton: View {
 }
 
 public extension DSButton {
-    
+
     static func callToActionLink(title: String, action: @escaping () -> Void) -> DSButton {
         DSButton(
             title: title,
@@ -280,7 +280,7 @@ public extension DSButton {
             action: action
         )
     }
-    
+
     static func sfSymbol(
         name: String,
         style: Style = .default,
@@ -314,7 +314,7 @@ struct Testable_DSButton: View {
             .dsPadding(.medium)
             .dsSecondaryBackground()
             .dsCornerRadius()
-            
+
             DSVStack {
                 DSButton(title: "Default", action: { })
                 DSButton(

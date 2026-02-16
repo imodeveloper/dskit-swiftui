@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DSColorModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
     let tint: DSColorKey

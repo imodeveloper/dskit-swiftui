@@ -8,10 +8,10 @@
 import SwiftUI
 
 public struct DSDebugLayoutModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     public init() { }
-    
+
     public func body(content: Content) -> some View {
         content
             .environment(\.debugLayout, true)

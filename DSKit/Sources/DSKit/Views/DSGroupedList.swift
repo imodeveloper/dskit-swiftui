@@ -24,11 +24,11 @@ Initializes a `DSGroupedList` with essential parameters for handling data and cu
 */
 
 public struct DSGroupedList<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View, Data.Index == Int {
-    
+
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
-    
+
     public init(
         data: Data,
         id: KeyPath<Data.Element, ID>,
@@ -38,7 +38,7 @@ public struct DSGroupedList<Data, ID, Content>: View where Data: RandomAccessCol
         self.id = id
         self.content = content
     }
-    
+
     public var body: some View {
         DSVStack {
             ForEach(data.indices, id: \.self) { index in
@@ -53,13 +53,13 @@ public struct DSGroupedList<Data, ID, Content>: View where Data: RandomAccessCol
 }
 
 struct Testable_DSGroupedList: View {
-    
+
     let artists = [
         "Eminem",
         "Madona",
         "Michael Jakson"
     ]
-    
+
     var body: some View {
         DSGroupedList(data: artists, id: \.self) { artist in
             DSText(artist)

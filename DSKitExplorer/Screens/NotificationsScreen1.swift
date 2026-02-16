@@ -5,28 +5,26 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct NotificationsScreen1: View {
-    
     @State private var isSwitchOn = true
     @Environment(\.appearance) var appearance: DSAppearance
-    
+
     var body: some View {
         DSVStack(spacing: .medium) {
-            
             Spacer()
-            
+
             DSHStack {
                 DSText("Turn on\nnotifications")
                     .dsTextStyle(.headline, 36)
                 Spacer()
                 DSImageView(systemName: "bell.fill", size: 60, tint: .viewStyle(.secondary, .background))
             }
-            
+
             DSText("Meet new people, create posts, find friends and more.")
-            
+
             DSHStack {
                 DSText("Notifications").dsTextStyle(.headline)
                 Spacer()
@@ -37,13 +35,13 @@ struct NotificationsScreen1: View {
             .dsPadding()
             .dsSecondaryBackground()
             .dsCornerRadius()
-            
+
             DSText("Enable notifications to make sure you don't miss out the post from your friends").dsTextStyle(.caption1)
             Spacer()
-            
-            DSButton(title: "Dismiss") { }
-            
-            .dsPadding(.bottom)
+
+            DSButton(title: "Dismiss") {}
+
+                .dsPadding(.bottom)
         }.dsScreen()
     }
 }
@@ -63,4 +61,3 @@ struct NotificationsScreen1_Previews: PreviewProvider {
         DSPreviewForEachAppearance { Testable_NotificationsScreen1() }
     }
 }
-

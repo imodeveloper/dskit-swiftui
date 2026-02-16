@@ -8,16 +8,16 @@
 import SwiftUI
 
 public struct DSSelectedStyleModifier: ViewModifier, DSDesignable {
-    
+
     @Environment(\.appearance) public var appearance: DSAppearance
     @Environment(\.viewStyle) public var viewStyle: DSViewStyle
-    
+
     let isSelected: Bool
-    
+
     init(isSelected: Bool) {
         self.isSelected = isSelected
     }
-    
+
     public func body(content: Content) -> some View {
         content
             .dsCornerRadius()

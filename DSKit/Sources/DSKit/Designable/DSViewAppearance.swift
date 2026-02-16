@@ -44,7 +44,7 @@ public enum DSViewColorKey: Equatable, Hashable {
 }
 
 public struct DSViewAppearance: DSViewAppearanceProtocol {
-    
+
     public init(
         button: DSButtonAppearanceProtocol,
         text: DSTextAppearanceProtocol,
@@ -60,7 +60,7 @@ public struct DSViewAppearance: DSViewAppearanceProtocol {
         self.separator = separator
         self.cornerRadius = cornerRadius
     }
-    
+
     public var button: DSButtonAppearanceProtocol
     public var text: DSTextAppearanceProtocol
     public var textField: DSTextFieldAppearanceProtocol

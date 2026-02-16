@@ -5,47 +5,43 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct FoodRestaurantScreen1: View {
-    
     @StateObject var viewModel = FoodRestaurantScreen1Model()
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
-                
                 BannerView()
-                
+
                 DSVStack(spacing: .regular) {
-                    
                     DSText("Popular Products")
                         .dsTextStyle(.headline)
-                    
+
                     DSGrid(
                         spacing: .regular,
                         data: viewModel.popularProducts,
-                        id: \.self.id
+                        id: \.id
                     ) { product in
                         PopularProductView(product: product)
                     }
                 }
-                
-            .dsPadding(.bottom)
-        
-            }}
+
+                .dsPadding(.bottom)
+            }
+        }
     }
 }
 
 extension FoodRestaurantScreen1 {
-    
     // MARK: - CategoryView View
+
     struct PopularProductView: View {
         let product: Data
-        
+
         var body: some View {
             DSVStack(spacing: .zero) {
                 DSImageView(named: product.image)
@@ -57,15 +53,14 @@ extension FoodRestaurantScreen1 {
                             .dsBackground(.view(.button(.accentColor)))
                             .dsPadding(.top)
                     }
-                
+
                 DSVStack(spacing: .zero) {
-                    
                     DSText(product.title)
                         .dsTextStyle(.smallHeadline)
                         .dsPadding(.small)
                         .dsFullWidth()
                     Spacer()
-                    
+
                     DSHStack {
                         DSHStack(spacing: .zero) {
                             DSImageView(
@@ -73,32 +68,31 @@ extension FoodRestaurantScreen1 {
                                 size: .font(.smallSubheadline),
                                 tint: .color(.yellow)
                             )
-                            
+
                             DSText(product.rating)
                                 .dsTextStyle(.smallSubheadline)
                                 .dsPadding(.small)
                         }
-                        
+
                         DSHStack(spacing: .zero) {
                             DSImageView(
                                 systemName: "clock.fill",
                                 size: .font(.smallSubheadline),
                                 tint: .text(.headline)
                             )
-                            
+
                             DSText(product.time)
                                 .dsTextStyle(.smallSubheadline)
                                 .dsPadding(.small)
                         }
                     }.dsPadding(.leading, 3)
-                        
                 }
                 .dsPadding(.regular)
             }
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String
@@ -108,8 +102,9 @@ extension FoodRestaurantScreen1 {
             let image: String
         }
     }
-    
+
     // MARK: - Banner View
+
     struct BannerView: View {
         var body: some View {
             DSVStack {
@@ -120,35 +115,34 @@ extension FoodRestaurantScreen1 {
                         DSVStack(spacing: .small) {
                             DSText("Express Ramen Shop")
                                 .dsTextStyle(.headline, 25, .color(.white))
-                            
+
                             DSHStack(spacing: .zero) {
                                 DSImageView(
                                     systemName: "star.fill",
                                     size: .font(.smallSubheadline),
                                     tint: .color(.yellow)
                                 )
-                                
+
                                 DSText("4.5")
                                     .dsTextStyle(.smallHeadline, .color(.white))
                                     .dsPadding(.small)
-                                
+
                                 DSText("(678)")
                                     .dsTextStyle(.smallSubheadline, .color(.white))
                                     .dsPadding(.small)
-                                
+
                                 DSText("Bread, Cacke $$")
                                     .dsTextStyle(.smallHeadline, .color(.white))
                                     .dsPadding(.small)
                             }
-                            
-                            DSHStack() {
+
+                            DSHStack {
                                 DSText("Pickup")
                                     .dsTextStyle(.smallHeadline)
                                     .dsPadding(.small)
                                     .dsSecondaryBackground()
                                     .dsCornerRadius()
-                                    
-                                
+
                                 DSText("Free Delivery")
                                     .dsTextStyle(.smallHeadline)
                                     .dsPadding(.small)
@@ -167,7 +161,6 @@ extension FoodRestaurantScreen1 {
 // MARK: - Model
 
 final class FoodRestaurantScreen1Model: ObservableObject {
-        
     var popularProducts: [FoodRestaurantScreen1.PopularProductView.Data] = [
         .init(
             title: "Authentic Japanese Ramen",
@@ -242,4 +235,3 @@ struct FoodRestaurantScreen1_Previews: PreviewProvider {
         }
     }
 }
-

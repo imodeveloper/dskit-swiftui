@@ -156,7 +156,7 @@ struct Testable_DSList: View {
 
     var body: some View {
         DSList(sectionSpacing: .medium, sectionHeaderSpacing: .medium) {
-            
+
             DSSection {
                 DSHStack {
                     DSVStack(spacing: .zero) {

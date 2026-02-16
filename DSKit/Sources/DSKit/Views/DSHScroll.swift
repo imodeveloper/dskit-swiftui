@@ -24,17 +24,17 @@ Initializes a `DSHScroll` with parameters that control layout and behavior.
 `DSHScroll` is particularly useful in scenarios where users need to browse through a series of items without navigating away from the current view context, such as in a media gallery or a horizontal list of options.
 */
 
-public struct DSHScroll<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View{
-    
+public struct DSHScroll<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View {
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.dsScrollableContentMarginKey) var scrollableContentMargin: CGFloat
-    
+
     let spacing: DSSpace
-    
+
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
-    
+
     public init(
         spacing: DSSpace = .regular,
         data: Data,
@@ -46,7 +46,7 @@ public struct DSHScroll<Data, ID, Content>: View where Data: RandomAccessCollect
         self.content = content
         self.id = id
     }
-    
+
     public var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             DSHStack(spacing: spacing) {

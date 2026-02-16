@@ -23,19 +23,19 @@ Initializes a `DSRatingView` with a specific rating and optional size for the st
 */
 
 public struct DSRatingView: View {
-    
+
     let rating: Float
     let maximumRating = 5
     let size: CGFloat
     let fullStarSymbol = "star.fill"
     let halfStarSymbol = "star.leadinghalf.fill"
     let emptyStarSymbol = "star"
-    
+
     public init(rating: Float, size: CGFloat = 14) {
         self.rating = rating
         self.size = size
     }
-    
+
     public var body: some View {
         HStack(spacing: 3) {
             ForEach(1...maximumRating, id: \.self) { index in
@@ -47,7 +47,7 @@ public struct DSRatingView: View {
             }
         }
     }
-    
+
     private func symbolName(for index: Int) -> String {
         if Float(index) <= rating {
             return fullStarSymbol

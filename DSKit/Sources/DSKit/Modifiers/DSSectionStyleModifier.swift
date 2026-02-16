@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-public struct DSSectionStyleModifier: ViewModifier {    
-    
+public struct DSSectionStyleModifier: ViewModifier {
+
     let title: String
-    
+
     public init(title: String) {
         self.title = title
     }
-    
+
     public func body(content: Content) -> some View {
         DSVStack(spacing: .small) {
             DSText(title).dsTextStyle(.smallHeadline)

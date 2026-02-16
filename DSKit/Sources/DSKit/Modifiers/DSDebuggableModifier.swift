@@ -20,17 +20,17 @@ public extension EnvironmentValues {
 }
 
 public struct DSDebuggableModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
     @Environment(\.debugLayout) var debugLayout: Bool
-    
+
     var debugColor: Color
-    
+
     public init(debugColor: Color) {
         self.debugColor = debugColor
     }
-    
+
     public func body(content: Content) -> some View {
         if debugLayout {
             content.background(debugColor.opacity(0.3))
@@ -70,6 +70,6 @@ public extension View {
         .dsPadding(.small)
         .dsSecondaryBackground()
         .dsCornerRadius()
-        
+
     }.dsPadding()
 }

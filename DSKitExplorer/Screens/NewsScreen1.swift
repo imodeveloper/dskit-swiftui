@@ -5,38 +5,36 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct NewsScreen1: View {
-    
     enum Style {
         case regular
         case compact
     }
-    
+
     @Environment(\.dismiss) var dismiss
     let viewModel = NewsScreen1Model()
     @State var style: Style = .regular
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(viewModel.articles) { article in
                     ArticleView(article: article, style: $style)
                 }
-        
-            }}
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
-                let icon = self.style == .compact ? "list.dash" : "list.bullet.below.rectangle"
+                let icon = style == .compact ? "list.dash" : "list.bullet.below.rectangle"
                 DSToolbarSFSymbolButton(name: icon)
                     .onTap {
-                        if self.style == .compact {
-                            self.style = .regular
+                        if style == .compact {
+                            style = .regular
                         } else {
-                            self.style = .compact
+                            style = .compact
                         }
                     }
             }
@@ -45,28 +43,26 @@ struct NewsScreen1: View {
 }
 
 extension NewsScreen1 {
-    
     // MARK: - Article View
-    
+
     struct ArticleView: View {
         let article: Data
-        
+
         @Binding var style: Style
-        
+
         var body: some View {
             DSVStack(alignment: .center, spacing: .zero) {
-                
                 if style == .regular {
                     if let image = article.image {
                         DSImageView(url: image)
                             .dsHeight(180)
                     }
-                    
+
                     DSVStack(spacing: .regular) {
                         DSText(article.title)
                             .dsTextStyle(.headline)
                             .dsFullWidth()
-                        
+
                         DSHStack(alignment: .bottom) {
                             DSText(article.description, alignment: .leading)
                                 .dsTextStyle(.subheadline)
@@ -81,23 +77,22 @@ extension NewsScreen1 {
                     }.dsPadding()
                 } else {
                     DSHStack(alignment: .top, spacing: .medium) {
-                        
                         if let image = article.image {
                             DSImageView(url: image)
                                 .frame(width: 75, height: 75)
                                 .dsCornerRadius()
                         }
-                        
+
                         DSVStack(spacing: .regular) {
                             DSText(article.title)
                                 .dsTextStyle(.smallHeadline)
                                 .dsFullWidth()
-                            
+
                             DSText(article.description, alignment: .leading)
                                 .dsTextStyle(.smallSubheadline)
                                 .dsFullWidth()
                         }
-                        
+
                         if article.bookmarked {
                             DSImageView(
                                 systemName: "bookmark.fill",
@@ -105,7 +100,7 @@ extension NewsScreen1 {
                                 tint: .color(.orange)
                             )
                         }
-                        
+
                     }.dsPadding()
                 }
             }
@@ -113,7 +108,7 @@ extension NewsScreen1 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -234,8 +229,8 @@ struct NewsScreen1_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let image1 = URL(string: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let image2 = URL(string: "https://images.unsplash.com/photo-1569428034239-f9565e32e224?q=80&w=3279&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let image3 = URL(string: "https://images.unsplash.com/photo-1681356382603-dc9d7b9ee0c8?q=80&w=3271&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let image4 = URL(string: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let image5 = URL(string: "https://images.unsplash.com/photo-1589149098258-3e9102cd63d3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UXVhbnR1bSUyMENvbXB1dGluZ3xlbnwwfHwwfHx8MA%3D%3D")
+private let image1 = URL(string: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image2 = URL(string: "https://images.unsplash.com/photo-1569428034239-f9565e32e224?q=80&w=3279&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image3 = URL(string: "https://images.unsplash.com/photo-1681356382603-dc9d7b9ee0c8?q=80&w=3271&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image4 = URL(string: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image5 = URL(string: "https://images.unsplash.com/photo-1589149098258-3e9102cd63d3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UXVhbnR1bSUyMENvbXB1dGluZ3xlbnwwfHwwfHx8MA%3D%3D")

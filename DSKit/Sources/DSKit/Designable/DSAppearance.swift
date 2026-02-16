@@ -59,7 +59,7 @@ public extension DSAppearance {
         } else {
             useNativeLiquidGlassBehavior = false
         }
-        
+
         // Configure Navigation Bar Appearance
         let navigationBarAppearance = UINavigationBarAppearance()
         if useNativeLiquidGlassBehavior {
@@ -72,32 +72,32 @@ public extension DSAppearance {
             }
             navigationBarAppearance.backgroundColor = self.navigationBar.bar
         }
-        
+
         navigationBarAppearance.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: self.navigationBar.text,
             NSAttributedString.Key.font: self.fonts.headline
         ]
-        
+
         navigationBarAppearance.backButtonAppearance.normal.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: self.navigationBar.buttons,
             NSAttributedString.Key.font: self.fonts.headline
         ]
-        
+
         navigationBarAppearance.largeTitleTextAttributes = [
             NSAttributedString.Key.foregroundColor: self.primaryView.text.title1,
             NSAttributedString.Key.font: self.fonts.headline.withSize(30)
         ]
-        
+
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-        
+
         let itemAppearance = UITabBarItemAppearance()
         itemAppearance.normal.iconColor = self.tabBar.unselectedItemTint
         itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.tabBar.unselectedItemTint]
         itemAppearance.selected.iconColor =  self.tabBar.itemTint
         itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.tabBar.itemTint]
-        
+
         let tabBarAppearance = UITabBarAppearance()
         if useNativeLiquidGlassBehavior {
             tabBarAppearance.configureWithDefaultBackground()
@@ -110,7 +110,7 @@ public extension DSAppearance {
             tabBarAppearance.backgroundColor = self.tabBar.barTint
         }
         tabBarAppearance.stackedLayoutAppearance = itemAppearance
-        
+
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         #endif

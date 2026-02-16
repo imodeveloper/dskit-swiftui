@@ -8,30 +8,30 @@
 import Foundation
 
 public final class DSTextFieldValue: ObservableObject, Hashable {
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
+
     public static func == (lhs: DSTextFieldValue, rhs: DSTextFieldValue) -> Bool {
         lhs.id == rhs.id
     }
-    
+
     let id = UUID()
-    
+
     public init(value: String = "") {
         self.text = value
     }
-    
+
     // The current text of the text field
     @Published public var text: String = ""
-    
+
     // Indicates whether the current text value is valid according to validation rules
     @Published public var isValid: Bool = true
-    
+
     // Closure for custom validation logic, can be set by the parent view
     var validationClosure: (() -> Void)?
-    
+
     public func validate() -> Bool {
         validationClosure?()
         return isValid

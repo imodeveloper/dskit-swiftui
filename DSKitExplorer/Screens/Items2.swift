@@ -5,23 +5,21 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Items2: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = Items2Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(viewModel.products) { product in
                     ProductView(product: product)
                 }
-        
-            }}
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "arrow.up.arrow.down.circle.fill")
@@ -36,9 +34,8 @@ struct Items2: View {
 }
 
 extension Items2 {
-    
     // MARK: - Product View
-    
+
     struct ProductView: View {
         let product: Data
         var body: some View {
@@ -47,13 +44,13 @@ extension Items2 {
                     DSImageView(url: product.image)
                     LinearGradient(
                         gradient:
-                            Gradient(
-                                colors: [
-                                    Color.black.opacity(0.0),
-                                    Color.black.opacity(0.2),
-                                    Color.black.opacity(1)
-                                ]
-                            ),
+                        Gradient(
+                            colors: [
+                                Color.black.opacity(0.0),
+                                Color.black.opacity(0.2),
+                                Color.black.opacity(1)
+                            ]
+                        ),
                         startPoint: .top,
                         endPoint: .bottom
                     )
@@ -77,7 +74,7 @@ extension Items2 {
                     .dsCornerRadius()
                     .dsPadding(.regular)
                 }
-                
+
                 DSVStack(alignment: .center, spacing: .zero) {
                     DSText(product.title)
                         .dsTextStyle(.smallHeadline, .white)
@@ -91,7 +88,7 @@ extension Items2 {
             .dsCornerRadius()
             .dsHeight(280)
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -107,7 +104,6 @@ extension Items2 {
 // MARK: - Model
 
 final class Items2Model {
-    
     let products: [Items2.ProductView.Data] = [
         .init(
             title: "Jodhpur Boots",
@@ -146,13 +142,13 @@ final class Items2Model {
             image: bootsImage
         ),
         .init(
-             title: "Riding Boots",
-             description: "Arrmani",
-             tag: "50% OFF",
-             price: DSPrice(amount: "57", regularAmount: "85", currency: "$"),
-             favorite: false,
-             image: ridingBootsImage
-         )
+            title: "Riding Boots",
+            description: "Arrmani",
+            tag: "50% OFF",
+            price: DSPrice(amount: "57", regularAmount: "85", currency: "$"),
+            favorite: false,
+            image: ridingBootsImage
+        )
     ]
 }
 
@@ -177,9 +173,9 @@ struct Items2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let bootsImage = URL(string: "https://images.pexels.com/photos/267242/pexels-photo-267242.jpeg?cs=srgb&dl=pexels-pixabay-267242.jpg&fm=jpg")
-fileprivate let shoesImage = URL(string: "https://images.pexels.com/photos/1904769/pexels-photo-1904769.jpeg?cs=srgb&dl=pexels-sebastian-palomino-1904769.jpg&fm=jpg")
-fileprivate let hikingBootsImage = URL(string: "https://images.pexels.com/photos/755871/pexels-photo-755871.jpeg?cs=srgb&dl=pexels-simon-migaj-755871.jpg&fm=jpg")
-fileprivate let motocrossBootsImage = URL(string: "https://images.pexels.com/photos/718981/pexels-photo-718981.jpeg?cs=srgb&dl=pexels-aidan-jarrett-718981.jpg&fm=jpg")
-fileprivate let ridingBootsImage = URL(string: "https://images.pexels.com/photos/6410600/pexels-photo-6410600.jpeg?cs=srgb&dl=pexels-jessica-jochheim-6410600.jpg&fm=jpg")
-fileprivate let jodhpurBootsImage = URL(string: "https://images.pexels.com/photos/2682289/pexels-photo-2682289.jpeg?cs=srgb&dl=pexels-andrew-neel-2682289.jpg&fm=jpg")
+private let bootsImage = URL(string: "https://images.pexels.com/photos/267242/pexels-photo-267242.jpeg?cs=srgb&dl=pexels-pixabay-267242.jpg&fm=jpg")
+private let shoesImage = URL(string: "https://images.pexels.com/photos/1904769/pexels-photo-1904769.jpeg?cs=srgb&dl=pexels-sebastian-palomino-1904769.jpg&fm=jpg")
+private let hikingBootsImage = URL(string: "https://images.pexels.com/photos/755871/pexels-photo-755871.jpeg?cs=srgb&dl=pexels-simon-migaj-755871.jpg&fm=jpg")
+private let motocrossBootsImage = URL(string: "https://images.pexels.com/photos/718981/pexels-photo-718981.jpeg?cs=srgb&dl=pexels-aidan-jarrett-718981.jpg&fm=jpg")
+private let ridingBootsImage = URL(string: "https://images.pexels.com/photos/6410600/pexels-photo-6410600.jpeg?cs=srgb&dl=pexels-jessica-jochheim-6410600.jpg&fm=jpg")
+private let jodhpurBootsImage = URL(string: "https://images.pexels.com/photos/2682289/pexels-photo-2682289.jpeg?cs=srgb&dl=pexels-andrew-neel-2682289.jpg&fm=jpg")

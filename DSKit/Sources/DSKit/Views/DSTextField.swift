@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 /*
 ## DSTextField
 
@@ -23,21 +22,19 @@ Initializes a `DSTextField` with various options for handling different types of
 `DSTextField` is suitable for forms, login screens, and any interface where user input is required. The secure entry option and input validation make it particularly useful for handling sensitive information.
 */
 
-import SwiftUI
-
 public struct DSTextField: View {
-    
+
     // Environment properties for theming and color customization
     @Environment(\.appearance) private var appearance: DSAppearance
     @Environment(\.viewStyle) private var viewStyle: DSViewStyle
-    
+
     // State variables to manage the visibility of secure text entry and editing status
     @State private var isSecureEntryVisible: Bool = false
     @State private var isEditing: Bool = false
     @State private var hasText: Bool = false
     @State private var readyToValidate: Bool = false
     @State private var didEdit: Bool = false
-    
+
     // Object to observe and react to changes in the text field value
     @ObservedObject var model: DSTextFieldValue
     // Placeholder text for the text field
@@ -53,7 +50,7 @@ public struct DSTextField: View {
     let validateMinimumLength: Int
     let validateMaximumLength: Int
     let validateEmptyTextField: Bool
-    
+
     public var body: some View {
         DSHStack {
             if let symbolName = leftSystemName {
@@ -63,7 +60,7 @@ public struct DSTextField: View {
                     tint: hasText ? .view(.textField(.text)) : .view(.textField(.placeholder))
                 )
             }
-            
+
             // The main text field component
             DSCustomUITextField(
                 text: $model.text,
@@ -74,7 +71,7 @@ public struct DSTextField: View {
                 textContentType: textContentType,
                 autocapitalizationType: autocapitalizationType
             )
-            
+
             // Toggles visibility of the secure text entry (password visibility)
             if isSecureEntry {
                 let systemName = isSecureEntryVisible ? "eye.slash" : "eye"
@@ -126,7 +123,7 @@ public struct DSTextField: View {
             }
         }
     }
-    
+
     // Defines the validation logic for the text field
     private func validate() {
         // Checks for empty text field, minimum and maximum length, and matches against a regex pattern
@@ -142,13 +139,13 @@ public struct DSTextField: View {
 }
 
 struct Testable_DSTextField: View {
-    
+
     @State private var name = DSTextFieldValue()
     @State private var email = DSTextFieldValue()
     @State private var phone = DSTextFieldValue()
     @State private var password = DSTextFieldValue()
     @State private var repeatPassword = DSTextFieldValue()
-    
+
     var body: some View {
         ScrollView {
             DSVStack {
@@ -160,9 +157,9 @@ struct Testable_DSTextField: View {
                 .dsPadding()
                 .dsSecondaryBackground()
                 .dsCornerRadius()
-                
+
                 DSTextField.password(value: password)
-                
+
                 DSButton(title: "Subbmit") {
                     for element in [email, password, phone] {
                         let isValid = element.validate()

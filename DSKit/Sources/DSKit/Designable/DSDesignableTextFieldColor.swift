@@ -14,7 +14,7 @@ protocol DSTextFieldColorsProtocol {
 }
 
 public struct DSTextFieldColors: DSTextFieldColorsProtocol {
-    
+
     public init(
         border: DSUIColor,
         background: DSUIColor,
@@ -26,7 +26,7 @@ public struct DSTextFieldColors: DSTextFieldColorsProtocol {
         self.text = text
         self.placeHolder = placeHolder
     }
-    
+
     public var border: DSUIColor
     public var background: DSUIColor
     public var text: DSUIColor

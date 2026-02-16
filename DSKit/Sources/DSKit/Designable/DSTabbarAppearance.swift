@@ -40,7 +40,7 @@ extension DSTabBarAppearanceProtocol {
 }
 
 public struct DSTabBarAppearance: DSTabBarAppearanceProtocol {
-    
+
     /// Initialize tab bar colors
     /// - Parameters:
     ///   - barTint: DSUIColor
@@ -61,7 +61,7 @@ public struct DSTabBarAppearance: DSTabBarAppearanceProtocol {
         self.badge = badge
         self.translucent = translucent
     }
-    
+
     public var barTint: DSUIColor
     public var itemTint: DSUIColor
     public var unselectedItemTint: DSUIColor

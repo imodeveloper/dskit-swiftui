@@ -5,20 +5,19 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 public struct LogInScreen1: View {
-    
     @StateObject var model = LogInScreen1Model()
     @Environment(\.dismiss) var dismiss
-    
+
     public init() {}
-    
+
     public var body: some View {
         DSVStack(spacing: .zero) {
             Spacer()
-            
+
             DSVStack(spacing: .medium) {
                 DSVStack(alignment: .leading, spacing: .small) {
                     DSText("DSKit")
@@ -29,7 +28,7 @@ public struct LogInScreen1: View {
                         .hideWhenKeyboardIsDisplayed()
                     DSText("An exciting place for the whole\nfamily to shop").dsTextStyle(.subheadline)
                 }.fixedSize(horizontal: false, vertical: true)
-                
+
                 DSVStack {
                     DSTextField.email(value: model.form.email)
                     DSTextField.password(value: model.form.password)
@@ -37,22 +36,21 @@ public struct LogInScreen1: View {
                         model.form.submit()
                     }
                     DSButton(title: "Forgot password?", style: .clear, action: {
-                        self.dismiss()
+                        dismiss()
                     })
                 }
             }
-            
+
             Spacer()
             Spacer()
-            
+
             DSButton(
                 title: "Sign Up",
                 rightSystemName: "chevron.right",
                 pushContentToSides: true,
                 style: .light
-            ) { self.dismiss() }
-            
-            .dsPadding(.bottom)
+            ) { dismiss() }
+                .dsPadding(.bottom)
         }
         .hideKeyboardWhenTappedOutside()
         .dsScreen()
@@ -66,8 +64,13 @@ final class LogInScreen1Model: ObservableObject {
     struct Form {
         var email = DSTextFieldValue()
         var password = DSTextFieldValue()
-        var allFields: [DSTextFieldValue] { [email, password] }
-        func submit() { allFields.validate() }
+        var allFields: [DSTextFieldValue] {
+            [email, password]
+        }
+
+        func submit() {
+            allFields.validate()
+        }
     }
 }
 

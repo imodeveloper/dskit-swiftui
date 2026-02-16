@@ -10,7 +10,7 @@ import SwiftUI
 public struct DSPreview<Content: View>: View {
 
     let content: () -> Content
-    
+
     public init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }

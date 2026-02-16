@@ -5,18 +5,16 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Items5: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = Items5Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSImageView(url: p0Image, size: .size(width: .none, height: 180))
                     .dsCornerRadius()
                     .overlay(alignment: .center) {
@@ -32,13 +30,13 @@ struct Items5: View {
                         .dsPadding(.horizontal)
                         .dsCardStyle()
                         .dsHeight(.actionElement)
-                        .onTap { self.dismiss() }
+                        .onTap { dismiss() }
                 }
                 DSGrid(data: viewModel.products, id: \.id) { product in
                     ProductView(product: product)
                 }
-        
-            }}
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "arrow.up.arrow.down.circle.fill")
@@ -53,9 +51,8 @@ struct Items5: View {
 }
 
 extension Items5 {
-    
     // MARK: - Product View
-    
+
     struct ProductView: View {
         let product: Data
         var body: some View {
@@ -81,12 +78,12 @@ extension Items5 {
             .dsCornerRadius()
             .dsHeight(290)
         }
-        
+
         struct Data: Identifiable {
             var id = UUID()
             let title: String
             let description: String
-            var tag: String? = nil
+            var tag: String?
             let price: DSPrice
             var favourite: Bool = false
             let image: URL?
@@ -97,7 +94,6 @@ extension Items5 {
 // MARK: - View Model
 
 final class Items5Model {
-    
     let products: [Items5.ProductView.Data] = [
         .init(
             title: "The Iconic Mesh Polo Shirt - All Fits",
@@ -174,18 +170,18 @@ struct Items5_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let p0Image = URL(string: "https://images.pexels.com/photos/6417941/pexels-photo-6417941.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-6417941.jpg&fm=jpg")
+private let p0Image = URL(string: "https://images.pexels.com/photos/6417941/pexels-photo-6417941.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-6417941.jpg&fm=jpg")
 
-fileprivate let p1Image = URL(string: "https://images.pexels.com/photos/3760610/pexels-photo-3760610.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3760610.jpg&fm=jpg")
+private let p1Image = URL(string: "https://images.pexels.com/photos/3760610/pexels-photo-3760610.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3760610.jpg&fm=jpg")
 
-fileprivate let p2Image = URL(string: "https://images.pexels.com/photos/3746314/pexels-photo-3746314.jpeg?cs=srgb&dl=pexels-anna-shvets-3746314.jpg&fm=jpg")
+private let p2Image = URL(string: "https://images.pexels.com/photos/3746314/pexels-photo-3746314.jpeg?cs=srgb&dl=pexels-anna-shvets-3746314.jpg&fm=jpg")
 
-fileprivate let p3Image = URL(string: "https://images.pexels.com/photos/3372595/pexels-photo-3372595.jpeg?cs=srgb&dl=pexels-aidan-roof-3372595.jpg&fm=jpg")
+private let p3Image = URL(string: "https://images.pexels.com/photos/3372595/pexels-photo-3372595.jpeg?cs=srgb&dl=pexels-aidan-roof-3372595.jpg&fm=jpg")
 
-fileprivate let p4Image = URL(string: "https://images.pexels.com/photos/2096694/pexels-photo-2096694.jpeg?cs=srgb&dl=pexels-luis-quintero-2096694.jpg&fm=jpg")
+private let p4Image = URL(string: "https://images.pexels.com/photos/2096694/pexels-photo-2096694.jpeg?cs=srgb&dl=pexels-luis-quintero-2096694.jpg&fm=jpg")
 
-fileprivate let p5Image = URL(string: "https://images.pexels.com/photos/5325887/pexels-photo-5325887.jpeg?cs=srgb&dl=pexels-anna-shvets-5325887.jpg&fm=jpg")
+private let p5Image = URL(string: "https://images.pexels.com/photos/5325887/pexels-photo-5325887.jpeg?cs=srgb&dl=pexels-anna-shvets-5325887.jpg&fm=jpg")
 
-fileprivate let p6Image = URL(string: "https://images.pexels.com/photos/4929024/pexels-photo-4929024.jpeg?cs=srgb&dl=pexels-cottonbro-4929024.jpg&fm=jpg")
+private let p6Image = URL(string: "https://images.pexels.com/photos/4929024/pexels-photo-4929024.jpeg?cs=srgb&dl=pexels-cottonbro-4929024.jpg&fm=jpg")
 
-fileprivate let p7Image = URL(string: "https://images.pexels.com/photos/5325741/pexels-photo-5325741.jpeg?cs=srgb&dl=pexels-anna-shvets-5325741.jpg&fm=jpg")
+private let p7Image = URL(string: "https://images.pexels.com/photos/5325741/pexels-photo-5325741.jpeg?cs=srgb&dl=pexels-anna-shvets-5325741.jpg&fm=jpg")

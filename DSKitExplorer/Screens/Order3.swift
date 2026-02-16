@@ -5,19 +5,18 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Order3: View {
-    
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSVStack(alignment: .center) {
             Spacer()
             DSButton(title: "Continue Shopping", rightSystemName: "bag.fill", action: { dismiss() })
-            
-            .dsPadding(.bottom)
+
+                .dsPadding(.bottom)
         }
         .overlay(alignment: .center, content: {
             DSVStack(alignment: .center) {

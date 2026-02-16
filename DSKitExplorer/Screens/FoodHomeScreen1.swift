@@ -5,20 +5,19 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct FoodHomeScreen1: View {
-    
     let viewModel = FoodHomeScreen1Model()
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSList {
             DSSection(spacing: .regular) {
                 LocationView(title: "2464 Royal Ln. Mesa")
                 SearchView()
-                DSCoverFlow(height: 150, data: viewModel.banners, id: \.self.id) { banner in
+                DSCoverFlow(height: 150, data: viewModel.banners, id: \.id) { banner in
                     BannerView(banner: banner)
                 }
             }
@@ -27,12 +26,12 @@ struct FoodHomeScreen1: View {
                     DSSectionHeaderView(
                         title: "Popular Products",
                         actionTitle: "View all",
-                        action: { self.dismiss() }
+                        action: { dismiss() }
                     )
                     DSHScroll(
                         spacing: .regular,
                         data: viewModel.popularProducts,
-                        id: \.self.id
+                        id: \.id
                     ) { product in
                         PopularProductView(product: product)
                     }
@@ -43,12 +42,12 @@ struct FoodHomeScreen1: View {
                     DSSectionHeaderView(
                         title: "All Categories",
                         actionTitle: "View all",
-                        action: { self.dismiss() }
+                        action: { dismiss() }
                     )
                     DSHScroll(
                         spacing: .regular,
                         data: viewModel.categories,
-                        id: \.self.id
+                        id: \.id
                     ) { category in
                         CategoryView(category: category)
                     }
@@ -60,8 +59,8 @@ struct FoodHomeScreen1: View {
 }
 
 extension FoodHomeScreen1 {
-    
     // MARK: - Profile View
+
     struct LocationView: View {
         let title: String
         var body: some View {
@@ -72,33 +71,35 @@ extension FoodHomeScreen1 {
                     DSText(title)
                         .dsTextStyle(.headline)
                 }
-                
+
                 Spacer()
-                
+
                 DSButton(
                     title: "Change",
                     rightSystemName: "location.circle.fill",
                     style: .clear,
                     maxWidth: false
-                ) { }
+                ) {}
                     .dsHeight(17)
-                
+
             }.dsCardStyle()
         }
     }
-    
+
     // MARK: - Search View
+
     struct SearchView: View {
         let value = DSTextFieldValue()
         var body: some View {
             DSTextField.search(value: value, placeholder: "What do you want to eat?")
         }
     }
-    
+
     // MARK: - CategoryView View
+
     struct CategoryView: View {
         let category: Data
-        
+
         var body: some View {
             DSVStack {
                 DSImageView(named: category.image)
@@ -116,7 +117,7 @@ extension FoodHomeScreen1 {
             .dsCardStyle()
             .dsSize(.size(width: 160, height: 200))
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String
@@ -124,11 +125,12 @@ extension FoodHomeScreen1 {
             let image: String
         }
     }
-    
+
     // MARK: - CategoryView View
+
     struct PopularProductView: View {
         let product: Data
-        
+
         var body: some View {
             DSVStack(spacing: .zero) {
                 DSImageView(named: product.image)
@@ -140,14 +142,13 @@ extension FoodHomeScreen1 {
                             .dsBackground(.view(.button(.accentColor)))
                             .dsPadding(.bottom)
                     }
-                
+
                 DSVStack(spacing: .zero) {
-                    
                     DSText(product.title)
                         .dsTextStyle(.smallHeadline)
                         .dsPadding(.small)
                         .dsFullWidth()
-                    
+
                     DSHStack {
                         DSHStack(spacing: .zero) {
                             DSImageView(
@@ -155,32 +156,32 @@ extension FoodHomeScreen1 {
                                 size: .font(.smallSubheadline),
                                 tint: .text(.smallSubheadline)
                             )
-                            
+
                             DSText(product.rating)
                                 .dsTextStyle(.smallSubheadline)
                                 .dsPadding(.small)
                         }
-                        
+
                         DSHStack(spacing: .zero) {
                             DSImageView(
                                 systemName: "clock",
                                 size: .font(.smallSubheadline),
                                 tint: .text(.smallSubheadline)
                             )
-                            
+
                             DSText(product.time)
                                 .dsTextStyle(.smallSubheadline)
                                 .dsPadding(.small)
                         }
                     }.dsPadding(.leading, 3)
-                        
+
                 }.dsPadding(.regular)
             }
             .dsSecondaryBackground()
             .dsWidth(160)
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String
@@ -190,8 +191,9 @@ extension FoodHomeScreen1 {
             let image: String
         }
     }
-    
+
     // MARK: - Banner View
+
     struct BannerView: View {
         let banner: Data
         var body: some View {
@@ -217,6 +219,7 @@ extension FoodHomeScreen1 {
                     }
             }
         }
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String
@@ -225,14 +228,11 @@ extension FoodHomeScreen1 {
             let image: String
         }
     }
-    
-    
 }
 
 // MARK: - Model
 
 final class FoodHomeScreen1Model: ObservableObject {
-        
     var banners: [FoodHomeScreen1.BannerView.Data] = [
         .init(
             title: "PASTA",
@@ -253,7 +253,7 @@ final class FoodHomeScreen1Model: ObservableObject {
             image: "Food_banner_oranges"
         )
     ]
-    
+
     var categories: [FoodHomeScreen1.CategoryView.Data] = [
         .init(
             title: "Breakfast",
@@ -271,7 +271,7 @@ final class FoodHomeScreen1Model: ObservableObject {
             image: "Food_category_3"
         )
     ]
-    
+
     var popularProducts: [FoodHomeScreen1.PopularProductView.Data] = [
         .init(
             title: "Marinated Grilled Salmon",
@@ -304,10 +304,10 @@ struct Testable_FoodHomeScreen1: View {
     var body: some View {
         TabView {
             FoodHomeScreen1()
-            .tabItem {
-                Image(systemName: "house.fill")
-                Text("Home")
-            }
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
             Text("Menu")
                 .tabItem {
                     Image(systemName: "menucard.fill")

@@ -5,9 +5,9 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
 import MapKit
+import SwiftUI
 
 struct BookingScreen2: View {
     @Environment(\.dismiss) var dismiss
@@ -15,7 +15,6 @@ struct BookingScreen2: View {
     var body: some View {
         DSList {
             DSSection {
-            
                 Location(address: viewModel.address)
                     .onTap { dismiss() }
                 Option(icon: "person.fill", title: "Barber", subtitle: "Select specialist")
@@ -24,8 +23,8 @@ struct BookingScreen2: View {
                     .onTap { dismiss() }
                 Option(icon: "calendar", title: "Date & Time", subtitle: "Select date and time")
                     .onTap { dismiss() }
-        
-            }}
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Book Now", rightSystemName: "bookmark.fill") {}
@@ -36,12 +35,11 @@ struct BookingScreen2: View {
 }
 
 extension BookingScreen2 {
-    
     struct Option: View {
         let icon: String
         let title: String
         let subtitle: String
-        
+
         var body: some View {
             DSHStack(spacing: .medium) {
                 DSImageView(systemName: icon, size: 23, tint: .text(.headline))
@@ -55,7 +53,7 @@ extension BookingScreen2 {
             }.dsCardStyle()
         }
     }
-    
+
     struct Location: View {
         let address: Data
         var body: some View {
@@ -88,14 +86,14 @@ extension BookingScreen2 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let name: String
             let address: String
             let coordinated: CLLocationCoordinate2D
             @State var region: MKCoordinateRegion
-            
+
             init(
                 name: String,
                 address: String,
@@ -104,7 +102,7 @@ extension BookingScreen2 {
                 self.coordinated = coordinated
                 self.address = address
                 self.name = name
-                self._region = State(initialValue: MKCoordinateRegion(
+                _region = State(initialValue: MKCoordinateRegion(
                     center: coordinated,
                     span: .init(latitudeDelta: 0.001, longitudeDelta: 0.001)
                 ))
@@ -116,8 +114,7 @@ extension BookingScreen2 {
 // MARK: - Model
 
 final class BookingScreen2Model: ObservableObject {
-    
-    @Published public var address: BookingScreen2.Location.Data = .init(
+    @Published var address: BookingScreen2.Location.Data = .init(
         name: "Barbershop Broadway",
         address: "325 Broadway, Bayonne, NJ 07002, 7km away",
         coordinated: CLLocationCoordinate2D(latitude: 40.764382, longitude: -73.973045)

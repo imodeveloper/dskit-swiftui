@@ -35,7 +35,7 @@ public enum DSTextFieldColorKey {
 }
 
 public struct DSTextFieldAppearance: DSTextFieldAppearanceProtocol {
-    
+
     public init(
         background: DSUIColor,
         text: DSUIColor,
@@ -45,7 +45,7 @@ public struct DSTextFieldAppearance: DSTextFieldAppearanceProtocol {
         self.text = text
         self.placeHolder = placeHolder
     }
-    
+
     public var background: DSUIColor
     public var text: DSUIColor
     public var placeHolder: DSUIColor

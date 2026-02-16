@@ -5,14 +5,13 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct SignUpScreen4: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = SignUpScreen4Model()
-    
+
     var body: some View {
         DSVStack(spacing: .medium) {
             Spacer()
@@ -32,9 +31,9 @@ struct SignUpScreen4: View {
                     })
                 }.dsHeight(20)
             }
-            
+
             DSButton(title: "Subbmit") { dismiss() }
-            
+
             Spacer()
             Spacer()
         }

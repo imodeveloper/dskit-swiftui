@@ -45,12 +45,12 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    
+
     func dsContentMargins(margin: CGFloat? = nil) -> some View {
         return self
             .modifier(DSContentMarginModifier(customMargins: margin))
     }
-    
+
     func dsResetContentMargins() -> some View {
         return self.environment(\.dsContentMarginKey, .zero)
     }

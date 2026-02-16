@@ -5,31 +5,29 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Items4: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = Items4Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSHScroll(data: viewModel.filters, id: \.self) { title in
                     DSText(title)
                         .dsTextStyle(.headline, 12)
                         .dsPadding(.horizontal, .large)
                         .dsCardStyle()
                         .dsHeight(.actionElement)
-                        .onTap { self.dismiss() }
+                        .onTap { dismiss() }
                 }
                 DSGrid(data: viewModel.products, id: \.id) { product in
                     ProductView(product: product)
                 }
-        
-            }}
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "arrow.up.arrow.down.circle.fill")
@@ -44,9 +42,8 @@ struct Items4: View {
 }
 
 extension Items4 {
-    
     // MARK: - Product View
-    
+
     struct ProductView: View {
         let product: Data
         var body: some View {
@@ -72,15 +69,15 @@ extension Items4 {
                     .dsCornerRadius()
                     .dsPadding(.regular)
                 }
-                .onTap { }
+                .onTap {}
             }.dsCornerRadius()
         }
-        
+
         struct Data: Identifiable {
             var id = UUID()
             let title: String
             let description: String
-            var tag: String? = nil
+            var tag: String?
             let price: DSPrice
             var favourite: Bool = false
             let image: URL?
@@ -91,7 +88,6 @@ extension Items4 {
 // MARK: - View Model
 
 final class Items4Model {
-    
     let filters = ["Polo", "Denim", "Jackets", "Shirts", "Shorts", "Sweaters"]
 
     let products: [Items4.ProductView.Data] = [
@@ -152,8 +148,8 @@ struct Testable_Items4: View {
     var body: some View {
         NavigationView {
             Items4()
-            .navigationTitle("Products")
-            .platformBasedNavigationBarTitleDisplayModeInline()
+                .navigationTitle("Products")
+                .platformBasedNavigationBarTitleDisplayModeInline()
         }
     }
 }
@@ -168,16 +164,16 @@ struct Items4_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let p1Image = URL(string: "https://images.pexels.com/photos/1816643/pexels-photo-1816643.jpeg?cs=srgb&dl=pexels-atef-khaled-1816643.jpg&fm=jpg")
+private let p1Image = URL(string: "https://images.pexels.com/photos/1816643/pexels-photo-1816643.jpeg?cs=srgb&dl=pexels-atef-khaled-1816643.jpg&fm=jpg")
 
-fileprivate let p2Image = URL(string: "https://images.pexels.com/photos/5325554/pexels-photo-5325554.jpeg?cs=srgb&dl=pexels-anna-shvets-5325554.jpg&fm=jpg")
+private let p2Image = URL(string: "https://images.pexels.com/photos/5325554/pexels-photo-5325554.jpeg?cs=srgb&dl=pexels-anna-shvets-5325554.jpg&fm=jpg")
 
-fileprivate let p3Image = URL(string: "https://images.pexels.com/photos/2909735/pexels-photo-2909735.jpeg?cs=srgb&dl=pexels-lad-fury-2909735.jpg&fm=jpg")
+private let p3Image = URL(string: "https://images.pexels.com/photos/2909735/pexels-photo-2909735.jpeg?cs=srgb&dl=pexels-lad-fury-2909735.jpg&fm=jpg")
 
-fileprivate let p4Image = URL(string: "https://images.pexels.com/photos/2755165/pexels-photo-2755165.jpeg?cs=srgb&dl=pexels-matt-hardy-2755165.jpg&fm=jpg")
+private let p4Image = URL(string: "https://images.pexels.com/photos/2755165/pexels-photo-2755165.jpeg?cs=srgb&dl=pexels-matt-hardy-2755165.jpg&fm=jpg")
 
-fileprivate let p5Image = URL(string: "https://images.pexels.com/photos/3289663/pexels-photo-3289663.jpeg?cs=srgb&dl=pexels-tnarg-3289663.jpg&fm=jpg")
+private let p5Image = URL(string: "https://images.pexels.com/photos/3289663/pexels-photo-3289663.jpeg?cs=srgb&dl=pexels-tnarg-3289663.jpg&fm=jpg")
 
-fileprivate let p6Image = URL(string: "https://images.pexels.com/photos/3608205/pexels-photo-3608205.jpeg?cs=srgb&dl=pexels-the-happiest-face-%29-3608205.jpg&fm=jpg")
+private let p6Image = URL(string: "https://images.pexels.com/photos/3608205/pexels-photo-3608205.jpeg?cs=srgb&dl=pexels-the-happiest-face-%29-3608205.jpg&fm=jpg")
 
-fileprivate let p7Image = URL(string: "https://images.pexels.com/photos/5999891/pexels-photo-5999891.jpeg?cs=srgb&dl=pexels-ono-kosuki-5999891.jpg&fm=jpg")
+private let p7Image = URL(string: "https://images.pexels.com/photos/5999891/pexels-photo-5999891.jpeg?cs=srgb&dl=pexels-ono-kosuki-5999891.jpg&fm=jpg")

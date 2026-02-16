@@ -5,23 +5,21 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct CartScreen2: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = CartScreen2Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(viewModel.products) { product in
                     ProductView(product: product)
                 }
-        
-            }}.safeAreaInset(edge: .bottom) {
+            }
+        }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 TotalView(itemsCount: "2", price: DSPrice(amount: "349.00", currency: "$"))
                 DSButton(title: "Continue") {
@@ -42,9 +40,8 @@ struct CartScreen2: View {
 }
 
 extension CartScreen2 {
-    
     // MARK: - Product View
-    
+
     struct ProductView: View {
         let product: Product
         var body: some View {
@@ -52,7 +49,7 @@ extension CartScreen2 {
                 DSImageView(url: product.image, size: .size(width: .none, height: 180))
                 DSVStack {
                     DSText(product.title).dsTextStyle(.headline)
-                    DSHStack() {
+                    DSHStack {
                         DSText(product.description).dsTextStyle(.smallSubheadline)
                         DSRatingView(rating: product.rating, size: 13)
                     }
@@ -65,7 +62,7 @@ extension CartScreen2 {
                         rightSystemName: "trash",
                         style: .clear,
                         maxWidth: false,
-                        action: { }
+                        action: {}
                     )
                 })
                 .frame(maxWidth: .infinity)
@@ -74,7 +71,7 @@ extension CartScreen2 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Product: Identifiable {
             let id = UUID()
             let title: String
@@ -84,14 +81,14 @@ extension CartScreen2 {
             let image: URL?
         }
     }
-    
+
     // MARK: - Total View
-    
+
     struct TotalView: View {
         let itemsCount: String
         let price: DSPrice
         var body: some View {
-            DSHStack() {
+            DSHStack {
                 DSText("Total").dsTextStyle(.headline)
                 Spacer()
                 DSHStack(alignment: .firstTextBaseline, spacing: .small) {
@@ -108,7 +105,6 @@ extension CartScreen2 {
 // MARK: - Model
 
 final class CartScreen2Model: ObservableObject {
-    
     let products: [CartScreen2.ProductView.Product] = [
         .init(
             title: "Sony XDE F30 Camera",
@@ -149,6 +145,6 @@ struct CartScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let p1Image = URL(string: "https://images.unsplash.com/photo-1568605560195-9f979ffc11ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")
+private let p1Image = URL(string: "https://images.unsplash.com/photo-1568605560195-9f979ffc11ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")
 
-fileprivate let p2Image = URL(string: "https://images.unsplash.com/photo-1536627217140-899b0bc9d881?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2110&q=80")
+private let p2Image = URL(string: "https://images.unsplash.com/photo-1536627217140-899b0bc9d881?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2110&q=80")

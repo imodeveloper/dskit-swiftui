@@ -25,11 +25,11 @@ private struct ShowDSThreadFooterThreadLine: EnvironmentKey {
 }
 
 public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: RandomAccessCollection, ID: Hashable, Content: View, Header: View, Footer: View, Data.Element: Equatable {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
     @Environment(\.showFooterThreadLine) var showFooterThreadLine
-    
+
     let headerSpacing: DSSpace
     let threadContentSpacing: CGFloat
     let threadLeftPadding: CGFloat
@@ -38,7 +38,7 @@ public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: Rand
     let header: (Data.Element, DSThreadPosition) -> Header
     let footer: () -> Footer
     let id: KeyPath<Data.Element, ID>
-    
+
     public init(
         headerSpacing: DSSpace = .regular,
         threadContentSpacing: CGFloat = 10,
@@ -59,11 +59,11 @@ public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: Rand
         self.header = header
         self.footer = footer
     }
-    
+
     public var body: some View {
         threadView.dsDebuggable(debugColor: Color.yellow)
     }
-    
+
     func positionFor(_ element: Data.Element) -> DSThreadPosition {
         if data.first == element {
             return .top
@@ -72,18 +72,18 @@ public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: Rand
         }
         return .middle
     }
-    
+
     var threadView: some View {
         DSVStack(spacing: .zero) {
-            
+
             ForEach(data, id: id) { element in
-                
+
                 DSVStack(spacing: .zero) {
-                    
+
                     self.header(element, positionFor(element))
                         .dsPadding(.vertical, .custom(appearance.spacing.value(for: headerSpacing)))
                         .zIndex(1)
-                    
+
                     self.content(element, positionFor(element))
                         .padding(.leading, threadLeftPadding + threadContentSpacing)
                         .overlay(alignment: .leading) {
@@ -97,9 +97,9 @@ public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: Rand
                         }
                 }
             }
-            
+
             footer()
-                
+
         }
     }
 }
@@ -114,28 +114,28 @@ struct SomeColor: Hashable {
 }
 
 struct Testable_DSThread: View {
-    
+
     let colors: [ThreadItem] = [
         ThreadItem(item: SomeColor(title: "red", color: Color.red)),
-        ThreadItem(item: SomeColor(title: "green", color:Color.green)),
+        ThreadItem(item: SomeColor(title: "green", color: Color.green)),
         ThreadItem(item: SomeColor(title: "yellow", color: Color.yellow)),
-        ThreadItem(item: SomeColor(title: "purple", color:  Color.purple))
+        ThreadItem(item: SomeColor(title: "purple", color: Color.purple))
     ]
-    
+
     var body: some View {
         ScrollView {
             DSThread(
                 data: colors,
                 id: \.self,
-                header: { threadItem, position in
+                header: { threadItem, _ in
                     DSHStack {
                         Circle()
                             .fill(threadItem.item.color)
                             .frame(width: 24, height: 24)
-                        
+
                         Text(threadItem.item.title)
                     }
-                }, content: { threadItem, position in
+                }, content: { threadItem, _ in
                     threadItem.item.color
                         .frame(height: 100)
                 }, footer: {

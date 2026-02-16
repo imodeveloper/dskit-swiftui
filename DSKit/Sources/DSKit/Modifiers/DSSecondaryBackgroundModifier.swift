@@ -8,9 +8,9 @@
 import SwiftUI
 
 public struct DSSecondaryBackgroundModifier: ViewModifier {
-    
+
     public init() { }
-    
+
     public func body(content: Content) -> some View {
         content
             .dsBackground(.secondary)

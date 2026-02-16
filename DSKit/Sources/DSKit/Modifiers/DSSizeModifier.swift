@@ -9,22 +9,22 @@ import Foundation
 import SwiftUI
 
 public struct DSSizeModifier: ViewModifier {
-    
+
     let size: DSSize
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
-    
+
     public func body(content: Content) -> some View {
         let width = fixedDimension(for: size.width)
         let height = fixedDimension(for: size.height)
         let maxWidth = size.width == .fillUpTheSpace ? CGFloat.infinity : nil
         let maxHeight = size.height == .fillUpTheSpace ? CGFloat.infinity : nil
-        
+
         return content
             .frame(width: width, height: height)
             .frame(maxWidth: maxWidth, maxHeight: maxHeight)
     }
-    
+
     private func fixedDimension(for dimension: DSDimension) -> CGFloat? {
         switch dimension {
         case .fillUpTheSpace:
@@ -39,12 +39,11 @@ public struct DSSizeModifier: ViewModifier {
 
 // Placeholder for your existing DSDimension, DSDesignable, and other relevant types
 
-
 public extension View {
     func dsSize(_ size: DSSize) -> some View {
         self.modifier(DSSizeModifier(size: size))
     }
-    
+
     func dsSize(dimension: DSDimension) -> some View {
         self.modifier(DSSizeModifier(size: DSSize(width: dimension, height: dimension)))
     }

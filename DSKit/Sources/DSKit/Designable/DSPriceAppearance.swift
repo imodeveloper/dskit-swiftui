@@ -36,7 +36,7 @@ extension DSPriceAppearanceProtocol {
 }
 
 public struct DSPriceAppearance: DSPriceAppearanceProtocol {
-    
+
     public init(
         regularAmount: DSUIColor,
         badgeBackground: DSUIColor = DSUIColor.red,
@@ -48,7 +48,7 @@ public struct DSPriceAppearance: DSPriceAppearanceProtocol {
         self.badgeText = badgeText
         self.badgeCornerRadius = badgeCornerRadius
     }
-    
+
     public var regularAmount: DSUIColor
     public var badgeBackground: DSUIColor
     public var badgeText: DSUIColor

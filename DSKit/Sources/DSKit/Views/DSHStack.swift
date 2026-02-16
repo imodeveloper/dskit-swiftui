@@ -26,11 +26,11 @@ Initializes a `DSHStack` with alignment, spacing, and dynamic content.
 public struct DSHStack<Content: View>: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    
+
     let spacing: DSSpace
     let content: () -> Content
     let alignment: VerticalAlignment
-    
+
     public init(
         alignment: VerticalAlignment = .center,
         spacing: DSSpace = .regular,

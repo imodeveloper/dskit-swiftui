@@ -14,10 +14,10 @@ public enum DSDisplayShape {
 }
 
 struct DSDisplayShapeModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     let shape: DSDisplayShape
-    
+
     func body(content: Content) -> some View {
         switch shape {
         case .none:

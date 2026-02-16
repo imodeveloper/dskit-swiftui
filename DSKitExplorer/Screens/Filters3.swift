@@ -5,14 +5,13 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Filters3: View {
-    
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = Filters3Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
@@ -20,7 +19,7 @@ struct Filters3: View {
                 OptionToggleView(title: "Free shipping")
                 OptionView(title: "Shipping to", option: "London UK")
                 OptionRangeView(title: "Range")
-                
+
                 DSPickerView(
                     data: viewModel.sizes,
                     id: \.self,
@@ -31,7 +30,7 @@ struct Filters3: View {
                         .dsSize(dimension: .actionElement)
                         .dsSecondaryBackground()
                 }.dsSectionStyle(title: "Size")
-                
+
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -58,9 +57,8 @@ struct Filters3: View {
 }
 
 extension Filters3 {
-    
     // MARK: - Option View
-    
+
     struct OptionView: View {
         let title: String
         let option: String
@@ -73,9 +71,9 @@ extension Filters3 {
             }.dsCardStyle()
         }
     }
-    
+
     // MARK: - Toggle View
-    
+
     struct OptionToggleView: View {
         let title: String
         @State private var isSwitchOn = true
@@ -91,9 +89,9 @@ extension Filters3 {
             }.dsCardStyle()
         }
     }
-    
+
     // MARK: - Range View
-    
+
     struct OptionRangeView: View {
         let title: String
         @State private var value: Double = 20
@@ -103,7 +101,7 @@ extension Filters3 {
             DSHStack {
                 DSText(title).dsTextStyle(.smallHeadline)
                 Spacer()
-                Slider(value: $value, in: 0...100).tint(Color.green)
+                Slider(value: $value, in: 0 ... 100).tint(Color.green)
                 DSText("\(round(value))").dsTextStyle(.subheadline)
                     .dsWidth(40)
             }.dsCardStyle()
@@ -114,20 +112,18 @@ extension Filters3 {
 // MARK: - View Model
 
 final class Filters3Model: ObservableObject {
-    
     @Published var selectedSize: String = "10"
     let sizes = ["8", "9", "10", "11", "12", "13", "14", "15", "16"]
-    
-    @Published var selectedColor: DSUIColor = DSUIColor(0xF88F6F)
+
+    @Published var selectedColor: DSUIColor = .init(0xF88F6F)
     let colors = [DSUIColor(0xFFC6A3),
                   DSUIColor(0xF88F6F),
                   DSUIColor(0x5CB946),
                   DSUIColor(0x006A7A),
-                  DSUIColor(0x28527a),
-                  DSUIColor(0x8ac4d0),
-                  DSUIColor(0xfbeeac)]
-    
-    
+                  DSUIColor(0x28527A),
+                  DSUIColor(0x8AC4D0),
+                  DSUIColor(0xFBEEAC)]
+
     @Published var selectedSortByOption = "Chelsea Boots"
     let sortByOptions = ["Boots", "Chelsea Boots", "Casual Sneakers", "Casual Shoes"]
 }

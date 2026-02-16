@@ -5,41 +5,37 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Order2: View {
-    
     @Environment(\.dismiss) var dismiss
-    
+
     let viewModel = Order2Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
-                
                 DSGrid(spacing: .regular, data: viewModel.checkoutInfo, id: \.id) { card in
                     CardView(card: card).onTap {}
                 }
-                
+
                 DSVStack {
                     DSGroupedList(data: viewModel.promoCodes, id: \.id) { code in
                         PromoCodeView(code: code)
                     }
-                    
+
                     DSButton(
                         title: "Add Promo Code",
                         rightSystemName: "tag.fill",
                         style: .light
                     ) {}
                 }.dsSectionStyle(title: "Promo Codes")
-                
+
                 OrderInfo(orderTotals: viewModel.orderTotals)
                     .dsSectionStyle(title: "Order Info")
-            
-        
-            }}.safeAreaInset(edge: .bottom) {
+            }
+        }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "Confirm Order",
@@ -51,8 +47,8 @@ struct Order2: View {
             }
         }
     }
-    
-    func section<Content: View>(with title: String, @ViewBuilder content: @escaping () -> Content) -> some View {
+
+    func section(with title: String, @ViewBuilder content: @escaping () -> some View) -> some View {
         DSVStack(spacing: .small) {
             DSText(title).dsTextStyle(.smallHeadline)
             content()
@@ -63,14 +59,12 @@ struct Order2: View {
 }
 
 extension Order2 {
-    
     // MARK: - Card
-    
+
     struct CardView: View, DSDesignable {
-        
         @Environment(\.appearance) var appearance: DSAppearance
         @Environment(\.viewStyle) var viewStyle: DSViewStyle
-        
+
         let card: Data
         var body: some View {
             DSVStack(alignment: .center) {
@@ -89,7 +83,7 @@ extension Order2 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable {
             var id = UUID()
             let icon: String
@@ -98,9 +92,9 @@ extension Order2 {
             let description: String
         }
     }
-    
+
     // MARK: - Order Info
-    
+
     struct OrderInfo: View {
         let orderTotals: [Data]
         var body: some View {
@@ -113,7 +107,7 @@ extension Order2 {
                 }.dsHeight(25)
             }
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -121,14 +115,13 @@ extension Order2 {
             var bold: Bool = false
         }
     }
-    
+
     // MARK: - Promo Code
-    
+
     struct PromoCodeView: View {
-        
         @Environment(\.appearance) var appearance: DSAppearance
         let code: Data
-        
+
         var body: some View {
             DSHStack {
                 DSText(code.title).dsTextStyle(.smallHeadline)
@@ -138,7 +131,7 @@ extension Order2 {
                     .dsPadding(.leading, .regular)
             }.dsHeight(25)
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -150,22 +143,21 @@ extension Order2 {
 // MARK: - View Model
 
 final class Order2Model {
-
     let checkoutInfo: [Order2.CardView.Data] = [
         .init(icon: "cart.fill", title: "My Cart", subtitle: "3 items", description: "$167.00"),
         .init(icon: "mappin.circle.fill", title: "Address", subtitle: "4863 West Virginia", description: "New York, US"),
         .init(icon: "shippingbox.fill", title: "Shipping", subtitle: "Standard Shipping", description: "2 weeks for $0"),
         .init(icon: "creditcard.fill", title: "Payment", subtitle: "MasterCard", description: "**** 8314")
     ]
-    
+
     let orderTotals: [Order2.OrderInfo.Data] = [
         .init(title: "Subtotal", price: DSPrice(amount: "160.00", currency: "$")),
         .init(title: "Shipping", price: DSPrice(amount: "4.70", currency: "$")),
         .init(title: "30OFFCODE", price: DSPrice(amount: "134.70", regularAmount: "164.70", currency: "$")),
         .init(title: "FREEDELIVERY", price: DSPrice(amount: "130.00", regularAmount: "134.70", currency: "$")),
-        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), bold: true),
+        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), bold: true)
     ]
-    
+
     let promoCodes: [Order2.PromoCodeView.Data] = [
         .init(title: "30OFFCODE", price: DSPrice(amount: "134.70", regularAmount: "164.70", currency: "$")),
         .init(title: "FREEDELIVERY", price: DSPrice(amount: "130.00", regularAmount: "134.70", currency: "$"))

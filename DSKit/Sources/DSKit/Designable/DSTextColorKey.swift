@@ -9,10 +9,10 @@
 import SwiftUI
 
 public indirect enum DSTextColorKey: Equatable, Hashable {
-    
+
     case font(DSTextFontKey)
     case dsColor(DSColorKey)
-    
+
     public func color(for appearance: DSAppearance, and style: DSViewStyle) -> Color {
         switch self {
         case .font(font: let font):
@@ -21,22 +21,22 @@ public indirect enum DSTextColorKey: Equatable, Hashable {
             return customColor.color(for: appearance, and: style)
         }
     }
-    
+
     public func color(for font: DSTextFontKey, appearance: DSAppearance, viewStyle: DSViewStyle) -> Color {
         uiColor(for: font, appearance: appearance, viewStyle: viewStyle).color
     }
-    
+
     public func uiColor(for font: DSTextFontKey, appearance: DSAppearance, viewStyle: DSViewStyle) -> DSUIColor {
-        
+
         let designableTextColor: DSTextAppearanceProtocol
-        
+
         switch viewStyle {
         case .primary:
             designableTextColor = appearance.primaryView.text
         case .secondary:
             designableTextColor = appearance.secondaryView.text
         }
-        
+
         switch font {
         case .largeTitle:
             return designableTextColor.largeTitle
@@ -60,7 +60,7 @@ public indirect enum DSTextColorKey: Equatable, Hashable {
             return designableTextColor.caption2
         case .footnote:
             return designableTextColor.footnote
-        case .custom(_):
+        case .custom:
             return DSUIColor.black
         case .fontWithSize(let font, _):
             return uiColor(for: font, appearance: appearance, viewStyle: viewStyle)

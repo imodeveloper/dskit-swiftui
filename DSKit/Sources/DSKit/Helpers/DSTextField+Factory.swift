@@ -40,7 +40,7 @@ public extension DSTextField {
             )
         }
     }
-    
+
     /// Generates a phone number input field.
     ///
     /// This function creates a `DSTextField` for entering phone numbers. It allows for a custom validation pattern,
@@ -140,7 +140,7 @@ public extension DSTextField {
             validateEmptyTextField: false
         )
     }
-    
+
     /// Creates a new password input field.
     ///
     /// Generates a `DSTextField` specifically for new password entry. It supports a custom validation pattern,
@@ -229,7 +229,7 @@ public extension DSTextField {
             )
         }
     }
-    
+
     /// Creates a given name (first name) input field.
     ///
     /// Generates a `DSTextField` specifically for entering given names. It supports a custom validation pattern,
@@ -274,7 +274,7 @@ public extension DSTextField {
             )
         }
     }
-    
+
     /// Creates a family name (last name) input field.
     ///
     /// Generates a `DSTextField` specifically for entering family names. It supports a custom validation pattern,
@@ -416,7 +416,7 @@ public extension DSTextField {
             validateEmptyTextField: true // Adjust based on whether empty search is allowed
         )
     }
-    
+
     /// Creates a street address line 1 input field.
     ///
     /// Generates a `DSTextField` specifically for entering the first line of a street address. It supports a custom validation pattern for addresses,
@@ -504,7 +504,7 @@ public extension DSTextField {
             )
         }
     }
-    
+
     /// Creates an address state input field.
     ///
     /// Generates a `DSTextField` specifically for entering the state in an address. It supports a custom validation pattern for addresses,
@@ -548,7 +548,7 @@ public extension DSTextField {
             )
         }
     }
-    
+
     /// Creates an address city input field.
     ///
     /// Generates a `DSTextField` specifically for entering city names in an address. It supports a custom validation pattern for city names,

@@ -5,18 +5,16 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Payment1: View {
-    
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = Payment1Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSRadioPickerView(
                     data: viewModel.paymentMethods,
                     id: \.id,
@@ -24,15 +22,15 @@ struct Payment1: View {
                 ) { method, _ in
                     PaymentMethod(method: method)
                 }
-                
+
                 DSButton(
                     title: "Add new credit card",
                     rightSystemName: "plus.circle",
                     style: .light,
                     action: { dismiss() }
                 )
-        
-            }}.safeAreaInset(edge: .bottom) {
+            }
+        }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
                     DSText("Next Step:").dsTextStyle(.smallHeadline)
@@ -44,7 +42,7 @@ struct Payment1: View {
                     rightSystemName: "arrow.right",
                     pushContentToSides: true,
                     style: .default,
-                    action: { }
+                    action: {}
                 )
             }
         }
@@ -52,9 +50,8 @@ struct Payment1: View {
 }
 
 extension Payment1 {
-    
     // MARK: - Payment Method
-    
+
     struct PaymentMethod: View {
         let method: Data
         var body: some View {
@@ -68,10 +65,10 @@ extension Payment1 {
                         DSText("\(method.type) **** \(method.end)").dsTextStyle(.smallHeadline)
                         DSText("\(method.holder) \(method.expire)").dsTextStyle(.smallSubheadline)
                     }
-                }.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                }.frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
             }
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let holder: String
@@ -86,7 +83,6 @@ extension Payment1 {
 // MARK: - View Model
 
 final class Payment1Model: ObservableObject {
-    
     let paymentMethods: [Payment1.PaymentMethod.Data] = [
         .init(
             holder: "John Doe",
@@ -114,11 +110,11 @@ final class Payment1Model: ObservableObject {
             end: "3481"
         )
     ]
-    
+
     @Published var selected: Payment1.PaymentMethod.Data
-    
+
     init() {
-        self.selected = paymentMethods.first!
+        selected = paymentMethods.first!
     }
 }
 

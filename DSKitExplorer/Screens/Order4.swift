@@ -5,14 +5,13 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Order4: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = Order4Model()
-    
+
     var body: some View {
         DSVStack(alignment: .center) {
             Spacer()
@@ -25,7 +24,7 @@ struct Order4: View {
             DSButton(title: "Continue Shopping", rightSystemName: "bag.fill", action: {
                 dismiss()
             })
-            
+
             .dsPadding(.bottom)
         }
         .overlay(alignment: .center, content: {
@@ -45,9 +44,8 @@ struct Order4: View {
 }
 
 extension Order4 {
-    
     // MARK: - Suggested Product
-    
+
     struct SuggestedProductView: View {
         let product: Data
         var body: some View {
@@ -63,6 +61,7 @@ extension Order4 {
                 }.frame(maxWidth: 160, alignment: .leading)
             }.dsCardStyle(padding: .regular)
         }
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -76,7 +75,6 @@ extension Order4 {
 // MARK: - View Model
 
 final class Order4Model {
-    
     let suggestedProducts: [Order4.SuggestedProductView.Data] = [
         .init(
             title: "New Balance All Fits",
@@ -117,6 +115,6 @@ struct Order4_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let sneakersThreePairs = URL(string: "https://images.pexels.com/photos/2300334/pexels-photo-2300334.jpeg?cs=srgb&dl=pexels-adrian-dorobantu-2300334.jpg&fm=jpg")
-fileprivate let sneakersWhiteOnYellowBg = URL(string: "https://images.pexels.com/photos/2421374/pexels-photo-2421374.jpeg?cs=srgb&dl=pexels-hoang-loc-2421374.jpg&fm=jpg")
-fileprivate let sneakersOnWhiteBg = URL(string: "https://images.pexels.com/photos/1858404/pexels-photo-1858404.jpeg?cs=srgb&dl=pexels-athena-1858404.jpg&fm=jpg")
+private let sneakersThreePairs = URL(string: "https://images.pexels.com/photos/2300334/pexels-photo-2300334.jpeg?cs=srgb&dl=pexels-adrian-dorobantu-2300334.jpg&fm=jpg")
+private let sneakersWhiteOnYellowBg = URL(string: "https://images.pexels.com/photos/2421374/pexels-photo-2421374.jpeg?cs=srgb&dl=pexels-hoang-loc-2421374.jpg&fm=jpg")
+private let sneakersOnWhiteBg = URL(string: "https://images.pexels.com/photos/1858404/pexels-photo-1858404.jpeg?cs=srgb&dl=pexels-athena-1858404.jpg&fm=jpg")

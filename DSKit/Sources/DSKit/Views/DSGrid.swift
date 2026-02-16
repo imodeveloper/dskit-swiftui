@@ -27,17 +27,17 @@ Initializes `DSGrid` with customizable settings for layout and data handling.
 */
 
 public struct DSGrid<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
 
     let viewHeight: DSDimension?
     let spacing: DSSpace
     let columns: Int
-    
+
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
-    
+
     public init(
         viewHeight: DSDimension? = nil,
         columns: Int = 2,
@@ -53,15 +53,15 @@ public struct DSGrid<Data, ID, Content>: View where Data: RandomAccessCollection
         self.id = id
         self.content = content
     }
-        
+
     var layout: [GridItem] {
         Array(repeating: GridItem(.flexible(), spacing: appearance.spacing.value(for: self.spacing)), count: columns)
     }
-    
+
     public var body: some View {
         gridView.dsDebuggable(debugColor: Color.pink)
     }
-    
+
     var gridView: some View {
         LazyVGrid(columns: layout, spacing: appearance.spacing.value(for: spacing)) {
             ForEach(data, id: id) { element in

@@ -23,22 +23,22 @@ Initializes a `DSText` with the text content and optional alignment.
 */
 
 public struct DSText: View {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
     @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
     @Environment(\.textStyle) var textStyle: DSTextStyle
-    
+
     let text: String
     let alignment: TextAlignment
     let lineSpacing: CGFloat
-    
+
     public init(_ text: String, alignment: TextAlignment = .leading, lineSpacing: CGFloat = 0) {
         self.text = text
         self.alignment = alignment
         self.lineSpacing = lineSpacing
     }
-    
+
     public var body: some View {
         Text(text)
             .font(textStyle.font(for: appearance, sizeCategory: sizeCategory))
@@ -50,50 +50,50 @@ public struct DSText: View {
 }
 
 public extension DSText {
-    
+
     func dsTextStyle(_ textFont: DSTextFontKey) -> some View {
         return self.environment(\.textStyle, DSTextStyle.textFont(textFont))
     }
-    
+
     func dsTextStyle(_ textStyle: DSTextStyle) -> some View {
         return self.environment(\.textStyle, textStyle)
     }
-    
+
     func dsTextStyle(_ textFont: DSTextFontKey, _ size: CGFloat) -> some View {
         return self.environment(\.textStyle, .textFont(.fontWithSize(textFont, size)))
     }
-    
+
     func dsTextStyle(_ textFont: DSTextFontKey, _ size: CGFloat, _ dsColor: DSColorKey) -> some View {
         return self.environment(\.textStyle, .textFontWithColor(.fontWithSize(textFont, size), dsColor))
     }
-    
+
     func dsTextStyle(_ textFont: DSTextFontKey, _ size: CGFloat, _ color: Color) -> some View {
         return self.environment(\.textStyle, .textFontWithColor(.fontWithSize(textFont, size), .color(color)))
     }
-    
+
     func dsTextStyle(_ textStyle: DSTextStyle, _ dsColor: DSColorKey) -> some View {
         return self.environment(\.textStyle, .reStyleWithColor(textStyle, dsColor))
     }
-    
+
     func dsTextStyle(_ textStyle: DSTextStyle, _ color: Color) -> some View {
         return self.environment(\.textStyle, .reStyleWithColor(textStyle, .color(color)))
     }
-    
+
     func dsTextStyle(_ textFont: DSTextFontKey, _ dsColor: DSColorKey) -> some View {
         return self.environment(\.textStyle, .textFontWithColor(textFont, dsColor))
     }
-    
+
     func dsTextStyle(_ textFont: DSTextFontKey, _ color: Color) -> some View {
         return self.environment(\.textStyle, .textFontWithColor(textFont, .color(color)))
     }
 }
 
 public indirect enum DSTextStyle: Equatable, Hashable {
-    
+
     case textFont(DSTextFontKey)
     case textFontWithColor(DSTextFontKey, DSColorKey)
     case reStyleWithColor(DSTextStyle, DSColorKey)
-    
+
     func textStyle(for appearance: DSAppearance) -> (font: DSTextFontKey, color: DSTextColorKey) {
         switch self {
         case .textFont(let font):
@@ -104,7 +104,7 @@ public indirect enum DSTextStyle: Equatable, Hashable {
             return (font: .fontWithSize(textStyle.dsTextFont, textStyle.dsTextFont.pointSize(for: appearance)), color: .dsColor(color))
         }
     }
-    
+
     var dsTextFont: DSTextFontKey {
         return switch self {
         case .textFont(let font):
@@ -115,7 +115,7 @@ public indirect enum DSTextStyle: Equatable, Hashable {
             style.dsTextFont
         }
     }
-    
+
     func font(for appearance: DSAppearance) -> Font {
         dsTextFont.font(for: appearance)
     }
@@ -130,7 +130,7 @@ public indirect enum DSTextStyle: Equatable, Hashable {
     func color(for appearance: DSAppearance, and viewStyle: DSViewStyle) -> Color {
         textStyle(for: appearance).color.color(for: appearance, and: viewStyle)
     }
-    
+
     func size(_ appearance: DSAppearance) -> CGFloat {
         dsTextFont.uiFont(for: appearance).pointSize
     }
@@ -163,7 +163,7 @@ struct Testable_DSText: View {
             DSText("Caption 1").dsTextStyle(.caption1)
             DSText("Caption 2").dsTextStyle(.caption2)
             DSText("Footnote").dsTextStyle(.footnote)
-            
+
             DSHStack {
                 DSText(
                     "Lorem Ipsum is simply dummy text.",

@@ -19,23 +19,23 @@ public extension EnvironmentValues {
 }
 
 public struct DSPaddingModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     let edge: Edge.Set
     let padding: DSPadding
-    
+
     init(edge: Edge.Set, padding: DSPadding) {
         self.edge = edge
         self.padding = padding
     }
-    
+
     public func body(content: Content) -> some View {
         let padding = getPadding()
         content
             .padding(edge, padding)
             .environment(\.parentPadding, padding)
     }
-    
+
     func getPadding() -> CGFloat {
         return appearance.padding.value(for: padding)
     }
@@ -49,7 +49,7 @@ public extension View {
         )
         return self.modifier(modifier)
     }
-    
+
     func dsPadding(_ padding: DSPadding = .medium) -> some View {
         let modifier = DSPaddingModifier(
             edge: .all,
@@ -60,15 +60,15 @@ public extension View {
 }
 
 #Preview {
-    
+
     VStack {
-        
+
         Text("Just Padding")
             .frame(width: 200)
             .background(Color.white)
             .dsPadding()
             .background(Color.red)
-        
+
 //        Text("Extra Small")
 //            .frame(width: 200)
 //            .background(Color.white)

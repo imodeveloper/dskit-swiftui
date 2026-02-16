@@ -31,18 +31,18 @@ Initializes a `DSPickerView` with customization options for layout and interacti
 */
 
 public struct DSPickerView<Data, ID, Content>: View where Data: RandomAccessCollection, Data.Element: Equatable, ID: Hashable, Content: View {
-    
+
     let style: DSPickerView.Style
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
     @Binding var selected: Data.Element
-    
+
     public enum Style {
         case horizontalScroll
         case grid(columns: Int)
     }
-    
+
     public init(
         style: DSPickerView.Style = .horizontalScroll,
         data: Data,
@@ -56,7 +56,7 @@ public struct DSPickerView<Data, ID, Content>: View where Data: RandomAccessColl
         self.style = style
         self._selected = selected
     }
-    
+
     public var body: some View {
         DSVStack(spacing: .small) {
             switch style {
@@ -67,19 +67,19 @@ public struct DSPickerView<Data, ID, Content>: View where Data: RandomAccessColl
             }
         }
     }
-    
+
     var horizontalScrollStyle: some View {
         DSHScroll(spacing: .regular, data: data, id: id) { element in
             styledContent(element)
         }
     }
-    
+
     func gridStyle(columns: Int) -> some View {
         DSGrid(columns: columns, spacing: .regular, data: data, id: id) { element in
             styledContent(element)
         }
     }
-    
+
     func styledContent(_ element: Data.Element) -> some View {
         self.content(element)
             .dsCornerRadius()
@@ -94,13 +94,13 @@ public struct DSPickerView<Data, ID, Content>: View where Data: RandomAccessColl
 }
 
 struct Testable_DSPickerView: View {
-    
-    let letters = ["A","B","C","D","E"]
+
+    let letters = ["A", "B", "C", "D", "E"]
     @State var selectedLetter = "A"
-    
-    let numbers = ["1","2","3","4","5","6","7","8","9"]
+
+    let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     @State var selectedNumber = "2"
-    
+
     var body: some View {
         DSVStack {
             DSPickerView(
@@ -113,7 +113,7 @@ struct Testable_DSPickerView: View {
                         .dsCardStyle()
                 }
             ).dsSectionStyle(title: "Letters")
-            
+
             DSPickerView(
                 style: .grid(columns: 5),
                 data: numbers, id: \.self,

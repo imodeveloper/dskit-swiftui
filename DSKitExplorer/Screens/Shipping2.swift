@@ -5,26 +5,24 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Shipping2: View {
-    
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = Shipping2Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSRadioPickerView(data: viewModel.shippingMethods, id: \.id, selected: $viewModel.selected) { method, _ in
                     ShippingMethodView(method: method)
                 }
                 section(with: "Order Info") {
                     OrderInfo(orderTotals: viewModel.orderTotals)
                 }
-        
-            }}.safeAreaInset(edge: .bottom) {
+            }
+        }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
                     DSText("Next Step:").dsTextStyle(.smallHeadline)
@@ -36,13 +34,13 @@ struct Shipping2: View {
                     rightSystemName: "arrow.right",
                     pushContentToSides: true,
                     style: .default,
-                    action: { }
+                    action: {}
                 )
             }
         }
     }
-    
-    func section<Content: View>(with title: String, @ViewBuilder content: @escaping () -> Content) -> some View {
+
+    func section(with title: String, @ViewBuilder content: @escaping () -> some View) -> some View {
         DSVStack(spacing: .small) {
             DSText(title).dsTextStyle(.smallHeadline)
             content()
@@ -52,9 +50,8 @@ struct Shipping2: View {
 }
 
 extension Shipping2 {
-    
     // MARK: - Order Info
-    
+
     struct OrderInfo: View {
         let orderTotals: [Data]
         var body: some View {
@@ -67,7 +64,7 @@ extension Shipping2 {
                 }.dsHeight(25)
             }
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -75,9 +72,9 @@ extension Shipping2 {
             var bold: Bool = false
         }
     }
-    
+
     // MARK: - Shipping Method
-    
+
     struct ShippingMethodView: View {
         let method: Data
         var body: some View {
@@ -101,12 +98,12 @@ extension Shipping2 {
                 }
             }
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String
             let description: String
-            var price: String? = nil
+            var price: String?
             var selected: Bool = false
         }
     }
@@ -115,13 +112,12 @@ extension Shipping2 {
 // MARK: - View Model
 
 final class Shipping2Model: ObservableObject {
-    
     let orderTotals: [Shipping2.OrderInfo.Data] = [
         .init(title: "Subtotal", price: DSPrice(amount: "160.00", currency: "$")),
         .init(title: "Shipping", price: DSPrice(amount: "4.70", currency: "$")),
-        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), bold: true),
+        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), bold: true)
     ]
-    
+
     let shippingMethods: [Shipping2.ShippingMethodView.Data] = [
         .init(
             title: "Free Shipping",
@@ -139,11 +135,11 @@ final class Shipping2Model: ObservableObject {
             price: "30.00"
         )
     ]
-    
+
     @Published var selected: Shipping2.ShippingMethodView.Data
-    
+
     init() {
-        self.selected = shippingMethods.first!
+        selected = shippingMethods.first!
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct DSHideKeyboardWhenTappedModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
 
@@ -23,7 +23,7 @@ public struct DSHideKeyboardWhenTappedModifier: ViewModifier {
             content
         }
     }
-    
+
     private func dismissKeyboard() {
         #if canImport(UIKit)
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -36,5 +36,3 @@ public extension View {
         self.modifier(DSHideKeyboardWhenTappedModifier())
     }
 }
-
-

@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 public extension View {
     func dsFullWidth(alignment: Alignment = .leading) -> some View {
         self.frame(maxWidth: .infinity, alignment: alignment)
@@ -17,7 +16,7 @@ public extension View {
 
 struct DSFullWidthModifier_Previews: PreviewProvider {
     static var previews: some View {
-        DSPreviewForEachAppearance { 
+        DSPreviewForEachAppearance {
             DSPreview {
                 DSText("Welcome to DSKit")
                     .dsFullWidth()

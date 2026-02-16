@@ -10,11 +10,11 @@ import SwiftUI
 
 @main
 struct DSKitCoreExplorerApp: App {
-    
+
     var screenshotMode: String? {
         ProcessInfo.processInfo.environment["screenshot"]
     }
-    
+
     var body: some Scene {
         WindowGroup {
             if let screen = screenshotMode,

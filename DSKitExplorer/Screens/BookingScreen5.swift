@@ -5,9 +5,9 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
 import MapKit
+import SwiftUI
 
 struct BookingScreen5: View {
     @Environment(\.dismiss) var dismiss
@@ -18,7 +18,7 @@ struct BookingScreen5: View {
                 Barber(barber: viewModel.barber)
                     .dsFullWidth(alignment: .center)
                     .onTap { dismiss() }
-                
+
                 DSVStack(spacing: .zero) {
                     DSVStack {
                         ForEach(viewModel.feedbackArray) { feedback in
@@ -38,8 +38,6 @@ struct BookingScreen5: View {
 }
 
 extension BookingScreen5 {
-    
-    
     struct Barber: View {
         let barber: Data
         var body: some View {
@@ -53,7 +51,7 @@ extension BookingScreen5 {
             }.dsPadding(.top, 25)
                 .dsPadding(.bottom, 25)
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let name: String
@@ -61,7 +59,7 @@ extension BookingScreen5 {
             let image: URL?
         }
     }
-    
+
     struct FeedbackView: View {
         let feedback: Data
         var body: some View {
@@ -84,7 +82,7 @@ extension BookingScreen5 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let userName: String
@@ -97,13 +95,12 @@ extension BookingScreen5 {
 // MARK: - Model
 
 final class BookingScreen5Model: ObservableObject {
-    
-    @Published public var barber: BookingScreen5.Barber.Data = .init(
+    @Published var barber: BookingScreen5.Barber.Data = .init(
         name: "Ms. Ole Thompson",
         grade: "Pro Barber",
         image: p1Image
     )
-    
+
     let feedbackArray: [BookingScreen5.FeedbackView.Data] = [
         .init(
             userName: "Sophia",
@@ -155,11 +152,10 @@ struct BookingScreen5_Previews: PreviewProvider {
     }
 }
 
-fileprivate let p1Image = URL(string: "https://images.unsplash.com/photo-1554387415-b0c2fcce17fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let p1Image = URL(string: "https://images.unsplash.com/photo-1554387415-b0c2fcce17fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
 
-
-fileprivate let userProfile1 =  URL(string: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2459&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile2 =  URL(string: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile3 =  URL(string: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile4 =  URL(string: "https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile5 =  URL(string: "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile1 = URL(string: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2459&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile2 = URL(string: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile3 = URL(string: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile4 = URL(string: "https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile5 = URL(string: "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")

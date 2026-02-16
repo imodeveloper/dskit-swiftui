@@ -5,23 +5,21 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct CartScreen3: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = CartScreen3Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(viewModel.products) { product in
                     ProductView(product: product)
                 }
-        
-            }}
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 TotalView(itemsCount: "4", price: DSPrice(amount: "1049.00", currency: "$"))
@@ -40,9 +38,8 @@ struct CartScreen3: View {
 }
 
 extension CartScreen3 {
-    
     // MARK: - Product View
-    
+
     struct ProductView: View {
         let product: Product
         var body: some View {
@@ -55,7 +52,7 @@ extension CartScreen3 {
                     DSText(product.description).dsTextStyle(.caption2)
                     DSPriceView(price: product.price, size: .smallHeadline)
                 }.dsFullWidth()
-                
+
                 DSSFSymbolButton(name: "minus.circle.fill", size: .mediumIcon)
                     .dsPadding(.trailing, .regular)
             }
@@ -63,7 +60,7 @@ extension CartScreen3 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Product: Identifiable {
             let id = UUID()
             let title: String
@@ -73,14 +70,14 @@ extension CartScreen3 {
             let image: URL?
         }
     }
-    
+
     // MARK: - Total View
-    
+
     struct TotalView: View {
         let itemsCount: String
         let price: DSPrice
         var body: some View {
-            DSHStack() {
+            DSHStack {
                 DSText("Total").dsTextStyle(.headline)
                 Spacer()
                 DSHStack(alignment: .firstTextBaseline, spacing: .small) {
@@ -97,7 +94,6 @@ extension CartScreen3 {
 // MARK: - Model
 
 final class CartScreen3Model: ObservableObject {
-    
     let products: [CartScreen3.ProductView.Product] = [
         .init(
             title: "iMac 2020",
@@ -152,9 +148,8 @@ struct CartScreen3_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let p1Image = URL(string: "https://images.unsplash.com/photo-1494173853739-c21f58b16055?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80")
-fileprivate let p2Image = URL(string: "https://images.unsplash.com/photo-1584695369221-3d8a8ebfeef0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2378&q=80")
+private let p1Image = URL(string: "https://images.unsplash.com/photo-1494173853739-c21f58b16055?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80")
+private let p2Image = URL(string: "https://images.unsplash.com/photo-1584695369221-3d8a8ebfeef0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2378&q=80")
 
-fileprivate let p3Image = URL(string: "https://images.unsplash.com/photo-1562075950-23ba332df71c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")
-fileprivate let p4Image = URL(string: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1951&q=80")
-
+private let p3Image = URL(string: "https://images.unsplash.com/photo-1562075950-23ba332df71c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")
+private let p4Image = URL(string: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1951&q=80")

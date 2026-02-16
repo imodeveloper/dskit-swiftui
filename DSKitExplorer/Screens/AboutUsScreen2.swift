@@ -5,38 +5,34 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
-
 import MapKit
+import SwiftUI
 
 struct AboutUsScreen2: View {
-    
     init(selectedTab: Int = 2) {
-        self._selectedTab = State(initialValue: selectedTab)
+        _selectedTab = State(initialValue: selectedTab)
     }
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @State private var selectedTab: Int
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275),
         span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
     )
-    
+
     let viewModel = AboutUsScreen2Model()
     let infoImageGallery = [p1Image, p2Image, p3Image]
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
-                
                 Picker("Section", selection: $selectedTab) {
                     Text("Info").tag(0)
                     Text("Feedback").tag(1)
                     Text("Contacts").tag(2)
                 }.pickerStyle(.segmented)
-                
+
                 switch selectedTab {
                 case 0:
                     infoView
@@ -47,21 +43,20 @@ struct AboutUsScreen2: View {
                 default:
                     infoView
                 }
-        
-            }}
+            }
+        }
         .safeAreaInset(edge: .bottom, content: {
             if selectedTab == 1 {
                 DSBottomContainer {
-                    DSButton(title: "Leave feedback", rightSystemName: "message.fill", action: { })
+                    DSButton(title: "Leave feedback", rightSystemName: "message.fill", action: {})
                         .dsPadding(.bottom, .medium)
                 }
             }
-            
+
         })
     }
-    
+
     var infoView: some View {
-        
         DSVStack {
             DSVStack {
                 DSText("Grocify")
@@ -70,12 +65,12 @@ struct AboutUsScreen2: View {
                 DSText("Here you will feel the attitude, here you will receive quality, here you will see the atmosphere of an authentic store")
                     .dsFullWidth()
             }
-            
+
             DSCoverFlow(height: 200, data: infoImageGallery, id: \.self) { image in
                 DSImageView(url: image)
                     .dsCornerRadius()
             }
-            
+
             DSVStack {
                 DSText("Introducing Grocify, where convenience meets quality. Our goal: tailor solutions for modern grocery stores. With a focus on user-friendly technology, we empower stores of all sizes to thrive.")
                     .dsTextStyle(.body)
@@ -90,7 +85,7 @@ struct AboutUsScreen2: View {
             }
         }
     }
-    
+
     var feedbackView: some View {
         DSVStack(spacing: .zero) {
             DSVStack {
@@ -101,8 +96,7 @@ struct AboutUsScreen2: View {
             Spacer()
         }
     }
-    
-    
+
     var contactsView: some View {
         DSVStack(spacing: .zero) {
             ScrollView {
@@ -110,14 +104,13 @@ struct AboutUsScreen2: View {
                     ContactView(iconName: "phone.fill", title: "Phone:", info: "+373 791 93398")
                     ContactView(iconName: "map.fill", title: "Address:", info: "Alexandru Cel Bun 13/2")
                     ContactView(iconName: "clock.fill", title: "Working Hours:", info: "Open ⋅ Closes 5PM")
-                    
+
                     DSHStack(alignment: .healthSafetyAlignment, spacing: .regular) {
-                        
                         DSVStack(spacing: .medium) {
                             DSImageView(systemName: "info.circle.fill", size: .font(.headline), tint: .text(.headline))
                                 .alignmentGuide(.healthSafetyAlignment) { d in d[VerticalAlignment.center] }
                         }
-                        
+
                         DSVStack {
                             DSText("Health and safety").dsTextStyle(.headline)
                                 .alignmentGuide(.healthSafetyAlignment) { d in d[VerticalAlignment.center] }
@@ -129,15 +122,14 @@ struct AboutUsScreen2: View {
                     .dsPadding()
                     .dsSecondaryBackground()
                     .dsCornerRadius()
-                    
+
                     Map(coordinateRegion: $region)
                         .dsFullWidth()
                         .dsHeight(200)
                         .dsCornerRadius()
                         .disabled(true)
-                    
-                    DSButton(title: "Get directions", rightSystemName: "location.fill", action: { })
-                    
+
+                    DSButton(title: "Get directions", rightSystemName: "location.fill", action: {})
                 }
                 Spacer()
             }
@@ -168,7 +160,7 @@ extension AboutUsScreen2 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let userName: String
@@ -178,22 +170,21 @@ extension AboutUsScreen2 {
     }
 }
 
-fileprivate extension VerticalAlignment {
+private extension VerticalAlignment {
     struct HealthSafetyAlignment: AlignmentID {
         static func defaultValue(in context: ViewDimensions) -> CGFloat {
             context[VerticalAlignment.top]
         }
     }
-    
+
     static let healthSafetyAlignment = VerticalAlignment(HealthSafetyAlignment.self)
 }
 
 struct ContactView: View {
-    
     let iconName: String
     let title: String
     let info: String
-    
+
     var body: some View {
         DSHStack {
             DSImageView(systemName: iconName, size: .font(.headline), tint: .text(.headline))
@@ -262,7 +253,7 @@ struct Testable_AboutUsScreen2: View {
                     Image(systemName: "info.circle.fill")
                     Text("About")
                 }.tag(2)
-            
+
             DSVStack {
                 DSButton(title: "Dismiss", style: .clear) {
                     dismiss()
@@ -283,13 +274,12 @@ struct AboutUsScreen2_Previews: PreviewProvider {
     }
 }
 
-fileprivate let p1Image = URL(string: "https://images.pexels.com/photos/164763/pexels-photo-164763.jpeg?cs=srgb&dl=pexels-pixabay-164763.jpg&fm=jpg")
-fileprivate let p2Image = URL(string: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?cs=srgb&dl=pexels-pixabay-264636.jpg&fm=jpg")
-fileprivate let p3Image = URL(string: "https://images.pexels.com/photos/1402407/pexels-photo-1402407.jpeg?cs=srgb&dl=pexels-lisa-fotios-1402407.jpg&fm=jpg")
+private let p1Image = URL(string: "https://images.pexels.com/photos/164763/pexels-photo-164763.jpeg?cs=srgb&dl=pexels-pixabay-164763.jpg&fm=jpg")
+private let p2Image = URL(string: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?cs=srgb&dl=pexels-pixabay-264636.jpg&fm=jpg")
+private let p3Image = URL(string: "https://images.pexels.com/photos/1402407/pexels-photo-1402407.jpeg?cs=srgb&dl=pexels-lisa-fotios-1402407.jpg&fm=jpg")
 
-
-fileprivate let userProfile1 =  URL(string: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2459&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile2 =  URL(string: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile3 =  URL(string: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile4 =  URL(string: "https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let userProfile5 =  URL(string: "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile1 = URL(string: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2459&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile2 = URL(string: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile3 = URL(string: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile4 = URL(string: "https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile5 = URL(string: "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")

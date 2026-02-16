@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 public struct DSHeightModifier: ViewModifier {
-    
+
     let height: DSDimension
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
-    
+
     public func body(content: Content) -> some View {
         content.frame(height: height.value(appearance: appearance, sizeCategory: sizeCategory))
     }

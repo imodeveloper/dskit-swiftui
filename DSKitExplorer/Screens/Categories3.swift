@@ -5,30 +5,27 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Categories3: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = Categories3Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(viewModel.categories) { category in
                     CategoryView(category: category)
                 }
-        
-            }}
+            }
+        }
     }
 }
 
 extension Categories3 {
-    
     // MARK: - Category View
-    
+
     struct CategoryView: View {
         let category: Data
         var body: some View {
@@ -37,13 +34,13 @@ extension Categories3 {
                     DSImageView(url: category.image)
                     LinearGradient(
                         gradient:
-                            Gradient(
-                                colors: [
-                                    Color.black.opacity(0),
-                                    Color.black.opacity(0.4),
-                                    Color.black.opacity(0)
-                                ]
-                            ),
+                        Gradient(
+                            colors: [
+                                Color.black.opacity(0),
+                                Color.black.opacity(0.4),
+                                Color.black.opacity(0)
+                            ]
+                        ),
                         startPoint: .top,
                         endPoint: .bottom
                     )
@@ -59,7 +56,7 @@ extension Categories3 {
             .dsCornerRadius()
             .dsHeight(200)
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -72,7 +69,6 @@ extension Categories3 {
 // MARK: - View Model
 
 final class Categories3Model {
-    
     let categories: [Categories3.CategoryView.Data] = [
         .init(
             title: "Shorts",
@@ -136,18 +132,18 @@ struct Categories3_Previews: PreviewProvider {
     }
 }
 
-fileprivate let watchesOnYellowBg = URL(string: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?cs=srgb&dl=pexels-pixabay-277390.jpg&fm=jpg")
+private let watchesOnYellowBg = URL(string: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?cs=srgb&dl=pexels-pixabay-277390.jpg&fm=jpg")
 
-fileprivate let shoesThreePairs = URL(string: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg")
+private let shoesThreePairs = URL(string: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg")
 
-fileprivate let personOnOrangeBg = URL(string: "https://images.pexels.com/photos/3641363/pexels-photo-3641363.jpeg?cs=srgb&dl=pexels-mikotoraw-3641363.jpg&fm=jpg")
+private let personOnOrangeBg = URL(string: "https://images.pexels.com/photos/3641363/pexels-photo-3641363.jpeg?cs=srgb&dl=pexels-mikotoraw-3641363.jpg&fm=jpg")
 
-fileprivate let personInWhite = URL(string: "https://images.pexels.com/photos/3622624/pexels-photo-3622624.jpeg?cs=srgb&dl=pexels-wesley-carvalho-3622624.jpg&fm=jpg")
+private let personInWhite = URL(string: "https://images.pexels.com/photos/3622624/pexels-photo-3622624.jpeg?cs=srgb&dl=pexels-wesley-carvalho-3622624.jpg&fm=jpg")
 
-fileprivate let blazers = URL(string: "https://images.pexels.com/photos/3555456/pexels-photo-3555456.jpeg?cs=srgb&dl=pexels-mikotoraw-3555456.jpg&fm=jpg")
+private let blazers = URL(string: "https://images.pexels.com/photos/3555456/pexels-photo-3555456.jpeg?cs=srgb&dl=pexels-mikotoraw-3555456.jpg&fm=jpg")
 
-fileprivate let pantsTrack = URL(string: "https://images.pexels.com/photos/5067705/pexels-photo-5067705.jpeg?cs=srgb&dl=pexels-anna-shvets-5067705.jpg&fm=jpg")
+private let pantsTrack = URL(string: "https://images.pexels.com/photos/5067705/pexels-photo-5067705.jpeg?cs=srgb&dl=pexels-anna-shvets-5067705.jpg&fm=jpg")
 
-fileprivate let shirtsThreePairs = URL(string: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcnRzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60")
+private let shirtsThreePairs = URL(string: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcnRzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60")
 
-fileprivate let jeansOnBlackBg = URL(string: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?cs=srgb&dl=pexels-mnz-1598507.jpg&fm=jpg")
+private let jeansOnBlackBg = URL(string: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?cs=srgb&dl=pexels-mnz-1598507.jpg&fm=jpg")

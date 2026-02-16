@@ -22,13 +22,13 @@ Initializes a `DSTermsAndConditions` with a specific message.
 */
 
 public struct DSTermsAndConditions: View {
-    
+
     let message: String
-    
+
     public  init(message: String) {
         self.message = message
     }
-    
+
     public var body: some View {
         DSVStack(spacing: .small) {
             DSText(message)

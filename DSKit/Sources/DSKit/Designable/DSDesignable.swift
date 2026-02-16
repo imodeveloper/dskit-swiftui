@@ -16,11 +16,11 @@ public extension DSDesignable {
     var viewColors: DSViewAppearanceProtocol {
         return viewStyle.colors(from: appearance)
     }
-    
+
     var navigationBarColors: DSNavigationBarAppearanceProtocol {
         return appearance.navigationBar
     }
-    
+
     func color(for colorKey: DSColorKey) -> Color {
         appearance.color(for: colorKey, viewStyle: viewStyle)
     }

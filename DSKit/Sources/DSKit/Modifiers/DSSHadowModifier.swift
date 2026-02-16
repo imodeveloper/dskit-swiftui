@@ -8,16 +8,15 @@
 import SwiftUI
 
 public struct DSShadowModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     let padding: DSPadding
-    
+
     var color: Color
     var radius: CGFloat
     var xOffset: CGFloat
     var yOffset: CGFloat
-    
-    
+
     init(padding: DSPadding, color: Color = .black, radius: CGFloat = 10, xOffset: CGFloat = 0, yOffset: CGFloat = -5) {
         self.padding = padding
         self.color = color
@@ -25,7 +24,7 @@ public struct DSShadowModifier: ViewModifier {
         self.xOffset = xOffset
         self.yOffset = yOffset
     }
-    
+
     public func body(content: Content) -> some View {
         ZStack(alignment: .top) {
             content

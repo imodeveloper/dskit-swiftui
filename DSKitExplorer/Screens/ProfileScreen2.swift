@@ -5,20 +5,18 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct ProfileScreen2: View {
-    
     @StateObject var viewModel = ProfileScreen2Model()
     @Environment(\.appearance) var appearance: DSAppearance
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ProfileView(title: "Jane Doe", subtitle: "12 April 200", profileImageUrl: personOnOrangeBg)
-                DSVStack() {
+                DSVStack {
                     DSVStack(spacing: .small) {
                         DSTextField.name(value: viewModel.fullName)
                         DSTextField.email(value: viewModel.email)
@@ -27,22 +25,21 @@ struct ProfileScreen2: View {
                         DSTextField.addressState(value: viewModel.state)
                         DSTextField.address(value: viewModel.address)
                     }
-                    
+
                     DSButton(title: "Update") {
                         viewModel.submit()
                     }
                 }
-        
-            }}.onAppear {
+            }
+        }.onAppear {
             viewModel.onApear()
         }
     }
 }
 
 extension ProfileScreen2 {
-    
     // MARK: - Profile View
-    
+
     struct ProfileView: View {
         let title: String
         let subtitle: String
@@ -68,18 +65,17 @@ extension ProfileScreen2 {
 // MARK: - Model
 
 final class ProfileScreen2Model: ObservableObject {
-    
     var fullName = DSTextFieldValue()
     var email = DSTextFieldValue()
     var phone = DSTextFieldValue()
     var city = DSTextFieldValue()
     var state = DSTextFieldValue()
     var address = DSTextFieldValue()
-    
+
     func onApear() {
         fullName.text = "Jane Doe"
     }
-   
+
     func submit() {
         for field in [fullName, email, phone, city, state, address] {
             let isValid = field.validate()
@@ -108,4 +104,4 @@ struct ProfileScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let personOnOrangeBg = URL(string: "https://images.pexels.com/photos/3641363/pexels-photo-3641363.jpeg?cs=srgb&dl=pexels-mikotoraw-3641363.jpg&fm=jpg")
+private let personOnOrangeBg = URL(string: "https://images.pexels.com/photos/3641363/pexels-photo-3641363.jpeg?cs=srgb&dl=pexels-mikotoraw-3641363.jpg&fm=jpg")

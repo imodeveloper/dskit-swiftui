@@ -9,7 +9,7 @@
 import Foundation
 
 public struct LightBlueAppearance: DSAppearance {
-    
+
     public var title: String
     public var primaryView: DSViewAppearanceProtocol
     public var secondaryView: DSViewAppearanceProtocol
@@ -22,15 +22,15 @@ public struct LightBlueAppearance: DSAppearance {
     public var fonts: DSFontsProtocol = DSFonts()
     public var actionElementHeight: CGFloat = 48
     public var screenMargins: CGFloat = 16
-    
+
     /// Init DSKit appearance with specific brand color
     /// - Parameter brandColor: UIColor
     public init(brandColor: DSUIColor? = nil) {
-        
+
         self.title = "Light Blue"
-        
+
         // MARK: - Primary view
-        
+
         // Text
         let text = DSTextAppearance(
             largeTitle: .dynamic(light: 0x14171a, dark: 0xfefffe),
@@ -45,29 +45,29 @@ public struct LightBlueAppearance: DSAppearance {
             caption2: .dynamic(light: 0x5b7083, dark: 0x8899a6),
             footnote: .dynamic(light: 0x5b7083, dark: 0x8899a6)
         )
-        
+
         // Text field
         let primaryViewTextField = DSTextFieldAppearance(
             background: .dynamic(light: 0xf3f4f2, dark: 0x101a24),
             text: .dynamic(light: 0x14171a, dark: 0xfefffe),
             placeHolder: .dynamic(light: 0x5b7083, dark: 0x8899a6)
         )
-        
+
         // Button
         let button = DSButtonAppearance(
             accentColor: .dynamic(light: 0x1da1f2, dark: 0x1da1f2),
             supportColor: .dynamic(light: 0xfefffe, dark: 0xfefffe)
         )
-        
+
         // Background
         let background: DSUIColor = .dynamic(light: 0xfefffe, dark: 0x15202b)
-        
+
         // Separator
         let separator: DSUIColor = .dynamic(light: 0xd0dbe3, dark: 0x38444d)
-        
+
         // Corner radius
         let cornerRadius: CGFloat = 5
-        
+
         // View
         primaryView = DSViewAppearance(
             button: button,
@@ -77,9 +77,9 @@ public struct LightBlueAppearance: DSAppearance {
             separator: separator,
             cornerRadius: cornerRadius
         )
-        
+
         // MARK: - Secondary view
-        
+
         // Text
         let secondaryText = DSTextAppearance(
             largeTitle: .dynamic(light: 0x14171a, dark: 0xfefffe),
@@ -94,29 +94,29 @@ public struct LightBlueAppearance: DSAppearance {
             caption2: .dynamic(light: 0x5b7083, dark: 0x8899a6),
             footnote: .dynamic(light: 0x5b7083, dark: 0x8899a6)
         )
-        
+
         // Text field
         let secondaryViewTextField = DSTextFieldAppearance(
             background: .dynamic(light: 0xfefffe, dark: 0x15202b),
             text: text.headline,
             placeHolder: text.subheadline
         )
-        
+
         // Button
         let sButton = DSButtonAppearance(
             accentColor: .dynamic(light: 0x5b7083, dark: 0x8899a6),
             supportColor: .dynamic(light: 0xfefffe, dark: 0xfefffe)
         )
-        
+
         // Background
         let sBackground: DSUIColor = .dynamic(light: 0xf3f4f2, dark: 0x101a24)
-        
+
         // Separator
         let sSeparator: DSUIColor = .dynamic(light: 0xd0dbe3, dark: 0x15202b)
-        
+
         // Corner radius
         let sCornerRadius: CGFloat = 10
-        
+
         // View
         secondaryView = DSViewAppearance(
             button: sButton,
@@ -126,9 +126,9 @@ public struct LightBlueAppearance: DSAppearance {
             separator: sSeparator,
             cornerRadius: sCornerRadius
         )
-        
+
         // MARK: - Tabbar
-        
+
         tabBar = DSTabBarAppearance(
             barTint: primaryView.background,
             itemTint: primaryView.button.accentColor,
@@ -136,32 +136,32 @@ public struct LightBlueAppearance: DSAppearance {
             badge: primaryView.button.accentColor,
             translucent: false
         )
-        
+
         // MARK: - Navigation bar
-        
+
         navigationBar = DSNavigationBarAppearance(
             buttons: primaryView.button.accentColor,
             text: text.title1,
             bar: primaryView.background,
             translucent: false
         )
-        
+
         // MARK: - Textfield
-        
+
         textField = DSTextFieldAppearance(
             background: secondaryView.background,
             text: secondaryView.text.title1,
             placeHolder: secondaryView.text.subheadline
         )
-        
+
         // MARK: - Price
-        
+
         price = DSPriceAppearance(
             regularAmount: text.subheadline,
             badgeBackground: DSUIColor(0xFF656B)
         )
     }
-    
+
     public func style(for viewStyle: DSViewStyle) -> DSViewAppearanceProtocol {
         return switch viewStyle {
         case .primary:

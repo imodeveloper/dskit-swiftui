@@ -62,7 +62,7 @@ public struct DSBlurBackgroundModifier: ViewModifier {
             .background(
                 BlurredBackgroundView(material: material)
                     .edgesIgnoringSafeArea(.all)
-               
+
             )
         #endif
     }
@@ -80,7 +80,7 @@ public extension View {
         return self.modifier(modifier)
     }
     #endif
-    
+
     func dsBlurBackgroundLight() -> some View {
         #if canImport(UIKit)
         return self.dsBlurBackground(style: .light)
@@ -88,7 +88,7 @@ public extension View {
         self
         #endif
     }
-    
+
     func dsBlurSystemThinMaterialLight() -> some View {
         #if canImport(UIKit)
         return self.dsBlurBackground(style: .systemThinMaterialLight)
@@ -96,11 +96,8 @@ public extension View {
         self
         #endif
     }
-    
-    
-    
-}
 
+}
 
 #Preview {
     VStack {

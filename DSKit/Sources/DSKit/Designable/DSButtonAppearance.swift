@@ -31,10 +31,10 @@ public enum DSButtonColorKey {
 }
 
 public struct DSButtonAppearance: DSButtonAppearanceProtocol {
-    
+
     public var accentColor: DSUIColor
     public var supportColor: DSUIColor
-    
+
     /// Initialize `DSButtonAppearance` with colors
     public init(
         accentColor: DSUIColor,

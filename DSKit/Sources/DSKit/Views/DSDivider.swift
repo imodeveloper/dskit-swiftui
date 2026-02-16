@@ -20,9 +20,9 @@ The `DSDivider` is initialized without parameters, defaulting to predefined styl
 */
 
 public struct DSDivider: View, DSDesignable {
-    
+
     public init() {}
-    
+
     @Environment(\.appearance) public var appearance: DSAppearance
     @Environment(\.viewStyle) public var viewStyle: DSViewStyle
 
@@ -47,4 +47,3 @@ struct DSDivider_Previews: PreviewProvider {
         }
     }
 }
-

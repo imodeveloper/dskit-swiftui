@@ -5,40 +5,37 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct ItemDetails1: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = ItemDetails1Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
-                
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
-                
+
                 DSVStack(spacing: .zero) {
                     DSText(viewModel.title).dsTextStyle(.title2)
                     DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                 }
-                
+
                 DSPriceView(price: viewModel.price, size: .headline)
-                
+
                 DSQuantityPicker()
-                
+
                 DSHStack {
-                    SelectView(title: "Size", selection: "US 14").onTap { }
-                    SelectColorView(title: "Color", selection: .yellow, label: "Yellow").onTap { }
+                    SelectView(title: "Size", selection: "US 14").onTap {}
+                    SelectColorView(title: "Color", selection: .yellow, label: "Yellow").onTap {}
                 }
-                
+
                 DSText(viewModel.description).dsTextStyle(.caption1)
-        
-            }}
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Add to cart", rightSystemName: "cart.fill") {
@@ -61,9 +58,8 @@ struct ItemDetails1: View {
 }
 
 extension ItemDetails1 {
-    
     // MARK: - Select View
-    
+
     struct SelectView: View {
         let title: String
         let selection: String
@@ -80,7 +76,7 @@ extension ItemDetails1 {
             .dsCornerRadius()
         }
     }
-    
+
     struct SelectColorView: View {
         let title: String
         let selection: Color
@@ -129,7 +125,6 @@ struct Testable_ItemDetails1: View {
 // MARK: - Preview
 
 struct ItemDetails1_Previews: PreviewProvider {
-    
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_ItemDetails1() }
     }
@@ -137,6 +132,6 @@ struct ItemDetails1_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let p1Image = URL(string: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?cs=srgb&dl=pexels-melvin-buezo-2529148.jpg&fm=jpg")
-fileprivate let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
-fileprivate let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")
+private let p1Image = URL(string: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?cs=srgb&dl=pexels-melvin-buezo-2529148.jpg&fm=jpg")
+private let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
+private let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")

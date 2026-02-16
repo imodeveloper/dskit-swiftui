@@ -5,23 +5,21 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Payment2: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = Payment2Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(viewModel.creditCards) { card in
                     CreditCard(card: card)
                 }
-        
-            }}.safeAreaInset(edge: .bottom) {
+            }
+        }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "Add new credit card",
@@ -34,9 +32,8 @@ struct Payment2: View {
 }
 
 extension Payment2 {
-    
     // MARK: - Credit Card
-    
+
     struct CreditCard: View {
         let card: Data
         var body: some View {
@@ -62,9 +59,9 @@ extension Payment2 {
                     }
             }
             .dsCornerRadius()
-            .onTap { }
+            .onTap {}
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let holder: String

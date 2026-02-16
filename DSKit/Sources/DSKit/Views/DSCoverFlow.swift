@@ -31,20 +31,19 @@ Initializes `DSCoverFlow` with specific layout and behavioral settings.
 - `content`: Closure that returns a `Content` view for each data item.
 */
 
-
 public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Data.Element: Equatable, Content: View {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     let height: DSDimension
     let spacing: DSSpace
     let showPaginationView: Bool
-    
+
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
-    
+
     @State private var currentElementID: Data.Element?
-    
+
     public init(
         height: DSDimension,
         spacing: DSSpace = .regular,
@@ -61,7 +60,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
         self.content = content
         _currentElementID = State(initialValue: data.first)
     }
-    
+
     public var body: some View {
         let paginationTopPadding = showPaginationView ? appearance.padding.value(for: .medium) : 0
         let paginationHeight: CGFloat = showPaginationView ? 7 : 0
@@ -96,7 +95,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
         }
         .dsHeight(totalHeight)
     }
-    
+
     private func defaultPaginationIndicator() -> some View {
         DSHStack {
             ForEach(data, id: id) { element in
@@ -110,7 +109,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
 }
 
 struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data: RandomAccessCollection, Data.Element: Equatable, ID: Hashable, Content: View {
-    
+
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
@@ -118,7 +117,7 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
     let interItemSpacing: CGFloat
     let viewportWidth: CGFloat
     let itemWidth: CGFloat
-    
+
     init(
         viewportWidth: CGFloat,
         itemWidth: CGFloat,
@@ -136,11 +135,11 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         self.itemWidth = itemWidth
         self._currentPage = currentPage
     }
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
-    
+
     // MARK: - Cross-Platform Implementations
     #if canImport(UIKit)
     func makeUIView(context: Context) -> DSUIScrollView {
@@ -150,7 +149,7 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         applyCenteringInsets(to: scrollView)
         return scrollView
     }
-    
+
     func updateUIView(_ uiView: DSUIScrollView, context: Context) {
         applyCenteringInsets(to: uiView)
     }
@@ -161,10 +160,10 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         addContentView(to: scrollView, context: context)
         return scrollView
     }
-    
+
     func updateNSView(_ nsView: DSUIScrollView, context: Context) {}
     #endif
-    
+
     // MARK: - Setup Methods
     private func setupScrollView(_ scrollView: DSUIScrollView, context: Context) {
         #if canImport(UIKit)
@@ -190,11 +189,11 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
         #endif
     }
-    
+
     private func addContentView(to scrollView: DSUIScrollView, context: Context) {
         let hostingController = DSHostingController(rootView: createContentView())
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         #if canImport(UIKit)
         scrollView.addSubview(hostingController.view)
         NSLayoutConstraint.activate([
@@ -208,7 +207,7 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
         scrollView.documentView = hostingController.view
         #endif
     }
-    
+
     private func createContentView() -> some View {
         HStack(spacing: interItemSpacing) {
             ForEach(data, id: id) { element in
@@ -217,17 +216,17 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
             }
         }
     }
-    
+
     // MARK: - Coordinator
     class Coordinator: NSObject, DSScrollViewDelegate {
         var parent: DSPaginatedScrollView
         private var dragStartOffsetX: CGFloat = .zero
         private var pendingTargetIndex: Int?
-        
+
         init(parent: DSPaginatedScrollView) {
             self.parent = parent
         }
-        
+
         #if canImport(UIKit)
         private var itemStride: CGFloat {
             parent.itemWidth + parent.interItemSpacing
@@ -305,13 +304,13 @@ struct DSPaginatedScrollView<Data, ID, Content>: DSViewRepresentable where Data:
 }
 
 struct Testable_DSCoverFlow: View {
-    
+
     let colors = [
         DSUIColor(0x006A7A),
         DSUIColor(0x28527a),
         DSUIColor(0xfbeeac)
     ]
-    
+
     var body: some View {
         DSCoverFlow(
             height: 200,

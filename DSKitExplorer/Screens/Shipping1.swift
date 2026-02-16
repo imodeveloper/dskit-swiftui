@@ -5,18 +5,16 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Shipping1: View {
-    
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = Shipping1Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSRadioPickerView(data: viewModel.deliveryAddresses, id: \.id, selected: $viewModel.selected) { address, _ in
                     DeliveryAddressView(address: address)
                 }
@@ -25,9 +23,8 @@ struct Shipping1: View {
                     rightSystemName: "plus.circle",
                     style: .light, action: { dismiss() }
                 )
-            
-        
-            }}.safeAreaInset(edge: .bottom) {
+            }
+        }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
                     DSText("Next Step:").dsTextStyle(.smallHeadline)
@@ -38,7 +35,7 @@ struct Shipping1: View {
                     rightSystemName: "arrow.right",
                     pushContentToSides: true,
                     style: .default,
-                    action: { }
+                    action: {}
                 )
             }
         }
@@ -46,9 +43,8 @@ struct Shipping1: View {
 }
 
 extension Shipping1 {
-    
     // MARK: - Delivery Address
-    
+
     struct DeliveryAddressView: View {
         let address: Data
         var body: some View {
@@ -60,7 +56,7 @@ extension Shipping1 {
                 }
             }
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let holder: String
@@ -74,7 +70,6 @@ extension Shipping1 {
 // MARK: - View Model
 
 final class Shipping1Model: ObservableObject {
-    
     let deliveryAddresses: [Shipping1.DeliveryAddressView.Data] = [
         .init(
             holder: "John Doe",
@@ -98,11 +93,11 @@ final class Shipping1Model: ObservableObject {
             phone: "+1(513)616-5699"
         )
     ]
-    
+
     @Published var selected: Shipping1.DeliveryAddressView.Data
-    
+
     init() {
-        self.selected = deliveryAddresses.first!
+        selected = deliveryAddresses.first!
     }
 }
 
@@ -116,7 +111,6 @@ struct Testable_Shipping1: View {
         }
     }
 }
-
 
 // MARK: - Preview
 

@@ -13,11 +13,11 @@ public enum DSSpace: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equ
     case medium
     case custom(CGFloat)
     case zero
-    
+
     public init(floatLiteral value: FloatLiteralType) {
         self = .custom(CGFloat(value))
     }
-    
+
     public init(integerLiteral value: IntegerLiteralType) {
         self = .custom(CGFloat(value))
     }

@@ -5,25 +5,23 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct ProfileScreen3: View {
-    
     @StateObject var viewModel = ProfileScreen3Model()
     @Environment(\.appearance) var appearance: DSAppearance
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSHStack(spacing: .medium) {
                     DSImageView(
                         systemName: "exclamationmark.shield.fill",
                         size: 50,
                         tint: .color(.yellow)
                     )
-                    
+
                     DSText("Changing your password regularly reduces your risk of exposure and avoids a number of dangers.")
                         .dsTextStyle(.subheadline)
                         .dsFullWidth()
@@ -31,18 +29,18 @@ struct ProfileScreen3: View {
                 .dsPadding()
                 .dsSecondaryBackground()
                 .dsCornerRadius()
-                
+
                 DSVStack(spacing: .small) {
                     DSTextField.password(value: viewModel.currentPassword)
                     DSTextField.newPassword(value: viewModel.newPassword)
                     DSTextField.password(value: viewModel.repeatPassword, placeholder: "Repeat Password")
                 }
-                
+
                 DSButton(title: "Update") {
                     viewModel.submit()
                 }
-        
-            }}
+            }
+        }
         .navigationTitle("Password")
     }
 }
@@ -50,11 +48,10 @@ struct ProfileScreen3: View {
 // MARK: - Model
 
 final class ProfileScreen3Model: ObservableObject {
-    
     var currentPassword = DSTextFieldValue()
     var newPassword = DSTextFieldValue()
     var repeatPassword = DSTextFieldValue()
-    
+
     func submit() {
         for field in [currentPassword, newPassword, repeatPassword] {
             let isValid = field.validate()

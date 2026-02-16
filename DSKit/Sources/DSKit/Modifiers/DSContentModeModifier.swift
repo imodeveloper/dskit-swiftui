@@ -8,10 +8,10 @@
 import SwiftUI
 
 public enum DSContentMode: Equatable, Hashable {
-    
+
     case scaleAspectFit // contents scaled to fit with fixed aspect. remainder is transparent
     case scaleAspectFill // contents scaled to fill with fixed aspect. some portion of content may be clipped.
-    
+
     public var rawValue: String {
         switch self {
         case .scaleAspectFit:

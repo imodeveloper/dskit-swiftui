@@ -5,35 +5,32 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct ItemDetails3: View {
-    
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = ItemDetails3Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
                 DSVStack(spacing: .medium) {
-                    
                     DSHStack {
                         DSVStack(spacing: .zero) {
                             DSText(viewModel.title).dsTextStyle(.title2)
                             DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                         }.dsFullWidth()
                     }
-                    
+
                     DSHStack(alignment: .center, spacing: .regular) {
                         DSRatingView(rating: 4.5, size: 16)
                         DSText("24K Ratings").dsTextStyle(.callout)
                     }
-                    
+
                     DSVStack(spacing: .zero) {
                         DSHStack(alignment: .center, spacing: .regular) {
                             DSImageView(systemName: "circlebadge.fill", size: 5, tint: .text(.caption1))
@@ -44,15 +41,15 @@ struct ItemDetails3: View {
                             DSText("Style: CW6575-001").dsTextStyle(.caption2)
                         }
                     }
-                    
+
                     DSPriceView(price: viewModel.price, size: .headline)
-                    
+
                     DSHStack(alignment: .center) {
                         DSImageView(systemName: "info.circle.fill", size: .font(.caption1), tint: .color(.yellow))
                         DSText(viewModel.priceDisclaimer, alignment: .leading).dsTextStyle(.caption2)
                     }
                 }
-                
+
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -60,7 +57,7 @@ struct ItemDetails3: View {
                 ) { color in
                     DSImageView(named: color, size: .size(width: 70, height: 50))
                 }.dsSectionStyle(title: "Model")
-                
+
                 DSPickerView(
                     data: viewModel.sizes,
                     id: \.self, selected: $viewModel.selectedSize
@@ -73,8 +70,8 @@ struct ItemDetails3: View {
                 }.dsSectionStyle(title: "Size")
 
                 DSText(viewModel.description).dsTextStyle(.caption1)
-        
-            }}
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Add to cart", style: .borderedLight) { dismiss() }
@@ -93,9 +90,8 @@ struct ItemDetails3: View {
 }
 
 extension ItemDetails3 {
-    
     // MARK: - Select Size View
-    
+
     struct SelectSizeView: View {
         @ObservedObject var viewModel: ItemDetails3Model
         var body: some View {
@@ -110,7 +106,7 @@ extension ItemDetails3 {
                         .dsSelectedStyle(isSelected: viewModel.selectedSize == size)
                         .onTap {
                             #if canImport(UIKit)
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             #endif
                             viewModel.selectedSize = size
                         }
@@ -118,9 +114,9 @@ extension ItemDetails3 {
             }
         }
     }
-    
+
     // MARK: - Select Color
-    
+
     struct SelectModelView: View {
         @ObservedObject var viewModel: ItemDetails3Model
         var body: some View {
@@ -131,7 +127,7 @@ extension ItemDetails3 {
                         .dsSelectedStyle(isSelected: viewModel.selectedColor == color)
                         .onTap {
                             #if canImport(UIKit)
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             #endif
                             viewModel.selectedColor = color
                         }
@@ -183,8 +179,6 @@ struct ItemDetails3_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let p1Image = URL(string: "https://images.pexels.com/photos/1456705/pexels-photo-1456705.jpeg?cs=srgb&dl=pexels-ray-piedra-1456705.jpg&fm=jpg")
-fileprivate let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
-fileprivate let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")
-
-
+private let p1Image = URL(string: "https://images.pexels.com/photos/1456705/pexels-photo-1456705.jpeg?cs=srgb&dl=pexels-ray-piedra-1456705.jpg&fm=jpg")
+private let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
+private let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")

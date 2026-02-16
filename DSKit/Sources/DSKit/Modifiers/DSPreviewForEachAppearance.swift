@@ -10,7 +10,7 @@ import SwiftUI
 // A generic structure that provides a way to
 // preview content for different languages and brands.
 public struct DSPreviewForEachAppearance<Content: View>: View {
-    
+
     var content: () -> Content
 
     public init(@ViewBuilder content: @escaping () -> Content) {

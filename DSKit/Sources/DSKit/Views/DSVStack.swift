@@ -24,13 +24,13 @@ Initializes a `DSVStack` with alignment, spacing, and dynamic content.
 */
 
 public struct DSVStack<Content: View>: View {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
-    
+
     let spacing: DSSpace
     let alignment: HorizontalAlignment
     let content: () -> Content
-    
+
     public init(
         alignment: HorizontalAlignment = .leading,
         spacing: DSSpace = .regular,
@@ -40,7 +40,7 @@ public struct DSVStack<Content: View>: View {
         self.spacing = spacing
         self.alignment = alignment
     }
-    
+
     public var body: some View {
         VStack(alignment: alignment, spacing: appearance.spacing.value(for: spacing)) {
             content()

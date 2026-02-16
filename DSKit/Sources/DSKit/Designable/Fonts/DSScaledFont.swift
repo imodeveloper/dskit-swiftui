@@ -35,10 +35,10 @@ public final class DSScaledFont {
         let fontSize: CGFloat
         let fontName: String
     }
-    
+
     private typealias DSStyleDictionary = [String: FontDescription]
     private var styleDictionary: DSStyleDictionary?
-    
+
     /// Create a `DSScaledFont`
     ///
     /// - Parameter fontName: Name of a plist file (without the extension)
@@ -61,7 +61,7 @@ public final class DSScaledFont {
             styleDictionary = try? decoder.decode(DSStyleDictionary.self, from: data)
         }
     }
-    
+
     /// Get the scaled font for the given text style using the
     /// style dictionary supplied at initialization.
     ///
@@ -75,11 +75,11 @@ public final class DSScaledFont {
         guard let fontDescription = styleDictionary?[textStyle.rawValue] else {
             return defaultFont(for: textStyle)
         }
-        
+
         guard let font = DSFont(name: fontDescription.fontName, size: fontDescription.fontSize) else {
             return defaultFont(for: textStyle)
         }
-        
+
         #if canImport(UIKit)
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
         return fontMetrics.scaledFont(for: font)
@@ -87,7 +87,7 @@ public final class DSScaledFont {
         return font // macOS does not have `UIFontMetrics`
         #endif
     }
-    
+
     /// Fallback to the default system font for the given text style.
     private func defaultFont(for textStyle: DSFont.TextStyle) -> DSFont {
         #if canImport(UIKit)

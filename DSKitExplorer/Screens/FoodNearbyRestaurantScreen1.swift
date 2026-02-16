@@ -5,11 +5,10 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct FoodNearbyRestaurantScreen1: View {
-    
     @StateObject var viewModel = FoodNearbyRestaurantScreen1Model()
     @Environment(\.dismiss) var dismiss
 
@@ -25,11 +24,11 @@ struct FoodNearbyRestaurantScreen1: View {
 }
 
 extension FoodNearbyRestaurantScreen1 {
-    
     // MARK: - CategoryView View
+
     struct PopularProductView: View {
         let product: Data
-        
+
         var body: some View {
             DSVStack(spacing: .zero) {
                 DSImageView(named: product.image)
@@ -40,13 +39,12 @@ extension FoodNearbyRestaurantScreen1 {
                             .dsCardStyle(padding: .small)
                             .dsPadding()
                     }
-                
+
                 DSVStack(spacing: .zero) {
-                    
                     DSHStack {
                         DSText(product.title)
                             .dsTextStyle(.headline)
-                        
+
                         DSHStack {
                             DSHStack(spacing: .zero) {
                                 DSImageView(
@@ -83,7 +81,6 @@ extension FoodNearbyRestaurantScreen1 {
 // MARK: - Model
 
 final class FoodNearbyRestaurantScreen1Model: ObservableObject {
-        
     var popularProducts: [FoodNearbyRestaurantScreen1.PopularProductView.Data] = [
         .init(
             title: "Right From Oven",
@@ -137,4 +134,3 @@ struct FoodNearbyRestaurantScreen1_Previews: PreviewProvider {
         }
     }
 }
-

@@ -9,7 +9,7 @@
 import SwiftUI
 
 public indirect enum DSTextFontKey: Equatable, Hashable {
-    
+
     case largeTitle
     case title1
     case title2
@@ -26,7 +26,7 @@ public indirect enum DSTextFontKey: Equatable, Hashable {
     case smallHeadline
     case smallSubheadline
     case largeHeadline
-    
+
     public func pointSize(for appearance: DSAppearance) -> CGFloat {
         pointSize(for: appearance, sizeCategory: nil)
     }
@@ -37,7 +37,7 @@ public indirect enum DSTextFontKey: Equatable, Hashable {
     ) -> CGFloat {
         uiFont(for: appearance, sizeCategory: sizeCategory).pointSize
     }
-    
+
     public func font(for appearance: DSAppearance) -> Font {
         let baseFont = uiFont(for: appearance)
         #if canImport(UIKit)
@@ -83,7 +83,7 @@ public indirect enum DSTextFontKey: Equatable, Hashable {
         return baseFont
         #endif
     }
-    
+
     public func uiFont(for appearance: DSAppearance) -> DSFont {
         return switch self {
         case .title1:
@@ -120,7 +120,7 @@ public indirect enum DSTextFontKey: Equatable, Hashable {
             appearance.fonts.headline.withSize(30)
         }
     }
-    
+
     func color(for textColors: DSTextAppearance) -> DSUIColor {
         return switch self {
         case .largeTitle:
@@ -145,7 +145,7 @@ public indirect enum DSTextFontKey: Equatable, Hashable {
             textColors.caption2
         case .footnote:
             textColors.footnote
-        case .custom(_):
+        case .custom:
             DSUIColor.black
         case .fontWithSize(let font, _):
             font.color(for: textColors)

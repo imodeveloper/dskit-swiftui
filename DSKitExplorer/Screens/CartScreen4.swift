@@ -5,23 +5,21 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct CartScreen4: View {
-    
     @Environment(\.dismiss) var dismiss
     let model = CartScreen4Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 ForEach(model.products) { product in
                     ProductView(product: product)
                 }
-        
-            }}
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 TotalView(itemsCount: "4", price: DSPrice(amount: "1049.00", currency: "$"))
@@ -40,9 +38,8 @@ struct CartScreen4: View {
 }
 
 extension CartScreen4 {
-    
     // MARK: - Product View
-    
+
     struct ProductView: View {
         let product: Product
         var body: some View {
@@ -60,7 +57,7 @@ extension CartScreen4 {
                                 }
                             }
                     }.dsCornerRadius()
-                    
+
                     DSVStack(alignment: .leading) {
                         DSText(product.title).dsTextStyle(.smallHeadline)
                         DSHStack {
@@ -71,7 +68,7 @@ extension CartScreen4 {
                         }
                         DSPriceView(price: product.price, size: .smallHeadline)
                     }.dsFullWidth()
-                    
+
                     DSSFSymbolButton(name: "minus.circle.fill", size: .mediumIcon)
                         .dsPadding(.trailing, .regular)
                 }
@@ -79,9 +76,9 @@ extension CartScreen4 {
             .dsPadding(.regular)
             .dsSecondaryBackground()
             .dsCornerRadius()
-            .onTap { }
+            .onTap {}
         }
-        
+
         struct Product: Identifiable {
             let id = UUID()
             let title: String
@@ -93,14 +90,14 @@ extension CartScreen4 {
             let image: URL?
         }
     }
-    
+
     // MARK: - Total View
-    
+
     struct TotalView: View {
         let itemsCount: String
         let price: DSPrice
         var body: some View {
-            DSHStack() {
+            DSHStack {
                 DSText("Total").dsTextStyle(.headline)
                 Spacer()
                 DSHStack(alignment: .firstTextBaseline, spacing: .small) {
@@ -117,7 +114,6 @@ extension CartScreen4 {
 // MARK: - Model
 
 final class CartScreen4Model: ObservableObject {
-    
     let products: [CartScreen4.ProductView.Product] = [
         .init(
             title: "Armani Blouse",
@@ -171,16 +167,15 @@ struct Testable_CartScreen4: View {
 // MARK: - Preview
 
 struct CartScreen4_Previews: PreviewProvider {
-    
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_CartScreen4() }
     }
 }
 
-fileprivate let p1Image = URL(string: "https://images.pexels.com/photos/6347619/pexels-photo-6347619.jpeg?cs=srgb&dl=pexels-liza-summer-6347619.jpg&fm=jpg")
+private let p1Image = URL(string: "https://images.pexels.com/photos/6347619/pexels-photo-6347619.jpeg?cs=srgb&dl=pexels-liza-summer-6347619.jpg&fm=jpg")
 
-fileprivate let p2Image = URL(string: "https://images.pexels.com/photos/3791648/pexels-photo-3791648.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3791648.jpg&fm=jpg")
+private let p2Image = URL(string: "https://images.pexels.com/photos/3791648/pexels-photo-3791648.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3791648.jpg&fm=jpg")
 
-fileprivate let p3Image = URL(string: "https://images.pexels.com/photos/5255268/pexels-photo-5255268.jpeg?cs=srgb&dl=pexels-samson-katt-5255268.jpg&fm=jpg")
+private let p3Image = URL(string: "https://images.pexels.com/photos/5255268/pexels-photo-5255268.jpeg?cs=srgb&dl=pexels-samson-katt-5255268.jpg&fm=jpg")
 
-fileprivate let p4Image = URL(string: "https://images.pexels.com/photos/5875215/pexels-photo-5875215.jpeg?cs=srgb&dl=pexels-jonathan-borba-5875215.jpg&fm=jpg")
+private let p4Image = URL(string: "https://images.pexels.com/photos/5875215/pexels-photo-5875215.jpeg?cs=srgb&dl=pexels-jonathan-borba-5875215.jpg&fm=jpg")

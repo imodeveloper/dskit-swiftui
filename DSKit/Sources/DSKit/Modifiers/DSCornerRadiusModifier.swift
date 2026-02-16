@@ -20,20 +20,20 @@ extension EnvironmentValues {
 }
 
 public struct DSCornerRadiusModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
-    
+
     @Environment(\.parentPadding) var parentPadding: CGFloat
     @Environment(\.parentCornerRadius) var parentCornerRadius: CGFloat
-    
+
     public func body(content: Content) -> some View {
         let newCornerRadius = resolveCornerRadius()
         content
             .cornerRadius(newCornerRadius)
             .environment(\.parentCornerRadius, newCornerRadius)
     }
-    
+
     func resolveCornerRadius() -> CGFloat {
         if parentCornerRadius == 0 {
             return viewStyle.colors(from: appearance).cornerRadius

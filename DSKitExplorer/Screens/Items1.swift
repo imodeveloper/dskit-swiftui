@@ -5,22 +5,21 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Items1: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = Items1Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            DSGrid(data: viewModel.products, id: \.id) { product in
-                ProductView(product: product).onTap { dismiss() }
+                DSGrid(data: viewModel.products, id: \.id) { product in
+                    ProductView(product: product).onTap { dismiss() }
+                }
             }
-        
-            }}
+        }
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "square.and.arrow.up")
@@ -35,9 +34,8 @@ struct Items1: View {
 }
 
 extension Items1 {
-    
     // MARK: - Product View
-    
+
     struct ProductView: View {
         let product: Data
         var body: some View {
@@ -75,7 +73,7 @@ extension Items1 {
                     .dsCornerRadius()
                     .dsPadding(.regular)
                 }
-                
+
                 DSVStack(alignment: .center, spacing: .zero) {
                     DSText(product.title).dsTextStyle(.smallHeadline, .white)
                     DSText(product.description).dsTextStyle(.smallSubheadline, .white.opacity(0.8))
@@ -87,12 +85,12 @@ extension Items1 {
             .dsCornerRadius()
             .dsHeight(250)
         }
-        
+
         struct Data: Identifiable {
             var id = UUID()
             let title: String
             let description: String
-            var tag: String? = nil
+            var tag: String?
             let price: DSPrice
             var favourite: Bool = false
             let image: URL?
@@ -103,7 +101,6 @@ extension Items1 {
 // MARK: - View Model
 
 final class Items1Model {
-    
     let products: [Items1.ProductView.Data] = [
         .init(
             title: "Suede Chuck-a Boots",
@@ -171,9 +168,9 @@ struct Items1_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let bootsImage = URL(string: "https://images.pexels.com/photos/267242/pexels-photo-267242.jpeg?cs=srgb&dl=pexels-pixabay-267242.jpg&fm=jpg")
-fileprivate let shoesImage = URL(string: "https://images.pexels.com/photos/1904769/pexels-photo-1904769.jpeg?cs=srgb&dl=pexels-sebastian-palomino-1904769.jpg&fm=jpg")
-fileprivate let hikingBootsImage = URL(string: "https://images.pexels.com/photos/755871/pexels-photo-755871.jpeg?cs=srgb&dl=pexels-simon-migaj-755871.jpg&fm=jpg")
-fileprivate let motocrossBootsImage = URL(string: "https://images.pexels.com/photos/718981/pexels-photo-718981.jpeg?cs=srgb&dl=pexels-aidan-jarrett-718981.jpg&fm=jpg")
-fileprivate let ridingBootsImage = URL(string: "https://images.pexels.com/photos/6410600/pexels-photo-6410600.jpeg?cs=srgb&dl=pexels-jessica-jochheim-6410600.jpg&fm=jpg")
-fileprivate let jodhpurBootsImage = URL(string: "https://images.pexels.com/photos/2682289/pexels-photo-2682289.jpeg?cs=srgb&dl=pexels-andrew-neel-2682289.jpg&fm=jpg")
+private let bootsImage = URL(string: "https://images.pexels.com/photos/267242/pexels-photo-267242.jpeg?cs=srgb&dl=pexels-pixabay-267242.jpg&fm=jpg")
+private let shoesImage = URL(string: "https://images.pexels.com/photos/1904769/pexels-photo-1904769.jpeg?cs=srgb&dl=pexels-sebastian-palomino-1904769.jpg&fm=jpg")
+private let hikingBootsImage = URL(string: "https://images.pexels.com/photos/755871/pexels-photo-755871.jpeg?cs=srgb&dl=pexels-simon-migaj-755871.jpg&fm=jpg")
+private let motocrossBootsImage = URL(string: "https://images.pexels.com/photos/718981/pexels-photo-718981.jpeg?cs=srgb&dl=pexels-aidan-jarrett-718981.jpg&fm=jpg")
+private let ridingBootsImage = URL(string: "https://images.pexels.com/photos/6410600/pexels-photo-6410600.jpeg?cs=srgb&dl=pexels-jessica-jochheim-6410600.jpg&fm=jpg")
+private let jodhpurBootsImage = URL(string: "https://images.pexels.com/photos/2682289/pexels-photo-2682289.jpeg?cs=srgb&dl=pexels-andrew-neel-2682289.jpg&fm=jpg")

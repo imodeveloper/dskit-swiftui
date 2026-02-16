@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 public struct DSWidthModifier: ViewModifier {
-    
+
     let width: DSDimension
     @Environment(\.appearance) var appearance: DSAppearance
-    
+
     public func body(content: Content) -> some View {
         content.frame(width: width.value(appearance: appearance))
     }
@@ -29,13 +29,13 @@ struct DSWidthModifier_Previews: PreviewProvider {
         DSPreviewForEachAppearance { DSPreview {
                 Color.blue
                     .dsWidth(100)
-                
+
                 Color.blue
                     .dsWidth(1.5)
-                
+
                 Color.blue
                     .dsWidth(2.5)
-                
+
             }.dsLayoutDebug()
         }
     }

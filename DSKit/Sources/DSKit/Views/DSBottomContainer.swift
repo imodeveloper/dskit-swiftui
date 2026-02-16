@@ -28,7 +28,7 @@ public struct DSBottomContainer<Content: View>: View {
     ) {
         self.content = content
     }
-    
+
     public var body: some View {
         DSVStack {
             content()

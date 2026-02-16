@@ -5,18 +5,16 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct LogInScreen3: View {
-    
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSVStack {
-            
             Spacer()
-            
+
             DSVStack(alignment: .center, spacing: .medium) {
                 DSImageView(
                     systemName: "square.3.layers.3d.top.filled",
@@ -30,15 +28,14 @@ struct LogInScreen3: View {
                 .dsTextStyle(.subheadline)
                 .dsWidth(300)
             }.frame(maxWidth: .infinity)
-            
+
             Spacer()
             Spacer()
             Spacer()
-            
+
             DSVStack(alignment: .center) {
-                
                 DSText("Log in with social networks").dsTextStyle(.subheadline)
-                
+
                 DSHStack {
                     DSButton(
                         title: "Facebook",
@@ -46,32 +43,32 @@ struct LogInScreen3: View {
                         pushContentToSides: true,
                         style: .custom(color: Color(DSUIColor(0x4267B2)))
                     ) {
-                        self.dismiss()
+                        dismiss()
                     }
-                    
+
                     DSButton(
                         title: "Google",
                         rightImageNamed: "google",
                         pushContentToSides: true,
                         style: .custom(color: Color(DSUIColor(0x4285F4)))
                     ) {
-                        self.dismiss()
+                        dismiss()
                     }
                 }
-                
+
                 DSText("or sign up with Email").dsTextStyle(.subheadline)
-                
+
                 DSButton(
                     title: "Sign Up",
                     rightSystemName: "envelope.fill",
                     pushContentToSides: true,
                     style: .light
                 ) {
-                    self.dismiss()
+                    dismiss()
                 }
-                
+
                 DSButton(title: "Log in with Email", style: .clear, action: {
-                    self.dismiss()
+                    dismiss()
                 })
             }
         }.dsScreen()

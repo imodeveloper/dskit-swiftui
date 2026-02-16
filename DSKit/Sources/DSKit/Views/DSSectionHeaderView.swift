@@ -29,13 +29,13 @@ public struct DSSectionHeaderView: View {
     let title: String
     let actionTitle: String
     let action: () -> Void
-    
+
     public init(title: String, actionTitle: String, action: @escaping () -> Void) {
         self.title = title
         self.actionTitle = actionTitle
         self.action = action
     }
-    
+
     public var body: some View {
         DSHStack {
             DSText(title)

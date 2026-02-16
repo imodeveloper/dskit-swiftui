@@ -76,7 +76,7 @@ enum ScreenKey: String, CaseIterable, Identifiable {
     case notificationsScreen1
     case aboutUsScreen1
     case aboutUsScreen2
-    
+
     var id: Self { self }
     var displayName: String {
         switch self {

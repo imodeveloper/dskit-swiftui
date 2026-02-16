@@ -12,13 +12,13 @@ public protocol DPaddingsProtocol {
 }
 
 public struct DSPaddingSystem: DPaddingsProtocol {
-    
+
     public let spatialSystem: CGFloat
-    
+
     public init(spatialSystem: CGFloat) {
         self.spatialSystem = spatialSystem
     }
-    
+
     public func value(for padding: DSPadding) -> CGFloat {
         switch padding {
         case .small:

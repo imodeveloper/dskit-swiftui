@@ -27,30 +27,30 @@ Initializes a `DSQuantityPicker` with an optional initial quantity.
 */
 
 public struct DSQuantityPicker: View {
-    
+
     @State var quantity: Int
-    
+
     public init(quantity: Int = 1) {
         self.quantity = quantity
     }
-    
+
     public var body: some View {
-        
+
         DSHStack(spacing: .zero) {
-            
+
             DSText("Quantity").dsTextStyle(.smallHeadline)
-            
+
             Spacer()
-            
+
             DSHStack(alignment: .center, spacing: .regular) {
-                
+
                 DSSFSymbolButton(name: "minus", size: .smallIcon)
                     .saturation(quantity > 1 ? 1 : 0)
                     .opacity(quantity > 1 ? 1 : 0.2)
                     .dsPadding(.horizontal, .regular)
                     .onTap {
                         if quantity > 1 {
-                            quantity = quantity - 1
+                            quantity -= 1
                             #if canImport(UIKit)
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             #endif
@@ -62,7 +62,7 @@ public struct DSQuantityPicker: View {
                 DSSFSymbolButton(name: "plus", size: .smallIcon)
                     .dsPadding(.horizontal, .regular)
                     .onTap {
-                        quantity = quantity + 1
+                        quantity += 1
                         #if canImport(UIKit)
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         #endif
@@ -91,4 +91,3 @@ struct DSQuantityPicker_Previews: PreviewProvider {
         }
     }
 }
-

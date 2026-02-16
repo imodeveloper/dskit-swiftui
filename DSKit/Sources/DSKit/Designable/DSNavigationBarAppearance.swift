@@ -47,7 +47,7 @@ public struct DSNavigationBarAppearance: DSNavigationBarAppearanceProtocol {
         self.bar = bar
         self.translucent = translucent
     }
-    
+
     public var buttons: DSUIColor
     public var text: DSUIColor
     public var bar: DSUIColor

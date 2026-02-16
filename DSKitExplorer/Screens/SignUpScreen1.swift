@@ -5,30 +5,28 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct SignUpScreen1: View {
-    
     let viewModel = SignUpScreen1Model()
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 Group {
                     DSButton(
                         title: "Login with Facebook",
                         rightImageNamed: "facebook",
                         pushContentToSides: true,
-                        style: .custom(color: Color(DSUIColor(0x4267B2)))  
-                    ) { self.dismiss() }
-                    
+                        style: .custom(color: Color(DSUIColor(0x4267B2)))
+                    ) { dismiss() }
+
                     DSText("or sign up with Email").dsTextStyle(.smallSubheadline).frame(maxWidth: .infinity, alignment: .center)
-                    
+
                 }.hideWhenKeyboardIsDisplayed()
-                
+
                 DSVStack(spacing: .small) {
                     DSTextField.name(value: viewModel.fullName)
                     DSTextField.email(value: viewModel.email)
@@ -36,15 +34,15 @@ struct SignUpScreen1: View {
                     DSTextField.password(value: viewModel.password)
                     DSTextField.password(value: viewModel.password)
                 }
-                
+
                 DSButton(title: "Continue") {
-                    self.dismiss()
+                    dismiss()
                 }
-                
+
                 DSTermsAndConditions(message: "By signing up, you agree to our")
-            .hideKeyboardWhenTappedOutside()
-        
-            }}
+                    .hideKeyboardWhenTappedOutside()
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             Group {
                 Spacer()
@@ -58,13 +56,12 @@ struct SignUpScreen1: View {
 // MARK: - Model
 
 final class SignUpScreen1Model: ObservableObject {
-    
     var fullName = DSTextFieldValue()
     var email = DSTextFieldValue()
     var phone = DSTextFieldValue()
     var password = DSTextFieldValue()
     var repeatPassword = DSTextFieldValue()
-    
+
     func submit() {
         for field in [fullName, email, phone, password, repeatPassword] {
             let isValid = field.validate()

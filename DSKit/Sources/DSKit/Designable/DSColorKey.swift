@@ -8,7 +8,7 @@
 import SwiftUI
 
 public enum DSColorKey: Equatable, Hashable {
-    
+
     case viewStyle(DSViewStyle, DSViewColorKey)
     case view(DSViewColorKey)
     case text(DSTextFontKey)
@@ -16,7 +16,7 @@ public enum DSColorKey: Equatable, Hashable {
     case tabBar(DSTabBarColorKey)
     case price(DSPriceColorKey)
     case color(Color)
-    
+
     func color(for appearance: DSAppearance, and style: DSViewStyle) -> Color {
         switch self {
         case .viewStyle(let style, let viewKey):

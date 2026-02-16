@@ -25,21 +25,21 @@ import SDWebImageSwiftUI
 */
 
 public struct DSImageView: View {
-    
+
     let unitTestMode = ProcessInfo.processInfo.arguments.contains("TESTMODE")
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
     @StateObject var imageManager = ImageManager()
     let image: DSImage
     @State private var imageLoaded = false
-    
+
     @State var imageSize: CGSize = .zero
-    
+
     public init(dsImage: DSImage) {
         self.image = dsImage
     }
-    
+
     public init(
         systemName: String,
         size: DSSize,
@@ -53,7 +53,7 @@ public struct DSImageView: View {
             contentMode: .scaleAspectFit
         )
     }
-    
+
     public init(
         uiImage: DSUIImage?,
         displayShape: DSDisplayShape = .none,
@@ -69,7 +69,7 @@ public struct DSImageView: View {
             contentMode: contentMode
         )
     }
-    
+
     public init(
         named: String,
         displayShape: DSDisplayShape = .none,
@@ -85,7 +85,7 @@ public struct DSImageView: View {
             contentMode: contentMode
         )
     }
-    
+
     public init(
         url: URL?,
         style: DSDisplayShape = .none,
@@ -101,7 +101,7 @@ public struct DSImageView: View {
             contentMode: contentMode
         )
     }
-    
+
     public var body: some View {
         switch image.content {
         case .system(name: let name):
@@ -111,7 +111,7 @@ public struct DSImageView: View {
                 .setContentMode(mode: image.contentMode)
                 .dsSize(image.size)
         case .image(image: let uiImage):
-            
+
             if let uiImage {
                 Color.clear
                     .overlay(alignment: .center) {
@@ -171,10 +171,10 @@ public struct DSImageView: View {
                     }
                     .onAppear {
                         let transformer = SDImageResizingTransformer(
-                            size: CGSize(width: geometry.size.width * 3, height:  geometry.size.height * 3),
+                            size: CGSize(width: geometry.size.width * 3, height: geometry.size.height * 3),
                             scaleMode: .aspectFill
                         )
-                        
+
                         self.imageManager.load(url: url, context: [.imageTransformer: transformer])
                     }
                     .onDisappear {
@@ -184,7 +184,7 @@ public struct DSImageView: View {
             }
         }
     }
-    
+
     private func fileImage(for url: URL?) -> DSUIImage? {
         guard let url, url.isFileURL, let data = try? Data(contentsOf: url) else {
             return nil
@@ -200,13 +200,13 @@ public enum DSImageContentType {
 }
 
 public struct DSImage {
-    
+
     public var displayShape: DSDisplayShape
     public var content: DSImageContentType
     public var contentMode: DSContentMode
     public var size: DSSize
     public var tintColor: DSColorKey?
-    
+
     public init(
         content: DSImageContentType,
         displayShape: DSDisplayShape = .none,
@@ -220,7 +220,7 @@ public struct DSImage {
         self.size = size
         self.contentMode = contentMode
     }
-    
+
     public init(
         systemName: String,
         displayShape: DSDisplayShape = .none,
@@ -236,7 +236,7 @@ public struct DSImage {
             contentMode: contentMode
         )
     }
-    
+
     public init(
         named: String,
         displayShape: DSDisplayShape = .none,
@@ -252,7 +252,7 @@ public struct DSImage {
             contentMode: contentMode
         )
     }
-    
+
     public init(
         uiImage: DSUIImage?,
         displayShape: DSDisplayShape = .none,
@@ -268,7 +268,7 @@ public struct DSImage {
             contentMode: contentMode
         )
     }
-    
+
     public init(
         imageURL: URL?,
         displayShape: DSDisplayShape = .none,
@@ -304,11 +304,11 @@ struct Testable_DSImageView: View {
         try? data.write(to: url, options: [.atomic])
         return url
     }()
-    
+
     let imageUrl = Testable_DSImageView.localDemoImageURL
-    
+
     let testImage = DSUIImage(named: "demo", in: Bundle.main, with: nil)
-    
+
     var body: some View {
         DSVStack {
             DSHStack {
@@ -328,7 +328,7 @@ struct Testable_DSImageView: View {
                     size: .size(50)
                 )
             }
-            
+
             DSHStack {
                 DSImageView(
                     uiImage: testImage,
@@ -346,10 +346,10 @@ struct Testable_DSImageView: View {
                     size: .size(width: 100, height: 50)
                 )
             }
-            
+
             DSHStack {
                 DSImageView(
-                    systemName: "sun.rain.fill", 
+                    systemName: "sun.rain.fill",
                     size: .font(.title1),
                     tint: .color(.red)
                 )

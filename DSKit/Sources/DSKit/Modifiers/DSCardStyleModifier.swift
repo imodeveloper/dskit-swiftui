@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-public struct DSCardStyleModifier: ViewModifier {    
-    
+public struct DSCardStyleModifier: ViewModifier {
+
     let padding: DSPadding
-    
+
     public init(padding: DSPadding) {
         self.padding = padding
     }
-    
+
     public func body(content: Content) -> some View {
         content
             .dsPadding(padding)

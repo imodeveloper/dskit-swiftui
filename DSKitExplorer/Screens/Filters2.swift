@@ -5,18 +5,16 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct Filters2: View {
-    
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = Filters2Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSRadioPickerView(
                     data: viewModel.sortByOptions,
                     id: \.self,
@@ -25,7 +23,7 @@ struct Filters2: View {
                     DSText(option)
                         .dsTextStyle(selected ? .smallHeadline : .subheadline, 14)
                 }.dsSectionStyle(title: "Style")
-                
+
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -34,7 +32,7 @@ struct Filters2: View {
                     Color(color)
                         .dsSize(dimension: .actionElement)
                 }.dsSectionStyle(title: "Color")
-                
+
                 DSPickerView(
                     data: viewModel.sizes,
                     id: \.self,
@@ -45,14 +43,14 @@ struct Filters2: View {
                         .dsSize(dimension: .actionElement)
                         .dsSecondaryBackground()
                 }.dsSectionStyle(title: "Size")
-                
+
                 DSVStack(spacing: .small) {
                     ForEach(viewModel.filters) { filter in
                         OptionView(option: filter)
                     }
                 }.dsSectionStyle(title: "Options")
-        
-            }}.safeAreaInset(edge: .bottom) {
+            }
+        }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "View (235) Items",
@@ -68,9 +66,8 @@ struct Filters2: View {
 }
 
 extension Filters2 {
-    
     // MARK: - Option View
-    
+
     struct OptionView: View {
         let option: Data
         var body: some View {
@@ -81,6 +78,7 @@ extension Filters2 {
                 DSChevronView()
             }.dsCardStyle()
         }
+
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -92,20 +90,18 @@ extension Filters2 {
 // MARK: - View Model
 
 final class Filters2Model: ObservableObject {
-    
     @Published var selectedSize: String = "10"
     let sizes = ["8", "9", "10", "11", "12", "13", "14", "15", "16"]
-    
-    @Published var selectedColor: DSUIColor = DSUIColor(0xF88F6F)
+
+    @Published var selectedColor: DSUIColor = .init(0xF88F6F)
     let colors = [DSUIColor(0xFFC6A3),
                   DSUIColor(0xF88F6F),
                   DSUIColor(0x5CB946),
                   DSUIColor(0x006A7A),
-                  DSUIColor(0x28527a),
-                  DSUIColor(0x8ac4d0),
-                  DSUIColor(0xfbeeac)]
-    
-    
+                  DSUIColor(0x28527A),
+                  DSUIColor(0x8AC4D0),
+                  DSUIColor(0xFBEEAC)]
+
     @Published var selectedSortByOption = "Chelsea Boots"
     let sortByOptions = ["Boots", "Chelsea Boots", "Casual Sneakers", "Casual Shoes"]
     let filters: [Filters2.OptionView.Data] = [
@@ -116,7 +112,6 @@ final class Filters2Model: ObservableObject {
         .init(title: "Range", option: "All")
     ]
 }
-
 
 // MARK: - Testable
 

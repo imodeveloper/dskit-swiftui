@@ -6,7 +6,7 @@
 //
 
 public class DSDynamicColor {
-    
+
     /// Generate light and dark color for dynamic interfaces
     /// - Parameters:
     ///   - light: DSUIColor for light interface
@@ -23,7 +23,7 @@ public class DSDynamicColor {
         })
         #endif
     }
-    
+
     /// Generate light and dark color for dynamic interfaces using hex values
     /// - Parameters:
     ///   - light: Hex color for light interface

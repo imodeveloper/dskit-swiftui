@@ -5,26 +5,24 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
 import MapKit
+import SwiftUI
 
 struct BookingScreen1: View {
     let viewModel = BookingScreen1Model()
     var body: some View {
         DSList {
             DSSection {
-            
-                ForEach(viewModel.addresses, id: \.self.id) { address in
+                ForEach(viewModel.addresses, id: \.id) { address in
                     Location(address: address)
                 }
-        
-            }}
+            }
+        }
     }
 }
 
 extension BookingScreen1 {
-    
     struct Location: View {
         let address: Data
         var body: some View {
@@ -57,14 +55,14 @@ extension BookingScreen1 {
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
-        
+
         struct Data: Identifiable {
             let id = UUID()
             let name: String
             let address: String
             let coordinated: CLLocationCoordinate2D
             @State var region: MKCoordinateRegion
-            
+
             init(
                 name: String,
                 address: String,
@@ -73,7 +71,7 @@ extension BookingScreen1 {
                 self.coordinated = coordinated
                 self.address = address
                 self.name = name
-                self._region = State(initialValue: MKCoordinateRegion(
+                _region = State(initialValue: MKCoordinateRegion(
                     center: coordinated,
                     span: .init(latitudeDelta: 0.001, longitudeDelta: 0.001)
                 ))
@@ -85,8 +83,7 @@ extension BookingScreen1 {
 // MARK: - Model
 
 final class BookingScreen1Model: ObservableObject {
-    
-    @Published public var addresses: [BookingScreen1.Location.Data] = [
+    @Published var addresses: [BookingScreen1.Location.Data] = [
         .init(
             name: "Barbershop Broadway",
             address: "325 Broadway, Bayonne, NJ 07002, 7km away",

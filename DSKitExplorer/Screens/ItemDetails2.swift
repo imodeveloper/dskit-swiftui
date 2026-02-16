@@ -5,32 +5,29 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct ItemDetails2: View {
-    
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = ItemDetails2Model()
-    
+
     var body: some View {
         DSList {
             DSSection {
-            
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
                 DSVStack(spacing: .medium) {
-                    
                     DSVStack(spacing: .zero) {
                         DSText(viewModel.title).dsTextStyle(.title2)
                         DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                     }
-                    
+
                     DSPriceView(price: viewModel.price, size: .headline)
                     DSQuantityPicker()
                 }
-                
+
                 DSPickerView(
                     style: .grid(columns: 4),
                     data: viewModel.sizes,
@@ -42,7 +39,7 @@ struct ItemDetails2: View {
                         .dsHeight(.actionElement)
                         .dsSecondaryBackground()
                 }.dsSectionStyle(title: "Size")
-                
+
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -52,8 +49,8 @@ struct ItemDetails2: View {
                 }.dsSectionStyle(title: "Model")
 
                 DSText(viewModel.description).dsTextStyle(.callout)
-        
-            }}
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Add to cart", rightSystemName: "cart.fill") {
@@ -117,7 +114,7 @@ struct ItemDetails2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let p1Image = URL(string: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?cs=srgb&dl=pexels-mnz-1598505.jpg&fm=jpg")
-fileprivate let p2Image = URL(string: "https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-fileprivate let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")
-fileprivate let p4Image = URL(string: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=2825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let p1Image = URL(string: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?cs=srgb&dl=pexels-mnz-1598505.jpg&fm=jpg")
+private let p2Image = URL(string: "https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")
+private let p4Image = URL(string: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=2825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")

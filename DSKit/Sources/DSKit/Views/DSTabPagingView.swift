@@ -11,15 +11,15 @@ import SwiftUI
 public struct DSTabPage<Content: View> {
 
     let content: Content
-    
+
     /// The view shown in the indicator at the top (e.g. `DSText("Popular")`).
     var activeItem: AnyView? = nil
     var defaultItem: AnyView? = nil
-    
+
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-    
+
     public func tabItem<Item: View>(@ViewBuilder content: (Bool) -> Item) -> Self {
         var copy = self
         copy.activeItem = AnyView(content(true))
@@ -55,14 +55,13 @@ public func makeDSTabPages(@DSTabPagingViewBuilder _ content: () -> [AnyDSTabPag
     content()
 }
 
-
 @resultBuilder
 public struct DSTabPagingViewBuilder {
-    
+
     public static func buildExpression<Content: View>(_ expression: DSTabPage<Content>) -> AnyDSTabPage {
         expression.eraseToAnyDSTabPage()
     }
-    
+
     public static func buildBlock(_ values: DSTabPageConvertible...) -> [AnyDSTabPage] {
         values.flatMap { $0.asDSTabPages() }
     }
@@ -81,16 +80,16 @@ public extension DSTabPagingViewBuilder {
 @available(iOS 17, *)
 public struct DSTabPagingView: View {
     @Environment(\.appearance) private var appearance: DSAppearance
-    
+
     private let pages: [AnyDSTabPage]
-    
+
     @State private var offset: CGRect = .zero
     @State private var page: Int = 0
-    
+
     public init(@DSTabPagingViewBuilder _ content: () -> [AnyDSTabPage]) {
         self.pages = content()
     }
-    
+
     public var body: some View {
         GeometryReader { proxy in
             VStack(spacing: 0) {
@@ -101,7 +100,7 @@ public struct DSTabPagingView: View {
                     pageItems: pages.compactMap { (active: $0.activeItem, default: $0.defaultItem) as? (active: AnyView, default: AnyView) },
                     screenWidth: proxy.size.width
                 )
-                
+
                 DSScrollViewContentFrameReader(
                     axes: .horizontal,
                     showsIndicators: false,
@@ -116,42 +115,42 @@ public struct DSTabPagingView: View {
                                 .id(i)
                         }
                     }.scrollTargetLayout()
-                    
+
                 }.scrollTargetBehavior(.viewAligned)
-                
+
             }.background(appearance.navigationBar.bar.color)
         }
     }
 }
 
 struct DSTabPagingIndicatorView: View {
-    
+
     @Binding var offset: CGRect
     @Binding var page: Int
-    
+
     let pageItems: [(active: AnyView, default: AnyView)]  // e.g. [DSText("Top"), DSText("Popular"), ...]
     let screenWidth: CGFloat
-    
+
     @Environment(\.appearance) private var appearance: DSAppearance
-    
+
     // Stores the measured frames of each item (index → CGRect).
     @State private var frames: [Int: CGRect] = [:]
     @State private var debounceWorkItem: DispatchWorkItem?
-    
+
     var body: some View {
         let totalPages = pageItems.count
-        
+
         let pageFraction = offset.origin.x > 0 ? 0 : -offset.origin.x / screenWidth
         let currentIndex = min(max(Int(floor(pageFraction)), 0), totalPages - 1)
         let fraction = pageFraction - floor(pageFraction)
         let nextIndex = min(currentIndex + 1, totalPages - 1)
-        
+
         let (indicatorX, indicatorWidth) = indicatorGeometry(
             currentIndex: currentIndex,
             nextIndex: nextIndex,
             fraction: fraction
         )
-        
+
         return VStack(spacing: 8) {
 
             HStack(spacing: 0) {
@@ -184,7 +183,7 @@ struct DSTabPagingIndicatorView: View {
                             page = idx
                             print("tap")
                         }
-                    
+
                     if idx < totalPages - 1 {
                         Spacer(minLength: 0)
                     }
@@ -196,7 +195,7 @@ struct DSTabPagingIndicatorView: View {
             .onPreferenceChange(DSFramePreferenceKey.self) { newValue in
                 frames = newValue
             }.onChange(of: offset) { newValue in
-                
+
                 debounceWorkItem?.cancel()
                 debounceWorkItem = DispatchWorkItem {
                     let currentPage = Int(round(abs(newValue.origin.x) / screenWidth))
@@ -204,12 +203,12 @@ struct DSTabPagingIndicatorView: View {
                         page = currentPage
                     }
                 }
-                
+
                 if let workItem = debounceWorkItem {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: workItem)
                 }
             }
-            
+
             VStack(spacing: 0) {
                 HStack {
                     Capsule()
@@ -223,7 +222,7 @@ struct DSTabPagingIndicatorView: View {
             }
         }
     }
-    
+
     /// Interpolates the x/width of the highlight between the “current” and “next” item frames.
     private func indicatorGeometry(
         currentIndex: Int,
@@ -237,7 +236,7 @@ struct DSTabPagingIndicatorView: View {
             let x = CGFloat(currentIndex) * defaultWidth
             return (x, defaultWidth)
         }
-        
+
         // Interpolate X:
         let xDiff = nextFrame.minX - currentFrame.minX
         let x = currentFrame.minX + xDiff * fraction
@@ -246,7 +245,7 @@ struct DSTabPagingIndicatorView: View {
         let w = currentFrame.width + wDiff * fraction
         return (x, w)
     }
-    
+
     private func dsActiveOpacityForIndex(
         _ index: Int,
         currentIndex: Int,
@@ -261,7 +260,7 @@ struct DSTabPagingIndicatorView: View {
             return 0.0
         }
     }
-    
+
     private func dsDefaultOpacityForIndex(
         _ index: Int,
         currentIndex: Int,
@@ -298,23 +297,22 @@ extension View {
     }
 }
 
-
 @available(iOS 17, *)
 struct Testable_DSTabPagingView: View {
-    
+
     @State private var scrollContentFrame: CGRect = .zero
-    
+
     @State var firstLastPage: Bool = true
     @State var showSecondPage: Bool = true
     @State var showLastPage: Bool = true
-    
+
     @State var showIndicator: Bool = true
-    
+
     var body: some View {
-        
+
         DSVStack {
             DSTabPagingView {
-                
+
                 if firstLastPage {
                     DSTabPage {
                         Color.red
@@ -329,7 +327,7 @@ struct Testable_DSTabPagingView: View {
                         }
                     }
                 }
-                
+
                 if showSecondPage {
                     DSTabPage {
                         Color.green
@@ -338,7 +336,7 @@ struct Testable_DSTabPagingView: View {
                             .dsTextStyle(.headline, isCurrent ? .text(.headline) : .text(.callout))
                     }
                 }
-                
+
                 if showLastPage {
                     DSTabPage {
                         Color.blue
@@ -348,39 +346,39 @@ struct Testable_DSTabPagingView: View {
                     }
                 }
             }
-            
+
             DSHStack {
-                
+
                 DSButton(title: "Toggle first") {
                     withAnimation {
                         firstLastPage.toggle()
                     }
                 }
-                
+
                 DSButton(title: "Toggle second") {
                     withAnimation {
                         showSecondPage.toggle()
                     }
                 }
-                
+
                 DSButton(title: "Toggle third") {
                     withAnimation {
                         showLastPage.toggle()
                     }
                 }
-                
+
             }.dsPadding(.horizontal)
-            
+
             DSHStack {
-                
+
                 DSButton(title: "Toggle show indicator") {
                     withAnimation {
                         showIndicator.toggle()
                     }
                 }
-                
+
             }.dsPadding(.horizontal)
-            
+
         }.dsPadding(.vertical)
     }
 }

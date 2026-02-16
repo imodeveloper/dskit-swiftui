@@ -5,34 +5,31 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct SignUpScreen3: View {
-    
     @Environment(\.dismiss) var dismiss
     let viewModel = SignUpScreen3Model()
-    
+
     var body: some View {
         DSVStack(spacing: .medium) {
-            
             Spacer()
-            
+
             DSVStack(spacing: .medium) {
-                
                 DSText("Start with \nphone number").dsTextStyle(.largeHeadline)
                     .dsFullWidth()
                     .overlay(alignment: .trailing) {
                         DSImageView(systemName: "phone.fill", size: 60, tint: .viewStyle(.secondary, .background))
                     }
-                    
+
                 DSText("Please enter your mobile number to get\nsms to activate your account")
                 DSTextField.phone(value: viewModel.phone)
                 DSText("You will receive an sms with code, which you should insert in the next step").dsTextStyle(.caption1)
             }
-            
+
             DSButton(title: "Subbmit") { dismiss() }
-            
+
             Spacer()
             Spacer()
         }
@@ -50,9 +47,8 @@ struct SignUpScreen3: View {
 // MARK: - Model
 
 final class SignUpScreen3Model: ObservableObject {
-    
     var phone = DSTextFieldValue(value: "+41007933309")
-    
+
     func submit() {
         for field in [phone] {
             let isValid = field.validate()

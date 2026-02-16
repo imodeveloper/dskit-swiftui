@@ -9,18 +9,18 @@ import Foundation
 import SwiftUI
 
 public enum DSDimension: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equatable {
-    
+
     case font(DSTextFontKey)
     case custom(CGFloat)
     case fillUpTheSpace
     case actionElement
     case none
     case zero
-    
+
     public init(floatLiteral value: FloatLiteralType) {
         self = .custom(CGFloat(value))
     }
-    
+
     public init(integerLiteral value: IntegerLiteralType) {
         self = .custom(CGFloat(value))
     }

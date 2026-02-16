@@ -5,14 +5,13 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct ImageGalleryScreen2: View {
-    
     @StateObject var viewModel = ImageGalleryScreen2Model()
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSVStack {
             DSText("Gallery")
@@ -24,10 +23,10 @@ struct ImageGalleryScreen2: View {
                         size: .mediumIcon
                     ).onTap { dismiss() }
                 }
-            
+
             DSCoverFlow(
                 height: .fillUpTheSpace,
-                data: viewModel.topProducts, 
+                data: viewModel.topProducts,
                 id: \.self
             ) { imageUrl in
                 DSImageView(url: imageUrl, style: .capsule)
@@ -35,7 +34,6 @@ struct ImageGalleryScreen2: View {
         }
         .clipped()
         .dsScreen()
-        
     }
 }
 
@@ -45,7 +43,7 @@ final class ImageGalleryScreen2Model: ObservableObject {
     var topProducts: [URL?] = [
         image1,
         image2,
-        image3,
+        image3
     ]
 }
 
@@ -70,10 +68,8 @@ struct ImageGalleryScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-fileprivate let image1 = URL(string: "https://images.unsplash.com/photo-1522512115668-c09775d6f424?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image1 = URL(string: "https://images.unsplash.com/photo-1522512115668-c09775d6f424?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
 
+private let image2 = URL(string: "https://images.unsplash.com/photo-1516313570236-85371711ee13?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
 
-fileprivate let image2 = URL(string: "https://images.unsplash.com/photo-1516313570236-85371711ee13?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-
-
-fileprivate let image3 = URL(string: "https://images.unsplash.com/photo-1495298599282-d8920eb5009b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image3 = URL(string: "https://images.unsplash.com/photo-1495298599282-d8920eb5009b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")

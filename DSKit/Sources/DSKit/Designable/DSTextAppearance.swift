@@ -23,7 +23,7 @@ public protocol DSTextAppearanceProtocol {
 }
 
 public struct DSTextAppearance: DSTextAppearanceProtocol {
-    
+
     public init(
         largeTitle: DSUIColor,
         title1: DSUIColor,
@@ -49,7 +49,7 @@ public struct DSTextAppearance: DSTextAppearanceProtocol {
         self.caption2 = caption2
         self.footnote = footnote
     }
-    
+
     public var largeTitle: DSUIColor
     public var title1: DSUIColor
     public var title2: DSUIColor
@@ -64,7 +64,7 @@ public struct DSTextAppearance: DSTextAppearanceProtocol {
 }
 
 public extension DSTextAppearance {
-    
+
     /// Get DSTextAppearance using only 2 colors to fill all text styles
     /// - Parameters:
     ///   - main: DSUIColor

@@ -9,13 +9,13 @@ import SwiftUI
 import Foundation
 
 public struct DSScrollViewContentFrameReader<Content: View>: View {
-    
+
     var axes: Axis.Set = [.vertical]
     var showsIndicators = true
     @Binding var contentFrame: CGRect
     @Binding var page: Int
     @ViewBuilder var content: () -> Content
-    
+
     public init(axes: Axis.Set, showsIndicators: Bool = true, contentFrame: Binding<CGRect>, page: Binding<Int>, content: @escaping () -> Content) {
         self.axes = axes
         self.showsIndicators = showsIndicators
@@ -23,9 +23,9 @@ public struct DSScrollViewContentFrameReader<Content: View>: View {
         self._page = page
         self.content = content
     }
-    
+
     private let coordinateSpaceName = UUID()
-    
+
     public var body: some View {
         ScrollViewReader { scrollViewProxy in
             ScrollView(axes, showsIndicators: showsIndicators) {
@@ -35,7 +35,7 @@ public struct DSScrollViewContentFrameReader<Content: View>: View {
                     content: content
                 )
             }.coordinateSpace(name: coordinateSpaceName)
-                .onChange(of: page) { newValue in
+                .onChange(of: page) { _ in
                     withAnimation {
                         scrollViewProxy.scrollTo(page, anchor: .center)
                     }
@@ -46,17 +46,17 @@ public struct DSScrollViewContentFrameReader<Content: View>: View {
 }
 
 public struct DSGeometryTrackingView<Content: View>: View {
-    
+
     var coordinateSpace: CoordinateSpace
     @Binding var trackedFrame: CGRect
     @ViewBuilder var content: () -> Content
-    
+
     public init(coordinateSpace: CoordinateSpace, trackedFrame: Binding<CGRect>, content: @escaping () -> Content) {
         self.coordinateSpace = coordinateSpace
         self._trackedFrame = trackedFrame
         self.content = content
     }
-    
+
     public var body: some View {
         content()
             .background(
@@ -79,16 +79,16 @@ public struct ScrollFramePreferenceKey: PreferenceKey {
 }
 
 struct Testable_ScrollViewContentFrameReader: View {
-    
+
     @State private var scrollContentFrame: CGRect = .zero
     @State var page: Int = 0
-    
+
     var body: some View {
         DSVStack {
-            
+
             DSText("\(scrollContentFrame)")
                 .padding()
-            
+
             DSScrollViewContentFrameReader(
                 axes: .horizontal,
                 showsIndicators: false,

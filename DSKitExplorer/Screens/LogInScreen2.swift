@@ -5,33 +5,32 @@
 //  Created by Ivan Borinschi on 31.13.3033.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct LogInScreen2: View {
-    
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSVStack {
             Spacer()
-            
+
             DSImageView(
                 systemName: "square.3.layers.3d.top.filled",
                 size: 70,
                 tint: .text(.headline)
             )
-            
+
             DSVStack(alignment: .leading) {
                 DSText("Welcome to\nDSKit")
                     .dsTextStyle(.headline, 38)
                 DSText("Meet new people with new\nideas and posts.")
                     .dsTextStyle(.subheadline)
             }.dsPadding(.trailing, .large)
-            
+
             Spacer()
             Spacer()
-            
+
             DSText("Use Facebook to find friends").dsTextStyle(.smallSubheadline)
             DSButton(
                 title: "Login with facebook",
@@ -39,7 +38,7 @@ struct LogInScreen2: View {
                 pushContentToSides: true,
                 style: .custom(color: Color(DSUIColor(0x4267B2)))
             ) {
-                self.dismiss()
+                dismiss()
             }
             .dsPadding(.bottom)
         }

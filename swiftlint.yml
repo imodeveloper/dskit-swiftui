@@ -1,0 +1,28 @@
+included:
+  - DSKit
+  - DSKitExplorer
+
+excluded:
+  - .build
+  - .swiftpm
+  - fastlane
+  - Content
+  - docs
+  - DSKitTests
+  - DSKitExplorerTests
+  - SharedTests
+
+disabled_rules:
+  - line_length
+  - type_name
+  - identifier_name
+  - nesting
+  - cyclomatic_complexity
+  - file_length
+  - function_body_length
+  - type_body_length
+  - private_over_fileprivate
+  - implicit_optional_initialization
+  - large_tuple
+
+reporter: "xcode"

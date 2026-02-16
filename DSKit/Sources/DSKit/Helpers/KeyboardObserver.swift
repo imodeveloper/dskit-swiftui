@@ -11,14 +11,14 @@ import SwiftUI
 import Combine
 
 public final class KeyboardObserver: ObservableObject {
-    
+
     public static let shared = KeyboardObserver()
-    
+
     @Published public var height: CGFloat = 0
     @Published public var isDisplayed: Bool = false
     @Published public var animationDuration: TimeInterval = 0.25
     @Published public var animationCurve: Animation = .easeInOut
-    
+
     private var cancellables = Set<AnyCancellable>()
     private var debounceTimer: Timer?
 
@@ -44,7 +44,7 @@ public final class KeyboardObserver: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
     private func mapCurveToAnimation(curveValue: Int) -> Animation {
         guard let curve = UIView.AnimationCurve(rawValue: curveValue) else { return .easeInOut }
         switch curve {
@@ -60,7 +60,7 @@ public final class KeyboardObserver: ObservableObject {
             return .easeInOut(duration: animationDuration)
         }
     }
-    
+
     private func updateKeyboardState(height: CGFloat, duration: TimeInterval, curve: Animation) {
         withAnimation(curve) {
             self.height = height

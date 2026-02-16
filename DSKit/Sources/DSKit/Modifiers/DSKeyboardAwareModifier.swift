@@ -10,11 +10,11 @@ import SwiftUI
 #if canImport(UIKit)
 
 public struct DSKeyboardAwareModifier: ViewModifier {
-    
+
     @ObservedObject var keyboard = KeyboardObserver.shared
     var hide: Bool
     var transition: AnyTransition
-    
+
     public func body(content: Content) -> some View {
         if hide {
             if !keyboard.isDisplayed {
@@ -36,7 +36,7 @@ public extension View {
         self
         #endif
     }
-    
+
     func showWhenKeyboardIsDisplayed(transition: AnyTransition = .opacity) -> some View {
         #if canImport(UIKit)
         self.modifier(DSKeyboardAwareModifier(hide: false, transition: transition))

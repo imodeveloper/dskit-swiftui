@@ -9,10 +9,10 @@ import SwiftUI
 import DSKit
 
 struct ScreenView: View {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     let screen: ScreenKey
-    
+
     var body: some View {
         switch screen {
         case .designTokensPlayground:
@@ -334,7 +334,7 @@ struct DynamicTypePlaygroundScreen: View {
                         .dsTextStyle(.body)
                 }
                 .dsCardStyle(padding: .regular)
-                
+
                 ForEach(dynamicTypeShowcaseSamples, id: \.0) { label, category in
                     DSVStack(spacing: .small) {
                         DSText("Dynamic Type: \(label)")
@@ -352,15 +352,15 @@ struct DynamicTypePlaygroundScreen: View {
 
 private struct DynamicTypePlaygroundRow: View {
     let category: ContentSizeCategory
-    
+
     @State private var name = DSTextFieldValue(value: "Alex Morgan")
     @State private var email = DSTextFieldValue(value: "alex.morgan@dskit.app")
-    
+
     var body: some View {
         DSVStack(spacing: .small) {
             DSText("Tokens stay semantic while scale adapts across wrappers.")
                 .dsTextStyle(.body)
-            
+
             DSVStack(spacing: .small) {
                 DSButton(title: "Continue with Dynamic Type", action: {})
                 DSText("Long body text demonstrates wrapping and vertical rhythm in DS components.").dsTextStyle(.body)
@@ -386,7 +386,7 @@ struct DesignTokensPlaygroundScreen: View {
                         .dsTextStyle(.body)
                 }
                 .dsCardStyle()
-                
+
                 spacingShowcase
                 typographyShowcase
                 colorShowcase
@@ -395,7 +395,7 @@ struct DesignTokensPlaygroundScreen: View {
         }
         .dsBackground(.primary)
     }
-    
+
     private var spacingShowcase: some View {
         DSVStack(spacing: .small) {
             DSText("Spacing")
@@ -406,7 +406,7 @@ struct DesignTokensPlaygroundScreen: View {
         }
         .dsCardStyle()
     }
-    
+
     private var typographyShowcase: some View {
         DSVStack(spacing: .small) {
             DSText("Typography")
@@ -418,7 +418,7 @@ struct DesignTokensPlaygroundScreen: View {
         }
         .dsCardStyle()
     }
-    
+
     private var colorShowcase: some View {
         DSVStack(spacing: .small) {
             DSText("Theme surfaces")
@@ -430,7 +430,7 @@ struct DesignTokensPlaygroundScreen: View {
         }
         .dsCardStyle()
     }
-    
+
     private func spacingRow(title: String, space: DSSpace) -> some View {
         DSVStack(spacing: space) {
             DSText(title)
@@ -448,7 +448,7 @@ struct DesignTokensPlaygroundScreen: View {
             .cornerRadius(8)
         }
     }
-    
+
     private func colorShowcaseRow(title: String, style: DSViewStyle) -> some View {
         DSVStack(spacing: .small) {
             DSText(title)

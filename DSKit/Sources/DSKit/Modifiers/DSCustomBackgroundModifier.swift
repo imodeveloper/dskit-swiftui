@@ -9,16 +9,16 @@
 import SwiftUI
 
 public struct DSCustomBackgroundModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
-    
+
     let dsColor: DSColorKey
-    
+
     public init(dsColor: DSColorKey) {
         self.dsColor = dsColor
     }
-    
+
     public func body(content: Content) -> some View {
         content.background(dsColor.color(for: appearance, and: viewStyle))
     }

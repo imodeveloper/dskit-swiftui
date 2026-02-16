@@ -11,15 +11,15 @@ struct DSTextfieldValidator {
     static func isValidMinimLength(_ length: Int, _ text: String?) -> Bool {
         return text?.count ?? 0 >= length
     }
-    
+
     static func isValidMaximLength(_ length: Int, _ text: String?) -> Bool {
         return text?.count ?? 0 <= length
     }
-    
+
     static func validate(string: String?, pattern: String) -> Bool {
         guard !pattern.isEmpty else { return true }
         guard let string = string else { return false }
-        
+
         do {
             let regex = try NSRegularExpression(pattern: pattern)
             return regex.numberOfMatches(in: string, range: NSRange(location: 0, length: string.utf16.count)) > 0
@@ -29,10 +29,9 @@ struct DSTextfieldValidator {
             return false
         }
     }
-    
+
     static func isValidWhiteSpaces(string: String?) -> Bool {
         guard let string = string else { return false }
         return string.trimmingCharacters(in: .whitespacesAndNewlines).count > 0
     }
 }
-

@@ -11,19 +11,19 @@ import DSKit
 struct ScreensView: View {
     let appearance: DSAppearance
     @Environment(\.dismiss) var dismiss
-    
+
     init(appearance: DSAppearance) {
         self.appearance = appearance
         self.appearance.overrideTheSystemAppearance()
     }
-    
+
     var body: some View {
         NavigationView {
             ScrollView {
                 DSVStack(spacing: .small) {
                     ForEach(ScreenKey.allCases) { screen in
                         NavigationLink {
-                            ScreenView(screen: screen)                            
+                            ScreenView(screen: screen)
                         } label: {
                             CustomActionView(title: screen.displayName)
                         }.buttonStyle(.plain)
@@ -44,9 +44,9 @@ struct ScreensView: View {
 }
 
 fileprivate struct CustomActionView: View {
-    
+
     let title: String
-    
+
     var body: some View {
         DSHStack {
             DSText(title).dsTextStyle(.smallHeadline)

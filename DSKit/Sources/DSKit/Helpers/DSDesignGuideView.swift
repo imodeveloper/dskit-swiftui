@@ -8,21 +8,21 @@
 import SwiftUI
 
 public struct DSDesignGuideView: View {
-    
+
     public enum Orientation {
         case vertical, horizontal
     }
-    
+
     let spacing: CGFloat
     let orientation: Orientation
     let divider: Int
-    
+
     public init(spacing: CGFloat, orientation: Orientation, divider: Int) {
         self.spacing = spacing / CGFloat(divider)
         self.orientation = orientation
         self.divider = divider
     }
-    
+
     public var body: some View {
         GeometryReader { geometry in
             // Adjusting totalCount calculation to ensure coverage
@@ -36,10 +36,10 @@ public struct DSDesignGuideView: View {
                     return Int(geometry.size.height / spacing) + 1
                 }
             }()
-            
+
             let itemWidth: CGFloat = orientation == .vertical ? spacing : geometry.size.width
             let itemHeight: CGFloat = orientation == .horizontal ? spacing : geometry.size.height
-            
+
             ZStack {
                 ForEach(0..<totalCount, id: \.self) { index in
                     Rectangle()
@@ -51,7 +51,7 @@ public struct DSDesignGuideView: View {
             }
         }
     }
-    
+
     private func calculateVerticalOffset(index: Int, totalCount: Int, width: CGFloat, spacing: CGFloat) -> CGFloat {
         let center = width / 2
         let halfCount = totalCount / 2
@@ -63,21 +63,21 @@ public struct DSDesignGuideView: View {
 }
 
 public struct DSDesignGuideViewModifier: ViewModifier {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
-    
+
     public enum Orientation {
         case vertical, horizontal, both
     }
-    
+
     let orientation: Orientation
     let divider: Int
-    
+
     public init(orientation: Orientation, divider: Int) {
         self.orientation = orientation
         self.divider = divider
     }
-    
+
     public func body(content: Content) -> some View {
         switch orientation {
         case .horizontal:

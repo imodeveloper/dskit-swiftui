@@ -9,12 +9,12 @@ import SwiftUI
 import DSKit
 
 struct AppearanceSelectionView: View {
-    
+
     @Environment(\.colorScheme) var colorScheme
     @State private var useDarkMode: Bool = false
     @Environment(\.appearance) var appearance: DSAppearance
     @State private var selectedAppearance: IdentifiableDesignable?
-    
+
     var body: some View {
         DSVStack {
             DSVStack {
@@ -26,13 +26,13 @@ struct AppearanceSelectionView: View {
                     DSText("Please select an appearance to continue").dsTextStyle(.subheadline)
                 }
                 .dsPadding(.top)
-                
+
                 DSGrid(columns: 2, data: appearances, id: \.title) { appearance in
                     AppearanceView(appearance: appearance).onTap {
                         self.selectedAppearance = IdentifiableDesignable(appearance: appearance)
                     }
                 }
-                
+
                 Spacer()
             }
             #if os(iOS)
@@ -42,7 +42,7 @@ struct AppearanceSelectionView: View {
             #elseif os(macOS)
             .sheet(item: $selectedAppearance) { identifiableDesignable in
                 ScreensView(appearance: identifiableDesignable.appearance)
-                    .frame(minWidth: 800, minHeight: 600) 
+                    .frame(minWidth: 800, minHeight: 600)
             }
             #endif
             PoweredByDSKitView()
@@ -51,9 +51,9 @@ struct AppearanceSelectionView: View {
 }
 
 fileprivate struct AppearanceView: View {
-    
+
     let appearance: DSAppearance
-    
+
     var body: some View {
         DSVStack {
             DSText(appearance.title).dsTextStyle(.headline)
@@ -73,7 +73,7 @@ fileprivate struct AppearanceView: View {
         .dsPadding()
         .dsSecondaryBackground()
         .dsCornerRadius()
-        
+
     }
 }
 

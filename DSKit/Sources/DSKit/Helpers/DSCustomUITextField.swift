@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DSCustomUITextField: DSViewRepresentable {
-    
+
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
 
@@ -31,12 +31,12 @@ struct DSCustomUITextField: DSViewRepresentable {
         configureUITextField(textField, context: context)
         return textField
     }
-    
+
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
         uiView.isSecureTextEntry = isSecureEntry
     }
-    
+
     private func configureUITextField(_ textField: UITextField, context: Context) {
         textField.placeholder = placeholder
         textField.attributedPlaceholder = NSAttributedString(
@@ -58,11 +58,11 @@ struct DSCustomUITextField: DSViewRepresentable {
         configureNSTextField(textField, context: context)
         return textField
     }
-    
+
     func updateNSView(_ nsView: NSTextField, context: Context) {
         nsView.stringValue = text
     }
-    
+
     private func configureNSTextField(_ textField: NSTextField, context: Context) {
         textField.placeholderString = placeholder
         textField.font = NSFont.systemFont(ofSize: 14)
@@ -98,16 +98,16 @@ extension DSCustomUITextFieldCoordinator: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         parent.text = textField.text ?? ""
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         parent.onCommit?()
         return true
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         parent.isEditing = true
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         parent.isEditing = false
     }
@@ -118,11 +118,11 @@ extension DSCustomUITextFieldCoordinator: NSTextFieldDelegate {
         guard let textField = obj.object as? NSTextField else { return }
         parent.text = textField.stringValue
     }
-    
+
     func controlTextDidBeginEditing(_ obj: Notification) {
         parent.isEditing = true
     }
-    
+
     func controlTextDidEndEditing(_ obj: Notification) {
         parent.isEditing = false
         parent.onCommit?()

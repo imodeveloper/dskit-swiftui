@@ -14,11 +14,11 @@ public enum DSPadding: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, E
     case large
     case custom(CGFloat)
     case zero
-    
+
     public init(floatLiteral value: FloatLiteralType) {
         self = .custom(CGFloat(value))
     }
-    
+
     public init(integerLiteral value: IntegerLiteralType) {
         self = .custom(CGFloat(value))
     }

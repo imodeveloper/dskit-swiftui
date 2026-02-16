@@ -5,34 +5,30 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct FoodDetailsScreen1: View {
-    
     @Environment(\.dismiss) var dismiss
-    let ingredients = ["Food_Ingredient_1","Food_Ingredient_1","Food_Ingredient_1"]
-    
+    let ingredients = ["Food_Ingredient_1", "Food_Ingredient_1", "Food_Ingredient_1"]
+
     var body: some View {
         DSList {
             DSSection {
-                
                 DSImageView(named: "Food_menu_1", displayShape: .capsule)
                     .dsHeight(260)
                     .dsCornerRadius()
-                
+
                 DSVStack(spacing: .small) {
-                    
                     DSText("Authentic Japanese Ramen")
                         .dsTextStyle(.title1)
-                    
-                    DSHStack() {
-                        
+
+                    DSHStack {
                         DSPriceView(
                             price: .init(amount: "8", regularAmount: "10", currency: "$", discountBadge: "-2$"),
                             size: .headline
                         )
-                        
+
                         DSHStack(spacing: .small) {
                             DSImageView(
                                 systemName: "star.fill",
@@ -42,7 +38,7 @@ struct FoodDetailsScreen1: View {
                             DSText("4.5")
                                 .dsTextStyle(.smallHeadline)
                         }
-                        
+
                         DSHStack(spacing: .small) {
                             DSImageView(
                                 systemName: "clock.fill",
@@ -54,25 +50,25 @@ struct FoodDetailsScreen1: View {
                         }
                     }
                 }
-                
+
                 DSText("Lorem ipsum et dolor sit amet, and consectetur eadipiscing elit. Ametmo magna the cursus yum dolor praesenta the  pulvinar tristique the food.")
                     .dsTextStyle(.subheadline)
-                
+
                 DSVStack(spacing: .small) {
                     DSText("Main Ingredients")
                         .dsTextStyle(.smallHeadline)
-                    DSGrid(columns: 8, data: 1...5, id: \.self) { id in
+                    DSGrid(columns: 8, data: 1 ... 5, id: \.self) { id in
                         DSImageView(named: "Food_Ingredient_\(id)")
                             .dsHeight(40)
                             .dsCornerRadius()
                     }
                 }
-                
+
                 DSVStack(spacing: .small) {
                     DSText("Food Information")
                         .dsTextStyle(.smallHeadline)
-                    
-                    DSHStack() {
+
+                    DSHStack {
                         DSHStack(spacing: .small) {
                             DSImageView(
                                 named: "Fodd_Icon_Calories",
@@ -111,7 +107,6 @@ struct FoodDetailsScreen1: View {
     }
 }
 
-
 // MARK: - Testable
 
 struct Testable_FoodDetailsScreen1: View {
@@ -133,4 +128,3 @@ struct FoodDetailsScreen1_Previews: PreviewProvider {
         }
     }
 }
-

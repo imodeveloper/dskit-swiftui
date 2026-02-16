@@ -12,13 +12,13 @@ public protocol DSSpacingProtocol {
 }
 
 public struct DSSpacingSystem: DSSpacingProtocol {
-    
+
     public let spatialSystem: CGFloat
-    
+
     public init(spatialSystem: CGFloat) {
         self.spatialSystem = spatialSystem
     }
-    
+
     public func value(for space: DSSpace) -> CGFloat {
         switch space {
         case .small:

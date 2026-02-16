@@ -5,21 +5,20 @@
 //  Created by Ivan Borinschi on 21.12.2022.
 //
 
-import SwiftUI
 import DSKit
+import SwiftUI
 
 struct FoodCategoriesScreen1: View {
-    
     @StateObject var viewModel = FoodCategoriesScreen1Model()
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         DSList {
             DSSection {
                 DSGrid(
                     spacing: .regular,
                     data: viewModel.categories,
-                    id: \.self.id
+                    id: \.id
                 ) { category in
                     CategoryView(category: category)
                 }
@@ -30,11 +29,11 @@ struct FoodCategoriesScreen1: View {
 }
 
 extension FoodCategoriesScreen1 {
-    
     // MARK: - CategoryView View
+
     struct CategoryView: View {
         let category: Data
-        
+
         var body: some View {
             DSVStack {
                 DSImageView(named: category.image)
@@ -54,7 +53,7 @@ extension FoodCategoriesScreen1 {
             }
             .dsCardStyle()
         }
-        
+
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String
@@ -67,7 +66,6 @@ extension FoodCategoriesScreen1 {
 // MARK: - Model
 
 final class FoodCategoriesScreen1Model: ObservableObject {
-        
     var categories: [FoodCategoriesScreen1.CategoryView.Data] = [
         .init(
             title: "Breakfast",
@@ -145,7 +143,7 @@ struct FoodCategoriesScreen1_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {
             Testable_FoodCategoriesScreen1()
-            //.dsLayoutDebug()
+            // .dsLayoutDebug()
         }
     }
 }
