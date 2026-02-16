@@ -40,6 +40,14 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - Wrapping all rows in one container can collapse the section into a single giant list cell, causing freeze/memory spikes in consuming apps.
 - Preserve native `Section { content() }` row structure for large feeds.
 
+## DSHScroll Margin Keys
+- `dsScrollableContentMarginKey` is the inset used by `DSHScroll` for horizontal content alignment.
+- `dsContentMarginKey` represents host/container margins and should not be re-applied in `DSHScroll` outer compensation.
+- `dsScreenMarginsAlreadyApplied` signals parent ownership of screen margins (notably `DSList`/`DSSection` contexts).
+- Stable `DSHScroll` math across standalone, `ScrollView + dsScreen`, and `DSList` is:
+  - inner `.padding(.horizontal, scrollableContentMargin)`
+  - outer `.padding(.horizontal, -scrollableContentMargin)`
+
 ## DSCoverFlow Stability Notes
 - Keep `DSCoverFlow` on the UIKit `UIScrollView` bridge path for runtime and previews.
 - Avoid ID-only pagination state rewrites that change `currentPage` binding semantics; this previously triggered SwiftUI preview crashes in `FoodHomeScreen1`.

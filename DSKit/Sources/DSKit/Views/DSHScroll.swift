@@ -28,7 +28,6 @@ public struct DSHScroll<Data, ID, Content>: View where Data: RandomAccessCollect
     
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.dsScrollableContentMarginKey) var scrollableContentMargin: CGFloat
-    @Environment(\.dsContentMarginKey) var contentMargin: CGFloat
     
     let spacing: DSSpace
     
@@ -58,7 +57,6 @@ public struct DSHScroll<Data, ID, Content>: View where Data: RandomAccessCollect
             .padding(.horizontal, scrollableContentMargin)
         }
         .padding(.horizontal, -scrollableContentMargin)
-        .padding(.horizontal, contentMargin)
     }
 }
 
@@ -73,17 +71,35 @@ struct Testable_DSHScroll: View {
     ]
     var body: some View {
         DSHScroll(spacing: .medium, data: Array(colors.enumerated()), id: \.offset) { item in
-            item.element.dsSize(60)
+            item.element.dsSize(90)
         }
     }
 }
 
 struct DSHScroll_Previews: PreviewProvider {
     static var previews: some View {
-        DSPreviewForEachAppearance {
-            DSPreview {
+        DSPreview {
+            Testable_DSHScroll()
+        }.previewDisplayName("Standalone")
+    }
+}
+
+struct DSHScroll_ScrollView_DSScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        ScrollView {
+            Testable_DSHScroll()
+        }
+        .dsScreen()
+        .previewDisplayName("ScrollView + dsScreen")
+    }
+}
+
+struct DSHScroll_DSList_Previews: PreviewProvider {
+    static var previews: some View {
+        DSList {
+            DSSection {
                 Testable_DSHScroll()
             }
-        }
+        }.previewDisplayName("DSList")
     }
 }

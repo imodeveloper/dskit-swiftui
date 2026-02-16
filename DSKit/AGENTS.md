@@ -20,6 +20,11 @@
 - For large feeds, prefer exposing child rows directly via `Section { content() }`.
 - `DSCoverFlow` must remain stable on the `UIScrollView` bridge; avoid pagination state rewrites that have caused preview crashes.
 - `DSCoverFlow.height` represents viewport height; if pagination is shown, add indicator + spacing into final container height.
+- `DSHScroll` inset math:
+  - `dsScrollableContentMarginKey` is the content inset `DSHScroll` uses for first/last item alignment.
+  - `dsContentMarginKey` is host container margin context; avoid adding it again in `DSHScroll` compensation.
+  - `dsScreenMarginsAlreadyApplied` indicates a parent (for example `DSList`/`DSSection`) already owns screen margins.
+  - Current stable rule in `DSHScroll`: keep inner `.padding(.horizontal, scrollableContentMargin)` and outer `.padding(.horizontal, -scrollableContentMargin)`.
 
 ## Run / Test in Isolation
 - Run snapshot tests via `DSKitExplorer` scheme (includes DSKitTests in the test plan).
