@@ -25,6 +25,8 @@ struct Order4: View {
             DSButton(title: "Continue Shopping", rightSystemName: "bag.fill", action: {
                 dismiss()
             })
+            
+            .dsPadding(.bottom)
         }
         .overlay(alignment: .center, content: {
             DSVStack(alignment: .center) {

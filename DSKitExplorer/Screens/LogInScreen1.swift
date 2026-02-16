@@ -51,6 +51,8 @@ public struct LogInScreen1: View {
                 pushContentToSides: true,
                 style: .light
             ) { self.dismiss() }
+            
+            .dsPadding(.bottom)
         }
         .hideKeyboardWhenTappedOutside()
         .dsScreen()

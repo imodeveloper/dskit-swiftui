@@ -33,6 +33,7 @@ public struct DSBottomContainer<Content: View>: View {
         DSVStack {
             content()
         }
+        .dsPadding(.bottom)
         .topShadow(padding: .medium)
         .dsBackground(.primary)
         .dsContentMargins()

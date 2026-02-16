@@ -41,6 +41,7 @@ struct LogInScreen2: View {
             ) {
                 self.dismiss()
             }
+            .dsPadding(.bottom)
         }
         .dsScreen()
     }

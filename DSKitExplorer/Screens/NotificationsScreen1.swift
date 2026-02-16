@@ -42,6 +42,8 @@ struct NotificationsScreen1: View {
             Spacer()
             
             DSButton(title: "Dismiss") { }
+            
+            .dsPadding(.bottom)
         }.dsScreen()
     }
 }

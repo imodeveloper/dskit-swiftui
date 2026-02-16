@@ -54,6 +54,7 @@ struct SignUpScreen2: View {
             DSButton(title: "I have an account", style: .borderedLight, action: {
                 self.dismiss()
             })
+            .dsPadding(.bottom)
         }
         .navigationTitle("Sign Up")
         .hideKeyboardWhenTappedOutside()

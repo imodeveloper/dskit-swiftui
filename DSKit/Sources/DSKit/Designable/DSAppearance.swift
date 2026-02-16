@@ -53,14 +53,25 @@ public extension DSAppearance {
     /// Override the system appearance settings (iOS only)
     func overrideTheSystemAppearance(opaqueNavigationBar: Bool, opaqueTabBar: Bool) {
         #if canImport(UIKit)
+        let useNativeLiquidGlassBehavior: Bool
+        if #available(iOS 26.0, *) {
+            useNativeLiquidGlassBehavior = true
+        } else {
+            useNativeLiquidGlassBehavior = false
+        }
+        
         // Configure Navigation Bar Appearance
         let navigationBarAppearance = UINavigationBarAppearance()
-        if opaqueNavigationBar {
-            navigationBarAppearance.configureWithOpaqueBackground()
-        } else {
+        if useNativeLiquidGlassBehavior {
             navigationBarAppearance.configureWithDefaultBackground()
+        } else {
+            if opaqueNavigationBar {
+                navigationBarAppearance.configureWithOpaqueBackground()
+            } else {
+                navigationBarAppearance.configureWithDefaultBackground()
+            }
+            navigationBarAppearance.backgroundColor = self.navigationBar.bar
         }
-        navigationBarAppearance.backgroundColor = self.navigationBar.bar
         
         navigationBarAppearance.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: self.navigationBar.text,
@@ -78,6 +89,8 @@ public extension DSAppearance {
         ]
         
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         
         let itemAppearance = UITabBarItemAppearance()
         itemAppearance.normal.iconColor = self.tabBar.unselectedItemTint
@@ -86,12 +99,16 @@ public extension DSAppearance {
         itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.tabBar.itemTint]
         
         let tabBarAppearance = UITabBarAppearance()
-        if opaqueTabBar {
-            tabBarAppearance.configureWithOpaqueBackground()
-        } else {
+        if useNativeLiquidGlassBehavior {
             tabBarAppearance.configureWithDefaultBackground()
+        } else {
+            if opaqueTabBar {
+                tabBarAppearance.configureWithOpaqueBackground()
+            } else {
+                tabBarAppearance.configureWithDefaultBackground()
+            }
+            tabBarAppearance.backgroundColor = self.tabBar.barTint
         }
-        tabBarAppearance.backgroundColor = self.tabBar.barTint
         tabBarAppearance.stackedLayoutAppearance = itemAppearance
         
         UITabBar.appearance().standardAppearance = tabBarAppearance
