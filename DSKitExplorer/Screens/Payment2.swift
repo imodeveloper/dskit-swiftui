@@ -14,13 +14,14 @@ struct Payment2: View {
     let viewModel = Payment2Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.creditCards) { card in
                     CreditCard(card: card)
                 }
-            }
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "Add new credit card",
@@ -28,7 +29,7 @@ struct Payment2: View {
                     action: { dismiss() }
                 )
             }
-        }.dsScreen()
+        }
     }
 }
 

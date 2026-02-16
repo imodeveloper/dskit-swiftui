@@ -27,8 +27,9 @@ struct AboutUsScreen2: View {
     let infoImageGallery = [p1Image, p2Image, p3Image]
     
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
                 
                 Picker("Section", selection: $selectedTab) {
                     Text("Info").tag(0)
@@ -46,8 +47,8 @@ struct AboutUsScreen2: View {
                 default:
                     infoView
                 }
-            }
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom, content: {
             if selectedTab == 1 {
                 DSBottomContainer {
@@ -57,7 +58,6 @@ struct AboutUsScreen2: View {
             }
             
         })
-        .dsScreen()
     }
     
     var infoView: some View {

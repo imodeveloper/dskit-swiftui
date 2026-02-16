@@ -14,8 +14,9 @@ struct HomeScreen1: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView() {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ProfileView(title: "Your Shop", subtitle: "The best experience", profileUrl: profile)
                 DSCoverFlow(height: 220, data: viewModel.topProducts, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl, style: .capsule).onTap { self.dismiss() }
@@ -26,8 +27,8 @@ struct HomeScreen1: View {
                         ProductView(product: arrival).onTap { dismiss() }
                     }
                 }
-            }
-        }.dsScreen()
+        
+            }}
     }
 }
 

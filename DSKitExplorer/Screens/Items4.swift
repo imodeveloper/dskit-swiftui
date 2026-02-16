@@ -14,8 +14,9 @@ struct Items4: View {
     let viewModel = Items4Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
                 DSHScroll(data: viewModel.filters, id: \.self) { title in
                     DSText(title)
                         .dsTextStyle(.headline, 12)
@@ -27,9 +28,8 @@ struct Items4: View {
                 DSGrid(data: viewModel.products, id: \.id) { product in
                     ProductView(product: product)
                 }
-            }
-        }
-        .dsScreen()
+        
+            }}
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "arrow.up.arrow.down.circle.fill")

@@ -14,8 +14,9 @@ struct Filters2: View {
     @ObservedObject var viewModel = Filters2Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 DSRadioPickerView(
                     data: viewModel.sortByOptions,
                     id: \.self,
@@ -50,8 +51,8 @@ struct Filters2: View {
                         OptionView(option: filter)
                     }
                 }.dsSectionStyle(title: "Options")
-            }
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "View (235) Items",
@@ -62,7 +63,7 @@ struct Filters2: View {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSButton(title: "Reset", style: .clear, action: {})
             }
-        }.dsScreen()
+        }
     }
 }
 

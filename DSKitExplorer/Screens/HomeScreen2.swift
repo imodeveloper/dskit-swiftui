@@ -14,8 +14,9 @@ struct HomeScreen2: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView() {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ProfileView(
                     title: "Shop",
                     subtitle: "Over 45k items available for you",
@@ -40,8 +41,8 @@ struct HomeScreen2: View {
                             .onTap { self.dismiss() }
                     }
                 }
-            }
-        }.dsScreen()
+        
+            }}
     }
 }
 

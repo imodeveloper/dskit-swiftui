@@ -14,14 +14,12 @@ struct Filters3: View {
     @ObservedObject var viewModel = Filters3Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
-                DSVStack(spacing: .small) {
-                    OptionView(title: "Brand", option: "Adidas, Puma, HRX")
-                    OptionToggleView(title: "Free shipping")
-                    OptionView(title: "Shipping to", option: "London UK")
-                    OptionRangeView(title: "Range")
-                }
+        DSList {
+            DSSection {
+                OptionView(title: "Brand", option: "Adidas, Puma, HRX")
+                OptionToggleView(title: "Free shipping")
+                OptionView(title: "Shipping to", option: "London UK")
+                OptionRangeView(title: "Range")
                 
                 DSPickerView(
                     data: viewModel.sizes,
@@ -43,8 +41,8 @@ struct Filters3: View {
                         .dsSize(dimension: .actionElement)
                 }.dsSectionStyle(title: "Color")
             }
-            
-        }.safeAreaInset(edge: .bottom) {
+        }
+        .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "View (235) Items",
@@ -55,7 +53,7 @@ struct Filters3: View {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSButton(title: "Reset", style: .clear, action: {})
             }
-        }.dsScreen()
+        }
     }
 }
 

@@ -15,6 +15,7 @@
 ## Conventions / Pitfalls
 - Keep screens deterministic for snapshot tests.
 - Add new screens to `ScreenKey` and `ScreenView` to expose them in the catalog.
+- Use `FoodHomeScreen1` as a preview canary when changing `DSCoverFlow`; it has reproduced coverflow/preview crash regressions.
 
 ## Run / Test in Isolation
 - Open `DSKitExplorer.xcodeproj` and run `DSKitExplorer` scheme.

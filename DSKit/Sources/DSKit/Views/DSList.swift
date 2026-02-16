@@ -71,7 +71,9 @@ public struct DSList<Content: View>: View {
             .background(Color(viewStyle.colors(from: appearance).background))
             .listStyle(.plain)
             .listRowSpacing(0)
-            .dsContentMargins()
+            .environment(\.dsContentMarginKey, appearance.screenMargins)
+            .environment(\.dsScrollableContentMarginKey, appearance.screenMargins)
+            .environment(\.dsScreenMarginsAlreadyApplied, true)
             .environment(\.dsSectionHeaderSpacingKey, appearance.spacing.value(for: sectionHeaderSpacing))
         )
     }
@@ -208,7 +210,7 @@ struct Testable_DSList: View {
 struct DSList_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {
-            Testable_DSList()
+            Testable_DSList().dsLayoutDebug()
         }
     }
 }

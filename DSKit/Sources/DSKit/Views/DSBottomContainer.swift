@@ -30,11 +30,12 @@ public struct DSBottomContainer<Content: View>: View {
     }
     
     public var body: some View {
-        DSVStack{
+        DSVStack {
             content()
         }
         .topShadow(padding: .medium)
         .dsBackground(.primary)
+        .dsContentMargins()
     }
 }
 

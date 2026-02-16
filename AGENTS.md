@@ -40,6 +40,11 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - Wrapping all rows in one container can collapse the section into a single giant list cell, causing freeze/memory spikes in consuming apps.
 - Preserve native `Section { content() }` row structure for large feeds.
 
+## DSCoverFlow Stability Notes
+- Keep `DSCoverFlow` on the UIKit `UIScrollView` bridge path for runtime and previews.
+- Avoid ID-only pagination state rewrites that change `currentPage` binding semantics; this previously triggered SwiftUI preview crashes in `FoodHomeScreen1`.
+- `DSCoverFlow.height` is the carousel viewport height; when `showPaginationView` is enabled, total view height must also include pagination dot height and its top padding.
+
 ## Design tokens reference
 - `DSAppearance` is the source of theme, spacing, and typography tokens.
 - Spacing system: `DSSpacingSystem` and `DSPaddingSystem` expose `.small/.regular/.medium` scales from `appearance`.
@@ -49,3 +54,8 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 ## Quick command
 - Build DSKitExplorer:
   - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' build`
+
+## Quick workflow
+- Regenerate `Content/Views.md` after view or snapshot changes:
+  - `cd /Users/ivan.borinschi/Work/dskit-swiftui/Scripts`
+  - `./documentation_generator.sh`

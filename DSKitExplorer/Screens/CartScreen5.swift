@@ -14,13 +14,14 @@ struct CartScreen5: View {
     let viewModel = CartScreen5Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.products) { product in
                     ProductView(product: product)
                 }
-            }
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSText("You may also like").dsTextStyle(.smallSubheadline)
@@ -38,7 +39,7 @@ struct CartScreen5: View {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "trash.fill").onTap { dismiss() }
             }
-        }.dsScreen()
+        }
     }
 }
 

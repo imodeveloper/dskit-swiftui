@@ -14,8 +14,9 @@ struct ProfileScreen1: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView {
-            DSVStack() {
+        DSList {
+            DSSection {
+            
                 
                 ProfileView(
                     title: "Jane Doe",
@@ -34,9 +35,9 @@ struct ProfileScreen1: View {
                         }
                     }
                 }
-            }
             
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "Log out",
@@ -45,7 +46,7 @@ struct ProfileScreen1: View {
                     self.dismiss()
                 }
             }
-        }.dsScreen()
+        }
     }
 }
 

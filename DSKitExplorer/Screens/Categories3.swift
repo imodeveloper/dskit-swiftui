@@ -14,13 +14,14 @@ struct Categories3: View {
     let viewModel = Categories3Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.categories) { category in
                     CategoryView(category: category)
                 }
-            }
-        }.dsScreen()
+        
+            }}
     }
 }
 

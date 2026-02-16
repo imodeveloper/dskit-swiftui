@@ -14,8 +14,9 @@ struct FoodDetailsScreen1: View {
     let ingredients = ["Food_Ingredient_1","Food_Ingredient_1","Food_Ingredient_1"]
     
     var body: some View {
-        ScrollView() {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
                 DSImageView(named: "Food_menu_1", displayShape: .capsule)
                     .dsHeight(260)
                     .dsCornerRadius()
@@ -98,15 +99,15 @@ struct FoodDetailsScreen1: View {
                         }.dsCardStyle()
                     }
                 }
-            }.dsPadding(.bottom)
-        }
+            .dsPadding(.bottom)
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Add to cart") { dismiss() }
                 DSTermsAndConditions(message: "By continuing you agree to our")
             }
         }
-        .dsScreen()
     }
 }
 

@@ -14,8 +14,9 @@ struct Shipping1: View {
     @ObservedObject var viewModel = Shipping1Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 DSRadioPickerView(data: viewModel.deliveryAddresses, id: \.id, selected: $viewModel.selected) { address, _ in
                     DeliveryAddressView(address: address)
                 }
@@ -24,9 +25,9 @@ struct Shipping1: View {
                     rightSystemName: "plus.circle",
                     style: .light, action: { dismiss() }
                 )
-            }
             
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
                     DSText("Next Step:").dsTextStyle(.smallHeadline)
@@ -40,7 +41,7 @@ struct Shipping1: View {
                     action: { }
                 )
             }
-        }.dsScreen()
+        }
     }
 }
 

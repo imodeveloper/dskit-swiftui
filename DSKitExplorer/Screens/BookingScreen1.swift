@@ -12,13 +12,14 @@ import MapKit
 struct BookingScreen1: View {
     let viewModel = BookingScreen1Model()
     var body: some View {
-        ScrollView {
-            DSVStack() {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.addresses, id: \.self.id) { address in
                     Location(address: address)
                 }
-            }
-        }.dsScreen()
+        
+            }}
     }
 }
 

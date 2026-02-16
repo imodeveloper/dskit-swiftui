@@ -13,15 +13,16 @@ struct BookingScreen4: View {
     @Environment(\.dismiss) var dismiss
     let viewModel = BookingScreen4Model()
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .regular) {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.barbers) { barber in
                     Barber(barber: barber)
                         .dsCardStyle()
                         .onTap { dismiss() }
                 }
-            }
-        }.dsScreen()
+        
+            }}
     }
 }
 

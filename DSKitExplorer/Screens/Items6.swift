@@ -14,12 +14,13 @@ struct Items6: View {
     let viewModel = Items6Model()
     
     var body: some View {
-        ScrollView {
+        DSList {
+            DSSection {
             DSGrid(data: viewModel.products, id: \.id) { product in
                 ProductView(product: product).onTap { }
             }
-        }
-        .dsScreen()
+        
+            }}
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "arrow.up.arrow.down.circle.fill")

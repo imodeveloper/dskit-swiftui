@@ -14,8 +14,9 @@ struct ItemDetails2: View {
     @ObservedObject var viewModel = ItemDetails2Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
@@ -51,8 +52,8 @@ struct ItemDetails2: View {
                 }.dsSectionStyle(title: "Model")
 
                 DSText(viewModel.description).dsTextStyle(.callout)
-            }
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Add to cart", rightSystemName: "cart.fill") {
@@ -70,7 +71,7 @@ struct ItemDetails2: View {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "heart").onTap { dismiss() }
             }
-        }.dsScreen()
+        }
     }
 }
 

@@ -63,6 +63,12 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
     }
     
     public var body: some View {
+        let paginationTopPadding = showPaginationView ? appearance.padding.value(for: .medium) : 0
+        let paginationHeight: CGFloat = showPaginationView ? 7 : 0
+        let totalHeight = DSDimension.custom(
+            height.value(appearance: appearance) + paginationTopPadding + paginationHeight
+        )
+
         Group {
             if data.isEmpty {
                 Color.clear
@@ -88,7 +94,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
                 }
             }
         }
-        .dsHeight(height)
+        .dsHeight(totalHeight)
     }
     
     private func defaultPaginationIndicator() -> some View {
@@ -319,8 +325,6 @@ struct Testable_DSCoverFlow: View {
 
 struct DSCoverFlow_Previews: PreviewProvider {
     static var previews: some View {
-        DSPreviewForEachAppearance {
-            Testable_DSCoverFlow()
-        }.dsScreen()
+        Testable_DSCoverFlow().dsScreen()
     }
 }

@@ -14,13 +14,15 @@ struct FoodNearbyRestaurantScreen1: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView() {
-            DSVStack(spacing: .regular) {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.popularProducts) { product in
                     PopularProductView(product: product)
                 }
-            }.dsPadding(.bottom)
-        }.dsScreen()
+            .dsPadding(.bottom)
+        
+            }}
     }
 }
 

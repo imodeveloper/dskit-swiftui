@@ -14,8 +14,9 @@ struct ProfileScreen2: View {
     @Environment(\.appearance) var appearance: DSAppearance
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ProfileView(title: "Jane Doe", subtitle: "12 April 200", profileImageUrl: personOnOrangeBg)
                 DSVStack() {
                     DSVStack(spacing: .small) {
@@ -31,10 +32,10 @@ struct ProfileScreen2: View {
                         viewModel.submit()
                     }
                 }
-            }
-        }.onAppear {
+        
+            }}.onAppear {
             viewModel.onApear()
-        }.dsScreen()
+        }
     }
 }
 

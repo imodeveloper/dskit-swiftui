@@ -20,14 +20,14 @@ struct NewsScreen1: View {
     @State var style: Style = .regular
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.articles) { article in
                     ArticleView(article: article, style: $style)
                 }
-            }
-        }
-        .dsScreen()
+        
+            }}
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 let icon = self.style == .compact ? "list.dash" : "list.bullet.below.rectangle"

@@ -14,16 +14,17 @@ struct Shipping2: View {
     @ObservedObject var viewModel = Shipping2Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 DSRadioPickerView(data: viewModel.shippingMethods, id: \.id, selected: $viewModel.selected) { method, _ in
                     ShippingMethodView(method: method)
                 }
                 section(with: "Order Info") {
                     OrderInfo(orderTotals: viewModel.orderTotals)
                 }
-            }
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
                     DSText("Next Step:").dsTextStyle(.smallHeadline)
@@ -38,7 +39,7 @@ struct Shipping2: View {
                     action: { }
                 )
             }
-        }.dsScreen()
+        }
     }
     
     func section<Content: View>(with title: String, @ViewBuilder content: @escaping () -> Content) -> some View {

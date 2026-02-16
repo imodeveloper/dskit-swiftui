@@ -14,8 +14,9 @@ struct ItemDetails4: View {
     @ObservedObject var viewModel = ItemDetails4Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
 
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
@@ -65,8 +66,8 @@ struct ItemDetails4: View {
                     ActionView(title: "Size Guides")
                     ActionView(title: "Return Policy")
                 }
-            }
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
@@ -85,7 +86,7 @@ struct ItemDetails4: View {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "heart").onTap { dismiss() }
             }
-        }.dsScreen()
+        }
     }
 }
 

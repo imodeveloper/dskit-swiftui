@@ -14,8 +14,9 @@ struct Items5: View {
     let viewModel = Items5Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
                 DSImageView(url: p0Image, size: .size(width: .none, height: 180))
                     .dsCornerRadius()
                     .overlay(alignment: .center) {
@@ -36,9 +37,8 @@ struct Items5: View {
                 DSGrid(data: viewModel.products, id: \.id) { product in
                     ProductView(product: product)
                 }
-            }
-        }
-        .dsScreen()
+        
+            }}
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "arrow.up.arrow.down.circle.fill")

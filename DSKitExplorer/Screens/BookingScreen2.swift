@@ -13,8 +13,9 @@ struct BookingScreen2: View {
     @Environment(\.dismiss) var dismiss
     let viewModel = BookingScreen2Model()
     var body: some View {
-        ScrollView {
-            DSVStack() {
+        DSList {
+            DSSection {
+            
                 Location(address: viewModel.address)
                     .onTap { dismiss() }
                 Option(icon: "person.fill", title: "Barber", subtitle: "Select specialist")
@@ -23,15 +24,14 @@ struct BookingScreen2: View {
                     .onTap { dismiss() }
                 Option(icon: "calendar", title: "Date & Time", subtitle: "Select date and time")
                     .onTap { dismiss() }
-            }
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Book Now", rightSystemName: "bookmark.fill") {}
                 DSTermsAndConditions(message: "By pressing 'Book Now' you agree with our")
             }
         }
-        .dsScreen()
     }
 }
 

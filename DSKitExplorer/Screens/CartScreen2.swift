@@ -14,13 +14,14 @@ struct CartScreen2: View {
     let viewModel = CartScreen2Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack() {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.products) { product in
                     ProductView(product: product)
                 }
-            }
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 TotalView(itemsCount: "2", price: DSPrice(amount: "349.00", currency: "$"))
                 DSButton(title: "Continue") {
@@ -29,7 +30,6 @@ struct CartScreen2: View {
                 PoweredByDSKitView()
             }
         }
-        .dsScreen()
         .toolbar {
             ToolbarItem(placement: .platformBasedTrailing) {
                 DSToolbarSFSymbolButton(name: "square.and.arrow.up.fill").onTap { dismiss() }

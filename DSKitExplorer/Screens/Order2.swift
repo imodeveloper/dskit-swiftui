@@ -15,8 +15,9 @@ struct Order2: View {
     let viewModel = Order2Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 
                 DSGrid(spacing: .regular, data: viewModel.checkoutInfo, id: \.id) { card in
                     CardView(card: card).onTap {}
@@ -36,9 +37,9 @@ struct Order2: View {
                 
                 OrderInfo(orderTotals: viewModel.orderTotals)
                     .dsSectionStyle(title: "Order Info")
-            }
             
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
                     title: "Confirm Order",
@@ -48,7 +49,7 @@ struct Order2: View {
                 }
                 DSTermsAndConditions(message: "By pressing confirm order, you agree to our")
             }
-        }.dsScreen()
+        }
     }
     
     func section<Content: View>(with title: String, @ViewBuilder content: @escaping () -> Content) -> some View {

@@ -16,14 +16,13 @@ struct AboutUsScreen1: View {
     let imageGallery = [p1Image, p2Image, p3Image]
     
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .medium) {
-                DSVStack {
+        DSList {
+            DSSection(spacing: .medium) {
+                
                     DSText("Our Story")
                         .dsTextStyle(.title2)
                     DSText("Here you will feel the attitude, here you will receive quality, here you will see the atmosphere of an authentic store")
                         .dsTextStyle(.body)
-                }
                 
                 DSCoverFlow(height: 250, data: imageGallery, id: \.self) { image in
                     DSImageView(url: image)
@@ -68,7 +67,6 @@ struct AboutUsScreen1: View {
                 }.dsCardStyle()
             }
         }
-        .dsScreen()
     }
 }
 

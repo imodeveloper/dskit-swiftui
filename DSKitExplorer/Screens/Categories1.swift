@@ -14,14 +14,15 @@ struct Categories1: View {
     let viewModel = Categories1Model()
         
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .small) {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.categories) { category in
                     CategoryView(category: category)
                         .onTap { }
                 }
-            }
-        }.dsScreen()
+        
+            }}
     }
 }
 

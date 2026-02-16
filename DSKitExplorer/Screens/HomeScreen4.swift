@@ -14,8 +14,9 @@ struct HomeScreen4: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView() {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ProfileView(
                     title: "Shoes Shop",
                     youHave: "You have",
@@ -41,8 +42,8 @@ struct HomeScreen4: View {
 //                DSVStack {
 //                    
 //                }.dsPadding(.top, .small)
-            }
-        }.dsScreen()
+        
+            }}
     }
 }
 

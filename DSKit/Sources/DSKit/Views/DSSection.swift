@@ -15,7 +15,7 @@ import SwiftUI
 #### Initialization:
 Initializes a `DSSection` with optional spacing and dynamic content.
 - Parameters:
-- `spacing`: Reserved for section spacing customization. Defaults to `.regular`.
+- `spacing`: Additional bottom spacing for rows in this section. Defaults to `.zero`.
 - `content`: A `@ViewBuilder` closure that generates the section content.
 
 #### Usage:
@@ -46,9 +46,17 @@ public struct DSSection<Content: View>: View {
         }
         .background(Color(viewStyle.colors(from: appearance).background))
         .listRowSeparator(.hidden)
-        .listRowInsets(EdgeInsets(top: 0, leading: contentMargin, bottom: 0, trailing: contentMargin))
+        .listRowInsets(
+            EdgeInsets(
+                top: 0,
+                leading: contentMargin,
+                bottom: appearance.spacing.value(for: spacing),
+                trailing: contentMargin
+            )
+        )
         .listSectionSeparator(.hidden)
         .listRowBackground(Color(viewStyle.colors(from: appearance).background))
+        .environment(\.dsScreenMarginsAlreadyApplied, true)
     }
 }
 

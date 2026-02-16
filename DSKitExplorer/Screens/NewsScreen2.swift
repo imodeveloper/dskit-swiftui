@@ -14,14 +14,14 @@ struct NewsScreen2: View {
     let viewModel = NewsScreen2Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 ForEach(viewModel.articles) { article in
                     ArticleView(article: article)
                 }
-            }
-        }
-        .dsScreen()
+        
+            }}
     }
 }
 

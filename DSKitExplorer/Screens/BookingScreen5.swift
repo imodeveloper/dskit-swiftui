@@ -13,7 +13,8 @@ struct BookingScreen5: View {
     @Environment(\.dismiss) var dismiss
     let viewModel = BookingScreen5Model()
     var body: some View {
-        ScrollView {
+        DSList {
+            DSSection {
             Barber(barber: viewModel.barber)
                 .onTap { dismiss() }
             
@@ -25,13 +26,13 @@ struct BookingScreen5: View {
                 }
                 Spacer()
             }
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Leave Feedback", rightSystemName: "message.fill") {}
             }
         }
-        .dsScreen()
     }
 }
 

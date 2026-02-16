@@ -72,7 +72,10 @@ public struct DSGrid<Data, ID, Content>: View where Data: RandomAccessCollection
                 }
             }
             .dsResetContentMargins()
-        }.dsContentMargins()
+        }
+        // Helps List/Section rows compute the full LazyVGrid height correctly.
+        .fixedSize(horizontal: false, vertical: true)
+        .dsContentMargins()
     }
 }
 

@@ -13,8 +13,9 @@ struct BookingScreen3: View {
     @Environment(\.dismiss) var dismiss
     let viewModel = BookingScreen3Model()
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .zero) {
+        DSList {
+            DSSection {
+            
                 Location(address: viewModel.address)
                     .onTap { dismiss() }
                 Barber(barber: viewModel.barber)
@@ -23,15 +24,14 @@ struct BookingScreen3: View {
                     .onTap { dismiss() }
                 DateAndTime(dateAndTime: "Mar 24, 2021 at 10:40 PM")
                     .onTap { dismiss() }
-            }
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(title: "Book Now", rightSystemName: "bookmark.fill") {}
                 DSTermsAndConditions(message: "By pressing 'Book Now' you agree with our")
             }
         }
-        .dsScreen()
     }
 }
 

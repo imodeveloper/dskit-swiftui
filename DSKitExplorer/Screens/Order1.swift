@@ -14,19 +14,16 @@ struct Order1: View {
     @ObservedObject var viewModel = Order1Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
-                
-                DSVStack(spacing: .regular) {
-                    DSGroupedList(data: viewModel.products, id: \.id) { product in
-                        ProductView(product: product)
-                    }
-                    DSButton(
-                        title: "Search for more products",
-                        rightSystemName: "magnifyingglass",
-                        style: .light
-                    ) {}
+        DSList {
+            DSSection {
+                DSGroupedList(data: viewModel.products, id: \.id) { product in
+                    ProductView(product: product)
                 }
+                DSButton(
+                    title: "Search for more products",
+                    rightSystemName: "magnifyingglass",
+                    style: .light
+                ) {}
                 
                 DSVStack {
                     DeliveryAddress(address: viewModel.address)
@@ -53,7 +50,7 @@ struct Order1: View {
                 }
                 DSTermsAndConditions(message: "By pressing confirm order, you agree to our")
             }
-        }.dsScreen()
+        }
     }
 }
 

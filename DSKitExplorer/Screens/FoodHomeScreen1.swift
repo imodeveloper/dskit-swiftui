@@ -10,23 +10,19 @@ import DSKit
 
 struct FoodHomeScreen1: View {
     
-    @StateObject var viewModel = FoodHomeScreen1Model()
+    let viewModel = FoodHomeScreen1Model()
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView() {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection(spacing: .regular) {
                 LocationView(title: "2464 Royal Ln. Mesa")
-                    .dsPadding(.top)
                 SearchView()
-                DSCoverFlow(
-                    height: 150,
-                    data: viewModel.banners,
-                    id: \.self.id
-                ) { banner in
+                DSCoverFlow(height: 150, data: viewModel.banners, id: \.self.id) { banner in
                     BannerView(banner: banner)
                 }
-                
+            }
+            DSSection(spacing: .regular) {
                 DSVStack(spacing: .regular) {
                     DSSectionHeaderView(
                         title: "Popular Products",
@@ -41,7 +37,8 @@ struct FoodHomeScreen1: View {
                         PopularProductView(product: product)
                     }
                 }
-                
+            }
+            DSSection(spacing: .custom(15)) {
                 DSVStack(spacing: .regular) {
                     DSSectionHeaderView(
                         title: "All Categories",
@@ -56,10 +53,9 @@ struct FoodHomeScreen1: View {
                         CategoryView(category: category)
                     }
                 }
-                
-                
-            }.dsPadding(.bottom)
-        }.dsScreen()
+                .dsPadding(.bottom)
+            }
+        }
     }
 }
 

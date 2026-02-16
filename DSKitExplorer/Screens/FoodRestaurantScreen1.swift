@@ -14,8 +14,9 @@ struct FoodRestaurantScreen1: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView() {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
                 
                 BannerView()
                 
@@ -33,8 +34,9 @@ struct FoodRestaurantScreen1: View {
                     }
                 }
                 
-            }.dsPadding(.bottom)
-        }.dsScreen()
+            .dsPadding(.bottom)
+        
+            }}
     }
 }
 

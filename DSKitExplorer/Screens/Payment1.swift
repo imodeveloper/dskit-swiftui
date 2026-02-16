@@ -14,8 +14,9 @@ struct Payment1: View {
     @ObservedObject var viewModel = Payment1Model()
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 DSRadioPickerView(
                     data: viewModel.paymentMethods,
                     id: \.id,
@@ -30,8 +31,8 @@ struct Payment1: View {
                     style: .light,
                     action: { dismiss() }
                 )
-            }
-        }.safeAreaInset(edge: .bottom) {
+        
+            }}.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
                     DSText("Next Step:").dsTextStyle(.smallHeadline)
@@ -46,7 +47,7 @@ struct Payment1: View {
                     action: { }
                 )
             }
-        }.dsScreen()
+        }
     }
 }
 

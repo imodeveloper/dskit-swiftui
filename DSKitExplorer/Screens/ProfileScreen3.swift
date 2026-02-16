@@ -14,8 +14,9 @@ struct ProfileScreen3: View {
     @Environment(\.appearance) var appearance: DSAppearance
     
     var body: some View {
-        ScrollView {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
+            
                 DSHStack(spacing: .medium) {
                     DSImageView(
                         systemName: "exclamationmark.shield.fill",
@@ -40,10 +41,9 @@ struct ProfileScreen3: View {
                 DSButton(title: "Update") {
                     viewModel.submit()
                 }
-            }
-        }
+        
+            }}
         .navigationTitle("Password")
-        .dsScreen()
     }
 }
 

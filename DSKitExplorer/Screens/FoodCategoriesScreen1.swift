@@ -14,18 +14,18 @@ struct FoodCategoriesScreen1: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView() {
-            DSVStack(spacing: .medium) {
+        DSList {
+            DSSection {
                 DSGrid(
-                    viewHeight: 200,
                     spacing: .regular,
                     data: viewModel.categories,
                     id: \.self.id
                 ) { category in
                     CategoryView(category: category)
                 }
-            }.dsPadding(.bottom)
-        }.dsScreen()
+                .dsPadding(.bottom)
+            }
+        }
     }
 }
 
@@ -146,7 +146,7 @@ struct FoodCategoriesScreen1_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {
             Testable_FoodCategoriesScreen1()
+            //.dsLayoutDebug()
         }
     }
 }
-

@@ -14,8 +14,9 @@ struct SignUpScreen1: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView {
-            DSVStack {
+        DSList {
+            DSSection {
+            
                 Group {
                     DSButton(
                         title: "Login with Facebook",
@@ -41,9 +42,9 @@ struct SignUpScreen1: View {
                 }
                 
                 DSTermsAndConditions(message: "By signing up, you agree to our")
-            }
             .hideKeyboardWhenTappedOutside()
-        }
+        
+            }}
         .safeAreaInset(edge: .bottom) {
             Group {
                 Spacer()
@@ -51,7 +52,6 @@ struct SignUpScreen1: View {
             }.hideWhenKeyboardIsDisplayed()
         }
         .navigationTitle("Sign Up")
-        .dsScreen()
     }
 }
 

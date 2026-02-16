@@ -14,11 +14,13 @@ struct Categories2: View {
     let viewModel = Categories2Model()
     
     var body: some View {
-        ScrollView {
+        DSList {
+            DSSection {
             DSGrid(data: viewModel.categories, id: \.id) { category in
                 CategoryView(category: category)
             }
-        }.dsScreen()
+        
+            }}
     }
 }
 

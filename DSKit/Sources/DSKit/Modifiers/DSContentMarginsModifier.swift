@@ -10,12 +10,15 @@ import SwiftUI
 public struct DSContentMarginModifier: ViewModifier {
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.dsContentMarginKey) var contentMargin: CGFloat
+    @Environment(\.dsScreenMarginsAlreadyApplied) var dsScreenMarginsAlreadyApplied: Bool
     let customMargins: CGFloat?
     public func body(content: Content) -> some View {
+        let shouldApplyHorizontalPadding = customMargins != nil || !dsScreenMarginsAlreadyApplied
+
         content
             .environment(\.dsContentMarginKey, customMargins ?? appearance.screenMargins)
             .environment(\.dsScrollableContentMarginKey, customMargins ?? appearance.screenMargins)
-            .padding(.horizontal, contentMargin)
+            .padding(.horizontal, shouldApplyHorizontalPadding ? contentMargin : .zero)
     }
 }
 
@@ -27,6 +30,17 @@ public extension EnvironmentValues {
     var dsContentMarginKey: CGFloat {
         get { self[DSContentMarginKey.self] }
         set { self[DSContentMarginKey.self] = newValue }
+    }
+}
+
+public struct DSScreenMarginsAlreadyAppliedKey: EnvironmentKey {
+    public static let defaultValue: Bool = false
+}
+
+public extension EnvironmentValues {
+    var dsScreenMarginsAlreadyApplied: Bool {
+        get { self[DSScreenMarginsAlreadyAppliedKey.self] }
+        set { self[DSScreenMarginsAlreadyAppliedKey.self] = newValue }
     }
 }
 
