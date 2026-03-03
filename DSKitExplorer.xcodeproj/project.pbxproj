@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -84,102 +84,46 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2BDEF50DCF50445B5371B841 /* Exceptions for "SharedTests" folder in "DSKitExplorerTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				.DS_Store,
-			);
-			target = 60D469F82BCAF14000A6F7FC /* DSKitExplorerTests */;
-		};
-		4557E2A68123AC29E97AC499 /* Exceptions for "DSKit" folder in "DSKit" target */ = {
+		4557E2A68123AC29E97AC499 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AGENTS.md,
-				.DS_Store,
 			);
 			publicHeaders = (
 				DSKit.h,
 			);
 			target = 604EED472BD23BE9009E3278 /* DSKit */;
 		};
-		832A7F5A7A9787272877C80F /* Exceptions for "DSKitTests" folder in "DSKitTests" target */ = {
+		832A7F5A7A9787272877C80F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AGENTS.md,
-				.DS_Store,
-				__Snapshots__,
 			);
 			target = 60D46A052BCAF16600A6F7FC /* DSKitTests */;
 		};
-		8761889194E8B76124751A17 /* Exceptions for "DSKitExplorerTests" folder in "DSKitExplorerTests" target */ = {
+		8761889194E8B76124751A17 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AGENTS.md,
-				.DS_Store,
 				DSKitExplorer.xctestplan,
-				__Snapshots__,
 			);
 			target = 60D469F82BCAF14000A6F7FC /* DSKitExplorerTests */;
 		};
-		C47C8F4D797FE786E51BAF6F /* Exceptions for "SharedTests" folder in "DSKitTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				.DS_Store,
-			);
-			target = 60D46A052BCAF16600A6F7FC /* DSKitTests */;
-		};
-		FBB1C96BC565EF433DA100AE /* Exceptions for "DSKitExplorer" folder in "DSKitExplorer" target */ = {
+		FBB1C96BC565EF433DA100AE /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AGENTS.md,
-				.DS_Store,
 			);
 			target = 60D4696D2BCAF07F00A6F7FC /* DSKitExplorer */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		265D4B4D7C3CA363470717C8 /* DSKitExplorer */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				FBB1C96BC565EF433DA100AE /* Exceptions for "DSKitExplorer" folder in "DSKitExplorer" target */,
-			);
-			path = DSKitExplorer;
-			sourceTree = "<group>";
-		};
-		34A3FB47525A07F78249031B /* SharedTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				2BDEF50DCF50445B5371B841 /* Exceptions for "SharedTests" folder in "DSKitExplorerTests" target */,
-				C47C8F4D797FE786E51BAF6F /* Exceptions for "SharedTests" folder in "DSKitTests" target */,
-			);
-			path = SharedTests;
-			sourceTree = "<group>";
-		};
-		6BCC12C0B1CBBA12F5791F95 /* DSKitTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				832A7F5A7A9787272877C80F /* Exceptions for "DSKitTests" folder in "DSKitTests" target */,
-			);
-			path = DSKitTests;
-			sourceTree = "<group>";
-		};
-		871BC51F6CF64286CD27B222 /* DSKitExplorerTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				8761889194E8B76124751A17 /* Exceptions for "DSKitExplorerTests" folder in "DSKitExplorerTests" target */,
-			);
-			path = DSKitExplorerTests;
-			sourceTree = "<group>";
-		};
-		E855396D5D6F348C8B08744E /* DSKit */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				4557E2A68123AC29E97AC499 /* Exceptions for "DSKit" folder in "DSKit" target */,
-			);
-			path = DSKit;
-			sourceTree = "<group>";
-		};
+		265D4B4D7C3CA363470717C8 /* DSKitExplorer */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (FBB1C96BC565EF433DA100AE /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DSKitExplorer; sourceTree = "<group>"; };
+		34A3FB47525A07F78249031B /* SharedTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SharedTests; sourceTree = "<group>"; };
+		6BCC12C0B1CBBA12F5791F95 /* DSKitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (832A7F5A7A9787272877C80F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DSKitTests; sourceTree = "<group>"; };
+		871BC51F6CF64286CD27B222 /* DSKitExplorerTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8761889194E8B76124751A17 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DSKitExplorerTests; sourceTree = "<group>"; };
+		E855396D5D6F348C8B08744E /* DSKit */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4557E2A68123AC29E97AC499 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DSKit; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,8 +281,8 @@
 				6092FE5F2BD2AC600016CB4A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				871BC51F6CF64286CD27B222 /* DSKitExplorerTests */,
 				34A3FB47525A07F78249031B /* SharedTests */,
+				871BC51F6CF64286CD27B222 /* DSKitExplorerTests */,
 			);
 			name = DSKitExplorerTests;
 			packageProductDependencies = (
@@ -363,8 +307,8 @@
 				6092FE5F2BD2AC600016CB4A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				6BCC12C0B1CBBA12F5791F95 /* DSKitTests */,
 				34A3FB47525A07F78249031B /* SharedTests */,
+				6BCC12C0B1CBBA12F5791F95 /* DSKitTests */,
 			);
 			name = DSKitTests;
 			packageProductDependencies = (
@@ -415,7 +359,6 @@
 				41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				41A858202BF3420000375D4D /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 60D4696F2BCAF07F00A6F7FC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

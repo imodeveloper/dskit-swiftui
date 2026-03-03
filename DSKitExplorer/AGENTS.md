@@ -9,7 +9,7 @@
 - Individual screens live in `Screens/`.
 
 ## Integration Points
-- Used as a workspace dependency by MNews to build and embed `DSKit.framework`.
+- Used as a workspace dependency by Monitor (`../imodeveloperlab`) to build and embed `DSKit.framework`.
 - Screenshot mode is enabled by `screenshot` env var (see `DSKitExplorerApp.swift`).
 
 ## Conventions / Pitfalls

@@ -28,7 +28,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 
 ## Runtime constraints
 - Build target: `DSKitExplorer` scheme in `DSKitExplorer.xcodeproj`
-- Primary simulator: `platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1`
+- Primary simulator: `platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2`
 - Bundle ID: `dskit.app.DSKitExplorer.com`
 - Snapshot harness:
   - Keep visual tests stable and deterministic
@@ -61,7 +61,16 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 
 ## Quick command
 - Build DSKitExplorer:
-  - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' build`
+  - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2' build`
+
+## Run (CLI)
+- Install: `xcrun simctl install <device-udid> <path-to-app>`
+- Launch: `xcrun simctl launch <device-udid> dskit.app.DSKitExplorer.com`
+
+## Lint
+- SwiftLint runs via Xcode build phases. To run manually:
+  - `cd /Users/ivan.borinschi/Work/dskit-swiftui`
+  - `swiftlint lint --config /Users/ivan.borinschi/Work/dskit-swiftui/swiftlint.yml`
 
 ## Quick workflow
 - Regenerate `Content/Views.md` after view or snapshot changes:
