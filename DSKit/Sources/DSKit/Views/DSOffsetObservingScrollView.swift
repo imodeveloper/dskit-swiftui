@@ -24,7 +24,7 @@ public struct DSScrollViewContentFrameReader<Content: View>: View {
         self.content = content
     }
 
-    private let coordinateSpaceName = UUID()
+    @State private var coordinateSpaceName = UUID()
 
     public var body: some View {
         ScrollViewReader { scrollViewProxy in
@@ -68,7 +68,9 @@ public struct DSGeometryTrackingView<Content: View>: View {
                 }
             )
             .onPreferenceChange(ScrollFramePreferenceKey.self) { newValue in
-                trackedFrame = newValue
+                if trackedFrame.isApproximatelyEqual(to: newValue, tolerance: 0.5) == false {
+                    trackedFrame = newValue
+                }
             }
     }
 }
@@ -76,6 +78,15 @@ public struct DSGeometryTrackingView<Content: View>: View {
 public struct ScrollFramePreferenceKey: PreferenceKey {
     public static var defaultValue: CGRect { .zero }
     public static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
+}
+
+private extension CGRect {
+    func isApproximatelyEqual(to other: CGRect, tolerance: CGFloat) -> Bool {
+        abs(origin.x - other.origin.x) <= tolerance &&
+            abs(origin.y - other.origin.y) <= tolerance &&
+            abs(size.width - other.size.width) <= tolerance &&
+            abs(size.height - other.size.height) <= tolerance
+    }
 }
 
 struct Testable_ScrollViewContentFrameReader: View {

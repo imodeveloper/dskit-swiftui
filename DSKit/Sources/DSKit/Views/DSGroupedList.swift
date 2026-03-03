@@ -25,6 +25,12 @@ Initializes a `DSGroupedList` with essential parameters for handling data and cu
 
 public struct DSGroupedList<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View, Data.Index == Int {
 
+    private struct GroupedItem: Identifiable {
+        let id: ID
+        let index: Int
+        let element: Data.Element
+    }
+
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
@@ -41,10 +47,16 @@ public struct DSGroupedList<Data, ID, Content>: View where Data: RandomAccessCol
 
     public var body: some View {
         DSVStack {
-            ForEach(data.indices, id: \.self) { index in
-                let element = data[data.index(data.startIndex, offsetBy: index)]
+            let items = data.enumerated().map {
+                GroupedItem(id: $0.element[keyPath: id], index: $0.offset, element: $0.element)
+            }
+            let lastIndex = max(0, items.count - 1)
+
+            ForEach(items) { item in
+                let index = item.index
+                let element = item.element
                 self.content(element)
-                if index != data.indices.last {
+                if index < lastIndex {
                     DSDivider()
                 }
             }

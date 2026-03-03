@@ -49,11 +49,13 @@ public struct DSHScroll<Data, ID, Content>: View where Data: RandomAccessCollect
 
     public var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            DSHStack(spacing: spacing) {
+            LazyHStack(spacing: appearance.spacing.value(for: spacing)) {
                 ForEach(data, id: id) { element in
                     self.content(element)
+                        .dsResetContentMargins()
                 }
             }
+            .dsContentMargins()
             .padding(.horizontal, scrollableContentMargin)
         }
         .padding(.horizontal, -scrollableContentMargin)

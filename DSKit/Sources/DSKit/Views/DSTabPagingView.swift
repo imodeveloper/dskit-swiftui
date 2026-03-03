@@ -108,11 +108,10 @@ public struct DSTabPagingView: View {
                     page: $page
                 ) {
                     LazyHStack(spacing: 0) {
-                        ForEach(0..<pages.count, id: \.self) { i in
-                            let page = pages[i]
+                        ForEach(Array(pages.enumerated()), id: \.element.id) { index, page in
                             page.content
                                 .frame(width: proxy.size.width)
-                                .id(i)
+                                .id(index)
                         }
                     }.scrollTargetLayout()
 
@@ -136,6 +135,7 @@ struct DSTabPagingIndicatorView: View {
     // Stores the measured frames of each item (index → CGRect).
     @State private var frames: [Int: CGRect] = [:]
     @State private var debounceWorkItem: DispatchWorkItem?
+    @State private var lastOffsetX: CGFloat = .zero
 
     var body: some View {
         let totalPages = pageItems.count
@@ -193,8 +193,12 @@ struct DSTabPagingIndicatorView: View {
             .frame(maxWidth: .infinity)
             .coordinateSpace(name: "DSTabIndicatorSpace")
             .onPreferenceChange(DSFramePreferenceKey.self) { newValue in
-                frames = newValue
+                if frames.areApproximatelyEqual(to: newValue, tolerance: 0.5) == false {
+                    frames = newValue
+                }
             }.onChange(of: offset) { newValue in
+                guard abs(newValue.origin.x - lastOffsetX) >= 1 else { return }
+                lastOffsetX = newValue.origin.x
 
                 debounceWorkItem?.cancel()
                 debounceWorkItem = DispatchWorkItem {
@@ -294,6 +298,28 @@ extension View {
                 )
             }
         )
+    }
+}
+
+private extension Dictionary where Key == Int, Value == CGRect {
+    func areApproximatelyEqual(to other: [Int: CGRect], tolerance: CGFloat) -> Bool {
+        guard count == other.count else { return false }
+        for (key, value) in self {
+            guard let otherValue = other[key] else { return false }
+            if value.isApproximatelyEqual(to: otherValue, tolerance: tolerance) == false {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+private extension CGRect {
+    func isApproximatelyEqual(to other: CGRect, tolerance: CGFloat) -> Bool {
+        abs(origin.x - other.origin.x) <= tolerance &&
+            abs(origin.y - other.origin.y) <= tolerance &&
+            abs(size.width - other.size.width) <= tolerance &&
+            abs(size.height - other.size.height) <= tolerance
     }
 }
 

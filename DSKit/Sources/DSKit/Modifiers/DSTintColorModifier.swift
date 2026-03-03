@@ -25,13 +25,14 @@ extension View {
 }
 
 extension Image {
-    func setImageTint(tint: DSColorKey?) -> AnyView {
+    @ViewBuilder
+    func setImageTint(tint: DSColorKey?) -> some View {
         if let tint {
-            return AnyView(self
+            self
                 .renderingMode(.template)
-                .setTint(tint: tint))
+                .setTint(tint: tint)
         } else {
-            return AnyView(self)
+            self
         }
     }
 }

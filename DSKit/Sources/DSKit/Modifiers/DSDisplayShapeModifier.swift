@@ -18,14 +18,15 @@ struct DSDisplayShapeModifier: ViewModifier {
     @Environment(\.appearance) var appearance: DSAppearance
     let shape: DSDisplayShape
 
+    @ViewBuilder
     func body(content: Content) -> some View {
         switch shape {
         case .none:
-            return AnyView(content.clipped())
+            content.clipped()
         case .circle:
-            return AnyView(content.clipShape(Circle()))
+            content.clipShape(Circle())
         case .capsule:
-            return AnyView(content.cornerRadius(appearance.secondaryView.cornerRadius))
+            content.cornerRadius(appearance.secondaryView.cornerRadius)
         }
     }
 }
