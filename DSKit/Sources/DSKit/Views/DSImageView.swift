@@ -218,18 +218,31 @@ private struct DSRemoteImageView: View {
     private func loadImageIfNeeded(for size: CGSize) {
         guard size.width > 0, size.height > 0 else { return }
 
-        let targetSize = CGSize(width: size.width * displayScale, height: size.height * displayScale)
+        let targetSize = CGSize(
+            width: max(CGFloat(1), ceil(size.width * displayScale)),
+            height: max(CGFloat(1), ceil(size.height * displayScale))
+        )
         let request = LoadRequest(url: url, pixelSize: targetSize)
 
         guard request != lastLoadRequest else { return }
         lastLoadRequest = request
 
-        let transformer = SDImageResizingTransformer(
-            size: targetSize,
-            scaleMode: .aspectFill
-        )
+        // Use decoder thumbnail context instead of image transformer to avoid
+        // transformed WebP disk re-encoding on iOS simulators without WebP writer support.
+        let context: [SDWebImageContextOption: Any] = [
+            .imageThumbnailPixelSize: targetSize,
+            .imagePreserveAspectRatio: true,
+            .imageScaleFactor: displayScale,
+            // Keep the derived (thumbnail) variant in memory only to avoid
+            // disk encode attempts for unsupported writer formats like WebP.
+            .storeCacheType: SDImageCacheType.memory.rawValue,
+            // Keep the original payload on disk so subsequent requests can
+            // reuse source bytes without another network fetch.
+            .originalStoreCacheType: SDImageCacheType.disk.rawValue
+        ]
 
-        imageManager.load(url: url, context: [.imageTransformer: transformer])
+        imageManager.cancel()
+        imageManager.load(url: url, context: context)
     }
 }
 
