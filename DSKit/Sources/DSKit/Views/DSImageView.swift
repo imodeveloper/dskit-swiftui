@@ -30,11 +30,7 @@ public struct DSImageView: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
-    @StateObject var imageManager = ImageManager()
     let image: DSImage
-    @State private var imageLoaded = false
-
-    @State var imageSize: CGSize = .zero
 
     public init(dsImage: DSImage) {
         self.image = dsImage
@@ -144,52 +140,113 @@ public struct DSImageView: View {
                         .setDisplayShape(shape: image.displayShape)
                 }
             } else {
-                GeometryReader(content: { geometry in
-                    Group {
-                        if imageManager.image != nil {
-                            Color.gray.opacity(0.1)
-                                .overlay(alignment: .center) {
-                                    if let uiImage = imageManager.image {
-                                        Image(dsUIImage: uiImage)
-                                            .resizable()
-                                            .setContentMode(mode: image.contentMode)
-                                            .opacity(imageLoaded ? 1 : 0)
-                                            .onAppear {
-                                                if imageManager.cacheType == .none {
-                                                    withAnimation { imageLoaded = true }
-                                                } else {
-                                                    imageLoaded = true
-                                                }
-                                            }
-                                    }
-                                }
-                                .setDisplayShape(shape: image.displayShape)
-                        } else {
-                            Color.gray.opacity(0.1)
-                                .setDisplayShape(shape: image.displayShape)
-                        }
-                    }
-                    .onAppear {
-                        let transformer = SDImageResizingTransformer(
-                            size: CGSize(width: geometry.size.width * 3, height: geometry.size.height * 3),
-                            scaleMode: .aspectFill
-                        )
-
-                        self.imageManager.load(url: url, context: [.imageTransformer: transformer])
-                    }
-                    .onDisappear {
-                        self.imageManager.cancel()
-                    }
-                }).dsSize(image.size)
+                DSRemoteImageView(url: url, image: image)
+                    .dsSize(image.size)
             }
         }
     }
 
     private func fileImage(for url: URL?) -> DSUIImage? {
-        guard let url, url.isFileURL, let data = try? Data(contentsOf: url) else {
+        guard let url, url.isFileURL else {
             return nil
         }
-        return DSUIImage(data: data)
+        if let cached = DSImageViewFileCache.image(for: url) {
+            return cached
+        }
+
+        guard let data = try? Data(contentsOf: url), let decoded = DSUIImage(data: data) else {
+            return nil
+        }
+
+        DSImageViewFileCache.store(decoded, for: url)
+        return decoded
+    }
+}
+
+private struct DSRemoteImageView: View {
+
+    @Environment(\.displayScale) private var displayScale
+    @StateObject private var imageManager = ImageManager()
+    @State private var imageLoaded = false
+    @State private var lastLoadRequest: LoadRequest?
+
+    let url: URL?
+    let image: DSImage
+
+    var body: some View {
+        GeometryReader { geometry in
+            Group {
+                if imageManager.image != nil {
+                    Color.gray.opacity(0.1)
+                        .overlay(alignment: .center) {
+                            if let uiImage = imageManager.image {
+                                Image(dsUIImage: uiImage)
+                                    .resizable()
+                                    .setContentMode(mode: image.contentMode)
+                                    .opacity(imageLoaded ? 1 : 0)
+                                    .onAppear {
+                                        if imageManager.cacheType == .none {
+                                            withAnimation { imageLoaded = true }
+                                        } else {
+                                            imageLoaded = true
+                                        }
+                                    }
+                            }
+                        }
+                        .setDisplayShape(shape: image.displayShape)
+                } else {
+                    Color.gray.opacity(0.1)
+                        .setDisplayShape(shape: image.displayShape)
+                }
+            }
+            .onAppear {
+                loadImageIfNeeded(for: geometry.size)
+            }
+            .onChange(of: geometry.size) { newSize in
+                loadImageIfNeeded(for: newSize)
+            }
+            .onChange(of: url) { _ in
+                imageLoaded = false
+                loadImageIfNeeded(for: geometry.size)
+            }
+            .onDisappear {
+                imageManager.cancel()
+            }
+        }
+    }
+
+    private func loadImageIfNeeded(for size: CGSize) {
+        guard size.width > 0, size.height > 0 else { return }
+
+        let targetSize = CGSize(width: size.width * displayScale, height: size.height * displayScale)
+        let request = LoadRequest(url: url, pixelSize: targetSize)
+
+        guard request != lastLoadRequest else { return }
+        lastLoadRequest = request
+
+        let transformer = SDImageResizingTransformer(
+            size: targetSize,
+            scaleMode: .aspectFill
+        )
+
+        imageManager.load(url: url, context: [.imageTransformer: transformer])
+    }
+}
+
+private struct LoadRequest: Equatable {
+    let url: URL?
+    let pixelSize: CGSize
+}
+
+private enum DSImageViewFileCache {
+    private static let cache = NSCache<NSURL, DSUIImage>()
+
+    static func image(for url: URL) -> DSUIImage? {
+        cache.object(forKey: url as NSURL)
+    }
+
+    static func store(_ image: DSUIImage, for url: URL) {
+        cache.setObject(image, forKey: url as NSURL)
     }
 }
 
