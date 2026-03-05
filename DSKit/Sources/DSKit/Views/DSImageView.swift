@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImage
 import SDWebImageSwiftUI
 
 /*
@@ -236,6 +237,9 @@ private struct DSRemoteImageView: View {
             // Keep the derived (thumbnail) variant in memory only to avoid
             // disk encode attempts for unsupported writer formats like WebP.
             .storeCacheType: SDImageCacheType.memory.rawValue,
+            // Reuse source bytes when possible and avoid encoding opaque images
+            // with an alpha channel when SDWebImage has to write disk data.
+            .cacheSerializer: DSOpaqueAwareCacheSerializer.instance,
             // Keep the original payload on disk so subsequent requests can
             // reuse source bytes without another network fetch.
             .originalStoreCacheType: SDImageCacheType.disk.rawValue
@@ -249,6 +253,36 @@ private struct DSRemoteImageView: View {
 private struct LoadRequest: Equatable {
     let url: URL?
     let pixelSize: CGSize
+}
+
+private enum DSOpaqueAwareCacheSerializer {
+    static let instance = SDWebImageCacheSerializer(block: { image, originalData, _ in
+        if let originalData, !originalData.isEmpty {
+            return originalData
+        }
+
+        // SDWebImage sometimes needs to re-encode cache payloads (for example
+        // transformed thumbnails). Prefer JPEG for opaque images to avoid alpha
+        // storage warnings and reduce decode memory pressure.
+        if image.dsHasAlphaChannel {
+            return image.sd_imageData(as: .PNG)
+        } else {
+            return image.sd_imageData(as: .JPEG, compressionQuality: 0.9)
+        }
+    })
+}
+
+private extension DSUIImage {
+    var dsHasAlphaChannel: Bool {
+        guard let cgImage else { return true }
+
+        switch cgImage.alphaInfo {
+        case .none, .noneSkipFirst, .noneSkipLast:
+            return false
+        default:
+            return true
+        }
+    }
 }
 
 private enum DSImageViewFileCache {
