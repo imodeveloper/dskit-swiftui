@@ -19,15 +19,15 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 
 ## Agents Memory
 - Canonical memory/reference folder:
-  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory`
+  - `Agents Memory/`
 - Keep architecture notes, analysis docs, and performance audits there.
 - Current key references:
-  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/ARCHITECTURE.md`
-  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/PROJECT_ANALYSIS.md`
-  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/CHANGELOG.md`
+  - `Agents Memory/ARCHITECTURE.md`
+  - `Agents Memory/PROJECT_ANALYSIS.md`
+  - `Agents Memory/CHANGELOG.md`
 
 ## Commit/Push Changelog Rule
-- Before every commit + push, update `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/CHANGELOG.md`.
+- Before every commit + push, update `Agents Memory/CHANGELOG.md`.
 - Each entry must include:
   - `Request`: what was asked.
   - `Done`: what was implemented.
@@ -77,7 +77,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 
 ## Quick command
 - Build DSKitExplorer:
-  - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2' build`
+  - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2' build`
 
 ## Run (CLI)
 - Install: `xcrun simctl install <device-udid> <path-to-app>`
@@ -85,10 +85,10 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 
 ## Lint
 - SwiftLint runs via Xcode build phases. To run manually:
-  - `cd /Users/ivan.borinschi/Work/dskit-swiftui`
-  - `swiftlint lint --config /Users/ivan.borinschi/Work/dskit-swiftui/swiftlint.yml`
+  - `cd .`
+  - `swiftlint lint --config swiftlint.yml`
 
 ## Quick workflow
 - Regenerate `Content/Views.md` after view or snapshot changes:
-  - `cd /Users/ivan.borinschi/Work/dskit-swiftui/Scripts`
+  - `cd Scripts`
   - `./documentation_generator.sh`

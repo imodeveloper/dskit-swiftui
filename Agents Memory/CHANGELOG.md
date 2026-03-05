@@ -20,3 +20,12 @@
 - Removed `Data.Element: Equatable` requirement from `DSThread`, reducing heavy comparisons for large row models.
 - Precomputed shared row constants (`headerVerticalPadding`) and reused per row.
 - Verified build success with `DSKitExplorer` scheme on iPhone 17 Pro (iOS 26.2).
+
+## 2026-03-05 (AGENTS Path Cleanup)
+
+### Request
+- Remove home-directory absolute paths from `dskit-swiftui/AGENTS.md`.
+
+### Done
+- Replaced absolute `/Users/ivan.borinschi/Work/dskit-swiftui/...` references with repo-relative paths in `AGENTS.md`.
+- Updated memory references, changelog rule path, build command path, lint command path, and scripts workflow path to be repository-local.
