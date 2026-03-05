@@ -3,7 +3,8 @@
 This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the full manual.
 
 ## Read first (30–60 seconds)
-- `ARCHITECTURE.md`
+- `Agents Memory/ARCHITECTURE.md`
+- `Agents Memory/PROJECT_ANALYSIS.md`
 - `docs/design-docs/ds-wrapper-principles.md`
 - `docs/WORKFLOWS.md`
 - `docs/QUALITY.md`
@@ -15,6 +16,21 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - `DSKitExplorerTests/AGENTS.md`
   - `Scripts/AGENTS.md`
   - `Content/AGENTS.md`
+
+## Agents Memory
+- Canonical memory/reference folder:
+  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory`
+- Keep architecture notes, analysis docs, and performance audits there.
+- Current key references:
+  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/ARCHITECTURE.md`
+  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/PROJECT_ANALYSIS.md`
+  - `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/CHANGELOG.md`
+
+## Commit/Push Changelog Rule
+- Before every commit + push, update `/Users/ivan.borinschi/Work/dskit-swiftui/Agents Memory/CHANGELOG.md`.
+- Each entry must include:
+  - `Request`: what was asked.
+  - `Done`: what was implemented.
 
 ## Project map
 - DSKit library: `DSKit/Sources/DSKit`

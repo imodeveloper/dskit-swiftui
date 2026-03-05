@@ -24,7 +24,7 @@ private struct ShowDSThreadFooterThreadLine: EnvironmentKey {
     static let defaultValue: Bool = true
 }
 
-public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: RandomAccessCollection, ID: Hashable, Content: View, Header: View, Footer: View, Data.Element: Equatable {
+public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: RandomAccessCollection, ID: Hashable, Content: View, Header: View, Footer: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.viewStyle) var viewStyle: DSViewStyle
@@ -64,35 +64,50 @@ public struct DSThread<Data, ID, Content, Header, Footer>: View where Data: Rand
         threadView.dsDebuggable(debugColor: Color.yellow)
     }
 
-    func positionFor(_ element: Data.Element) -> DSThreadPosition {
-        if data.first == element {
+    private func positionFor(
+        elementID: ID,
+        firstID: ID?,
+        lastID: ID?
+    ) -> DSThreadPosition {
+        if elementID == firstID {
             return .top
-        } else if data.last == element {
+        } else if elementID == lastID {
             return .bottom
         }
         return .middle
     }
 
     var threadView: some View {
-        DSVStack(spacing: .zero) {
+        let firstID = data.first.map { $0[keyPath: id] }
+        let lastID = data.last.map { $0[keyPath: id] }
+        let headerVerticalPadding = appearance.spacing.value(for: headerSpacing)
+
+        return DSVStack(spacing: .zero) {
 
             ForEach(data, id: id) { element in
+                let elementID = element[keyPath: id]
+                let position = positionFor(
+                    elementID: elementID,
+                    firstID: firstID,
+                    lastID: lastID
+                )
+                let showsThreadLineToFooter = showFooterThreadLine || elementID != lastID
 
                 DSVStack(spacing: .zero) {
 
-                    self.header(element, positionFor(element))
-                        .dsPadding(.vertical, .custom(appearance.spacing.value(for: headerSpacing)))
+                    self.header(element, position)
+                        .dsPadding(.vertical, .custom(headerVerticalPadding))
                         .zIndex(1)
 
-                    self.content(element, positionFor(element))
+                    self.content(element, position)
                         .padding(.leading, threadLeftPadding + threadContentSpacing)
                         .overlay(alignment: .leading) {
                             appearance.color(for: .text(.headline), viewStyle: viewStyle)
                                 .frame(width: 2)
                                 .frame(maxHeight: .infinity)
-                                .padding(.vertical, -appearance.spacing.value(for: headerSpacing))
+                                .padding(.vertical, -headerVerticalPadding)
                                 .zIndex(0)
-                                .opacity(showFooterThreadLine || (data.last != element) ? 0.1 : 0)
+                                .opacity(showsThreadLineToFooter ? 0.1 : 0)
                                 .padding(.leading, threadLeftPadding)
                         }
                 }
