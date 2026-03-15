@@ -41,7 +41,12 @@ public struct DSSectionHeaderView: View {
             DSText(title)
                 .dsTextStyle(.headline)
             Spacer()
-            DSButton.callToActionLink(title: actionTitle, action: action)
+            DSButton.callToActionLink(
+                title: actionTitle,
+                textFont: .smallHeadline,
+                rightSystemName: "chevron.right",
+                action: action
+            )
         }
         .dsHeight(20)
         .padding(.bottom, sectionHeaderSpacing)

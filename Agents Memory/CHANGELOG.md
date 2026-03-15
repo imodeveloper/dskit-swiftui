@@ -29,3 +29,14 @@
 ### Done
 - Replaced absolute `/Users/ivan.borinschi/Work/dskit-swiftui/...` references with repo-relative paths in `AGENTS.md`.
 - Updated memory references, changelog rule path, build command path, lint command path, and scripts workflow path to be repository-local.
+
+## 2026-03-15
+
+### Request
+- Commit and push all pending repository changes.
+
+### Done
+- Included current DSKit local updates in commit:
+  - `DSKit/Sources/DSKit/Views/DSButton.swift`
+  - `DSKit/Sources/DSKit/Views/DSSectionHeaderView.swift`
+- Updated changelog before commit/push as required.

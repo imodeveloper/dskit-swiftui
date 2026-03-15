@@ -62,6 +62,7 @@ public struct DSButton: View {
     var style: Style = .default
     var maxWidth: Bool
     var spacing: DSSpace
+    var titleFont: DSTextFontKey = .headline
     let action: () -> Void
 
     public init(
@@ -72,6 +73,7 @@ public struct DSButton: View {
         style: Style = .default,
         maxWidth: Bool = true,
         spacing: DSSpace = .regular,
+        titleFont: DSTextFontKey = .headline,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -82,6 +84,7 @@ public struct DSButton: View {
         self.maxWidth = maxWidth
         self.action = action
         self.spacing = spacing
+        self.titleFont = titleFont
     }
 
     public init(
@@ -92,6 +95,7 @@ public struct DSButton: View {
         style: Style = .default,
         maxWidth: Bool = true,
         spacing: DSSpace = .regular,
+        titleFont: DSTextFontKey = .headline,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -109,6 +113,7 @@ public struct DSButton: View {
         self.maxWidth = maxWidth
         self.action = action
         self.spacing = spacing
+        self.titleFont = titleFont
     }
 
     public init(
@@ -117,6 +122,7 @@ public struct DSButton: View {
         style: Style = .default,
         maxWidth: Bool = true,
         spacing: DSSpace = .regular,
+        titleFont: DSTextFontKey = .headline,
         action: @escaping () -> Void
     ) {
         self.init(
@@ -126,6 +132,7 @@ public struct DSButton: View {
             pushContentToSides: pushContentToSides,
             style: style,
             maxWidth: maxWidth,
+            titleFont: titleFont,
             action: action
         )
     }
@@ -138,6 +145,7 @@ public struct DSButton: View {
         style: Style = .default,
         maxWidth: Bool = true,
         spacing: DSSpace = .regular,
+        titleFont: DSTextFontKey = .headline,
         action: @escaping () -> Void
     ) {
         var leftImage: DSImage?
@@ -157,6 +165,7 @@ public struct DSButton: View {
             pushContentToSides: pushContentToSides,
             style: style,
             maxWidth: maxWidth,
+            titleFont: titleFont,
             action: action
         )
     }
@@ -211,7 +220,7 @@ public struct DSButton: View {
             }
 
             if !title.isEmpty {
-                DSText(title).dsTextStyle(.headline, titleColor)
+                DSText(title).dsTextStyle(titleFont, titleColor)
             }
 
             if let rightImage {
@@ -271,12 +280,25 @@ public struct DSButton: View {
 
 public extension DSButton {
 
-    static func callToActionLink(title: String, action: @escaping () -> Void) -> DSButton {
-        DSButton(
+    static func callToActionLink(
+        title: String,
+        textFont: DSTextFontKey = .headline,
+        rightSystemName: String? = nil,
+        action: @escaping () -> Void
+    ) -> DSButton {
+        let rightImage: DSImage? = if let rightSystemName {
+            DSImage(content: .system(name: rightSystemName), size: .font(.caption1))
+        } else {
+            nil
+        }
+
+        return DSButton(
             title: title,
+            rightImage: rightImage,
             pushContentToSides: false,
             style: .clear,
             maxWidth: false,
+            titleFont: textFont,
             action: action
         )
     }
