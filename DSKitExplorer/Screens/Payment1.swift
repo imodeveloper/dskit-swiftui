@@ -6,11 +6,12 @@
 //
 
 import DSKit
+import Observation
 import SwiftUI
 
 struct Payment1: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = Payment1Model()
+    @State private var viewModel = Payment1Model()
 
     var body: some View {
         DSList {
@@ -82,7 +83,9 @@ extension Payment1 {
 
 // MARK: - View Model
 
-final class Payment1Model: ObservableObject {
+@Observable
+@MainActor
+final class Payment1Model {
     let paymentMethods: [Payment1.PaymentMethod.Data] = [
         .init(
             holder: "John Doe",
@@ -111,7 +114,7 @@ final class Payment1Model: ObservableObject {
         )
     ]
 
-    @Published var selected: Payment1.PaymentMethod.Data
+    var selected: Payment1.PaymentMethod.Data
 
     init() {
         selected = paymentMethods.first!

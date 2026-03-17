@@ -6,11 +6,12 @@
 //
 
 import DSKit
+import Observation
 import SwiftUI
 
 struct ItemDetails4: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = ItemDetails4Model()
+    @State private var viewModel = ItemDetails4Model()
 
     var body: some View {
         DSList {
@@ -108,7 +109,9 @@ extension ItemDetails4 {
 
 // MARK: - Model
 
-final class ItemDetails4Model: ObservableObject {
+@Observable
+@MainActor
+final class ItemDetails4Model {
     let title = "Ditsy Floral Sweetheart Neck Dress"
     let subtitle = "Dolce & Gabbana"
     let description = "In the 11th century, women in Europe wore dresses that were similar to men's tunics and were loose, with a hemline reaching to below the knees or lower."
@@ -120,8 +123,8 @@ final class ItemDetails4Model: ObservableObject {
         discountBadge: "80$ OFF"
     )
 
-    @Published var selectedSize: String = "10"
-    @Published var selectedColor: DSUIColor = .init(0xF88F6F)
+    var selectedSize: String = "10"
+    var selectedColor: DSUIColor = .init(0xF88F6F)
 
     let imageGallery = [p2Image, p1Image, p3Image]
 

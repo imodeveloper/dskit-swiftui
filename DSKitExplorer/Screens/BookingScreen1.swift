@@ -7,10 +7,11 @@
 
 import DSKit
 import MapKit
+import Observation
 import SwiftUI
 
 struct BookingScreen1: View {
-    let viewModel = BookingScreen1Model()
+    @State private var viewModel = BookingScreen1Model()
     var body: some View {
         DSList {
             DSSection {
@@ -82,8 +83,10 @@ extension BookingScreen1 {
 
 // MARK: - Model
 
-final class BookingScreen1Model: ObservableObject {
-    @Published var addresses: [BookingScreen1.Location.Data] = [
+@Observable
+@MainActor
+final class BookingScreen1Model {
+    let addresses: [BookingScreen1.Location.Data] = [
         .init(
             name: "Barbershop Broadway",
             address: "325 Broadway, Bayonne, NJ 07002, 7km away",

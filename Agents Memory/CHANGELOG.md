@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-03-17
+
+### Request
+- Raise `dskit-swiftui` to iOS 17.6 and selectively migrate isolated DSKitExplorer screen models from `ObservableObject` to Observation.
+
+### Done
+- Raised the DSKit Swift package iOS floor from 15 to 17 and normalized `DSKitExplorer` deployment targets to iOS 17.6.
+- Updated compatibility docs and project analysis notes to reflect the new iOS 17.6+ support floor.
+- Migrated isolated DSKitExplorer screen-local models to `@Observable` and updated their owning views to Observation-friendly state ownership.
+- Kept DSKit runtime helpers such as `KeyboardObserver` and `DSTextFieldValue` on legacy `ObservableObject` semantics.
+
 ## 2026-03-05
 
 ### Request

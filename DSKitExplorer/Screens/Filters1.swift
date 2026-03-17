@@ -6,11 +6,12 @@
 //
 
 import DSKit
+import Observation
 import SwiftUI
 
 struct Filters1: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = Filters1Model()
+    @State private var viewModel = Filters1Model()
 
     var body: some View {
         DSList {
@@ -66,8 +67,10 @@ extension Filters1 {
 
 // MARK: - View Model
 
-final class Filters1Model: ObservableObject {
-    @Published var selectedSortByOption = "New Items"
+@Observable
+@MainActor
+final class Filters1Model {
+    var selectedSortByOption = "New Items"
     let sortByOptions = ["Featured", "New Items", "Price (Hight First)", "Price (Low First)", "Range"]
     let filters: [Filters1.OptionView.Data] = [
         .init(title: "Size", option: "All"),

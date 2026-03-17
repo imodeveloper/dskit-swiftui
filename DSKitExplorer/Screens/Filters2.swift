@@ -6,11 +6,12 @@
 //
 
 import DSKit
+import Observation
 import SwiftUI
 
 struct Filters2: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = Filters2Model()
+    @State private var viewModel = Filters2Model()
 
     var body: some View {
         DSList {
@@ -89,11 +90,13 @@ extension Filters2 {
 
 // MARK: - View Model
 
-final class Filters2Model: ObservableObject {
-    @Published var selectedSize: String = "10"
+@Observable
+@MainActor
+final class Filters2Model {
+    var selectedSize: String = "10"
     let sizes = ["8", "9", "10", "11", "12", "13", "14", "15", "16"]
 
-    @Published var selectedColor: DSUIColor = .init(0xF88F6F)
+    var selectedColor: DSUIColor = .init(0xF88F6F)
     let colors = [DSUIColor(0xFFC6A3),
                   DSUIColor(0xF88F6F),
                   DSUIColor(0x5CB946),
@@ -102,7 +105,7 @@ final class Filters2Model: ObservableObject {
                   DSUIColor(0x8AC4D0),
                   DSUIColor(0xFBEEAC)]
 
-    @Published var selectedSortByOption = "Chelsea Boots"
+    var selectedSortByOption = "Chelsea Boots"
     let sortByOptions = ["Boots", "Chelsea Boots", "Casual Sneakers", "Casual Shoes"]
     let filters: [Filters2.OptionView.Data] = [
         .init(title: "Size", option: "All"),

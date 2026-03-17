@@ -6,11 +6,12 @@
 //
 
 import DSKit
+import Observation
 import SwiftUI
 
 struct Shipping2: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = Shipping2Model()
+    @State private var viewModel = Shipping2Model()
 
     var body: some View {
         DSList {
@@ -111,7 +112,9 @@ extension Shipping2 {
 
 // MARK: - View Model
 
-final class Shipping2Model: ObservableObject {
+@Observable
+@MainActor
+final class Shipping2Model {
     let orderTotals: [Shipping2.OrderInfo.Data] = [
         .init(title: "Subtotal", price: DSPrice(amount: "160.00", currency: "$")),
         .init(title: "Shipping", price: DSPrice(amount: "4.70", currency: "$")),
@@ -136,7 +139,7 @@ final class Shipping2Model: ObservableObject {
         )
     ]
 
-    @Published var selected: Shipping2.ShippingMethodView.Data
+    var selected: Shipping2.ShippingMethodView.Data
 
     init() {
         selected = shippingMethods.first!

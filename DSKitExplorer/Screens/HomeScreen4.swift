@@ -6,10 +6,11 @@
 //
 
 import DSKit
+import Observation
 import SwiftUI
 
 struct HomeScreen4: View {
-    @StateObject var viewModel = HomeScreen4Model()
+    @State private var viewModel = HomeScreen4Model()
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -172,14 +173,16 @@ extension HomeScreen4 {
 
 // MARK: - Model
 
-final class HomeScreen4Model: ObservableObject {
+@Observable
+@MainActor
+final class HomeScreen4Model {
     init() {
         selectedCategory = categories.first!.id
     }
 
-    @Published var selectedCategory: UUID
+    var selectedCategory: UUID
 
-    var categories: [HomeScreen4.CategoryView.Category] = [
+    let categories: [HomeScreen4.CategoryView.Category] = [
         .init(title: "Nike", count: "12"),
         .init(title: "Puma", count: "7"),
         .init(title: "Crocs", count: "56"),
@@ -187,13 +190,13 @@ final class HomeScreen4Model: ObservableObject {
         .init(title: "New Balance", count: "12")
     ]
 
-    var topProducts: [HomeScreen4.TopProductView.TopProduct] = [
+    let topProducts: [HomeScreen4.TopProductView.TopProduct] = [
         .init(title: "Nike", subtitle: "Top quality", imageUrl: sneakersOnWhiteBg),
         .init(title: "Love", subtitle: "Bring the future to light", imageUrl: sneakersNeon),
         .init(title: "Converse", subtitle: "All the stars in the world", imageUrl: sneakersWhiteOnYellowBg)
     ]
 
-    var products: [HomeScreen4.ProductView.Product] = [
+    let products: [HomeScreen4.ProductView.Product] = [
         .init(
             title: "Total Orange",
             description: "Air Max 95 x Kim Jones",

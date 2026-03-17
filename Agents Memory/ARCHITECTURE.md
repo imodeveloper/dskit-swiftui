@@ -38,7 +38,7 @@
 
 - Package-level target:
   - Swift package target: `DSKit`
-  - Platforms: iOS 15+, macOS 12+
+  - Platforms: iOS 17.6+, macOS 12+
   - External dependencies:
     - `SDWebImageSwiftUI`
     - `SDWebImage`

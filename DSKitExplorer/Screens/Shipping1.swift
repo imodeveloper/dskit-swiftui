@@ -6,11 +6,12 @@
 //
 
 import DSKit
+import Observation
 import SwiftUI
 
 struct Shipping1: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = Shipping1Model()
+    @State private var viewModel = Shipping1Model()
 
     var body: some View {
         DSList {
@@ -69,7 +70,9 @@ extension Shipping1 {
 
 // MARK: - View Model
 
-final class Shipping1Model: ObservableObject {
+@Observable
+@MainActor
+final class Shipping1Model {
     let deliveryAddresses: [Shipping1.DeliveryAddressView.Data] = [
         .init(
             holder: "John Doe",
@@ -94,7 +97,7 @@ final class Shipping1Model: ObservableObject {
         )
     ]
 
-    @Published var selected: Shipping1.DeliveryAddressView.Data
+    var selected: Shipping1.DeliveryAddressView.Data
 
     init() {
         selected = deliveryAddresses.first!

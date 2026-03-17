@@ -7,11 +7,12 @@
 
 import DSKit
 import MapKit
+import Observation
 import SwiftUI
 
 struct BookingScreen4: View {
     @Environment(\.dismiss) var dismiss
-    let viewModel = BookingScreen4Model()
+    @State private var viewModel = BookingScreen4Model()
     var body: some View {
         DSList {
             DSSection {
@@ -69,8 +70,10 @@ extension BookingScreen4 {
 
 // MARK: - Model
 
-final class BookingScreen4Model: ObservableObject {
-    @Published var barbers: [BookingScreen4.Barber.Data] = [
+@Observable
+@MainActor
+final class BookingScreen4Model {
+    let barbers: [BookingScreen4.Barber.Data] = [
         .init(
             name: "Ms. Ole Thompson",
             grade: "Pro Barber",

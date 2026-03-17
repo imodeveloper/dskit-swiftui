@@ -3,7 +3,7 @@
 ## 1) Purpose & Responsibilities
 
 ### DSKit (Swift Package / Framework)
-- Purpose: Design system library for SwiftUI (iOS 15+), providing components, modifiers, layouts, and appearance theming.
+- Purpose: Design system library for SwiftUI (iOS 17.6+), providing components, modifiers, layouts, and appearance theming.
 - Responsibilities:
   - Centralize UI styles and tokens (colors, spacing, typography, appearances).
   - Provide reusable SwiftUI views/modifiers used by apps (including MNews).
