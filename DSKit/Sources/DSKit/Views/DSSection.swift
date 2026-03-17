@@ -20,6 +20,7 @@ Initializes a `DSSection` with optional spacing and dynamic content.
 
 #### Usage:
 `DSSection` is intended to be used inside a `DSList` to keep list sections visually consistent with the design system.
+When section content contains many vertical rows, emit the `ForEach` rows directly instead of wrapping the whole set in `VStack` or `LazyVStack`, or SwiftUI may collapse them into one large list cell.
 */
 
 public struct DSSection<Content: View>: View {
@@ -42,6 +43,7 @@ public struct DSSection<Content: View>: View {
     public var body: some View {
         Section {
             // Keep section children as native List rows to preserve virtualization.
+            // Avoid wrapping a full vertical ForEach in VStack/LazyVStack here.
             content()
                 .listRowSeparator(.hidden)
                 .listRowInsets(

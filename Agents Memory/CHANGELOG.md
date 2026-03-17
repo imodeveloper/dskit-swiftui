@@ -51,3 +51,14 @@
   - `DSKit/Sources/DSKit/Views/DSButton.swift`
   - `DSKit/Sources/DSKit/Views/DSSectionHeaderView.swift`
 - Updated changelog before commit/push as required.
+
+## 2026-03-17
+
+### Request
+- Commit and push all pending repository changes.
+
+### Done
+- Included the current DSKit local updates in commit:
+  - increased `LightBlueAppearance` corner radius from `5` to `10`
+  - documented the `DSSection` virtualization rule to avoid wrapping full row sets in `VStack`/`LazyVStack`
+- Updated changelog before commit/push as required.
