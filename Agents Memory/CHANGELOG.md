@@ -74,3 +74,13 @@
 - Fixed the documentation generator to reference `.snapshot.png` assets instead of stale `.1.png` names.
 - Extended `dsCardStyle` to support separate `horizontalPadding` and `verticalPadding` while keeping the existing single-padding overload.
 - Added repo guidance to avoid `Created by Codex` file headers and to use `Created by Ivan Borinschi` instead.
+
+## 2026-03-22 (Adaptive Remote Image Height)
+
+### Request
+- Replace fixed remote image heights with an adaptive DSKit sizing mode that can learn and reuse image aspect ratios for later renders.
+
+### Done
+- Added `DSDimension.adaptiveHeight(_:)` and updated `DSSizeModifier` so adaptive-height images are not pinned to a fixed runtime height.
+- Extended `DSImageView` remote loading to cache aspect ratios from decoded images and reuse them through exact-image, path-family, and host-level lookups before the next render.
+- Kept a fallback default height for first render while allowing later loads to refine the aspect ratio and update the cache.

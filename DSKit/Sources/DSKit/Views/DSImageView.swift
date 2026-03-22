@@ -170,12 +170,16 @@ private struct DSRemoteImageView: View {
     @StateObject private var imageManager = ImageManager()
     @State private var imageLoaded = false
     @State private var lastLoadRequest: LoadRequest?
+    @State private var currentWidth: CGFloat = 0
+    @State private var resolvedAspectRatio: CGFloat?
 
     let url: URL?
     let image: DSImage
 
     var body: some View {
         GeometryReader { geometry in
+            let layoutSize = effectiveLayoutSize(from: geometry.size)
+
             Group {
                 if imageManager.image != nil {
                     Color.gray.opacity(0.1)
@@ -186,6 +190,7 @@ private struct DSRemoteImageView: View {
                                     .setContentMode(mode: image.contentMode)
                                     .opacity(imageLoaded ? 1 : 0)
                                     .onAppear {
+                                        registerMetadata(for: uiImage)
                                         if imageManager.cacheType == .none {
                                             withAnimation { imageLoaded = true }
                                         } else {
@@ -201,19 +206,26 @@ private struct DSRemoteImageView: View {
                 }
             }
             .onAppear {
-                loadImageIfNeeded(for: geometry.size)
+                updateLayoutState(for: geometry.size)
+                loadImageIfNeeded(for: layoutSize)
             }
-            .onChange(of: geometry.size) { newSize in
-                loadImageIfNeeded(for: newSize)
+            .onChange(of: geometry.size) { _, newSize in
+                updateLayoutState(for: newSize)
+                loadImageIfNeeded(for: effectiveLayoutSize(from: newSize))
             }
-            .onChange(of: url) { _ in
+            .onChange(of: url) { _, _ in
                 imageLoaded = false
-                loadImageIfNeeded(for: geometry.size)
+                lastLoadRequest = nil
+                currentWidth = 0
+                resolvedAspectRatio = nil
+                updateLayoutState(for: geometry.size)
+                loadImageIfNeeded(for: effectiveLayoutSize(from: geometry.size))
             }
             .onDisappear {
                 imageManager.cancel()
             }
         }
+        .frame(height: adaptiveDisplayHeight)
     }
 
     private func loadImageIfNeeded(for size: CGSize) {
@@ -248,6 +260,74 @@ private struct DSRemoteImageView: View {
         imageManager.cancel()
         imageManager.load(url: url, context: context)
     }
+
+    private func updateLayoutState(for size: CGSize) {
+        guard size.width > 0 else {
+            if resolvedAspectRatio == nil,
+               let cachedAspectRatio = DSImageAspectRatioCache.shared.aspectRatio(for: url) {
+                resolvedAspectRatio = cachedAspectRatio
+            }
+            return
+        }
+
+        let width = size.width
+        if abs(currentWidth - width) > 0.5 {
+            currentWidth = width
+        }
+
+        if resolvedAspectRatio == nil,
+           let cachedAspectRatio = DSImageAspectRatioCache.shared.aspectRatio(for: url) {
+            resolvedAspectRatio = cachedAspectRatio
+        }
+    }
+
+    private func effectiveLayoutSize(from size: CGSize) -> CGSize {
+        let width = max(CGFloat(1), size.width)
+        let height = max(CGFloat(1), adaptiveDisplayHeight ?? size.height)
+        return CGSize(width: width, height: height)
+    }
+
+    private var adaptiveDisplayHeight: CGFloat? {
+        guard let defaultHeight = image.size.height.adaptiveHeightDefault else {
+            return nil
+        }
+
+        guard currentWidth > 0 else {
+            return defaultHeight
+        }
+
+        guard let aspectRatio = effectiveAspectRatio, aspectRatio > 0 else {
+            return defaultHeight
+        }
+
+        return max(CGFloat(1), currentWidth / aspectRatio)
+    }
+
+    private var effectiveAspectRatio: CGFloat? {
+        if let resolvedAspectRatio, resolvedAspectRatio > 0 {
+            return resolvedAspectRatio
+        }
+
+        guard let cachedAspectRatio = DSImageAspectRatioCache.shared.aspectRatio(for: url),
+              cachedAspectRatio > 0
+        else {
+            return nil
+        }
+
+        return cachedAspectRatio
+    }
+
+    private func registerMetadata(for uiImage: DSUIImage) {
+        guard let aspectRatio = uiImage.dsAspectRatio, aspectRatio > 0 else {
+            return
+        }
+
+        DSImageAspectRatioCache.shared.store(aspectRatio: aspectRatio, for: url)
+
+        if resolvedAspectRatio == nil || abs((resolvedAspectRatio ?? 0) - aspectRatio) > 0.001 {
+            resolvedAspectRatio = aspectRatio
+        }
+    }
 }
 
 private struct LoadRequest: Equatable {
@@ -273,6 +353,29 @@ private enum DSOpaqueAwareCacheSerializer {
 }
 
 private extension DSUIImage {
+    var dsAspectRatio: CGFloat? {
+        let pixelSize = dsPixelSize
+        guard pixelSize.width > 0, pixelSize.height > 0 else {
+            return nil
+        }
+
+        return pixelSize.width / pixelSize.height
+    }
+
+    var dsPixelSize: CGSize {
+        #if canImport(UIKit)
+            if let cgImage {
+                return CGSize(width: cgImage.width, height: cgImage.height)
+            }
+            return CGSize(width: size.width * scale, height: size.height * scale)
+        #elseif canImport(AppKit)
+            if let cgImage = cgImage(forProposedRect: nil, context: nil, hints: nil) {
+                return CGSize(width: cgImage.width, height: cgImage.height)
+            }
+            return CGSize(width: size.width, height: size.height)
+        #endif
+    }
+
     var dsHasAlphaChannel: Bool {
         guard let cgImage else { return true }
 
@@ -294,6 +397,93 @@ private enum DSImageViewFileCache {
 
     static func store(_ image: DSUIImage, for url: URL) {
         cache.setObject(image, forKey: url as NSURL)
+    }
+}
+
+private final class DSImageAspectRatioCache: @unchecked Sendable {
+    static let shared = DSImageAspectRatioCache()
+
+    private struct Aggregate {
+        var total: CGFloat
+        var count: Int
+
+        mutating func add(_ value: CGFloat) {
+            total += value
+            count += 1
+        }
+
+        var average: CGFloat? {
+            guard count > 0 else { return nil }
+            return total / CGFloat(count)
+        }
+    }
+
+    private let lock = NSLock()
+    private var exactRatios: [String: CGFloat] = [:]
+    private var directoryRatios: [String: Aggregate] = [:]
+    private var hostRatios: [String: Aggregate] = [:]
+
+    func aspectRatio(for url: URL?) -> CGFloat? {
+        guard let url else { return nil }
+
+        lock.lock()
+        defer { lock.unlock() }
+
+        if let exactKey = exactKey(for: url), let ratio = exactRatios[exactKey] {
+            return ratio
+        }
+
+        if let directoryKey = directoryKey(for: url),
+           let ratio = directoryRatios[directoryKey]?.average {
+            return ratio
+        }
+
+        if let hostKey = hostKey(for: url),
+           let ratio = hostRatios[hostKey]?.average {
+            return ratio
+        }
+
+        return nil
+    }
+
+    func store(aspectRatio: CGFloat, for url: URL?) {
+        guard aspectRatio > 0, let url else { return }
+
+        lock.lock()
+        defer { lock.unlock() }
+
+        if let exactKey = exactKey(for: url) {
+            exactRatios[exactKey] = aspectRatio
+        }
+
+        if let directoryKey = directoryKey(for: url) {
+            var aggregate = directoryRatios[directoryKey] ?? Aggregate(total: 0, count: 0)
+            aggregate.add(aspectRatio)
+            directoryRatios[directoryKey] = aggregate
+        }
+
+        if let hostKey = hostKey(for: url) {
+            var aggregate = hostRatios[hostKey] ?? Aggregate(total: 0, count: 0)
+            aggregate.add(aspectRatio)
+            hostRatios[hostKey] = aggregate
+        }
+    }
+
+    private func exactKey(for url: URL) -> String? {
+        guard let host = hostKey(for: url) else { return nil }
+        let path = url.path.isEmpty ? "/" : url.path
+        return "\(host)|\(path)"
+    }
+
+    private func directoryKey(for url: URL) -> String? {
+        guard let host = hostKey(for: url) else { return nil }
+        let directoryPath = url.deletingLastPathComponent().path
+        guard directoryPath.isEmpty == false else { return host }
+        return "\(host)|\(directoryPath)"
+    }
+
+    private func hostKey(for url: URL) -> String? {
+        url.host?.lowercased()
     }
 }
 
@@ -395,6 +585,15 @@ extension DSImage {
         var image = self
         image.tintColor = tintColor
         return image
+    }
+}
+
+private extension DSDimension {
+    var adaptiveHeightDefault: CGFloat? {
+        if case .adaptiveHeight(let defaultHeight) = self {
+            return defaultHeight
+        }
+        return nil
     }
 }
 

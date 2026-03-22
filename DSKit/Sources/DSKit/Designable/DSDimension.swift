@@ -12,6 +12,7 @@ public enum DSDimension: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral,
 
     case font(DSTextFontKey)
     case custom(CGFloat)
+    case adaptiveHeight(CGFloat)
     case fillUpTheSpace
     case actionElement
     case none
@@ -34,6 +35,8 @@ extension DSDimension {
         switch self {
         case .custom(let number):
             number
+        case .adaptiveHeight(let defaultHeight):
+            defaultHeight
         case .fillUpTheSpace:
                 .infinity
         case .none:

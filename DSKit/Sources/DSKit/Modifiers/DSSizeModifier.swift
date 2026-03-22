@@ -31,6 +31,8 @@ public struct DSSizeModifier: ViewModifier {
             return nil
         case .none:
             return nil
+        case .adaptiveHeight:
+            return nil
         default:
             return dimension.value(appearance: appearance, sizeCategory: sizeCategory)
         }
