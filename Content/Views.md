@@ -38,7 +38,7 @@ struct Testable_DSVStack: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSVStack.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSVStack.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSHStack
@@ -81,7 +81,7 @@ struct Testable_DSHStack: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSHStack.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSHStack.snapshot.png" width="35%"/></td></tr><table/>
 
 
  ## DSGrid
@@ -109,10 +109,10 @@ struct Testable_DSGrid: View {
         DSGrid(
             viewHeight: 50,
             columns: 3,
-            data: colors,
-            id: \.self,
-            content: { color in
-                color
+            data: Array(colors.enumerated()),
+            id: \.offset,
+            content: { item in
+                item.element
             }
         )
     }
@@ -120,7 +120,7 @@ struct Testable_DSGrid: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSGrid.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSGrid.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSButton
@@ -173,7 +173,7 @@ struct Testable_DSButton: View {
             .dsPadding(.medium)
             .dsSecondaryBackground()
             .dsCornerRadius()
-            
+
             DSVStack {
                 DSButton(title: "Default", action: { })
                 DSButton(
@@ -207,7 +207,7 @@ struct Testable_DSButton: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSButton.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSButton.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSText
@@ -241,7 +241,7 @@ struct Testable_DSText: View {
             DSText("Caption 1").dsTextStyle(.caption1)
             DSText("Caption 2").dsTextStyle(.caption2)
             DSText("Footnote").dsTextStyle(.footnote)
-            
+
             DSHStack {
                 DSText(
                     "Lorem Ipsum is simply dummy text.",
@@ -267,7 +267,7 @@ struct Testable_DSText: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSText.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSText.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSHScroll
@@ -297,15 +297,15 @@ struct Testable_DSHScroll: View {
         Color.yellow
     ]
     var body: some View {
-        DSHScroll(spacing: .medium, data: colors, id: \.self) { color in
-            color.dsSize(60)
+        DSHScroll(spacing: .medium, data: Array(colors.enumerated()), id: \.offset) { item in
+            item.element.dsSize(90)
         }
     }
 }
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSHScroll.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSHScroll.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSCoverFlow
@@ -333,13 +333,13 @@ Initializes `DSCoverFlow` with specific layout and behavioral settings.
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSCoverFlow: View {
-    
+
     let colors = [
         DSUIColor(0x006A7A),
         DSUIColor(0x28527a),
         DSUIColor(0xfbeeac)
     ]
-    
+
     var body: some View {
         DSCoverFlow(
             height: 200,
@@ -353,7 +353,7 @@ struct Testable_DSCoverFlow: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSCoverFlow.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSCoverFlow.snapshot.png" width="35%"/></td></tr><table/>
 
 
  ## DSImageView
@@ -373,16 +373,20 @@ Code example result:
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSImageView: View {
-    
-    let imageUrl = URL(string: "https://images.unsplash.com/photo-1702540122576-dd7d387f652f?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    )
-    
-    let testImage = DSUIImage(
-        named: "demo",
-        in: Bundle(identifier: "app.DSKit"),
-        with: nil
-    )
-    
+    private static let localDemoImageURL: URL? = {
+        guard let image = DSUIImage(named: "demo", in: Bundle.main, with: nil),
+              let data = image.jpegData(compressionQuality: 0.9) else {
+            return nil
+        }
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("dskit-demo.jpg")
+        try? data.write(to: url, options: [.atomic])
+        return url
+    }()
+
+    let imageUrl = Testable_DSImageView.localDemoImageURL
+
+    let testImage = DSUIImage(named: "demo", in: Bundle.main, with: nil)
+
     var body: some View {
         DSVStack {
             DSHStack {
@@ -402,7 +406,7 @@ struct Testable_DSImageView: View {
                     size: .size(50)
                 )
             }
-            
+
             DSHStack {
                 DSImageView(
                     uiImage: testImage,
@@ -420,10 +424,10 @@ struct Testable_DSImageView: View {
                     size: .size(width: 100, height: 50)
                 )
             }
-            
+
             DSHStack {
                 DSImageView(
-                    systemName: "sun.rain.fill", 
+                    systemName: "sun.rain.fill",
                     size: .font(.title1),
                     tint: .color(.red)
                 )
@@ -449,7 +453,7 @@ struct Testable_DSImageView: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSImageView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSImageView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSTermsAndConditions
@@ -474,23 +478,23 @@ struct Testable_DSTermsAndConditions: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSTermsAndConditions.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSTermsAndConditions.snapshot.png" width="35%"/></td></tr><table/>
 
 
 #### Code example:
 Here is how you might set up it within your views:
 ```swift
 struct Testable_ScrollViewContentFrameReader: View {
-    
+
     @State private var scrollContentFrame: CGRect = .zero
     @State var page: Int = 0
-    
+
     var body: some View {
         DSVStack {
-            
+
             DSText("\(scrollContentFrame)")
                 .padding()
-            
+
             DSScrollViewContentFrameReader(
                 axes: .horizontal,
                 showsIndicators: false,
@@ -513,7 +517,7 @@ struct Testable_ScrollViewContentFrameReader: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSOffsetObservingScrollView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSOffsetObservingScrollView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSPriceView
@@ -540,21 +544,23 @@ struct Testable_DSPriceView: View {
         discountBadge: "10% OFF"
     )
     var body: some View {
-        DSPriceView(price: price, size: .title1)
-        DSPriceView(price: price, size: .title2)
-        DSPriceView(price: price, size: .title3)
-        DSPriceView(price: price, size: .headline)
-        DSPriceView(price: price, size: .subheadline)
-        DSPriceView(price: price, size: .caption1, color: .green)
-        DSPriceView(price: price, size: .caption2, color: .green)
-        DSPriceView(price: price, size: .footnote)
-        DSPriceView(price: price, size: .fontWithSize(.headline, 20))
+        DSVStack(spacing: .regular) {
+            DSPriceView(price: price, size: .title1)
+            DSPriceView(price: price, size: .title2)
+            DSPriceView(price: price, size: .title3)
+            DSPriceView(price: price, size: .headline)
+            DSPriceView(price: price, size: .subheadline)
+            DSPriceView(price: price, size: .caption1, color: .green)
+            DSPriceView(price: price, size: .caption2, color: .green)
+            DSPriceView(price: price, size: .footnote)
+            DSPriceView(price: price, size: .fontWithSize(.headline, 20))
+        }
     }
 }
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSPriceView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSPriceView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSGroupedList
@@ -574,13 +580,13 @@ Initializes a `DSGroupedList` with essential parameters for handling data and cu
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSGroupedList: View {
-    
+
     let artists = [
         "Eminem",
         "Madona",
         "Michael Jakson"
     ]
-    
+
     var body: some View {
         DSGroupedList(data: artists, id: \.self) { artist in
             DSText(artist)
@@ -590,7 +596,7 @@ struct Testable_DSGroupedList: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSGroupedList.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSGroupedList.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSList
@@ -609,18 +615,119 @@ Initializes a `DSList` with a spacing value and dynamic content.
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSList: View {
+    private struct Category: Identifiable {
+        let id = UUID()
+        let title: String
+    }
+
+    private struct Product: Identifiable {
+        let id = UUID()
+        let title: String
+        let description: String
+        let imageURL: URL?
+        let price: DSPrice
+    }
+
+    private let categories: [Category] = [
+        .init(title: "Shoes"),
+        .init(title: "Shirts"),
+        .init(title: "Jeans"),
+        .init(title: "Watches")
+    ]
+
+    private let topProducts: [URL?] = [
+        URL(string: "https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg?cs=srgb&dl=pexels-ray-piedra-1478442.jpg&fm=jpg"),
+        URL(string: "https://images.pexels.com/photos/2421374/pexels-photo-2421374.jpeg?cs=srgb&dl=pexels-hoang-loc-2421374.jpg&fm=jpg"),
+        URL(string: "https://images.pexels.com/photos/2300334/pexels-photo-2300334.jpeg?cs=srgb&dl=pexels-adrian-dorobantu-2300334.jpg&fm=jpg")
+    ]
+
+    private let products: [Product] = [
+        .init(
+            title: "New trend",
+            description: "Colourful sneakers",
+            imageURL: URL(string: "https://images.pexels.com/photos/2300334/pexels-photo-2300334.jpeg?cs=srgb&dl=pexels-adrian-dorobantu-2300334.jpg&fm=jpg"),
+            price: DSPrice(amount: "100", regularAmount: "120", currency: "$", discountBadge: "20% Off")
+        ),
+        .init(
+            title: "Shirts",
+            description: "Fresh prints of Bel-Air",
+            imageURL: URL(string: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcnRzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"),
+            price: DSPrice(amount: "50", regularAmount: "60", currency: "$", discountBadge: "15% Off")
+        ),
+        .init(
+            title: "Shoes",
+            description: "Bring power to you",
+            imageURL: URL(string: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg"),
+            price: DSPrice(amount: "200", regularAmount: "250", currency: "$", discountBadge: "20% Off")
+        ),
+        .init(
+            title: "Watches",
+            description: "Time is what you make",
+            imageURL: URL(string: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?cs=srgb&dl=pexels-pixabay-277390.jpg&fm=jpg"),
+            price: DSPrice(amount: "300", regularAmount: "350", currency: "$", discountBadge: "10% Off")
+        ),
+        .init(
+            title: "Jeans",
+            description: "Quality never goes down",
+            imageURL: URL(string: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?cs=srgb&dl=pexels-mnz-1598507.jpg&fm=jpg"),
+            price: DSPrice(amount: "80", regularAmount: "90", currency: "$", discountBadge: "10% Off")
+        ),
+        .init(
+            title: "T-Shirts",
+            description: "Blink if you want me",
+            imageURL: URL(string: "https://images.pexels.com/photos/761963/pexels-photo-761963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"),
+            price: DSPrice(amount: "40", regularAmount: "45", currency: "$", discountBadge: "10% Off")
+        )
+    ]
+
     var body: some View {
-        DSList(spacing: .custom(16)) {
-            DSSection {
-                DSVStack(spacing: .small) {
-                    DSText("Title").dsTextStyle(.headline)
-                    DSText("Subtitle").dsTextStyle(.caption)
-                }
-            }
+        DSList(sectionSpacing: .medium, sectionHeaderSpacing: .medium) {
+
             DSSection {
                 DSHStack {
-                    DSButton.callToAction(title: "Primary", action: { })
-                    DSButton.callToActionLink(title: "Link", action: { })
+                    DSVStack(spacing: .zero) {
+                        DSText("Shop").dsTextStyle(.largeHeadline)
+                        DSText("Over 45k items available for you").dsTextStyle(.subheadline)
+                    }
+                    Spacer()
+                    DSImageView(
+                        url: URL(string: "https://images.pexels.com/photos/3760707/pexels-photo-3760707.jpeg?cs=srgb&dl=pexels-sound-on-3760707.jpg&fm=jpg"),
+                        style: .circle,
+                        size: 50
+                    )
+                }
+            }
+
+            DSSection {
+                DSCoverFlow(height: .custom(220), data: topProducts, id: \.self) { imageURL in
+                    DSImageView(url: imageURL, style: .capsule)
+                }
+            }
+
+            DSSection {
+                DSSectionHeaderView(title: "Categories", actionTitle: "View all", action: { })
+                DSGrid(data: categories, id: \.id) { category in
+                    DSText(category.title).dsTextStyle(.smallHeadline)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .dsCardStyle()
+                }
+            }
+
+            DSSection {
+                DSSectionHeaderView(title: "Discounts", actionTitle: "View all", action: { })
+                DSGrid(viewHeight: 180, data: products, id: \.id) { product in
+                    DSVStack {
+                        DSImageView(
+                            url: product.imageURL,
+                            style: .capsule
+                        )
+                        DSVStack(spacing: .zero) {
+                            DSText(product.title).dsTextStyle(.smallHeadline)
+                            DSText(product.description).dsTextStyle(.smallSubheadline)
+                            DSPriceView(price: product.price, size: .smallHeadline)
+                                .dsPadding(.top, .regular)
+                        }
+                    }.dsPadding(.bottom)
                 }
             }
         }
@@ -629,7 +736,7 @@ struct Testable_DSList: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSList.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSList.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSSFSymbolButton
@@ -655,7 +762,7 @@ struct Testable_DSSFSymbolButton: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSSFSymbolButton.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSSFSymbolButton.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSRatingView
@@ -687,7 +794,7 @@ struct Testable_DSRatingView: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSRatingView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSRatingView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSRadioPickerView
@@ -711,7 +818,7 @@ Initializes a `DSRadioPickerView` with data and custom content rendering options
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSRadioPickerView: View {
-    let data = ["Red","Orange","Purple","Green","Blue"]
+    let data = ["Red", "Orange", "Purple", "Green", "Blue"]
     @State var selected = "Purple"
     var body: some View {
         DSRadioPickerView(data: data, id: \.self, selected: $selected, content: { element, _ in
@@ -722,35 +829,35 @@ struct Testable_DSRadioPickerView: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSRadioPickerView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSRadioPickerView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 #### Code example:
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSThread: View {
-    
+
     let colors: [ThreadItem] = [
         ThreadItem(item: SomeColor(title: "red", color: Color.red)),
-        ThreadItem(item: SomeColor(title: "green", color:Color.green)),
+        ThreadItem(item: SomeColor(title: "green", color: Color.green)),
         ThreadItem(item: SomeColor(title: "yellow", color: Color.yellow)),
-        ThreadItem(item: SomeColor(title: "purple", color:  Color.purple))
+        ThreadItem(item: SomeColor(title: "purple", color: Color.purple))
     ]
-    
+
     var body: some View {
         ScrollView {
             DSThread(
                 data: colors,
                 id: \.self,
-                header: { threadItem, position in
+                header: { threadItem, _ in
                     DSHStack {
                         Circle()
                             .fill(threadItem.item.color)
                             .frame(width: 24, height: 24)
-                        
+
                         Text(threadItem.item.title)
                     }
-                }, content: { threadItem, position in
+                }, content: { threadItem, _ in
                     threadItem.item.color
                         .frame(height: 100)
                 }, footer: {
@@ -763,7 +870,7 @@ struct Testable_DSThread: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSThread.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSThread.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSSection
@@ -773,11 +880,12 @@ Code example result:
 #### Initialization:
 Initializes a `DSSection` with optional spacing and dynamic content.
 - Parameters:
-- `spacing`: Reserved for section spacing customization. Defaults to `.regular`.
+- `spacing`: Additional bottom spacing for rows in this section. Defaults to `.zero`.
 - `content`: A `@ViewBuilder` closure that generates the section content.
 
 #### Usage:
 `DSSection` is intended to be used inside a `DSList` to keep list sections visually consistent with the design system.
+When section content contains many vertical rows, emit the `ForEach` rows directly instead of wrapping the whole set in `VStack` or `LazyVStack`, or SwiftUI may collapse them into one large list cell.
 #### Code example:
 Here is how you might set up it within your views:
 ```swift
@@ -786,13 +894,13 @@ struct Testable_DSSection: View {
         DSList(spacing: .custom(12)) {
             DSSection {
                 DSVStack(spacing: .small) {
-                    DSText("Section Title").dsTextStyle(.headline)
-                    DSText("Section body text").dsTextStyle(.caption)
+                DSText("Section Title").dsTextStyle(.headline)
+                DSText("Section body text").dsTextStyle(.caption2)
                 }
             }
             DSSection {
                 DSHStack {
-                    DSButton.callToAction(title: "Action", action: { })
+                    DSButton(title: "Action", action: { })
                     DSButton.callToActionLink(title: "More", action: { })
                 }
             }
@@ -802,7 +910,7 @@ struct Testable_DSSection: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSSection.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSSection.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSQuantityPicker
@@ -832,7 +940,7 @@ struct Testable_DSQuantityPicker: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSQuantityPicker.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSQuantityPicker.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSPickerView
@@ -859,13 +967,13 @@ Initializes a `DSPickerView` with customization options for layout and interacti
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSPickerView: View {
-    
-    let letters = ["A","B","C","D","E"]
+
+    let letters = ["A", "B", "C", "D", "E"]
     @State var selectedLetter = "A"
-    
-    let numbers = ["1","2","3","4","5","6","7","8","9"]
+
+    let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     @State var selectedNumber = "2"
-    
+
     var body: some View {
         DSVStack {
             DSPickerView(
@@ -878,7 +986,7 @@ struct Testable_DSPickerView: View {
                         .dsCardStyle()
                 }
             ).dsSectionStyle(title: "Letters")
-            
+
             DSPickerView(
                 style: .grid(columns: 5),
                 data: numbers, id: \.self,
@@ -895,7 +1003,7 @@ struct Testable_DSPickerView: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSPickerView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSPickerView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSBottomContainer
@@ -929,7 +1037,7 @@ struct Testable_DSBottomContainer: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSBottomContainer.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSBottomContainer.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSDivider
@@ -952,7 +1060,7 @@ struct Testable_DSDivider: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSDivider.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSDivider.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSTextField
@@ -971,13 +1079,13 @@ Initializes a `DSTextField` with various options for handling different types of
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSTextField: View {
-    
+
     @State private var name = DSTextFieldValue()
     @State private var email = DSTextFieldValue()
     @State private var phone = DSTextFieldValue()
     @State private var password = DSTextFieldValue()
     @State private var repeatPassword = DSTextFieldValue()
-    
+
     var body: some View {
         ScrollView {
             DSVStack {
@@ -989,9 +1097,9 @@ struct Testable_DSTextField: View {
                 .dsPadding()
                 .dsSecondaryBackground()
                 .dsCornerRadius()
-                
+
                 DSTextField.password(value: password)
-                
+
                 DSButton(title: "Subbmit") {
                     for element in [email, password, phone] {
                         let isValid = element.validate()
@@ -1007,7 +1115,7 @@ struct Testable_DSTextField: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSTextField.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSTextField.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSLazyVStack
@@ -1041,27 +1149,27 @@ struct Testable_DSLazyVStack: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSLazyVStack.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSLazyVStack.snapshot.png" width="35%"/></td></tr><table/>
 
 
 #### Code example:
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSTabPagingView: View {
-    
+
     @State private var scrollContentFrame: CGRect = .zero
-    
+
     @State var firstLastPage: Bool = true
     @State var showSecondPage: Bool = true
     @State var showLastPage: Bool = true
-    
+
     @State var showIndicator: Bool = true
-    
+
     var body: some View {
-        
+
         DSVStack {
             DSTabPagingView {
-                
+
                 if firstLastPage {
                     DSTabPage {
                         Color.red
@@ -1076,7 +1184,7 @@ struct Testable_DSTabPagingView: View {
                         }
                     }
                 }
-                
+
                 if showSecondPage {
                     DSTabPage {
                         Color.green
@@ -1085,7 +1193,7 @@ struct Testable_DSTabPagingView: View {
                             .dsTextStyle(.headline, isCurrent ? .text(.headline) : .text(.callout))
                     }
                 }
-                
+
                 if showLastPage {
                     DSTabPage {
                         Color.blue
@@ -1095,46 +1203,46 @@ struct Testable_DSTabPagingView: View {
                     }
                 }
             }
-            
+
             DSHStack {
-                
+
                 DSButton(title: "Toggle first") {
                     withAnimation {
                         firstLastPage.toggle()
                     }
                 }
-                
+
                 DSButton(title: "Toggle second") {
                     withAnimation {
                         showSecondPage.toggle()
                     }
                 }
-                
+
                 DSButton(title: "Toggle third") {
                     withAnimation {
                         showLastPage.toggle()
                     }
                 }
-                
+
             }.dsPadding(.horizontal)
-            
+
             DSHStack {
-                
+
                 DSButton(title: "Toggle show indicator") {
                     withAnimation {
                         showIndicator.toggle()
                     }
                 }
-                
+
             }.dsPadding(.horizontal)
-            
+
         }.dsPadding(.vertical)
     }
 }
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSTabPagingView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSTabPagingView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSChevronView
@@ -1158,7 +1266,7 @@ struct Testable_DSChevronView: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSChevronView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSChevronView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSToolbarSFSymbolButton
@@ -1183,7 +1291,53 @@ struct Testable_DSToolbarSFSymbolButton: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSToolbarSFSymbolButton.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSToolbarSFSymbolButton.snapshot.png" width="35%"/></td></tr><table/>
+
+
+## DSChipsView
+
+`DSChipsView` is a reusable DSKit layout container for chip and tag collections. It lays out child views horizontally and wraps items onto the next line based on each item's intrinsic width.
+
+#### Initialization:
+Initializes `DSChipsView` with data, identity, spacing, and a content builder.
+- Parameters:
+- `data`: The collection of items to render.
+- `id`: A key path to a stable identifier for each element.
+- `horizontalSpacing`: Horizontal spacing between chips.
+- `verticalSpacing`: Vertical spacing between wrapped rows.
+- `content`: A closure that returns the chip content for each element.
+
+#### Usage:
+`DSChipsView` is intentionally layout-only. It does not impose visual styling, selection behavior, or tap handling, so callers can render chips, filters, or tags with the appearance they need while reusing a single wrapping layout.
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+struct Testable_DSChipsView: View {
+    let values: [DSChipsPreviewChip] = [
+        .init(id: "swift", title: "Swift", style: .secondary),
+        .init(id: "design-system", title: "Design System", style: .primary),
+        .init(id: "swiftui", title: "SwiftUI", style: .secondary),
+        .init(id: "ios", title: "iOS", style: .secondary),
+        .init(id: "monitor", title: "Monitor", style: .primary),
+        .init(id: "dskit", title: "DSKit", style: .secondary),
+        .init(id: "components", title: "Components", style: .primary),
+        .init(id: "layout", title: "Layout Only", style: .secondary)
+    ]
+
+    var body: some View {
+        DSVStack {
+            DSChipsView(data: values, id: \.id) { item in
+                DSChipsPreviewTag(title: item.title, style: item.style)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .dsPadding()
+    }
+}
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSChipsView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSSectionHeaderView
@@ -1214,6 +1368,6 @@ struct Testable_DSSectionHeaderView: View {
 ```
 Code example result:
 
-<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSSectionHeaderView.1.png" width="35%"/></td></tr><table/>
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSSectionHeaderView.snapshot.png" width="35%"/></td></tr><table/>
 
 

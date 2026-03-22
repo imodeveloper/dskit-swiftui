@@ -76,6 +76,10 @@ final class DSKitTests: SnapshotTestCase {
     func testDSChevronView() throws {
         assertSnapshot(for: Testable_DSChevronView(), named: "DSChevronView", options: crossSimulatorOptions)
     }
+
+    func testDSChipsView() throws {
+        assertSnapshot(for: Testable_DSChipsView(), named: "DSChipsView", options: crossSimulatorOptions)
+    }
     
     func testDSCoverFlow() throws {
         assertSnapshot(for: Testable_DSCoverFlow(), named: "DSCoverFlow", options: crossSimulatorOptions)

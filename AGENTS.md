@@ -75,6 +75,10 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - Typography system: `DSFonts` + `DSTextFontKey`, resolved through `DSText` via `dsTextStyle(...)`.
 - Colors and surface tokens are exposed via `DSColorKey` and mapped through `DSViewStyle`/`DSAppearance`.
 
+## File Header Rule
+- Never use `Created by Codex` in source file headers.
+- Use `Created by Ivan Borinschi` instead when a created-by header is present.
+
 ## Quick command
 - Build DSKitExplorer:
   - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2' build`

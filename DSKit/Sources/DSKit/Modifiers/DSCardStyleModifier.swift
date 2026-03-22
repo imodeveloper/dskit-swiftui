@@ -9,15 +9,23 @@ import SwiftUI
 
 public struct DSCardStyleModifier: ViewModifier {
 
-    let padding: DSPadding
+    let horizontalPadding: DSPadding
+    let verticalPadding: DSPadding
 
     public init(padding: DSPadding) {
-        self.padding = padding
+        self.horizontalPadding = padding
+        self.verticalPadding = padding
+    }
+
+    public init(horizontalPadding: DSPadding, verticalPadding: DSPadding) {
+        self.horizontalPadding = horizontalPadding
+        self.verticalPadding = verticalPadding
     }
 
     public func body(content: Content) -> some View {
         content
-            .dsPadding(padding)
+            .dsPadding(.horizontal, horizontalPadding)
+            .dsPadding(.vertical, verticalPadding)
             .dsSecondaryBackground()
             .dsCornerRadius()
     }
@@ -26,5 +34,17 @@ public struct DSCardStyleModifier: ViewModifier {
 public extension View {
     func dsCardStyle(padding: DSPadding = .medium) -> some View {
         return self.modifier(DSCardStyleModifier(padding: padding))
+    }
+
+    func dsCardStyle(
+        horizontalPadding: DSPadding,
+        verticalPadding: DSPadding
+    ) -> some View {
+        return self.modifier(
+            DSCardStyleModifier(
+                horizontalPadding: horizontalPadding,
+                verticalPadding: verticalPadding
+            )
+        )
     }
 }

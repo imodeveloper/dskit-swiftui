@@ -62,3 +62,15 @@
   - increased `LightBlueAppearance` corner radius from `5` to `10`
   - documented the `DSSection` virtualization rule to avoid wrapping full row sets in `VStack`/`LazyVStack`
 - Updated changelog before commit/push as required.
+
+## 2026-03-22
+
+### Request
+- Rename the chips layout from `DSClipsView` to `DSChipsView`, move it into DSKit, document it like other DSKit views, align it with DSKit spacing/style tokens, add more flexible `dsCardStyle` padding, and prepare repository changes for commit/push.
+
+### Done
+- Added new `DSChipsView` to `DSKit/Sources/DSKit/Views` as a layout-only wrapping container with `DSSpace`-based horizontal and vertical spacing.
+- Added DSKit documentation/source comments, snapshot test coverage hook, generated docs entry, and a `DSChipsView.snapshot.png` golden.
+- Fixed the documentation generator to reference `.snapshot.png` assets instead of stale `.1.png` names.
+- Extended `dsCardStyle` to support separate `horizontalPadding` and `verticalPadding` while keeping the existing single-padding overload.
+- Added repo guidance to avoid `Created by Codex` file headers and to use `Created by Ivan Borinschi` instead.

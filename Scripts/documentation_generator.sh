@@ -50,7 +50,7 @@ for file in "${sorted_files[@]}"; do
 
     # Adding an image preview using the filename
     echo "Code example result:\n" >> "$output_file"
-    echo "<table><tr><td><img src=\"../DSKitTests/__Snapshots__/DSKitTests/${filename}.1.png\" width=\"35%\"/></td></tr><table/>" >> "$output_file"
+    echo "<table><tr><td><img src=\"../DSKitTests/__Snapshots__/DSKitTests/${filename}.snapshot.png\" width=\"35%\"/></td></tr><table/>" >> "$output_file"
     echo "\n" >> "$output_file"  # Add another separator for readability
 done
 
