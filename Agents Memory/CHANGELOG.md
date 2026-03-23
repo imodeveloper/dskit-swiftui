@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-03-23 (Dotted Divider Style)
+
+### Request
+- Add a DSKit-backed dotted divider style so the Monitor hourly brief can render centered dot separators instead of line dividers.
+- Keep the existing divider behavior as the default and prepare the repo changes for commit/push.
+
+### Done
+- Extended `DSDivider` with a backward-compatible `style` API.
+- Added `DSDividerStyle.line` to preserve the existing default line rendering.
+- Added `DSDividerStyle.dots(number:size:spacing:alignment:)` plus `DSDividerAlignment` for centered or edge-aligned dot separators.
+- Kept the default `DSDivider()` behavior unchanged while enabling dotted separators for consuming apps such as Monitor.
+
 ## 2026-03-17
 
 ### Request

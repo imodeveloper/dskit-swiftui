@@ -16,25 +16,90 @@ import SwiftUI
 The `DSDivider` is initialized without parameters, defaulting to predefined styling that respects the current theme and spacing conventions.
 
 #### Usage:
-`DSDivider` is used to visually separate content within a view, often between list items, sections in a form, or alongside layout changes.
+ `DSDivider` is used to visually separate content within a view, often between list items, sections in a form, or alongside layout changes.
 */
 
-public struct DSDivider: View, DSDesignable {
+public enum DSDividerAlignment: Sendable {
+    case leading
+    case center
+    case trailing
+}
 
-    public init() {}
+public enum DSDividerStyle: Sendable {
+    case line
+    case dots(
+        number: Int = 3,
+        size: CGFloat = 4,
+        spacing: CGFloat = 4,
+        alignment: DSDividerAlignment = .center
+    )
+}
+
+public struct DSDivider: View, DSDesignable {
+    public let style: DSDividerStyle
+
+    public init(style: DSDividerStyle = .line) {
+        self.style = style
+    }
 
     @Environment(\.appearance) public var appearance: DSAppearance
     @Environment(\.viewStyle) public var viewStyle: DSViewStyle
 
     public var body: some View {
-        Divider().background(viewColors.separator.color)
-            .frame(minWidth: 1, minHeight: 1)
+        switch style {
+        case .line:
+            Divider()
+                .background(viewColors.separator.color)
+                .frame(minWidth: 1, minHeight: 1)
+        case let .dots(number, size, spacing, alignment):
+            dotsDivider(
+                number: max(1, number),
+                size: max(1, size),
+                spacing: max(0, spacing),
+                alignment: alignment
+            )
+        }
+    }
+
+    @ViewBuilder
+    private func dotsDivider(
+        number: Int,
+        size: CGFloat,
+        spacing: CGFloat,
+        alignment: DSDividerAlignment
+    ) -> some View {
+        let dots = HStack(spacing: spacing) {
+            ForEach(0 ..< number, id: \.self) { _ in
+                Circle()
+                    .fill(viewColors.separator.color)
+                    .frame(width: size, height: size)
+            }
+        }
+
+        HStack(spacing: 0) {
+            switch alignment {
+            case .leading:
+                dots
+                Spacer(minLength: 0)
+            case .center:
+                Spacer(minLength: 0)
+                dots
+                Spacer(minLength: 0)
+            case .trailing:
+                Spacer(minLength: 0)
+                dots
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: size)
     }
 }
 
 struct Testable_DSDivider: View {
     var body: some View {
-        DSDivider()
+        DSVStack(spacing: .medium) {
+            DSDivider()
+            DSDivider(style: .dots())
+        }
     }
 }
 
