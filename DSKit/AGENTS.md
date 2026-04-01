@@ -25,6 +25,10 @@
   - `dsContentMarginKey` is host container margin context; avoid adding it again in `DSHScroll` compensation.
   - `dsScreenMarginsAlreadyApplied` indicates a parent (for example `DSList`/`DSSection`) already owns screen margins.
   - Current stable rule in `DSHScroll`: keep inner `.padding(.horizontal, scrollableContentMargin)` and outer `.padding(.horizontal, -scrollableContentMargin)`.
+- `DSImageView` remote image placeholders:
+  - While a remote image is loading, show a centered `photo` placeholder.
+  - If the remote image load fails, show `photo.badge.exclamationmark`.
+  - Placeholder icon size should scale with the rendered image bounds, but remain relatively smaller on large images; keep the placeholder readable without dominating the surface.
 
 ## Run / Test in Isolation
 - Run snapshot tests via `DSKitExplorer` scheme (includes DSKitTests in the test plan).

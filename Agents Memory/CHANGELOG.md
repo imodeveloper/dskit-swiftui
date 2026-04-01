@@ -96,3 +96,13 @@
 - Added `DSDimension.adaptiveHeight(_:)` and updated `DSSizeModifier` so adaptive-height images are not pinned to a fixed runtime height.
 - Extended `DSImageView` remote loading to cache aspect ratios from decoded images and reuse them through exact-image, path-family, and host-level lookups before the next render.
 - Kept a fallback default height for first render while allowing later loads to refine the aspect ratio and update the cache.
+
+## 2026-04-01
+
+### Request
+- Improve DSKit remote image loading placeholders and prepare current repository changes for commit/push.
+
+### Done
+- Updated `DSImageView` remote-image loading states so loading shows a centered `photo` placeholder and failures show `photo.badge.exclamationmark`.
+- Made the loading/error placeholder icon scale with the rendered image bounds while remaining relatively smaller on large image surfaces.
+- Documented the remote-image placeholder behavior in `DSKit/AGENTS.md`.

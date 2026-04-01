@@ -179,6 +179,7 @@ private struct DSRemoteImageView: View {
     var body: some View {
         GeometryReader { geometry in
             let layoutSize = effectiveLayoutSize(from: geometry.size)
+            let loadFailed = imageManager.image == nil && imageManager.error != nil
 
             Group {
                 if imageManager.image != nil {
@@ -201,8 +202,10 @@ private struct DSRemoteImageView: View {
                         }
                         .setDisplayShape(shape: image.displayShape)
                 } else {
-                    Color.gray.opacity(0.1)
-                        .setDisplayShape(shape: image.displayShape)
+                    placeholderView(
+                        for: layoutSize,
+                        failed: loadFailed
+                    )
                 }
             }
             .onAppear {
@@ -226,6 +229,21 @@ private struct DSRemoteImageView: View {
             }
         }
         .frame(height: adaptiveDisplayHeight)
+    }
+
+    @ViewBuilder
+    private func placeholderView(for layoutSize: CGSize, failed: Bool) -> some View {
+        let placeholderIconSize = adaptivePlaceholderIconSize(for: layoutSize)
+
+        Color.gray.opacity(0.1)
+            .overlay(alignment: .center) {
+                Image(systemName: failed ? "photo.badge.exclamationmark" : "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundStyle(.secondary.opacity(failed ? 0.95 : 0.75))
+                    .frame(width: placeholderIconSize, height: placeholderIconSize)
+            }
+            .setDisplayShape(shape: image.displayShape)
     }
 
     private func loadImageIfNeeded(for size: CGSize) {
@@ -285,6 +303,11 @@ private struct DSRemoteImageView: View {
         let width = max(CGFloat(1), size.width)
         let height = max(CGFloat(1), adaptiveDisplayHeight ?? size.height)
         return CGSize(width: width, height: height)
+    }
+
+    private func adaptivePlaceholderIconSize(for size: CGSize) -> CGFloat {
+        let minSide = max(CGFloat(1), min(size.width, size.height))
+        return min(max(14, minSide * 0.24), 22)
     }
 
     private var adaptiveDisplayHeight: CGFloat? {
