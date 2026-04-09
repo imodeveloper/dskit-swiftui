@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 /*
 ## DSLetterBadgeView
 
@@ -107,10 +113,27 @@ public struct DSLetterBadgeView: View {
     ]
 
     public static func generatedColor(for seed: String) -> Color {
+        if let namedColor = colorFromNamedAsset(seed) {
+            return namedColor
+        }
+
         let stableColorIndex = seed.unicodeScalars.reduce(0) { partialResult, scalar in
             ((partialResult * 31) + Int(scalar.value)) & 0x7fffffff
         }
         return palette[stableColorIndex % palette.count]
+    }
+
+    private static func colorFromNamedAsset(_ name: String) -> Color? {
+        #if canImport(UIKit)
+        if let uiColor = UIColor(named: name) {
+            return Color(uiColor)
+        }
+        #elseif canImport(AppKit)
+        if let nsColor = NSColor(named: NSColor.Name(name)) {
+            return Color(nsColor)
+        }
+        #endif
+        return nil
     }
 }
 

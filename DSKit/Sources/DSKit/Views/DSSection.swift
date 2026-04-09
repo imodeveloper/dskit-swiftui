@@ -220,7 +220,7 @@ where Data: RandomAccessCollection, ID: Hashable, RowContent: View, TopSeparator
     }
 
     private var resolvedSpacing: DSSpatialToken {
-        inheritedSpacing ?? .space8
+        inheritedSpacing ?? .space16
     }
 
     private var allSeparatorEdges: VerticalEdge.Set {
@@ -554,7 +554,7 @@ public struct DSSection<Content: View>: View {
     }
 
     private var resolvedSpacing: DSSpatialToken {
-        inheritedSpacing ?? .space8
+        inheritedSpacing ?? .space16
     }
 
     private func styledPlainContent<SectionContent: View>(_ sectionContent: SectionContent) -> some View {

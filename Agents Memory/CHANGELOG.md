@@ -151,3 +151,12 @@
 - Expanded `DSLetterBadgeView` and `DSAuthorView` previews with broader color coverage, full typography-scale examples, and typography-token naming in the preview content.
 - Made `DSAuthorView` derive its badge/text spacing from the resolved typography point size instead of taking a separate public spacing token.
 - Regenerated `Content/Views.md` to document the new reusable views and the updated previews.
+
+### Request
+- Update DSKit list defaults so bare `DSList` rows do not show a platform separator, verify the custom separator system still works, and prepare current repository changes for commit/push.
+
+### Done
+- Changed `DSList` to hide the platform list-row separator by default so standalone rows no longer render an implicit divider line.
+- Kept the custom and native `DSSection` separator paths intact, since `DSSection` already hides native separators before applying DSKit-managed divider or custom separator content.
+- Expanded the `DSList` preview surface to show default no-separator rows, native divider rows, and custom separator rows side by side.
+- Regenerated `Content/Views.md` for the updated `DSList` behavior and previews.

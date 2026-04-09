@@ -750,8 +750,51 @@ struct Testable_DSList: View {
         )
     ]
 
+    private let separatorSampleRows = [
+        "Default row one",
+        "Default row two"
+    ]
+
+    private let customSeparatorRows = [
+        "Custom separator one",
+        "Custom separator two"
+    ]
+
     var body: some View {
         DSList(sectionSpacing: .space16, sectionHeaderSpacing: .space16) {
+            DSSection {
+                DSVStack(spacing: .space4) {
+                    DSText("Default DSList rows").dsTextStyle(.headline)
+                    DSText("These rows should not show the platform separator by default.").dsTextStyle(.caption2)
+                }
+            }
+
+            DSSection(
+                data: separatorSampleRows,
+                id: \.self,
+                content: { row, _ in
+                    DSText(row).dsTextStyle(.label)
+                }
+            )
+
+            DSSection(
+                data: separatorSampleRows,
+                id: \.self,
+                nativeSeparator: .visible
+            ) { row, _ in
+                DSText("Native divider · \(row)").dsTextStyle(.label)
+            }
+
+            DSSection(
+                data: customSeparatorRows,
+                id: \.self,
+                content: { row, _ in
+                    DSText(row).dsTextStyle(.label)
+                },
+                separator: { _ in
+                    DSListSeparatorView()
+                }
+            )
 
             DSSection {
                 DSHStack {
