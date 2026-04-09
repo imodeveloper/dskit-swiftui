@@ -24,7 +24,7 @@ public enum DSColorToken: Equatable, Hashable {
     }
 
     public func uiColor(for appearance: DSAppearance, in surfaceStyle: DSSurfaceStyle) -> DSUIColor {
-        appearance.colors.uiColor(for: self, in: surfaceStyle)
+        appearance.resolvedUIColor(for: self, in: surfaceStyle)
     }
 }
 

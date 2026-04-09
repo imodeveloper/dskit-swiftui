@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-04-09 (Restore Pre-Refactor Color Behavior)
+
+### Request
+- Revert the DSKit changes related to `DSColorToken.swift` from the latest DSKit commit, keep the non-color work, restore color and wand-related behavior to how it was before, and commit/push all current repository changes.
+
+### Done
+- Restored the pre-refactor DSKit appearance color model around primary/secondary view colors, button colors, text colors, text-field colors, navigation bar colors, tab bar colors, and price colors.
+- Added back the legacy color compatibility types and key-based APIs needed for the old color behavior to coexist with the current typography and spacing structure.
+- Updated `DSColorToken` resolution and the affected DSKit controls so runtime colors now follow the old appearance behavior again instead of the newer semantic-token mapping.
+- Kept the non-color DSKit work from the recent refactor in place, including the newer layout, spacing, and typography changes that were not part of this rollback.
+- Verified the rollback with a successful `DSKitExplorer` simulator build.
+- Updated this changelog before commit/push as required.
+
 ## 2026-04-09 (Semantic Tokens and Section/List Refactor)
 
 ### Request

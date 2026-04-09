@@ -73,7 +73,7 @@ public indirect enum DSTextStyle: Equatable, Hashable {
     func textStyle(for appearance: DSAppearance, in surfaceStyle: DSSurfaceStyle) -> (font: DSTypographyToken, color: DSColorToken) {
         switch self {
         case .textFont(let font):
-            return (font: font, color: appearance.colors.defaultTextColorToken(for: font, in: surfaceStyle))
+            return (font: font, color: appearance.defaultTextColorToken(for: font, in: surfaceStyle))
         case .textFontWithColor(let font, let color):
             return (font: font, color: color)
         case .reStyleWithColor(let textStyle, let color):

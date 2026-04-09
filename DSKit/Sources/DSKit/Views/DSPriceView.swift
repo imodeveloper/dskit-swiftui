@@ -49,7 +49,7 @@ public struct DSPriceView: View, DSDesignable {
         if let color {
             .custom(color)
         } else {
-            .text(.secondary)
+            .custom(Color(appearance.price.regularAmount))
         }
     }
 
@@ -85,11 +85,11 @@ public struct DSPriceView: View, DSDesignable {
                             weight: .regular,
                             relativeTo: textFont
                         ),
-                        .text(.brandOnBold)
+                        .custom(Color(appearance.price.badgeText))
                     )
                     .dsPadding(.horizontal, .space8)
                     .dsPadding(.vertical, .custom(2))
-                    .dsBackground(.background(.brand))
+                    .dsBackground(.custom(Color(appearance.price.badgeBackground)))
                     .cornerRadius(appearance.price.badgeCornerRadius)
             }
         }

@@ -244,11 +244,13 @@ public struct DSButton: View {
     }
 
     var dsBackgroundColor: DSColorToken {
+        let currentView = appearance.viewAppearance(for: surfaceStyle)
+
         switch style {
         case .default:
-            return .background(.brand)
+            return .custom(Color(currentView.button.accentColor))
         case .light:
-            return .background(.brand)
+            return .custom(Color(currentView.button.accentColor))
         case .custom(color: let color):
             return .custom(color)
         case .clear:
@@ -256,24 +258,26 @@ public struct DSButton: View {
         case .toolbar:
             return .custom(.clear)
         case .borderedLight:
-            return .background(.surface)
+            return .custom(Color(appearance.primaryView.button.supportColor))
         }
     }
 
     var titleColor: DSColorToken {
+        let currentView = appearance.viewAppearance(for: surfaceStyle)
+
         switch style {
         case .default:
-            return .text(.brandOnBold)
+            return .custom(Color(currentView.button.supportColor))
         case .light:
-            return .text(.brand)
+            return .custom(Color(currentView.button.accentColor))
         case .custom:
             return .custom(.white)
         case .clear:
-            return .text(.brand)
+            return .custom(Color(currentView.button.accentColor))
         case .toolbar:
-            return .icon(.brand)
+            return .custom(Color(currentView.button.accentColor))
         case .borderedLight:
-            return .text(.brand)
+            return .custom(Color(appearance.primaryView.button.accentColor))
         }
     }
 }
