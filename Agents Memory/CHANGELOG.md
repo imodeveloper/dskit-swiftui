@@ -131,3 +131,13 @@
 - Updated `DSImageView` remote-image loading states so loading shows a centered `photo` placeholder and failures show `photo.badge.exclamationmark`.
 - Made the loading/error placeholder icon scale with the rendered image bounds while remaining relatively smaller on large image surfaces.
 - Documented the remote-image placeholder behavior in `DSKit/AGENTS.md`.
+
+## 2026-04-09
+
+### Request
+- Add a reusable inline tag view to DSKit for article metadata, support manual icon scaling and offset tuning, expand previews, and prepare current repository changes for commit/push.
+
+### Done
+- Added `DSInlineTagView` as a reusable DSKit inline metadata/tag component with a system-symbol convenience initializer and a custom-content initializer.
+- Kept icon sizing driven by `DSTypographyToken` and supported manual `additionalScale` and `iconOffset` controls instead of automatic symbol-compensation logic.
+- Added broader previews covering common tags, scaled symbols, typography-driven sizing, and custom inline content examples.
