@@ -141,3 +141,13 @@
 - Added `DSInlineTagView` as a reusable DSKit inline metadata/tag component with a system-symbol convenience initializer and a custom-content initializer.
 - Kept icon sizing driven by `DSTypographyToken` and supported manual `additionalScale` and `iconOffset` controls instead of automatic symbol-compensation logic.
 - Added broader previews covering common tags, scaled symbols, typography-driven sizing, and custom inline content examples.
+
+### Request
+- Add reusable DSKit author and letter-badge views, tune their typography/layout behavior, expand previews across the full typography scale, and prepare current repository changes for commit/push.
+
+### Done
+- Added `DSLetterBadgeView` and `DSAuthorView` as reusable DSKit components for compact identity rows and seeded initial badges.
+- Refined `DSLetterBadgeView` so badge sizing, glyph sizing, padding, and weight follow the passed `DSTypographyToken` more closely, while keeping explicit badge colors controlled by the caller.
+- Expanded `DSLetterBadgeView` and `DSAuthorView` previews with broader color coverage, full typography-scale examples, and typography-token naming in the preview content.
+- Made `DSAuthorView` derive its badge/text spacing from the resolved typography point size instead of taking a separate public spacing token.
+- Regenerated `Content/Views.md` to document the new reusable views and the updated previews.

@@ -6,7 +6,7 @@
 Initializes a `DSVStack` with alignment, spacing, and dynamic content.
 - Parameters:
 - `alignment`: The horizontal alignment of content within the stack. Defaults to `.leading`.
-- `spacing`: Specifies the space between each item within the stack. Defaults to `.regular`.
+- `spacing`: Specifies the space between each item within the stack. Defaults to `.space8`.
 - `content`: A `@ViewBuilder` closure that generates the content of the stack.
 
 #### Usage:
@@ -17,17 +17,17 @@ Here is how you might set up it within your views:
 struct Testable_DSVStack: View {
     var body: some View {
         DSHStack {
-            DSVStack(spacing: .small) {
+            DSVStack(spacing: .space4) {
                 Color.yellow
                 Color.green
                 Color.blue
             }.overlay(alignment: .center, content: { Text("1") })
-            DSVStack(spacing: .regular) {
+            DSVStack(spacing: .space8) {
                 Color.yellow
                 Color.green
                 Color.blue
             }.overlay(alignment: .center, content: { Text("2") })
-            DSVStack(spacing: .medium) {
+            DSVStack(spacing: .space16) {
                 Color.yellow
                 Color.green
                 Color.blue
@@ -49,7 +49,7 @@ Code example result:
 Initializes a `DSHStack` with alignment, spacing, and dynamic content.
 - Parameters:
 - `alignment`: The vertical alignment of content within the stack. Defaults to `.center`.
-- `spacing`: Specifies the space between each item within the stack. Defaults to `.regular`.
+- `spacing`: Specifies the space between each item within the stack. Defaults to `.space8`.
 - `content`: A `@ViewBuilder` closure that generates the content of the stack.
 
 #### Usage:
@@ -60,17 +60,17 @@ Here is how you might set up it within your views:
 struct Testable_DSHStack: View {
     var body: some View {
         DSVStack {
-            DSHStack(spacing: .small) {
+            DSHStack(spacing: .space4) {
                 Color.yellow
                 Color.green
                 Color.blue
             }.overlay(alignment: .center, content: { Text("2") })
-            DSHStack(spacing: .regular) {
+            DSHStack(spacing: .space8) {
                 Color.yellow
                 Color.green
                 Color.blue
             }.overlay(alignment: .center, content: { Text("3") })
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 Color.yellow
                 Color.green
                 Color.blue
@@ -160,7 +160,7 @@ Here is how you might set up it within your views:
 struct Testable_DSButton: View {
     var body: some View {
         DSVStack {
-            DSVStack(spacing: .small) {
+            DSVStack(spacing: .space4) {
                 DSButton(
                     title: "Default",
                     action: { }
@@ -170,7 +170,7 @@ struct Testable_DSButton: View {
                     style: .light, action: { }
                 )
             }
-            .dsPadding(.medium)
+            .dsPadding(.space16)
             .dsSecondaryBackground()
             .dsCornerRadius()
 
@@ -233,14 +233,16 @@ struct Testable_DSText: View {
             DSText("Title 2").dsTextStyle(.title2)
             DSText("Title 3").dsTextStyle(.title3)
             DSText("Headline").dsTextStyle(.headline)
-            DSText("Headline with size 20").dsTextStyle(.headline, 20)
+            DSText("Label").dsTextStyle(DSTypographyToken.label)
             DSText("Subheadline").dsTextStyle(.subheadline)
-            DSText("Subheadline with size 20").dsTextStyle(.headline, 20)
+            DSText("Body small").dsTextStyle(.bodySmall)
+            DSText("Body large").dsTextStyle(.bodyLarge)
             DSText("Body").dsTextStyle(.body)
             DSText("Callout").dsTextStyle(.callout)
             DSText("Caption 1").dsTextStyle(.caption1)
             DSText("Caption 2").dsTextStyle(.caption2)
             DSText("Footnote").dsTextStyle(.footnote)
+            DSText("Custom 20 semibold headline").dsTextStyle(DSTypographyToken.custom(size: 20, weight: .semibold, relativeTo: .headline))
 
             DSHStack {
                 DSText(
@@ -297,7 +299,7 @@ struct Testable_DSHScroll: View {
         Color.yellow
     ]
     var body: some View {
-        DSHScroll(spacing: .medium, data: Array(colors.enumerated()), id: \.offset) { item in
+        DSHScroll(spacing: .space16, data: Array(colors.enumerated()), id: \.offset) { item in
             item.element.dsSize(90)
         }
     }
@@ -324,7 +326,7 @@ Code example result:
 Initializes `DSCoverFlow` with specific layout and behavioral settings.
 - Parameters:
 - `height`: `DSDimension` specifying the height of the cover flow.
-- `spacing`: `DSSpace` specifying the spacing between items.
+- `spacing`: `DSSpatialToken` specifying the spacing between items.
 - `showPaginationView`: Boolean indicating whether to show pagination dots.
 - `data`: The collection of data items to display.
 - `id`: KeyPath to the unique identifier for each data item.
@@ -528,7 +530,7 @@ Code example result:
 Initializes a `DSPriceView` with a given `DSPrice` model, text font key for style, and an optional color.
 - Parameters:
 - `price`: `DSPrice` struct containing amount, currency, and optional regular amount and discount badge.
-- `size`: `DSTextFontKey` indicating the text size and style.
+- `size`: `DSTypographyToken` indicating the text size and style.
 - `color`: Optional `Color` for the price text, defaults to nil.
  
 #### Usage:
@@ -544,7 +546,7 @@ struct Testable_DSPriceView: View {
         discountBadge: "10% OFF"
     )
     var body: some View {
-        DSVStack(spacing: .regular) {
+        DSVStack(spacing: .space8) {
             DSPriceView(price: price, size: .title1)
             DSPriceView(price: price, size: .title2)
             DSPriceView(price: price, size: .title3)
@@ -553,7 +555,7 @@ struct Testable_DSPriceView: View {
             DSPriceView(price: price, size: .caption1, color: .green)
             DSPriceView(price: price, size: .caption2, color: .green)
             DSPriceView(price: price, size: .footnote)
-            DSPriceView(price: price, size: .fontWithSize(.headline, 20))
+            DSPriceView(price: price, size: .custom(size: 20, weight: .semibold, relativeTo: .headline))
         }
     }
 }
@@ -561,6 +563,23 @@ struct Testable_DSPriceView: View {
 Code example result:
 
 <table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSPriceView.snapshot.png" width="35%"/></td></tr><table/>
+
+
+## DSLetterBadgeView
+
+`DSLetterBadgeView` renders a compact initial badge whose size is derived from a typography token.
+
+#### Usage:
+- Show a single-letter or short-initial avatar next to names and sources.
+- Keep badge sizing tied to `DSTypographyToken` instead of ad-hoc `CGFloat` values.
+- Pass an explicit background color so the badge styling is controlled by the caller.
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSLetterBadgeView.snapshot.png" width="35%"/></td></tr><table/>
 
 
 ## DSListSeparatorView
@@ -600,9 +619,9 @@ struct Testable_DSListSeparatorView: View {
                     title: "Custom",
                     height: 48,
                     horizontalBleed: 24,
-                    backgroundStyle: .primary,
+                    backgroundStyle: .canvas,
                     textStyle: .headline,
-                    textColor: .text(.headline)
+                    textColor: .text(.primary)
                 )
             }
         }
@@ -657,7 +676,7 @@ Code example result:
 #### Initialization:
 Initializes a `DSList` with a spacing value and dynamic content.
 - Parameters:
-- `spacing`: Specifies the vertical spacing between list rows. Defaults to `.regular`.
+- `spacing`: Specifies the vertical spacing between list rows. Defaults to `.space8`.
 - `content`: A `@ViewBuilder` closure that generates the list content.
 
 #### Usage:
@@ -732,12 +751,12 @@ struct Testable_DSList: View {
     ]
 
     var body: some View {
-        DSList(sectionSpacing: .medium, sectionHeaderSpacing: .medium) {
+        DSList(sectionSpacing: .space16, sectionHeaderSpacing: .space16) {
 
             DSSection {
                 DSHStack {
-                    DSVStack(spacing: .zero) {
-                        DSText("Shop").dsTextStyle(.largeHeadline)
+                    DSVStack(spacing: .space0) {
+                        DSText("Shop").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                         DSText("Over 45k items available for you").dsTextStyle(.subheadline)
                     }
                     Spacer()
@@ -758,7 +777,7 @@ struct Testable_DSList: View {
             DSSection {
                 DSSectionHeaderView(title: "Categories", actionTitle: "View all", action: { })
                 DSGrid(data: categories, id: \.id) { category in
-                    DSText(category.title).dsTextStyle(.smallHeadline)
+                    DSText(category.title).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .dsCardStyle()
                 }
@@ -772,11 +791,11 @@ struct Testable_DSList: View {
                             url: product.imageURL,
                             style: .capsule
                         )
-                        DSVStack(spacing: .zero) {
-                            DSText(product.title).dsTextStyle(.smallHeadline)
-                            DSText(product.description).dsTextStyle(.smallSubheadline)
-                            DSPriceView(price: product.price, size: .smallHeadline)
-                                .dsPadding(.top, .regular)
+                        DSVStack(spacing: .space0) {
+                            DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                            DSText(product.description).dsTextStyle(.caption1)
+                            DSPriceView(price: product.price, size: DSTypographyToken.label)
+                                .dsPadding(.top, .space8)
                         }
                     }.dsPadding(.bottom)
                 }
@@ -816,6 +835,23 @@ Code example result:
 <table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSSFSymbolButton.snapshot.png" width="35%"/></td></tr><table/>
 
 
+## DSAuthorView
+
+`DSAuthorView` is a reusable inline author/source label composed of an initial badge and a text label.
+
+#### Usage:
+- Use for article authors, sources, or any compact labeled identity row.
+- Keep text and badge sizing tied to a shared `DSTypographyToken`.
+- Override label color when the surrounding surface needs a stronger or softer emphasis.
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSAuthorView.snapshot.png" width="35%"/></td></tr><table/>
+
+
 ## DSRatingView
 
 `DSRatingView` is a SwiftUI component within the DSKit framework designed to display a star rating system. It provides a visual representation of ratings through customizable star icons, suitable for review systems, product ratings, or any feature requiring a rating visualization.
@@ -848,6 +884,23 @@ Code example result:
 <table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSRatingView.snapshot.png" width="35%"/></td></tr><table/>
 
 
+## DSInlineTagView
+
+`DSInlineTagView` is a small layout primitive for inline metadata tags made of a leading icon and trailing content.
+
+#### Usage:
+- Keep icon and label alignment consistent across multiple tag rows.
+- Provide either a system icon or any custom icon view.
+- Optionally reserve a fixed-width icon slot so symbols with different metrics still align visually.
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSInlineTagView.snapshot.png" width="35%"/></td></tr><table/>
+
+
 ## DSRadioPickerView
 
 `DSRadioPickerView` is a SwiftUI component designed to offer a customizable radio button selection interface within the DSKit framework. It allows users to select a single option from a list of available options, making it ideal for forms, surveys, and settings.
@@ -873,7 +926,7 @@ struct Testable_DSRadioPickerView: View {
     @State var selected = "Purple"
     var body: some View {
         DSRadioPickerView(data: data, id: \.self, selected: $selected, content: { element, _ in
-            DSText(element).dsTextStyle(.smallHeadline)
+            DSText(element).dsTextStyle(DSTypographyToken.label)
         })
     }
 }
@@ -949,7 +1002,7 @@ struct Testable_DSThreadSection: View {
             } footer: {
                 DSText("Footer")
                     .dsTextStyle(.subheadline)
-                    .dsPadding(.top, .small)
+                    .dsPadding(.top, .space4)
             }
         }
     }
@@ -991,7 +1044,7 @@ struct Testable_DSSection: View {
     var body: some View {
         DSList(spacing: .custom(12)) {
             DSSection {
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSText("Section Title").dsTextStyle(.headline)
                     DSText("Section body text").dsTextStyle(.caption2)
                 }
@@ -1023,7 +1076,7 @@ struct Testable_DSSection: View {
                     DSDivider(style: .dots())
                 }
             )
-            .dsSpacing(.small)
+            .dsSpacing(.space4)
         }
     }
 }
@@ -1174,7 +1227,7 @@ Here is how you might set up it within your views:
 ```swift
 struct Testable_DSDivider: View {
     var body: some View {
-        DSVStack(spacing: .medium) {
+        DSVStack(spacing: .space16) {
             DSDivider()
             DSDivider(style: .dots())
         }
@@ -1249,7 +1302,7 @@ Code example result:
 Initializes a `DSLazyVStack` with alignment, spacing, and dynamic content.
 - Parameters:
 - `alignment`: The horizontal alignment of content within the stack. Defaults to `.leading`.
-- `spacing`: Specifies the space between each item within the stack. Defaults to `.regular`.
+- `spacing`: Specifies the space between each item within the stack. Defaults to `.space8`.
 - `content`: A `@ViewBuilder` closure that generates the content of the stack.
 
 #### Usage:
@@ -1260,7 +1313,7 @@ Here is how you might set up it within your views:
 struct Testable_DSLazyVStack: View {
     var body: some View {
         ScrollView {
-            DSLazyVStack(spacing: .small) {
+            DSLazyVStack(spacing: .space4) {
                 Color.yellow.dsHeight(60)
                 Color.green.dsHeight(60)
                 Color.blue.dsHeight(60)
