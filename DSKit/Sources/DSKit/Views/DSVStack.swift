@@ -16,7 +16,7 @@ import SwiftUI
 Initializes a `DSVStack` with alignment, spacing, and dynamic content.
 - Parameters:
 - `alignment`: The horizontal alignment of content within the stack. Defaults to `.leading`.
-- `spacing`: Specifies the space between each item within the stack. Defaults to `.regular`.
+- `spacing`: Specifies the space between each item within the stack. Defaults to `.space8`.
 - `content`: A `@ViewBuilder` closure that generates the content of the stack.
 
 #### Usage:
@@ -27,13 +27,13 @@ public struct DSVStack<Content: View>: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
 
-    let spacing: DSSpace
+    let spacing: DSSpatialToken
     let alignment: HorizontalAlignment
     let content: () -> Content
 
     public init(
         alignment: HorizontalAlignment = .leading,
-        spacing: DSSpace = .regular,
+        spacing: DSSpatialToken = .space8,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.content = content
@@ -53,17 +53,17 @@ public struct DSVStack<Content: View>: View {
 struct Testable_DSVStack: View {
     var body: some View {
         DSHStack {
-            DSVStack(spacing: .small) {
+            DSVStack(spacing: .space4) {
                 Color.yellow
                 Color.green
                 Color.blue
             }.overlay(alignment: .center, content: { Text("1") })
-            DSVStack(spacing: .regular) {
+            DSVStack(spacing: .space8) {
                 Color.yellow
                 Color.green
                 Color.blue
             }.overlay(alignment: .center, content: { Text("2") })
-            DSVStack(spacing: .medium) {
+            DSVStack(spacing: .space16) {
                 Color.yellow
                 Color.green
                 Color.blue

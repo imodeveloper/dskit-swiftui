@@ -17,19 +17,19 @@ struct SignUpScreen2: View {
             DSImageView(url: profileImage, style: .circle, size: 100)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .overlay {
-                    DSImageView(systemName: "camera.fill", size: .smallIcon, tint: .viewStyle(.primary, .button(.accentColor)))
-                        .dsPadding(.regular)
-                        .dsBackground(.secondary)
+                    DSImageView(systemName: "camera.fill", size: .smallIcon, tint: .icon(.brandOnBold))
+                        .dsPadding(.space8)
+                        .dsBackground(.background(.brand))
                         .clipShape(Circle())
                         .onTap { dismiss() }
                         .offset(x: 35, y: 35)
                 }
-                .dsPadding(.top, .medium)
+                .dsPadding(.top, .space16)
                 .hideWhenKeyboardIsDisplayed()
 
             Spacer()
 
-            DSVStack(spacing: .small) {
+            DSVStack(spacing: .space4) {
                 DSTextField.name(value: viewModel.fullName)
                 DSTextField.email(value: viewModel.email)
                 DSTextField.password(value: viewModel.password)

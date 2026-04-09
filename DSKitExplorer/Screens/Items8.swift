@@ -39,24 +39,24 @@ extension Items8 {
     struct ProductView: View {
         let product: Data
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 DSImageView(url: product.image)
                     .dsSecondaryBackground()
                     .dsSize(.size(width: 100, height: 120))
 
                 DSVStack {
-                    DSVStack(spacing: .zero) {
-                        DSText(product.title).dsTextStyle(.smallHeadline)
-                        DSText(product.description).dsTextStyle(.smallSubheadline)
+                    DSVStack(spacing: .custom(0)) {
+                        DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                        DSText(product.description).dsTextStyle(.caption1)
                     }
                     DSHStack {
                         DSRatingView(rating: 4.5, size: 12)
                         DSText("2.4k Reviews").dsTextStyle(.caption2)
                     }
-                    DSPriceView(price: product.price, size: .smallHeadline)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
                 }
                 .dsFullWidth()
-                .dsPadding(.regular)
+                .dsPadding(.space8)
 
             }.overlay(alignment: .topLeading) {
                 DSImageView(
@@ -64,7 +64,7 @@ extension Items8 {
                     size: .font(.subheadline),
                     tint: .color(product.favorite ? .red : .white)
                 )
-                .dsPadding(.regular)
+                .dsPadding(.space8)
             }
             .overlay(alignment: .trailing) {
                 DSImageView(
@@ -72,7 +72,7 @@ extension Items8 {
                     size: .font(.subheadline),
                     tint: .text(.headline)
                 )
-                .dsPadding(.medium)
+                .dsPadding(.space16)
             }
             .dsSecondaryBackground()
             .dsCornerRadius()

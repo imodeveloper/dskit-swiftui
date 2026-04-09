@@ -32,7 +32,7 @@ struct HomeScreen4: View {
                 DSHScroll(data: viewModel.categories, id: \.id) { category in
                     CategoryView(category: category, isSelected: viewModel.selectedCategory == category.id)
                         .onTap { viewModel.selectedCategory = category.id }
-                }.dsPadding(.top, .small)
+                }.dsPadding(.top, .space4)
 
                 DSGrid(viewHeight: 190, data: viewModel.products, id: \.id) { product in
                     ProductView(product: product).onTap { dismiss() }
@@ -40,7 +40,7 @@ struct HomeScreen4: View {
 
 //                DSVStack {
 //
-//                }.dsPadding(.top, .small)
+//                }.dsPadding(.top, .space4)
             }
         }
     }
@@ -52,13 +52,13 @@ extension HomeScreen4 {
     struct ProductView: View {
         let product: Product
         var body: some View {
-            DSVStack(spacing: .zero) {
+            DSVStack(spacing: .custom(0)) {
                 DSImageView(named: product.image)
-                DSVStack(spacing: .zero) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
-                    DSText(product.description).dsTextStyle(.smallSubheadline)
-                    DSPriceView(price: product.price, size: .smallHeadline)
-                        .dsPadding(.top, .regular)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(product.description).dsTextStyle(.caption1)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
+                        .dsPadding(.top, .space8)
                 }.dsPadding()
             }
             .dsSecondaryBackground()
@@ -82,14 +82,14 @@ extension HomeScreen4 {
             Group {
                 DSImageView(url: product.imageUrl)
                     .overlay(alignment: .bottomTrailing) {
-                        DSVStack(alignment: .trailing, spacing: .zero) {
-                            DSText(product.title).dsTextStyle(.smallHeadline)
-                            DSText(product.subtitle).dsTextStyle(.smallSubheadline)
+                        DSVStack(alignment: .trailing, spacing: .custom(0)) {
+                            DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                            DSText(product.subtitle).dsTextStyle(.caption1)
                         }
-                        .dsPadding(.regular)
-                        .dsBackground(.viewStyle(.secondary, .background))
+                        .dsPadding(.space8)
+                        .dsBackground(.surface)
                         .dsCornerRadius()
-                        .dsPadding(.regular)
+                        .dsPadding(.space8)
                     }
             }.dsCornerRadius()
         }
@@ -112,15 +112,15 @@ extension HomeScreen4 {
         let profileImageUrl: URL?
         var body: some View {
             DSHStack {
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText(title)
-                        .dsTextStyle(.headline, 28)
-                    DSHStack(spacing: .small) {
+                        .dsTextStyle(DSTypographyToken.custom(size: 28, weight: .semibold, relativeTo: .headline))
+                    DSHStack(spacing: .space4) {
                         DSText(youHave).dsTextStyle(.subheadline)
                         DSText(numberOfItemsInCart)
-                            .dsTextStyle(.headline, 12, .viewStyle(.primary, .background))
+                            .dsTextStyle(DSTypographyToken.custom(size: 12, weight: .semibold, relativeTo: .headline), .text(.brandOnBold))
                             .dsSize(20)
-                            .dsBackground(.view(.button(.accentColor)))
+                            .dsBackground(.background(.brand))
                             .clipShape(Circle())
                         DSText(itemsInYourCart).dsTextStyle(.subheadline)
                     }
@@ -145,21 +145,21 @@ extension HomeScreen4 {
             DSHStack {
                 if isSelected {
                     DSText(category.title)
-                        .dsTextStyle(.smallHeadline, .viewStyle(.primary, .button(.supportColor)))
+                        .dsTextStyle(DSTypographyToken.label, .text(.brandOnBold))
                 } else {
                     DSText(category.title)
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                 }
 
                 DSText(category.count)
-                    .dsTextStyle(.headline, 10)
+                    .dsTextStyle(DSTypographyToken.custom(size: 10, weight: .semibold, relativeTo: .headline))
                     .dsSize(20)
-                    .dsBackground(isSelected ? .viewStyle(.secondary, .background) : .viewStyle(.primary, .background))
+                    .dsBackground(isSelected ? .background(.surface) : .background(.canvas))
                     .clipShape(Capsule())
             }
             .dsPadding(.horizontal)
             .dsHeight(35)
-            .dsBackground(isSelected ? .viewStyle(.secondary, .button(.accentColor)) : .viewStyle(.secondary, .background))
+            .dsBackground(isSelected ? .background(.brand) : .background(.surface))
             .dsCornerRadius()
         }
 

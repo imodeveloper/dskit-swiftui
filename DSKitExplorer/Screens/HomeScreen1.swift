@@ -38,11 +38,11 @@ extension HomeScreen1 {
         var body: some View {
             DSVStack {
                 DSImageView(url: product.imageUrl, style: .capsule)
-                DSVStack(spacing: .zero) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
-                    DSText(product.description).dsTextStyle(.smallSubheadline)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(product.description).dsTextStyle(.caption1)
                 }
-            }.dsPadding(.bottom, .regular)
+            }.dsPadding(.bottom, .space8)
         }
 
         struct Product: Identifiable {
@@ -61,8 +61,8 @@ extension HomeScreen1 {
         let profileUrl: URL?
         var body: some View {
             DSHStack {
-                DSVStack(spacing: .zero) {
-                    DSText(title).dsTextStyle(.largeHeadline)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(title).dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                     DSText(subtitle).dsTextStyle(.subheadline)
                 }
                 Spacer()

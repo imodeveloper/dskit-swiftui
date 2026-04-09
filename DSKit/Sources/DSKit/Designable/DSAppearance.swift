@@ -1,14 +1,11 @@
 //
-//  Designable.swift
+//  DSAppearance.swift
 //  DSKit
 //
 //  Created by Borinschi Ivan on 30.11.2020.
-//  Copyright © 2021 Borinschi Ivan. All rights reserved.
 //
 
 import SwiftUI
-
-// MARK: - Environment Key for DSAppearance
 
 struct AppearanceEnvironment: EnvironmentKey {
     static let defaultValue: DSAppearance = LightBlueAppearance()
@@ -21,36 +18,35 @@ public extension EnvironmentValues {
     }
 }
 
-// MARK: - DSAppearance Protocol
-
 public protocol DSAppearance {
     var title: String { get set }
-    var primaryView: DSViewAppearanceProtocol { get set }
-    var secondaryView: DSViewAppearanceProtocol { get set }
+    var colors: DSColorTheme { get set }
     var spacing: DSSpacingProtocol { get set }
     var padding: DPaddingsProtocol { get set }
     var tabBar: DSTabBarAppearanceProtocol { get set }
     var navigationBar: DSNavigationBarAppearanceProtocol { get set }
     var price: DSPriceAppearanceProtocol { get set }
-    var fonts: DSFontsProtocol { get set }
+    var typography: DSTypographyProtocol { get set }
     var actionElementHeight: CGFloat { get set }
     var screenMargins: CGFloat { get set }
-    func style(for viewStyle: DSViewStyle) -> DSViewAppearanceProtocol
+    var cornerRadius: CGFloat { get set }
 }
 
 extension DSAppearance {
-    func color(for colorKey: DSColorKey, viewStyle: DSViewStyle) -> Color {
-        colorKey.color(for: self, and: viewStyle)
+    func color(for colorToken: DSColorToken, surfaceStyle: DSSurfaceStyle) -> Color {
+        colorToken.color(for: self, in: surfaceStyle)
+    }
+
+    func uiColor(for colorToken: DSColorToken, surfaceStyle: DSSurfaceStyle) -> DSUIColor {
+        colorToken.uiColor(for: self, in: surfaceStyle)
     }
 }
 
 public extension DSAppearance {
-    /// Override the system appearance settings (iOS only)
     func overrideTheSystemAppearance() {
         overrideTheSystemAppearance(opaqueNavigationBar: true, opaqueTabBar: true)
     }
 
-    /// Override the system appearance settings (iOS only)
     func overrideTheSystemAppearance(opaqueNavigationBar: Bool, opaqueTabBar: Bool) {
         #if canImport(UIKit)
         let useNativeLiquidGlassBehavior: Bool
@@ -60,7 +56,6 @@ public extension DSAppearance {
             useNativeLiquidGlassBehavior = false
         }
 
-        // Configure Navigation Bar Appearance
         let navigationBarAppearance = UINavigationBarAppearance()
         if useNativeLiquidGlassBehavior {
             navigationBarAppearance.configureWithDefaultBackground()
@@ -70,22 +65,22 @@ public extension DSAppearance {
             } else {
                 navigationBarAppearance.configureWithDefaultBackground()
             }
-            navigationBarAppearance.backgroundColor = self.navigationBar.bar
+            navigationBarAppearance.backgroundColor = uiColor(for: .background(.canvas), surfaceStyle: .canvas)
         }
 
         navigationBarAppearance.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: self.navigationBar.text,
-            NSAttributedString.Key.font: self.fonts.headline
+            .foregroundColor: uiColor(for: .text(.primary), surfaceStyle: .canvas),
+            .font: typography.headline
         ]
 
         navigationBarAppearance.backButtonAppearance.normal.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: self.navigationBar.buttons,
-            NSAttributedString.Key.font: self.fonts.headline
+            .foregroundColor: uiColor(for: .icon(.brand), surfaceStyle: .canvas),
+            .font: typography.headline
         ]
 
         navigationBarAppearance.largeTitleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: self.primaryView.text.title1,
-            NSAttributedString.Key.font: self.fonts.headline.withSize(30)
+            .foregroundColor: uiColor(for: .text(.primary), surfaceStyle: .canvas),
+            .font: DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline).uiFont(for: self)
         ]
 
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
@@ -93,10 +88,10 @@ public extension DSAppearance {
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
 
         let itemAppearance = UITabBarItemAppearance()
-        itemAppearance.normal.iconColor = self.tabBar.unselectedItemTint
-        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.tabBar.unselectedItemTint]
-        itemAppearance.selected.iconColor =  self.tabBar.itemTint
-        itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.tabBar.itemTint]
+        itemAppearance.normal.iconColor = uiColor(for: .icon(.secondary), surfaceStyle: .canvas)
+        itemAppearance.normal.titleTextAttributes = [.foregroundColor: uiColor(for: .text(.secondary), surfaceStyle: .canvas)]
+        itemAppearance.selected.iconColor = uiColor(for: .icon(.brand), surfaceStyle: .canvas)
+        itemAppearance.selected.titleTextAttributes = [.foregroundColor: uiColor(for: .text(.brand), surfaceStyle: .canvas)]
 
         let tabBarAppearance = UITabBarAppearance()
         if useNativeLiquidGlassBehavior {
@@ -107,7 +102,7 @@ public extension DSAppearance {
             } else {
                 tabBarAppearance.configureWithDefaultBackground()
             }
-            tabBarAppearance.backgroundColor = self.tabBar.barTint
+            tabBarAppearance.backgroundColor = uiColor(for: .background(.canvas), surfaceStyle: .canvas)
         }
         tabBarAppearance.stackedLayoutAppearance = itemAppearance
 
@@ -117,10 +112,7 @@ public extension DSAppearance {
     }
 }
 
-// MARK: - SwiftUI View Extension
-
 public extension View {
-    /// Apply the `DSAppearance` to the SwiftUI view
     func dsAppearance(
         _ appearance: DSAppearance,
         overrideSystemAppearance: Bool = false,

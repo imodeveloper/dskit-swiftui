@@ -14,22 +14,23 @@ struct FoodHomeScreen1: View {
 
     var body: some View {
         DSList {
-            DSSection(spacing: .regular) {
+            DSSection {
                 LocationView(title: "2464 Royal Ln. Mesa")
                 SearchView()
                 DSCoverFlow(height: 150, data: viewModel.banners, id: \.id) { banner in
                     BannerView(banner: banner)
                 }
             }
-            DSSection(spacing: .regular) {
-                DSVStack(spacing: .regular) {
+            .dsSpacing(.space8)
+            DSSection {
+                DSVStack(spacing: .space8) {
                     DSSectionHeaderView(
                         title: "Popular Products",
                         actionTitle: "View all",
                         action: { dismiss() }
                     )
                     DSHScroll(
-                        spacing: .regular,
+                        spacing: .space8,
                         data: viewModel.popularProducts,
                         id: \.id
                     ) { product in
@@ -37,15 +38,16 @@ struct FoodHomeScreen1: View {
                     }
                 }
             }
-            DSSection(spacing: .custom(15)) {
-                DSVStack(spacing: .regular) {
+            .dsSpacing(.space8)
+            DSSection {
+                DSVStack(spacing: .space8) {
                     DSSectionHeaderView(
                         title: "All Categories",
                         actionTitle: "View all",
                         action: { dismiss() }
                     )
                     DSHScroll(
-                        spacing: .regular,
+                        spacing: .space8,
                         data: viewModel.categories,
                         id: \.id
                     ) { category in
@@ -54,6 +56,7 @@ struct FoodHomeScreen1: View {
                 }
                 .dsPadding(.bottom)
             }
+            .dsSpacing(.custom(15))
         }
     }
 }
@@ -65,9 +68,9 @@ extension FoodHomeScreen1 {
         let title: String
         var body: some View {
             DSHStack {
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText("Your Location")
-                        .dsTextStyle(.smallSubheadline)
+                        .dsTextStyle(.caption1)
                     DSText(title)
                         .dsTextStyle(.headline)
                 }
@@ -104,11 +107,11 @@ extension FoodHomeScreen1 {
             DSVStack {
                 DSImageView(named: category.image)
                 DSHStack {
-                    DSVStack(spacing: .zero) {
+                    DSVStack(spacing: .custom(0)) {
                         DSText(category.title)
-                            .dsTextStyle(.smallHeadline)
+                            .dsTextStyle(DSTypographyToken.label)
                         DSText(category.subtitle)
-                            .dsTextStyle(.smallSubheadline)
+                            .dsTextStyle(.caption1)
                     }
                     Spacer()
                     DSSFSymbolButton(name: "chevron.right.square.fill", size: .mediumIcon)
@@ -132,50 +135,50 @@ extension FoodHomeScreen1 {
         let product: Data
 
         var body: some View {
-            DSVStack(spacing: .zero) {
+            DSVStack(spacing: .custom(0)) {
                 DSImageView(named: product.image)
                     .dsSize(dimension: 160)
                     .overlay(alignment: .bottomLeading) {
                         DSText(product.discount)
-                            .dsTextStyle(.smallSubheadline, .color(.white))
-                            .dsPadding(.small)
-                            .dsBackground(.view(.button(.accentColor)))
+                            .dsTextStyle(.caption1, .color(.white))
+                            .dsPadding(.space4)
+                            .dsBackground(.background(.brand))
                             .dsPadding(.bottom)
                     }
 
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText(product.title)
-                        .dsTextStyle(.smallHeadline)
-                        .dsPadding(.small)
+                        .dsTextStyle(DSTypographyToken.label)
+                        .dsPadding(.space4)
                         .dsFullWidth()
 
                     DSHStack {
-                        DSHStack(spacing: .zero) {
+                        DSHStack(spacing: .custom(0)) {
                             DSImageView(
                                 systemName: "star",
-                                size: .font(.smallSubheadline),
-                                tint: .text(.smallSubheadline)
+                                size: .font(.caption1),
+                                tint: .text(.caption1)
                             )
 
                             DSText(product.rating)
-                                .dsTextStyle(.smallSubheadline)
-                                .dsPadding(.small)
+                                .dsTextStyle(.caption1)
+                                .dsPadding(.space4)
                         }
 
-                        DSHStack(spacing: .zero) {
+                        DSHStack(spacing: .custom(0)) {
                             DSImageView(
                                 systemName: "clock",
-                                size: .font(.smallSubheadline),
-                                tint: .text(.smallSubheadline)
+                                size: .font(.caption1),
+                                tint: .text(.caption1)
                             )
 
                             DSText(product.time)
-                                .dsTextStyle(.smallSubheadline)
-                                .dsPadding(.small)
+                                .dsTextStyle(.caption1)
+                                .dsPadding(.space4)
                         }
                     }.dsPadding(.leading, 3)
 
-                }.dsPadding(.regular)
+                }.dsPadding(.space8)
             }
             .dsSecondaryBackground()
             .dsWidth(160)
@@ -202,19 +205,19 @@ extension FoodHomeScreen1 {
                     .dsSecondaryBackground()
                     .dsCornerRadius()
                     .overlay(alignment: .leading) {
-                        DSVStack(spacing: .zero) {
+                        DSVStack(spacing: .custom(0)) {
                             DSText(banner.title)
-                                .dsTextStyle(.headline, 25, .view(.button(.accentColor)))
+                                .dsTextStyle(DSTypographyToken.custom(size: 25, weight: .semibold, relativeTo: .headline), .text(.brand))
                             DSText(banner.subtitle)
-                                .dsTextStyle(.body, 15)
+                                .dsTextStyle(DSTypographyToken.custom(size: 15, weight: .regular, relativeTo: .body))
                         }
                         .dsPadding()
                         .dsPadding(.bottom)
                     }
                     .overlay(alignment: .bottomLeading) {
-                        DSVStack(spacing: .zero) {
+                        DSVStack(spacing: .custom(0)) {
                             DSText(banner.discount)
-                                .dsTextStyle(.smallSubheadline)
+                                .dsTextStyle(.caption1)
                         }.dsPadding()
                     }
             }

@@ -39,7 +39,7 @@ extension BookingScreen3 {
     struct DateAndTime: View {
         let dateAndTime: String
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 DSImageView(
                     systemName: "calendar",
                     size: .mediumIcon,
@@ -47,7 +47,7 @@ extension BookingScreen3 {
                 )
 
                 DSText(dateAndTime)
-                    .dsTextStyle(.smallHeadline)
+                    .dsTextStyle(DSTypographyToken.label)
                     .dsFullWidth()
                 DSSFSymbolButton(name: "pencil.circle.fill", size: .mediumIcon)
             }
@@ -66,14 +66,14 @@ extension BookingScreen3 {
     struct Barber: View {
         let barber: Data
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 DSImageView(url: barber.image, style: .circle)
                     .dsSize(50)
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText(barber.name)
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                     DSText(barber.grade)
-                        .dsTextStyle(.smallSubheadline)
+                        .dsTextStyle(.caption1)
                 }.dsFullWidth()
 
                 DSSFSymbolButton(name: "pencil.circle.fill", size: .mediumIcon)
@@ -93,22 +93,22 @@ extension BookingScreen3 {
     struct Services: View {
         let services: [Data]
         var body: some View {
-            DSVStack(spacing: .small) {
+            DSVStack(spacing: .space4) {
                 ForEach(services) { service in
-                    DSHStack(spacing: .medium) {
-                        DSVStack(spacing: .small) {
+                    DSHStack(spacing: .space16) {
+                        DSVStack(spacing: .space4) {
                             DSText(service.title)
-                                .dsTextStyle(.smallHeadline)
+                                .dsTextStyle(DSTypographyToken.label)
                             DSHStack {
                                 DSImageView(
                                     systemName: "clock.fill",
-                                    size: .font(.smallSubheadline),
-                                    tint: .text(.smallSubheadline)
+                                    size: .font(.caption1),
+                                    tint: .text(.caption1)
                                 )
                                 DSText("Duration:\(service.duration)")
-                                    .dsTextStyle(.smallSubheadline)
+                                    .dsTextStyle(.caption1)
                             }
-                            DSPriceView(price: service.price, size: .smallHeadline)
+                            DSPriceView(price: service.price, size: DSTypographyToken.label)
                         }
                         .dsFullWidth()
                         DSSFSymbolButton(
@@ -121,7 +121,7 @@ extension BookingScreen3 {
 
                 DSHStack {
                     DSText("Manage selected services")
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                         .dsFullWidth()
                         .onTap { print("Manage services") }
                     DSChevronView()
@@ -141,18 +141,18 @@ extension BookingScreen3 {
     struct Location: View {
         let address: Data
         var body: some View {
-            DSVStack(spacing: .zero) {
-                DSVStack(spacing: .small) {
+            DSVStack(spacing: .custom(0)) {
+                DSVStack(spacing: .space4) {
                     DSText(address.name)
                         .dsTextStyle(.headline)
                     DSHStack {
                         DSImageView(
                             systemName: "house",
                             size: .font(.subheadline),
-                            tint: .text(.smallSubheadline)
+                            tint: .text(.caption1)
                         )
                         DSText(address.address)
-                            .dsTextStyle(.smallSubheadline)
+                            .dsTextStyle(.caption1)
                     }
                 }.dsPadding()
                 Map(

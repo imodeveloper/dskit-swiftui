@@ -13,14 +13,14 @@ struct SignUpScreen3: View {
     let viewModel = SignUpScreen3Model()
 
     var body: some View {
-        DSVStack(spacing: .medium) {
+        DSVStack(spacing: .space16) {
             Spacer()
 
-            DSVStack(spacing: .medium) {
-                DSText("Start with \nphone number").dsTextStyle(.largeHeadline)
+            DSVStack(spacing: .space16) {
+                DSText("Start with \nphone number").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                     .dsFullWidth()
                     .overlay(alignment: .trailing) {
-                        DSImageView(systemName: "phone.fill", size: 60, tint: .viewStyle(.secondary, .background))
+                        DSImageView(systemName: "phone.fill", size: 60, tint: .background(.surface))
                     }
 
                 DSText("Please enter your mobile number to get\nsms to activate your account")

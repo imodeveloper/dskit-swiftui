@@ -27,18 +27,18 @@ extension BookingScreen1 {
     struct Location: View {
         let address: Data
         var body: some View {
-            DSVStack(spacing: .zero) {
-                DSVStack(spacing: .small) {
+            DSVStack(spacing: .custom(0)) {
+                DSVStack(spacing: .space4) {
                     DSText(address.name)
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                     DSHStack {
                         DSImageView(
                             systemName: "house",
                             size: .font(.subheadline),
-                            tint: .text(.smallSubheadline)
+                            tint: .text(.caption1)
                         )
                         DSText(address.address)
-                            .dsTextStyle(.smallSubheadline)
+                            .dsTextStyle(.caption1)
                     }
                 }.dsPadding()
                 Map(

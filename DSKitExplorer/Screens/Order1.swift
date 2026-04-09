@@ -62,9 +62,9 @@ extension Order1 {
             DSGroupedList(data: orderTotals, id: \.id) { total in
                 DSHStack {
                     DSText(total.title)
-                        .dsTextStyle(total.bold ? .smallHeadline : .smallSubheadline)
+                        .dsTextStyle(total.bold ? DSTypographyToken.label : .caption1)
                     Spacer()
-                    DSPriceView(price: total.price, size: total.bold ? .smallHeadline : .smallSubheadline)
+                    DSPriceView(price: total.price, size: total.bold ? DSTypographyToken.label : .caption1)
                 }.dsHeight(25)
             }
         }
@@ -83,12 +83,12 @@ extension Order1 {
         let method: Data
 
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 DSImageView(named: method.icon, size: .size(width: 50, height: 30))
                     .dsCornerRadius()
-                DSVStack(spacing: .zero) {
-                    DSText(method.title).dsTextStyle(.smallHeadline)
-                    DSText(method.subtitle).dsTextStyle(.smallSubheadline)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(method.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(method.subtitle).dsTextStyle(.caption1)
                 }
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
@@ -111,15 +111,15 @@ extension Order1 {
 
         var body: some View {
             DSVStack(alignment: .leading) {
-                DSText(address.holder).dsTextStyle(.smallHeadline)
-                DSVStack(spacing: .small) {
+                DSText(address.holder).dsTextStyle(DSTypographyToken.label)
+                DSVStack(spacing: .space4) {
                     DSHStack {
                         DSImageView(systemName: "house", size: 12, tint: .text(.subheadline))
-                        DSText(address.address).dsTextStyle(.smallSubheadline)
+                        DSText(address.address).dsTextStyle(.caption1)
                     }
                     DSHStack {
                         DSImageView(systemName: "phone", size: 12, tint: .text(.subheadline))
-                        DSText(address.phone).dsTextStyle(.smallSubheadline)
+                        DSText(address.phone).dsTextStyle(.caption1)
                     }
                 }
             }
@@ -145,13 +145,13 @@ extension Order1 {
 
         var body: some View {
             DSVStack(alignment: .leading) {
-                DSText(shipping.method).dsTextStyle(.smallHeadline)
-                DSVStack(spacing: .small) {
+                DSText(shipping.method).dsTextStyle(DSTypographyToken.label)
+                DSVStack(spacing: .space4) {
                     DSHStack {
                         DSImageView(systemName: "calendar", size: 12, tint: .text(.subheadline))
-                        DSText(shipping.date).dsTextStyle(.smallSubheadline)
+                        DSText(shipping.date).dsTextStyle(.caption1)
                     }
-                    DSPriceView(price: shipping.price, size: .smallHeadline)
+                    DSPriceView(price: shipping.price, size: DSTypographyToken.label)
                 }
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
@@ -174,14 +174,14 @@ extension Order1 {
         let product: Data
 
         var body: some View {
-            DSHStack(alignment: .center, spacing: .medium) {
+            DSHStack(alignment: .center, spacing: .space16) {
                 DSImageView(url: product.image, size: .size(width: 50, height: 60))
                     .dsCornerRadius()
 
-                DSVStack(alignment: .leading, spacing: .small) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
-                    DSText(product.subtitle).dsTextStyle(.smallSubheadline)
-                    DSPriceView(price: product.price, size: .smallHeadline)
+                DSVStack(alignment: .leading, spacing: .space4) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(product.subtitle).dsTextStyle(.caption1)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
                 }.dsFullWidth()
             }
             .onTap {}

@@ -29,12 +29,12 @@ extension Categories4 {
     struct CategoryView: View {
         let category: Data
         var body: some View {
-            DSVStack(alignment: .center, spacing: .zero) {
+            DSVStack(alignment: .center, spacing: .custom(0)) {
                 DSImageView(url: category.image)
-                DSVStack(alignment: .center, spacing: .zero) {
-                    DSText(category.title).dsTextStyle(.smallHeadline)
+                DSVStack(alignment: .center, spacing: .custom(0)) {
+                    DSText(category.title).dsTextStyle(DSTypographyToken.label)
                     DSText(category.description).dsTextStyle(.subheadline)
-                }.dsPadding(.regular)
+                }.dsPadding(.space8)
             }
             .dsSecondaryBackground()
             .dsCornerRadius()

@@ -50,7 +50,7 @@ enum SnapshotLayout {
     case component(
         width: CGFloat = 400,
         padding: CGFloat = 12,
-        background: DSViewStyle = .primary,
+        background: DSSurfaceStyle = .primary,
         traits: UITraitCollection = SnapshotLayout.deterministicComponentTraits
     )
     case screen(

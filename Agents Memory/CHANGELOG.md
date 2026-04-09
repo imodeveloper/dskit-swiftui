@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-04-09 (Semantic Tokens and Section/List Refactor)
+
+### Request
+- Commit and push all current repository changes, including the DSKit section/list separator refactor, spatial token cleanup, typography and color token migration, and the related DSKitExplorer updates.
+
+### Done
+- Added the data-driven `DSSection` APIs for repeated rows and refactored list/separator handling around DSKit-owned section behavior.
+- Moved list spacing control to `.dsSpacing(...)`, introduced the numeric `DSSpatialToken` scale, and migrated DSKit internals plus key consumers away from the old spacing/padding enums.
+- Replaced legacy typography and color surfaces with `DSTypographyToken`, `DSColorToken`, and `DSSurfaceStyle`-driven theming across DSKit and DSKitExplorer.
+- Added `DSListSeparatorView`, updated Explorer/demo screens and previews, and refreshed generated/docs-adjacent references for the current DSKit API surface.
+- Updated this changelog before commit/push as required.
+
 ## 2026-03-23 (Dotted Divider Style)
 
 ### Request

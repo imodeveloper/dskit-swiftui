@@ -49,7 +49,7 @@ struct AboutUsScreen2: View {
             if selectedTab == 1 {
                 DSBottomContainer {
                     DSButton(title: "Leave feedback", rightSystemName: "message.fill", action: {})
-                        .dsPadding(.bottom, .medium)
+                        .dsPadding(.bottom, .space16)
                 }
             }
 
@@ -87,7 +87,7 @@ struct AboutUsScreen2: View {
     }
 
     var feedbackView: some View {
-        DSVStack(spacing: .zero) {
+        DSVStack(spacing: .custom(0)) {
             DSVStack {
                 ForEach(viewModel.feedbackArray) { feedback in
                     FeedbackView(feedback: feedback)
@@ -98,15 +98,15 @@ struct AboutUsScreen2: View {
     }
 
     var contactsView: some View {
-        DSVStack(spacing: .zero) {
+        DSVStack(spacing: .custom(0)) {
             ScrollView {
                 DSVStack {
                     ContactView(iconName: "phone.fill", title: "Phone:", info: "+373 791 93398")
                     ContactView(iconName: "map.fill", title: "Address:", info: "Alexandru Cel Bun 13/2")
                     ContactView(iconName: "clock.fill", title: "Working Hours:", info: "Open ⋅ Closes 5PM")
 
-                    DSHStack(alignment: .healthSafetyAlignment, spacing: .regular) {
-                        DSVStack(spacing: .medium) {
+                    DSHStack(alignment: .healthSafetyAlignment, spacing: .space8) {
+                        DSVStack(spacing: .space16) {
                             DSImageView(systemName: "info.circle.fill", size: .font(.headline), tint: .text(.headline))
                                 .alignmentGuide(.healthSafetyAlignment) { d in d[VerticalAlignment.center] }
                         }
@@ -115,7 +115,7 @@ struct AboutUsScreen2: View {
                             DSText("Health and safety").dsTextStyle(.headline)
                                 .alignmentGuide(.healthSafetyAlignment) { d in d[VerticalAlignment.center] }
                             DSText("· Mask required\n· Temperature check required\n· Staff wear masks\n· Staff get temperature checks")
-                                .dsTextStyle(.subheadline, 14)
+                                .dsTextStyle(DSTypographyToken.custom(size: 14, weight: .regular, relativeTo: .subheadline))
                                 .dsFullWidth()
                         }
                     }
@@ -141,15 +141,15 @@ extension AboutUsScreen2 {
     struct FeedbackView: View {
         let feedback: Data
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 DSImageView(url: feedback.image, style: .circle)
                     .dsSize(60)
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSText(feedback.userName).dsTextStyle(.headline)
                         .dsFullWidth()
                     DSHStack {
-                        DSImageView(systemName: "calendar", size: .font(.smallSubheadline), tint: .text(.caption1))
-                        DSText("14.05.2024").dsTextStyle(.smallSubheadline)
+                        DSImageView(systemName: "calendar", size: .font(.caption1), tint: .text(.caption1))
+                        DSText("14.05.2024").dsTextStyle(.caption1)
                     }
                     DSRatingView(rating: 4.5, size: 12)
                     DSText(feedback.feedbackText).dsTextStyle(.caption1)
@@ -189,9 +189,9 @@ struct ContactView: View {
         DSHStack {
             DSImageView(systemName: iconName, size: .font(.headline), tint: .text(.headline))
             DSHStack {
-                DSText(title).dsTextStyle(.smallHeadline)
+                DSText(title).dsTextStyle(DSTypographyToken.label)
                 DSText(info)
-                    .dsTextStyle(.subheadline, 14)
+                    .dsTextStyle(DSTypographyToken.custom(size: 14, weight: .regular, relativeTo: .subheadline))
                     .dsFullWidth()
             }
         }.dsCardStyle()

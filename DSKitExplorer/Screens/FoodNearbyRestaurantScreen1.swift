@@ -30,30 +30,30 @@ extension FoodNearbyRestaurantScreen1 {
         let product: Data
 
         var body: some View {
-            DSVStack(spacing: .zero) {
+            DSVStack(spacing: .custom(0)) {
                 DSImageView(named: product.image)
                     .dsHeight(130)
                     .overlay(alignment: .bottomLeading) {
                         DSText(product.distance)
-                            .dsTextStyle(.smallSubheadline)
-                            .dsCardStyle(padding: .small)
+                            .dsTextStyle(.caption1)
+                            .dsCardStyle(padding: .space4)
                             .dsPadding()
                     }
 
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSHStack {
                         DSText(product.title)
                             .dsTextStyle(.headline)
 
                         DSHStack {
-                            DSHStack(spacing: .zero) {
+                            DSHStack(spacing: .custom(0)) {
                                 DSImageView(
                                     systemName: "star.fill",
-                                    size: .font(.smallSubheadline),
+                                    size: .font(.caption1),
                                     tint: .color(.yellow)
                                 )
                                 DSText(product.rating)
-                                    .dsTextStyle(.smallSubheadline)
+                                    .dsTextStyle(.caption1)
                             }
                         }
                     }

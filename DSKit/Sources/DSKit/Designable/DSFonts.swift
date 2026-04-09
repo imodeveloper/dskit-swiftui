@@ -6,7 +6,7 @@
 //  Copyright © 2021 Borinschi Ivan. All rights reserved.
 //
 
-public protocol DSFontsProtocol {
+public protocol DSTypographyProtocol {
     var body: DSFont { get }
     var callout: DSFont { get }
     var caption1: DSFont { get }
@@ -20,7 +20,7 @@ public protocol DSFontsProtocol {
     var title3: DSFont { get }
 }
 
-public class DSFonts: DSFontsProtocol {
+public class DSTypographySystem: DSTypographyProtocol {
 
     var fontName: String
 

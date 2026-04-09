@@ -19,7 +19,7 @@ struct FoodDetailsScreen1: View {
                     .dsHeight(260)
                     .dsCornerRadius()
 
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSText("Authentic Japanese Ramen")
                         .dsTextStyle(.title1)
 
@@ -29,24 +29,24 @@ struct FoodDetailsScreen1: View {
                             size: .headline
                         )
 
-                        DSHStack(spacing: .small) {
+                        DSHStack(spacing: .space4) {
                             DSImageView(
                                 systemName: "star.fill",
-                                size: .font(.smallHeadline),
+                                size: .font(.label),
                                 tint: .color(.yellow)
                             )
                             DSText("4.5")
-                                .dsTextStyle(.smallHeadline)
+                                .dsTextStyle(DSTypographyToken.label)
                         }
 
-                        DSHStack(spacing: .small) {
+                        DSHStack(spacing: .space4) {
                             DSImageView(
                                 systemName: "clock.fill",
-                                size: .font(.smallHeadline),
-                                tint: .text(.smallHeadline)
+                                size: .font(.label),
+                                tint: .text(.label)
                             )
                             DSText("30 min")
-                                .dsTextStyle(.smallHeadline)
+                                .dsTextStyle(DSTypographyToken.label)
                         }
                     }
                 }
@@ -54,9 +54,9 @@ struct FoodDetailsScreen1: View {
                 DSText("Lorem ipsum et dolor sit amet, and consectetur eadipiscing elit. Ametmo magna the cursus yum dolor praesenta the  pulvinar tristique the food.")
                     .dsTextStyle(.subheadline)
 
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSText("Main Ingredients")
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                     DSGrid(columns: 8, data: 1 ... 5, id: \.self) { id in
                         DSImageView(named: "Food_Ingredient_\(id)")
                             .dsHeight(40)
@@ -64,34 +64,34 @@ struct FoodDetailsScreen1: View {
                     }
                 }
 
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSText("Food Information")
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
 
                     DSHStack {
-                        DSHStack(spacing: .small) {
+                        DSHStack(spacing: .space4) {
                             DSImageView(
                                 named: "Fodd_Icon_Calories",
-                                size: .font(.smallHeadline)
+                                size: .font(.label)
                             )
                             DSText("1990 kal")
-                                .dsTextStyle(.smallHeadline)
+                                .dsTextStyle(DSTypographyToken.label)
                         }.dsCardStyle()
-                        DSHStack(spacing: .small) {
+                        DSHStack(spacing: .space4) {
                             DSImageView(
                                 named: "Food_Icon_GluttenFree",
-                                size: .font(.smallHeadline)
+                                size: .font(.label)
                             )
                             DSText("Gluten Free")
-                                .dsTextStyle(.smallHeadline)
+                                .dsTextStyle(DSTypographyToken.label)
                         }.dsCardStyle()
-                        DSHStack(spacing: .small) {
+                        DSHStack(spacing: .space4) {
                             DSImageView(
                                 named: "Food_Icon_Organic",
-                                size: .font(.smallHeadline)
+                                size: .font(.label)
                             )
                             DSText("Organic")
-                                .dsTextStyle(.smallHeadline)
+                                .dsTextStyle(DSTypographyToken.label)
                         }.dsCardStyle()
                     }
                 }

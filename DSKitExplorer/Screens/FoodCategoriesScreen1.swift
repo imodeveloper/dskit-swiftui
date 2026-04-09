@@ -16,7 +16,7 @@ struct FoodCategoriesScreen1: View {
         DSList {
             DSSection {
                 DSGrid(
-                    spacing: .regular,
+                    spacing: .space8,
                     data: viewModel.categories,
                     id: \.id
                 ) { category in
@@ -38,11 +38,11 @@ extension FoodCategoriesScreen1 {
             DSVStack {
                 DSImageView(named: category.image)
                 DSHStack {
-                    DSVStack(spacing: .zero) {
+                    DSVStack(spacing: .custom(0)) {
                         DSText(category.title)
-                            .dsTextStyle(.smallHeadline)
+                            .dsTextStyle(DSTypographyToken.label)
                         DSText(category.subtitle)
-                            .dsTextStyle(.smallSubheadline)
+                            .dsTextStyle(.caption1)
                     }
                     Spacer()
                     DSSFSymbolButton(

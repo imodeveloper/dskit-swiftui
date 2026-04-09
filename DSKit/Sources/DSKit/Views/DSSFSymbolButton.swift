@@ -25,7 +25,7 @@ Initializes a `DSSFSymbolButton` with a symbol name and size.
 public struct DSSFSymbolButton: View, DSDesignable {
 
     @Environment(\.appearance) public var appearance: DSAppearance
-    @Environment(\.viewStyle) public var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) public var surfaceStyle: DSSurfaceStyle
 
     let name: String
     let size: DSSize
@@ -39,7 +39,7 @@ public struct DSSFSymbolButton: View, DSDesignable {
         DSImageView(
             systemName: name,
             size: size,
-            tint: .view(.button(.accentColor))
+            tint: .icon(.brand)
         )
     }
 }

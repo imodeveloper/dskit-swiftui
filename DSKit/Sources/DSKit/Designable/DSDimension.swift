@@ -10,7 +10,8 @@ import SwiftUI
 
 public enum DSDimension: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equatable {
 
-    case font(DSTextFontKey)
+    case token(DSSpatialToken)
+    case font(DSTypographyToken)
     case custom(CGFloat)
     case adaptiveHeight(CGFloat)
     case fillUpTheSpace
@@ -33,6 +34,8 @@ extension DSDimension {
         sizeCategory: ContentSizeCategory? = nil
     ) -> CGFloat {
         switch self {
+        case .token(let token):
+            token.value
         case .custom(let number):
             number
         case .adaptiveHeight(let defaultHeight):

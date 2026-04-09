@@ -34,9 +34,9 @@ struct Payment1: View {
         }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
-                    DSText("Next Step:").dsTextStyle(.smallHeadline)
+                    DSText("Next Step:").dsTextStyle(DSTypographyToken.label)
                     DSText("Shipping address")
-                        .dsTextStyle(.subheadline, 14)
+                        .dsTextStyle(DSTypographyToken.custom(size: 14, weight: .regular, relativeTo: .subheadline))
                 }
                 DSButton(
                     title: "Continue",
@@ -56,15 +56,15 @@ extension Payment1 {
     struct PaymentMethod: View {
         let method: Data
         var body: some View {
-            DSVStack(spacing: .small) {
-                DSHStack(spacing: .medium) {
+            DSVStack(spacing: .space4) {
+                DSHStack(spacing: .space16) {
                     DSImageView(
                         named: method.type.replacingOccurrences(of: " ", with: ""),
                         size: .size(width: 50, height: 30)
                     ).dsCornerRadius()
-                    DSVStack(spacing: .zero) {
-                        DSText("\(method.type) **** \(method.end)").dsTextStyle(.smallHeadline)
-                        DSText("\(method.holder) \(method.expire)").dsTextStyle(.smallSubheadline)
+                    DSVStack(spacing: .custom(0)) {
+                        DSText("\(method.type) **** \(method.end)").dsTextStyle(DSTypographyToken.label)
+                        DSText("\(method.holder) \(method.expire)").dsTextStyle(.caption1)
                     }
                 }.frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
             }

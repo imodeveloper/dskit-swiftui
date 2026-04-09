@@ -29,14 +29,14 @@ public struct DSHScroll<Data, ID, Content>: View where Data: RandomAccessCollect
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.dsScrollableContentMarginKey) var scrollableContentMargin: CGFloat
 
-    let spacing: DSSpace
+    let spacing: DSSpatialToken
 
     let data: Data
     let content: (Data.Element) -> Content
     let id: KeyPath<Data.Element, ID>
 
     public init(
-        spacing: DSSpace = .regular,
+        spacing: DSSpatialToken = .space8,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -72,7 +72,7 @@ struct Testable_DSHScroll: View {
         Color.yellow
     ]
     var body: some View {
-        DSHScroll(spacing: .medium, data: Array(colors.enumerated()), id: \.offset) { item in
+        DSHScroll(spacing: .space16, data: Array(colors.enumerated()), id: \.offset) { item in
             item.element.dsSize(90)
         }
     }

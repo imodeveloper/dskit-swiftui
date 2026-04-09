@@ -26,7 +26,7 @@ struct DSDisplayShapeModifier: ViewModifier {
         case .circle:
             content.clipShape(Circle())
         case .capsule:
-            content.cornerRadius(appearance.secondaryView.cornerRadius)
+            content.cornerRadius(appearance.cornerRadius)
         }
     }
 }

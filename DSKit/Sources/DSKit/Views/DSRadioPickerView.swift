@@ -47,7 +47,7 @@ public struct DSRadioPickerView<Data, ID, Content>: View where Data: RandomAcces
     }
 
     public var body: some View {
-        DSVStack(spacing: .small) {
+        DSVStack(spacing: .space4) {
             ForEach(data, id: id) { element in
                 DSVStack(alignment: .leading) {
                     self.content(element, selected == element)
@@ -78,7 +78,7 @@ struct Testable_DSRadioPickerView: View {
     @State var selected = "Purple"
     var body: some View {
         DSRadioPickerView(data: data, id: \.self, selected: $selected, content: { element, _ in
-            DSText(element).dsTextStyle(.smallHeadline)
+            DSText(element).dsTextStyle(DSTypographyToken.label)
         })
     }
 }

@@ -17,8 +17,8 @@ struct Items4: View {
             DSSection {
                 DSHScroll(data: viewModel.filters, id: \.self) { title in
                     DSText(title)
-                        .dsTextStyle(.headline, 12)
-                        .dsPadding(.horizontal, .large)
+                        .dsTextStyle(DSTypographyToken.custom(size: 12, weight: .semibold, relativeTo: .headline))
+                        .dsPadding(.horizontal, .space24)
                         .dsCardStyle()
                         .dsHeight(.actionElement)
                         .onTap { dismiss() }
@@ -48,13 +48,13 @@ extension Items4 {
         let product: Data
         var body: some View {
             Group {
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSImageView(url: product.image)
-                    DSVStack(spacing: .small) {
-                        DSText(product.title).dsTextStyle(.smallHeadline)
-                        DSText(product.description).dsTextStyle(.smallSubheadline)
-                        DSPriceView(price: product.price, size: .smallHeadline)
-                    }.dsPadding(.regular)
+                    DSVStack(spacing: .space4) {
+                        DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                        DSText(product.description).dsTextStyle(.caption1)
+                        DSPriceView(price: product.price, size: DSTypographyToken.label)
+                    }.dsPadding(.space8)
                 }
                 .dsSecondaryBackground()
                 .dsHeight(290)
@@ -64,10 +64,10 @@ extension Items4 {
                         size: .font(.subheadline),
                         tint: .color(product.favourite ? .red : .gray.opacity(0.5))
                     )
-                    .dsPadding(.regular)
+                    .dsPadding(.space8)
                     .dsBackground(.primary)
                     .dsCornerRadius()
-                    .dsPadding(.regular)
+                    .dsPadding(.space8)
                 }
                 .onTap {}
             }.dsCornerRadius()

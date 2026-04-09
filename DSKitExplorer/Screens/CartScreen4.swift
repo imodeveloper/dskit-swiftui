@@ -44,36 +44,36 @@ extension CartScreen4 {
         let product: Product
         var body: some View {
             DSVStack {
-                DSHStack(alignment: .center, spacing: .medium) {
+                DSHStack(alignment: .center, spacing: .space16) {
                     Group {
                         DSImageView(url: product.image, size: .size(width: 100, height: 100))
                             .overlay(alignment: .bottomLeading) {
                                 if let tag = product.tag {
-                                    DSText(tag).dsTextStyle(.headline, 9)
-                                        .dsPadding(.small)
+                                    DSText(tag).dsTextStyle(DSTypographyToken.custom(size: 9, weight: .semibold, relativeTo: .headline))
+                                        .dsPadding(.space4)
                                         .dsBackground(.primary)
                                         .dsCornerRadius()
-                                        .dsPadding(.small)
+                                        .dsPadding(.space4)
                                 }
                             }
                     }.dsCornerRadius()
 
                     DSVStack(alignment: .leading) {
-                        DSText(product.title).dsTextStyle(.smallHeadline)
+                        DSText(product.title).dsTextStyle(DSTypographyToken.label)
                         DSHStack {
                             DSText("Color:").dsTextStyle(.subheadline)
                             product.color.dsSize(.smallIcon).dsCornerRadius()
                             DSText("Size:").dsTextStyle(.subheadline)
-                            DSText(product.size).dsTextStyle(.smallHeadline)
+                            DSText(product.size).dsTextStyle(DSTypographyToken.label)
                         }
-                        DSPriceView(price: product.price, size: .smallHeadline)
+                        DSPriceView(price: product.price, size: DSTypographyToken.label)
                     }.dsFullWidth()
 
                     DSSFSymbolButton(name: "minus.circle.fill", size: .mediumIcon)
-                        .dsPadding(.trailing, .regular)
+                        .dsPadding(.trailing, .space8)
                 }
             }
-            .dsPadding(.regular)
+            .dsPadding(.space8)
             .dsSecondaryBackground()
             .dsCornerRadius()
             .onTap {}
@@ -100,9 +100,9 @@ extension CartScreen4 {
             DSHStack {
                 DSText("Total").dsTextStyle(.headline)
                 Spacer()
-                DSHStack(alignment: .firstTextBaseline, spacing: .small) {
+                DSHStack(alignment: .firstTextBaseline, spacing: .space4) {
                     DSText("for").dsTextStyle(.subheadline)
-                    DSText(itemsCount).dsTextStyle(.smallHeadline)
+                    DSText(itemsCount).dsTextStyle(DSTypographyToken.label)
                     DSText("items").dsTextStyle(.subheadline)
                     DSPriceView(price: price, size: .headline)
                 }

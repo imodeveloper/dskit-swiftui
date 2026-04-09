@@ -20,7 +20,7 @@ struct BookingScreen5: View {
                     .dsFullWidth(alignment: .center)
                     .onTap { dismiss() }
 
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSVStack {
                         ForEach(viewModel.feedbackArray) { feedback in
                             FeedbackView(feedback: feedback)
@@ -42,7 +42,7 @@ extension BookingScreen5 {
     struct Barber: View {
         let barber: Data
         var body: some View {
-            DSVStack(alignment: .center, spacing: .small) {
+            DSVStack(alignment: .center, spacing: .space4) {
                 DSImageView(url: barber.image, style: .circle)
                     .dsSize(90)
                 DSText(barber.name)
@@ -64,15 +64,15 @@ extension BookingScreen5 {
     struct FeedbackView: View {
         let feedback: Data
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 DSImageView(url: feedback.image, style: .circle)
                     .dsSize(60)
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSText(feedback.userName).dsTextStyle(.headline)
                         .dsFullWidth()
                     DSHStack {
-                        DSImageView(systemName: "calendar", size: .font(.smallSubheadline), tint: .text(.caption1))
-                        DSText("14.05.2024").dsTextStyle(.smallSubheadline)
+                        DSImageView(systemName: "calendar", size: .font(.caption1), tint: .text(.caption1))
+                        DSText("14.05.2024").dsTextStyle(.caption1)
                     }
                     DSRatingView(rating: 4.5, size: 12)
                     DSText(feedback.feedbackText).dsTextStyle(.caption1)

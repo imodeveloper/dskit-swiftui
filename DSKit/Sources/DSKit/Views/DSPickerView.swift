@@ -58,7 +58,7 @@ public struct DSPickerView<Data, ID, Content>: View where Data: RandomAccessColl
     }
 
     public var body: some View {
-        DSVStack(spacing: .small) {
+        DSVStack(spacing: .space4) {
             switch style {
             case .horizontalScroll:
                 horizontalScrollStyle
@@ -69,13 +69,13 @@ public struct DSPickerView<Data, ID, Content>: View where Data: RandomAccessColl
     }
 
     var horizontalScrollStyle: some View {
-        DSHScroll(spacing: .regular, data: data, id: id) { element in
+        DSHScroll(spacing: .space8, data: data, id: id) { element in
             styledContent(element)
         }
     }
 
     func gridStyle(columns: Int) -> some View {
-        DSGrid(columns: columns, spacing: .regular, data: data, id: id) { element in
+        DSGrid(columns: columns, spacing: .space8, data: data, id: id) { element in
             styledContent(element)
         }
     }

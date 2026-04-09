@@ -16,7 +16,7 @@ struct AboutUsScreen1: View {
 
     var body: some View {
         DSList {
-            DSSection(spacing: .medium) {
+            DSSection {
                 DSText("Our Story")
                     .dsTextStyle(.title2)
 
@@ -29,7 +29,7 @@ struct AboutUsScreen1: View {
                 }
 
                 DSVStack(alignment: .leading) {
-                    DSHStack(spacing: .medium) {
+                    DSHStack(spacing: .space16) {
                         DSImageView(
                             systemName: "message.fill",
                             size: .font(.headline),
@@ -43,7 +43,7 @@ struct AboutUsScreen1: View {
                     DSDivider()
                         .dsPadding(.leading, 30)
 
-                    DSHStack(spacing: .medium) {
+                    DSHStack(spacing: .space16) {
                         DSImageView(
                             systemName: "shippingbox.fill",
                             size: .font(.headline),
@@ -57,7 +57,7 @@ struct AboutUsScreen1: View {
                     DSDivider()
                         .dsPadding(.leading, 30)
 
-                    DSHStack(spacing: .medium) {
+                    DSHStack(spacing: .space16) {
                         DSImageView(
                             systemName: "leaf.arrow.triangle.circlepath",
                             size: .font(.headline),
@@ -70,6 +70,7 @@ struct AboutUsScreen1: View {
 
                 }.dsCardStyle()
             }
+            .dsSpacing(.space16)
         }
     }
 }

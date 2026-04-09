@@ -43,13 +43,13 @@ public struct DSDivider: View, DSDesignable {
     }
 
     @Environment(\.appearance) public var appearance: DSAppearance
-    @Environment(\.viewStyle) public var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) public var surfaceStyle: DSSurfaceStyle
 
     public var body: some View {
         switch style {
         case .line:
             Divider()
-                .background(viewColors.separator.color)
+                .background(color(for: .border(.subtle)))
                 .frame(minWidth: 1, minHeight: 1)
         case let .dots(number, size, spacing, alignment):
             dotsDivider(
@@ -71,7 +71,7 @@ public struct DSDivider: View, DSDesignable {
         let dots = HStack(spacing: spacing) {
             ForEach(0 ..< number, id: \.self) { _ in
                 Circle()
-                    .fill(viewColors.separator.color)
+                    .fill(color(for: .border(.subtle)))
                     .frame(width: size, height: size)
             }
         }
@@ -96,7 +96,7 @@ public struct DSDivider: View, DSDesignable {
 
 struct Testable_DSDivider: View {
     var body: some View {
-        DSVStack(spacing: .medium) {
+        DSVStack(spacing: .space16) {
             DSDivider()
             DSDivider(style: .dots())
         }

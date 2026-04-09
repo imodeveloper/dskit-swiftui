@@ -48,21 +48,21 @@ extension CartScreen1 {
     struct ProductView: View {
         let product: Product
         var body: some View {
-            DSHStack(alignment: .center, spacing: .medium) {
+            DSHStack(alignment: .center, spacing: .space16) {
                 DSImageView(url: product.image, size: .size(width: 80, height: 100))
                     .dsCornerRadius()
 
-                DSVStack(spacing: .small) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
-                    DSText(product.description).dsTextStyle(.smallSubheadline)
+                DSVStack(spacing: .space4) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(product.description).dsTextStyle(.caption1)
                     DSRatingView(rating: product.rating, size: 10)
-                    DSPriceView(price: product.price, size: .smallHeadline).dsPadding(.top, .regular)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label).dsPadding(.top, .space8)
                 }.dsFullWidth()
 
                 DSSFSymbolButton(name: "pencil.circle.fill", size: .mediumIcon)
-                    .dsPadding(.trailing, .regular)
+                    .dsPadding(.trailing, .space8)
             }
-            .dsPadding(.regular)
+            .dsPadding(.space8)
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
@@ -86,9 +86,9 @@ extension CartScreen1 {
             DSHStack {
                 DSText("Total").dsTextStyle(.headline)
                 Spacer()
-                DSHStack(alignment: .firstTextBaseline, spacing: .small) {
+                DSHStack(alignment: .firstTextBaseline, spacing: .space4) {
                     DSText("for").dsTextStyle(.subheadline)
-                    DSText(itemsCount).dsTextStyle(.smallHeadline)
+                    DSText(itemsCount).dsTextStyle(DSTypographyToken.label)
                     DSText("items").dsTextStyle(.subheadline)
                     DSPriceView(price: price, size: .headline)
                 }

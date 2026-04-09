@@ -13,18 +13,18 @@ struct SignUpScreen4: View {
     let viewModel = SignUpScreen4Model()
 
     var body: some View {
-        DSVStack(spacing: .medium) {
+        DSVStack(spacing: .space16) {
             Spacer()
-            DSVStack(spacing: .medium) {
-                DSText("Enter secure\ncode to verify").dsTextStyle(.largeHeadline)
+            DSVStack(spacing: .space16) {
+                DSText("Enter secure\ncode to verify").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                     .dsFullWidth()
                     .overlay(alignment: .trailing) {
-                        DSImageView(systemName: "checkmark.circle.fill", size: 60, tint: .viewStyle(.secondary, .background))
+                        DSImageView(systemName: "checkmark.circle.fill", size: 60, tint: .background(.surface))
                     }
                 DSText("Please enter your mobile number to\nget sms to activate your account")
                 DSTextField.password(value: viewModel.code)
                 DSHStack {
-                    DSText("Valid for 45 seconds").dsTextStyle(.smallSubheadline)
+                    DSText("Valid for 45 seconds").dsTextStyle(.caption1)
                     Spacer()
                     DSButton(title: "Resend Code", style: .clear, maxWidth: false, action: {
                         dismiss()

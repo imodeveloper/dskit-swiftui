@@ -32,7 +32,7 @@ struct Order4: View {
                 Spacer()
                 DSImageView(systemName: "checkmark.circle.fill", size: 70, tint: .color(.green))
                     .dsPadding(.bottom, 30)
-                DSText("It's Ordered").dsTextStyle(.largeHeadline)
+                DSText("It's Ordered").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                 DSText("Hi John - thanks for your order,\nwe hope you enjoyed shopping\nwith us", alignment: .center)
                     .dsTextStyle(.subheadline)
                 Spacer()
@@ -49,17 +49,17 @@ extension Order4 {
     struct SuggestedProductView: View {
         let product: Data
         var body: some View {
-            DSHStack(alignment: .center, spacing: .regular) {
+            DSHStack(alignment: .center, spacing: .space8) {
                 DSImageView(url: product.image, size: .size(width: 80, height: 60))
                     .dsCornerRadius()
-                DSVStack(alignment: .leading, spacing: .small) {
+                DSVStack(alignment: .leading, spacing: .space4) {
                     DSText(product.title, alignment: .leading)
-                        .dsTextStyle(.headline, 12)
+                        .dsTextStyle(DSTypographyToken.custom(size: 12, weight: .semibold, relativeTo: .headline))
                     DSText(product.subtitle, alignment: .leading)
-                        .dsTextStyle(.smallSubheadline)
-                    DSPriceView(price: product.price, size: .smallHeadline)
+                        .dsTextStyle(.caption1)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
                 }.frame(maxWidth: 160, alignment: .leading)
-            }.dsCardStyle(padding: .regular)
+            }.dsCardStyle(padding: .space8)
         }
 
         struct Data: Identifiable {

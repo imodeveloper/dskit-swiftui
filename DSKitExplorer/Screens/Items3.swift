@@ -40,13 +40,13 @@ extension Items3 {
         let product: Data
         var body: some View {
             ZStack {
-                DSHStack(alignment: .center, spacing: .medium) {
+                DSHStack(alignment: .center, spacing: .space16) {
                     DSImageView(url: product.image, size: .size(width: 90, height: 120))
                         .dsCornerRadius()
                     DSVStack(alignment: .leading) {
-                        DSText(product.title).dsTextStyle(.smallHeadline)
+                        DSText(product.title).dsTextStyle(DSTypographyToken.label)
                         DSText(product.description).dsTextStyle(.caption2)
-                        DSPriceView(price: product.price, size: .smallHeadline)
+                        DSPriceView(price: product.price, size: DSTypographyToken.label)
                     }.dsFullWidth()
                 }
 
@@ -55,12 +55,12 @@ extension Items3 {
                     size: .font(.subheadline),
                     tint: .color(product.favorite ? .red : .gray.opacity(0.5))
                 )
-                .dsPadding(.regular)
+                .dsPadding(.space8)
                 .dsBackground(.primary)
                 .dsCornerRadius()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }
-            .dsPadding(.regular)
+            .dsPadding(.space8)
             .dsSecondaryBackground()
             .dsCornerRadius()
         }

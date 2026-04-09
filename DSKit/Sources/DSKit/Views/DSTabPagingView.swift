@@ -117,7 +117,7 @@ public struct DSTabPagingView: View {
 
                 }.scrollTargetBehavior(.viewAligned)
 
-            }.background(appearance.navigationBar.bar.color)
+            }.background(appearance.color(for: .background(.canvas), surfaceStyle: .canvas))
         }
     }
 }
@@ -216,7 +216,7 @@ struct DSTabPagingIndicatorView: View {
             VStack(spacing: 0) {
                 HStack {
                     Capsule()
-                        .fill(appearance.primaryView.button.accentColor.color)
+                        .fill(appearance.color(for: .background(.brand), surfaceStyle: .canvas))
                         .frame(width: indicatorWidth, height: 4)
                         .offset(x: indicatorX)
                         .animation(.bouncy, value: frames.values.map { $0.width }.reduce(0, +) + CGFloat(frames.count))

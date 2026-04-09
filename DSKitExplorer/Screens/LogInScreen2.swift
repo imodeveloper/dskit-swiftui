@@ -23,15 +23,15 @@ struct LogInScreen2: View {
 
             DSVStack(alignment: .leading) {
                 DSText("Welcome to\nDSKit")
-                    .dsTextStyle(.headline, 38)
+                    .dsTextStyle(DSTypographyToken.custom(size: 38, weight: .semibold, relativeTo: .headline))
                 DSText("Meet new people with new\nideas and posts.")
                     .dsTextStyle(.subheadline)
-            }.dsPadding(.trailing, .large)
+            }.dsPadding(.trailing, .space24)
 
             Spacer()
             Spacer()
 
-            DSText("Use Facebook to find friends").dsTextStyle(.smallSubheadline)
+            DSText("Use Facebook to find friends").dsTextStyle(.caption1)
             DSButton(
                 title: "Login with facebook",
                 rightImageNamed: "facebook",

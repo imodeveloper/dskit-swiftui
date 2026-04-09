@@ -9,19 +9,15 @@ import SwiftUI
 
 public protocol DSDesignable {
     var appearance: DSAppearance { get }
-    var viewStyle: DSViewStyle { get }
+    var surfaceStyle: DSSurfaceStyle { get }
 }
 
 public extension DSDesignable {
-    var viewColors: DSViewAppearanceProtocol {
-        return viewStyle.colors(from: appearance)
+    func color(for colorToken: DSColorToken) -> Color {
+        appearance.color(for: colorToken, surfaceStyle: surfaceStyle)
     }
 
-    var navigationBarColors: DSNavigationBarAppearanceProtocol {
-        return appearance.navigationBar
-    }
-
-    func color(for colorKey: DSColorKey) -> Color {
-        appearance.color(for: colorKey, viewStyle: viewStyle)
+    func uiColor(for colorToken: DSColorToken) -> DSUIColor {
+        appearance.uiColor(for: colorToken, surfaceStyle: surfaceStyle)
     }
 }

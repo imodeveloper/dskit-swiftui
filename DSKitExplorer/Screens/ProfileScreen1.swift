@@ -22,9 +22,9 @@ struct ProfileScreen1: View {
                 )
 
                 ForEach(viewModel.groups, id: \.self) { (group: ActionView.Group) in
-                    DSVStack(spacing: .small) {
+                    DSVStack(spacing: .space4) {
                         if let title = group.title {
-                            DSText(title).dsTextStyle(.smallSubheadline)
+                            DSText(title).dsTextStyle(.caption1)
                                 .dsPadding(.top)
                         }
                         ForEach(group.items, id: \.title) { (action: ActionView.Action) in
@@ -62,11 +62,11 @@ extension ProfileScreen1 {
                 )
                 DSVStack(alignment: .center) {
                     DSText(title).dsTextStyle(.headline)
-                    DSText(subtitle).dsTextStyle(.smallSubheadline)
+                    DSText(subtitle).dsTextStyle(.caption1)
                 }
             }
             .frame(maxWidth: .infinity)
-            .dsPadding(.vertical, .large)
+            .dsPadding(.vertical, .space24)
         }
     }
 
@@ -84,18 +84,18 @@ extension ProfileScreen1 {
                     tint: .text(.headline)
                 )
 
-                DSText(action.title).dsTextStyle(.smallHeadline)
+                DSText(action.title).dsTextStyle(DSTypographyToken.label)
 
                 Spacer()
 
                 if let badge = action.badge {
                     DSText(badge)
-                        .dsTextStyle(.smallSubheadline, .viewStyle(.secondary, .button(.supportColor)))
+                        .dsTextStyle(.caption1, .text(.brandOnBold))
                         .dsSize(18)
-                        .dsBackground(.color(.red))
+                        .dsBackground(.background(.danger))
                         .clipShape(Circle())
                 } else if let option = action.option {
-                    DSText(option).dsTextStyle(.smallSubheadline)
+                    DSText(option).dsTextStyle(.caption1)
                 }
 
                 DSChevronView()

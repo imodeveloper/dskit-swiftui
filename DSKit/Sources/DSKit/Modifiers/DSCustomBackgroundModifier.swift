@@ -11,21 +11,21 @@ import SwiftUI
 public struct DSCustomBackgroundModifier: ViewModifier {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
 
-    let dsColor: DSColorKey
+    let dsColor: DSColorToken
 
-    public init(dsColor: DSColorKey) {
+    public init(dsColor: DSColorToken) {
         self.dsColor = dsColor
     }
 
     public func body(content: Content) -> some View {
-        content.background(dsColor.color(for: appearance, and: viewStyle))
+        content.background(dsColor.color(for: appearance, in: surfaceStyle))
     }
 }
 
 public extension View {
-    func dsBackground(_ dsColor: DSColorKey) -> some View {
+    func dsBackground(_ dsColor: DSColorToken) -> some View {
         let modifier = DSCustomBackgroundModifier(dsColor: dsColor)
         return self.modifier(modifier)
     }
@@ -44,16 +44,16 @@ struct Testable_DSCustomBackgroundModifier: View {
                             DSText("Primary Background")
                         }
                         .dsPadding()
-                        dsBackground(.primary)
+                        dsBackground(.background(.canvas))
                     }
                     .dsPadding()
-                    .dsBackground(.secondary)
+                    .dsBackground(.background(.surface))
                 }
                 .dsPadding()
-                .dsBackground(.primary)
+                .dsBackground(.background(.canvas))
             }
             .dsPadding()
-            .dsBackground(.secondary)
+            .dsBackground(.background(.surface))
         }.dsScreen()
     }
 }

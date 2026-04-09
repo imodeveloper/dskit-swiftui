@@ -20,13 +20,13 @@ struct Items5: View {
                     .overlay(alignment: .center) {
                         DSVStack(alignment: .center) {
                             DSText("Clothing")
-                                .dsTextStyle(.largeHeadline, Color.black)
+                                .dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline), Color.black)
                             DSText("73.3k items")
-                                .dsTextStyle(.smallHeadline, Color.black)
+                                .dsTextStyle(DSTypographyToken.label, Color.black)
                         }
                     }
                 DSHScroll(data: viewModel.filters, id: \.self) { title in
-                    DSText(title).dsTextStyle(.smallHeadline)
+                    DSText(title).dsTextStyle(DSTypographyToken.label)
                         .dsPadding(.horizontal)
                         .dsCardStyle()
                         .dsHeight(.actionElement)
@@ -56,13 +56,13 @@ extension Items5 {
     struct ProductView: View {
         let product: Data
         var body: some View {
-            DSVStack(spacing: .zero) {
+            DSVStack(spacing: .custom(0)) {
                 DSImageView(url: product.image)
                     .dsSecondaryBackground()
-                DSVStack(spacing: .small) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
-                    DSText(product.description).dsTextStyle(.smallSubheadline)
-                    DSPriceView(price: product.price, size: .smallHeadline)
+                DSVStack(spacing: .space4) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(product.description).dsTextStyle(.caption1)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
                 }.dsPadding()
             }.overlay(alignment: .topTrailing, content: {
                 DSImageView(
@@ -70,9 +70,9 @@ extension Items5 {
                     size: .font(.subheadline),
                     tint: .color(product.favourite ? .red : .white)
                 )
-                .dsPadding(.regular)
+                .dsPadding(.space8)
                 .dsCornerRadius()
-                .dsPadding(.regular)
+                .dsPadding(.space8)
             })
             .dsSecondaryBackground()
             .dsCornerRadius()

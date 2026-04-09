@@ -43,20 +43,20 @@ extension CartScreen3 {
     struct ProductView: View {
         let product: Product
         var body: some View {
-            DSHStack(alignment: .center, spacing: .medium) {
+            DSHStack(alignment: .center, spacing: .space16) {
                 DSImageView(url: product.image, size: .size(width: 90, height: 100))
                     .dsCornerRadius()
                 DSVStack(alignment: .leading) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
                         .dsFullWidth()
                     DSText(product.description).dsTextStyle(.caption2)
-                    DSPriceView(price: product.price, size: .smallHeadline)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
                 }.dsFullWidth()
 
                 DSSFSymbolButton(name: "minus.circle.fill", size: .mediumIcon)
-                    .dsPadding(.trailing, .regular)
+                    .dsPadding(.trailing, .space8)
             }
-            .dsPadding(.regular)
+            .dsPadding(.space8)
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
@@ -80,9 +80,9 @@ extension CartScreen3 {
             DSHStack {
                 DSText("Total").dsTextStyle(.headline)
                 Spacer()
-                DSHStack(alignment: .firstTextBaseline, spacing: .small) {
+                DSHStack(alignment: .firstTextBaseline, spacing: .space4) {
                     DSText("for").dsTextStyle(.subheadline)
-                    DSText(itemsCount).dsTextStyle(.smallHeadline)
+                    DSText(itemsCount).dsTextStyle(DSTypographyToken.label)
                     DSText("items").dsTextStyle(.subheadline)
                     DSPriceView(price: price, size: .headline)
                 }

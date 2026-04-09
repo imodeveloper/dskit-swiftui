@@ -30,19 +30,19 @@ public struct DSTermsAndConditions: View {
     }
 
     public var body: some View {
-        DSVStack(spacing: .small) {
+        DSVStack(spacing: .space4) {
             DSText(message)
-                .dsTextStyle(.smallSubheadline)
+                .dsTextStyle(.caption1)
                 .frame(maxWidth: .infinity, alignment: .center)
-            DSHStack(spacing: .small) {
+            DSHStack(spacing: .space4) {
                 DSText("Terms")
-                    .dsTextStyle(.headline, 12)
+                    .dsTextStyle(DSTypographyToken.custom(size: 12, weight: .semibold, relativeTo: .headline))
                     .onTap { }
-                DSText("and").dsTextStyle(.smallSubheadline)
+                DSText("and").dsTextStyle(.caption1)
                 DSText("Privacy")
-                    .dsTextStyle(.headline, 12)
+                    .dsTextStyle(DSTypographyToken.custom(size: 12, weight: .semibold, relativeTo: .headline))
                     .onTap { }
-                DSText("policy").dsTextStyle(.smallSubheadline)
+                DSText("policy").dsTextStyle(.caption1)
             }.frame(maxWidth: .infinity, alignment: .center)
         }
     }

@@ -19,7 +19,7 @@ struct ItemDetails1: View {
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
 
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText(viewModel.title).dsTextStyle(.title2)
                     DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                 }
@@ -65,9 +65,9 @@ extension ItemDetails1 {
         let selection: String
         var body: some View {
             DSHStack {
-                DSText(title).dsTextStyle(.smallHeadline)
+                DSText(title).dsTextStyle(DSTypographyToken.label)
                 Spacer()
-                DSText(selection).dsTextStyle(.smallSubheadline)
+                DSText(selection).dsTextStyle(.caption1)
                 DSChevronView()
             }
             .dsHeight(.actionElement)
@@ -83,9 +83,9 @@ extension ItemDetails1 {
         let label: String
         var body: some View {
             DSHStack {
-                DSText(title).dsTextStyle(.smallHeadline)
+                DSText(title).dsTextStyle(DSTypographyToken.label)
                 Spacer()
-                DSText(label).dsTextStyle(.smallSubheadline)
+                DSText(label).dsTextStyle(.caption1)
                 selection
                     .dsSize(20)
                     .dsCornerRadius()

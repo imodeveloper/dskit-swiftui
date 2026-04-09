@@ -55,11 +55,11 @@ extension HomeScreen2 {
                     url: product.imageUrl,
                     style: .capsule
                 )
-                DSVStack(spacing: .zero) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
-                    DSText(product.description).dsTextStyle(.smallSubheadline)
-                    DSPriceView(price: product.price, size: .smallHeadline)
-                        .dsPadding(.top, .regular)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(product.description).dsTextStyle(.caption1)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
+                        .dsPadding(.top, .space8)
                 }
             }.dsPadding(.bottom)
         }
@@ -81,8 +81,8 @@ extension HomeScreen2 {
         let profileImageUrl: URL?
         var body: some View {
             DSHStack {
-                DSVStack(spacing: .zero) {
-                    DSText(title).dsTextStyle(.largeHeadline)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(title).dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                     DSText(subtitle).dsTextStyle(.subheadline)
                 }
                 Spacer()
@@ -101,7 +101,7 @@ extension HomeScreen2 {
         let title: String
         let action: () -> Void
         var body: some View {
-            DSText(title).dsTextStyle(.smallHeadline)
+            DSText(title).dsTextStyle(DSTypographyToken.label)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .dsCardStyle()
                 .onTap { action() }

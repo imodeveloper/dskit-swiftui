@@ -12,7 +12,7 @@ struct LogInScreen4: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        DSVStack(spacing: .medium) {
+        DSVStack(spacing: .space16) {
             Spacer()
 
             DSVStack(alignment: .center) {
@@ -24,7 +24,7 @@ struct LogInScreen4: View {
                 )
 
                 DSVStack(alignment: .center) {
-                    DSText("John Doe").dsTextStyle(.largeHeadline)
+                    DSText("John Doe").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                     DSText("john.doe@gmail.com").dsTextStyle(.subheadline)
                 }
             }.frame(maxWidth: .infinity)
@@ -33,7 +33,7 @@ struct LogInScreen4: View {
             Spacer()
             Spacer()
 
-            DSVStack(alignment: .center, spacing: .zero) {
+            DSVStack(alignment: .center, spacing: .custom(0)) {
                 DSButton(title: "Continue as John") {
                     dismiss()
                 }

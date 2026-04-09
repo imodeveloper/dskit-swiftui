@@ -28,9 +28,9 @@ struct ItemDetails5: View {
                     DSImageView(named: color, size: .size(width: 70, height: 50))
                 }
 
-                DSVStack(spacing: .medium) {
+                DSVStack(spacing: .space16) {
                     DSHStack {
-                        DSVStack(spacing: .zero) {
+                        DSVStack(spacing: .custom(0)) {
                             DSText(viewModel.title).dsTextStyle(.title2)
                             DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                         }.dsFullWidth()
@@ -42,7 +42,7 @@ struct ItemDetails5: View {
                     data: viewModel.sizes,
                     id: \.self, selected: $viewModel.selectedSize
                 ) { size in
-                    DSText(size).dsTextStyle(.smallHeadline)
+                    DSText(size).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity)
                         .dsPadding(.horizontal)
                         .dsHeight(.actionElement)

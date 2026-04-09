@@ -28,8 +28,8 @@ struct Shipping1: View {
         }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
-                    DSText("Next Step:").dsTextStyle(.smallHeadline)
-                    DSText("Checkout").dsTextStyle(.subheadline, 14)
+                    DSText("Next Step:").dsTextStyle(DSTypographyToken.label)
+                    DSText("Checkout").dsTextStyle(DSTypographyToken.custom(size: 14, weight: .regular, relativeTo: .subheadline))
                 }
                 DSButton(
                     title: "Continue",
@@ -49,11 +49,11 @@ extension Shipping1 {
     struct DeliveryAddressView: View {
         let address: Data
         var body: some View {
-            DSVStack(spacing: .small) {
-                DSText(address.address).dsTextStyle(.smallHeadline)
-                DSHStack(spacing: .small) {
+            DSVStack(spacing: .space4) {
+                DSText(address.address).dsTextStyle(DSTypographyToken.label)
+                DSHStack(spacing: .space4) {
                     DSImageView(systemName: "phone", size: 12, tint: .text(.subheadline))
-                    DSText(address.phone).dsTextStyle(.smallSubheadline)
+                    DSText(address.phone).dsTextStyle(.caption1)
                 }
             }
         }

@@ -31,7 +31,7 @@ public struct DSGrid<Data, ID, Content>: View where Data: RandomAccessCollection
     @Environment(\.appearance) var appearance: DSAppearance
 
     let viewHeight: DSDimension?
-    let spacing: DSSpace
+    let spacing: DSSpatialToken
     let columns: Int
 
     let data: Data
@@ -41,7 +41,7 @@ public struct DSGrid<Data, ID, Content>: View where Data: RandomAccessCollection
     public init(
         viewHeight: DSDimension? = nil,
         columns: Int = 2,
-        spacing: DSSpace = .regular,
+        spacing: DSSpatialToken = .space8,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content

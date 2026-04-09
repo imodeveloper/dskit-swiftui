@@ -19,25 +19,25 @@ struct ItemDetails3: View {
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
-                DSVStack(spacing: .medium) {
+                DSVStack(spacing: .space16) {
                     DSHStack {
-                        DSVStack(spacing: .zero) {
+                        DSVStack(spacing: .custom(0)) {
                             DSText(viewModel.title).dsTextStyle(.title2)
                             DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                         }.dsFullWidth()
                     }
 
-                    DSHStack(alignment: .center, spacing: .regular) {
+                    DSHStack(alignment: .center, spacing: .space8) {
                         DSRatingView(rating: 4.5, size: 16)
                         DSText("24K Ratings").dsTextStyle(.callout)
                     }
 
-                    DSVStack(spacing: .zero) {
-                        DSHStack(alignment: .center, spacing: .regular) {
+                    DSVStack(spacing: .custom(0)) {
+                        DSHStack(alignment: .center, spacing: .space8) {
                             DSImageView(systemName: "circlebadge.fill", size: 5, tint: .text(.caption1))
                             DSText("Colour Shown: Light Charcoal/Black/Lemon Venom/University Red").dsTextStyle(.caption2)
                         }
-                        DSHStack(alignment: .center, spacing: .regular) {
+                        DSHStack(alignment: .center, spacing: .space8) {
                             DSImageView(systemName: "circlebadge.fill", size: 5, tint: .text(.caption2))
                             DSText("Style: CW6575-001").dsTextStyle(.caption2)
                         }
@@ -63,7 +63,7 @@ struct ItemDetails3: View {
                     data: viewModel.sizes,
                     id: \.self, selected: $viewModel.selectedSize
                 ) { size in
-                    DSText(size).dsTextStyle(.smallHeadline)
+                    DSText(size).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity)
                         .dsPadding(.horizontal)
                         .dsHeight(.actionElement)
@@ -96,10 +96,10 @@ extension ItemDetails3 {
     struct SelectSizeView: View {
         let viewModel: ItemDetails3Model
         var body: some View {
-            DSVStack(spacing: .small) {
-                DSText("Size").dsTextStyle(.smallHeadline).dsPadding(.horizontal)
-                DSHScroll(spacing: .small, data: viewModel.sizes, id: \.self) { size in
-                    DSText(size).dsTextStyle(.smallHeadline)
+            DSVStack(spacing: .space4) {
+                DSText("Size").dsTextStyle(DSTypographyToken.label).dsPadding(.horizontal)
+                DSHScroll(spacing: .space4, data: viewModel.sizes, id: \.self) { size in
+                    DSText(size).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity)
                         .dsPadding(.horizontal)
                         .dsHeight(35)
@@ -121,9 +121,9 @@ extension ItemDetails3 {
     struct SelectModelView: View {
         let viewModel: ItemDetails3Model
         var body: some View {
-            DSVStack(spacing: .small) {
-                DSText("Model").dsTextStyle(.smallHeadline).dsPadding(.horizontal)
-                DSHScroll(spacing: .small, data: viewModel.colors, id: \.self) { color in
+            DSVStack(spacing: .space4) {
+                DSText("Model").dsTextStyle(DSTypographyToken.label).dsPadding(.horizontal)
+                DSHScroll(spacing: .space4, data: viewModel.colors, id: \.self) { color in
                     DSImageView(named: color, size: .size(width: 70, height: 50))
                         .dsSelectedStyle(isSelected: viewModel.selectedColor == color)
                         .onTap {

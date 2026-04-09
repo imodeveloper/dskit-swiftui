@@ -31,10 +31,10 @@ extension BookingScreen4 {
         let barber: Data
         var body: some View {
             DSVStack {
-                DSHStack(spacing: .medium) {
+                DSHStack(spacing: .space16) {
                     DSImageView(url: barber.image, style: .circle)
                         .dsSize(60)
-                    DSVStack(spacing: .zero) {
+                    DSVStack(spacing: .custom(0)) {
                         DSText(barber.name)
                             .dsTextStyle(.headline)
                         DSText(barber.grade)
@@ -49,7 +49,7 @@ extension BookingScreen4 {
 
                 DSGrid(columns: 4, data: barber.hours, id: \.self) { hour in
                     DSText(hour)
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                         .dsMaxWidthCentered()
                         .dsHeight(.actionElement)
                         .dsBackground(.primary)

@@ -563,6 +563,57 @@ Code example result:
 <table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSPriceView.snapshot.png" width="35%"/></td></tr><table/>
 
 
+## DSListSeparatorView
+
+`DSListSeparatorView` is a reusable DSKit list separator that supports both compact bar separators and titled section-break separators.
+
+#### Initialization:
+Use the default initializer for the common cases:
+- `DSListSeparatorView()` renders a compact bar separator.
+- `DSListSeparatorView(title: "Today")` renders a titled separator.
+
+For more control you can customize:
+- `style`: `.bar` or `.title`
+- `height`
+- `horizontalBleed` (defaults to the current DSKit content margin)
+- `backgroundStyle`
+- `textStyle`
+- `textColor`
+
+#### Usage:
+`DSListSeparatorView` is intended for custom list separators inserted through `DSSection(data:id:content:separator:)` or `dsListRowSeparator(...)` when the default line divider is not enough.
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+struct Testable_DSListSeparatorView: View {
+    var body: some View {
+        DSList {
+            DSSection {
+                DSText("Top item")
+                    .dsTextStyle(.headline)
+            }
+
+            DSSection {
+                DSListSeparatorView()
+                DSListSeparatorView(title: "Today")
+                DSListSeparatorView(
+                    title: "Custom",
+                    height: 48,
+                    horizontalBleed: 24,
+                    backgroundStyle: .primary,
+                    textStyle: .headline,
+                    textColor: .text(.headline)
+                )
+            }
+        }
+    }
+}
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSListSeparatorView.snapshot.png" width="35%"/></td></tr><table/>
+
+
 ## DSGroupedList
 
 `DSGroupedList` is a SwiftUI component designed to display a collection of data in a grouped list format within the DSKit framework. It organizes elements in a vertical stack with dividers between items, suitable for settings where data needs to be sectioned clearly, such as in menus, forms, or any list-based interface.
@@ -867,6 +918,42 @@ struct Testable_DSThread: View {
         }
     }
 }
+struct Testable_DSThreadSection: View {
+
+    let colors: [ThreadItem] = [
+        ThreadItem(item: SomeColor(title: "red", color: Color.red)),
+        ThreadItem(item: SomeColor(title: "green", color: Color.green)),
+        ThreadItem(item: SomeColor(title: "yellow", color: Color.yellow)),
+        ThreadItem(item: SomeColor(title: "purple", color: Color.purple))
+    ]
+
+    var body: some View {
+        DSList {
+            DSThreadSection(
+                threadContentSpacing: 4,
+                threadLeftPadding: 6,
+                data: colors,
+                id: \.self
+            ) { threadItem, _ in
+                DSHStack {
+                    Circle()
+                        .fill(threadItem.item.color)
+                        .frame(width: 24, height: 24)
+
+                    Text(threadItem.item.title)
+                }
+            } content: { threadItem, position in
+                threadItem.item.color
+                    .frame(height: position == .top ? 100 : 60)
+                    .clipShape(.rect(cornerRadius: 12))
+            } footer: {
+                DSText("Footer")
+                    .dsTextStyle(.subheadline)
+                    .dsPadding(.top, .small)
+            }
+        }
+    }
+}
 ```
 Code example result:
 
@@ -875,35 +962,68 @@ Code example result:
 
 ## DSSection
 
-`DSSection` is a SwiftUI component within the DSKit framework that wraps SwiftUI's `Section` and applies DSKit list styling, background, and content margins.
+`DSSection` wraps SwiftUI's `Section` and applies DSKit list styling, background, and content margins.
 
-#### Initialization:
-Initializes a `DSSection` with optional spacing and dynamic content.
-- Parameters:
-- `spacing`: Additional bottom spacing for rows in this section. Defaults to `.zero`.
-- `content`: A `@ViewBuilder` closure that generates the section content.
+Use the plain initializer for arbitrary section content:
+- `DSSection(content:)`
+- Override row spacing for a subtree with `.dsSpacing(...)`
 
-#### Usage:
-`DSSection` is intended to be used inside a `DSList` to keep list sections visually consistent with the design system.
-When section content contains many vertical rows, emit the `ForEach` rows directly instead of wrapping the whole set in `VStack` or `LazyVStack`, or SwiftUI may collapse them into one large list cell.
+Use the data-driven initializers when the section renders repeated list rows and DSKit should own
+row position and separator boilerplate:
+- `DSSection(data:id:content:)`
+- `DSSection(data:id:nativeSeparator:content:)`
+- `DSSection(data:id:content:separator:)`
+
+When section content contains many vertical rows, emit the `ForEach` rows directly instead of
+wrapping the whole set in `VStack` or `LazyVStack`, or SwiftUI may collapse them into one large
+list cell.
 #### Code example:
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSSection: View {
+    private let colors: [DSSectionPreviewColor] = [
+        DSSectionPreviewColor(title: "red", color: .red),
+        DSSectionPreviewColor(title: "green", color: .green),
+        DSSectionPreviewColor(title: "yellow", color: .yellow),
+        DSSectionPreviewColor(title: "purple", color: .purple)
+    ]
+
     var body: some View {
         DSList(spacing: .custom(12)) {
             DSSection {
                 DSVStack(spacing: .small) {
-                DSText("Section Title").dsTextStyle(.headline)
-                DSText("Section body text").dsTextStyle(.caption2)
+                    DSText("Section Title").dsTextStyle(.headline)
+                    DSText("Section body text").dsTextStyle(.caption2)
                 }
             }
-            DSSection {
+
+            DSSection(
+                data: colors,
+                id: \.title,
+                nativeSeparator: .visible
+            ) { item, position in
                 DSHStack {
-                    DSButton(title: "Action", action: { })
-                    DSButton.callToActionLink(title: "More", action: { })
+                    Circle()
+                        .fill(item.color)
+                        .frame(width: 16, height: 16)
+
+                    DSText("\(item.title) · \(String(describing: position))")
+                        .dsTextStyle(.headline)
                 }
             }
+
+            DSSection(
+                data: colors,
+                id: \.title,
+                content: { item, _ in
+                    DSText(item.title)
+                        .dsTextStyle(.headline)
+                },
+                separator: { _ in
+                    DSDivider(style: .dots())
+                }
+            )
+            .dsSpacing(.small)
         }
     }
 }
@@ -1048,13 +1168,16 @@ Code example result:
 The `DSDivider` is initialized without parameters, defaulting to predefined styling that respects the current theme and spacing conventions.
 
 #### Usage:
-`DSDivider` is used to visually separate content within a view, often between list items, sections in a form, or alongside layout changes.
+ `DSDivider` is used to visually separate content within a view, often between list items, sections in a form, or alongside layout changes.
 #### Code example:
 Here is how you might set up it within your views:
 ```swift
 struct Testable_DSDivider: View {
     var body: some View {
-        DSDivider()
+        DSVStack(spacing: .medium) {
+            DSDivider()
+            DSDivider(style: .dots())
+        }
     }
 }
 ```

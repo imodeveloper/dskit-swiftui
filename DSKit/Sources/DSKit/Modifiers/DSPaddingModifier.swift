@@ -1,5 +1,5 @@
 //
-//  DSPadding.swift
+//  DSSpatialToken.swift
 //  DSKit
 //
 //  Created by Ivan Borinschi on 14.12.2022.
@@ -22,9 +22,9 @@ public struct DSPaddingModifier: ViewModifier {
 
     @Environment(\.appearance) var appearance: DSAppearance
     let edge: Edge.Set
-    let padding: DSPadding
+    let padding: DSSpatialToken
 
-    init(edge: Edge.Set, padding: DSPadding) {
+    init(edge: Edge.Set, padding: DSSpatialToken) {
         self.edge = edge
         self.padding = padding
     }
@@ -42,7 +42,7 @@ public struct DSPaddingModifier: ViewModifier {
 }
 
 public extension View {
-    func dsPadding(_ edge: Edge.Set = .all, _ padding: DSPadding = .medium) -> some View {
+    func dsPadding(_ edge: Edge.Set = .all, _ padding: DSSpatialToken = .space16) -> some View {
         let modifier = DSPaddingModifier(
             edge: edge,
             padding: padding
@@ -50,7 +50,7 @@ public extension View {
         return self.modifier(modifier)
     }
 
-    func dsPadding(_ padding: DSPadding = .medium) -> some View {
+    func dsPadding(_ padding: DSSpatialToken = .space16) -> some View {
         let modifier = DSPaddingModifier(
             edge: .all,
             padding: padding
@@ -82,12 +82,12 @@ public extension View {
 //        Text("Small")
 //            .frame(width: 200)
 //            .background(Color.white)
-//            .dsPadding(.all, .small)
+//            .dsPadding(.all, .space4)
 //            .background(Color.red)
 //        Text("Medium")
 //            .frame(width: 200)
 //            .background(Color.white)
-//            .dsPadding(.all, .medium)
+//            .dsPadding(.all, .space16)
 //            .background(Color.red)
 //        Text("Medium Large")
 //            .frame(width: 200)
@@ -97,7 +97,7 @@ public extension View {
 //        Text("Large")
 //            .frame(width: 200)
 //            .background(Color.white)
-//            .dsPadding(.all, .large)
+//            .dsPadding(.all, .space24)
 //            .background(Color.red)
 //        Text("Extra Large")
 //            .frame(width: 200)

@@ -13,14 +13,14 @@ struct NotificationsScreen1: View {
     @Environment(\.appearance) var appearance: DSAppearance
 
     var body: some View {
-        DSVStack(spacing: .medium) {
+        DSVStack(spacing: .space16) {
             Spacer()
 
             DSHStack {
                 DSText("Turn on\nnotifications")
-                    .dsTextStyle(.headline, 36)
+                    .dsTextStyle(DSTypographyToken.custom(size: 36, weight: .semibold, relativeTo: .headline))
                 Spacer()
-                DSImageView(systemName: "bell.fill", size: 60, tint: .viewStyle(.secondary, .background))
+                DSImageView(systemName: "bell.fill", size: 60, tint: .background(.surface))
             }
 
             DSText("Meet new people, create posts, find friends and more.")

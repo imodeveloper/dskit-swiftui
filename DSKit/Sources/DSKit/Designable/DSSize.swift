@@ -12,7 +12,7 @@ public struct DSSize: Equatable, ExpressibleByFloatLiteral, ExpressibleByInteger
     public let width: DSDimension
     public let height: DSDimension
 
-    public init(_ textFont: DSTextFontKey) {
+    public init(_ textFont: DSTypographyToken) {
         self.width = .font(textFont)
         self.height = .font(textFont)
     }
@@ -35,18 +35,18 @@ public struct DSSize: Equatable, ExpressibleByFloatLiteral, ExpressibleByInteger
 
 public extension DSSize {
     static var smallIcon: DSSize {
-        16
+        .size(.token(.space16))
     }
 
     static var mediumIcon: DSSize {
-        20
+        .size(.custom(20))
     }
 
     static func size(_ number: DSDimension) -> DSSize {
         DSSize(width: number, height: number)
     }
 
-    static func font(_ textFont: DSTextFontKey) -> DSSize {
+    static func font(_ textFont: DSTypographyToken) -> DSSize {
         DSSize(textFont)
     }
 

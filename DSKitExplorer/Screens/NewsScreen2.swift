@@ -30,14 +30,14 @@ extension NewsScreen2 {
         let article: Data
 
         var body: some View {
-            DSHStack(alignment: .top, spacing: .medium) {
-                DSVStack(spacing: .regular) {
+            DSHStack(alignment: .top, spacing: .space16) {
+                DSVStack(spacing: .space8) {
                     DSText(article.title)
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                         .dsFullWidth()
 
                     DSText(article.description, alignment: .leading)
-                        .dsTextStyle(.smallSubheadline)
+                        .dsTextStyle(.caption1)
                         .dsFullWidth()
 
                     DSHStack {

@@ -10,14 +10,14 @@ import SwiftUI
 public struct DSShadowModifier: ViewModifier {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    let padding: DSPadding
+    let padding: DSSpatialToken
 
     var color: Color
     var radius: CGFloat
     var xOffset: CGFloat
     var yOffset: CGFloat
 
-    init(padding: DSPadding, color: Color = .black, radius: CGFloat = 10, xOffset: CGFloat = 0, yOffset: CGFloat = -5) {
+    init(padding: DSSpatialToken, color: Color = .black, radius: CGFloat = 10, xOffset: CGFloat = 0, yOffset: CGFloat = -5) {
         self.padding = padding
         self.color = color
         self.radius = radius
@@ -30,7 +30,7 @@ public struct DSShadowModifier: ViewModifier {
             content
                 .dsPadding(.top, padding)
             Rectangle()
-                .fill(appearance.primaryView.background.color)
+                .fill(appearance.uiColor(for: .background(.canvas), surfaceStyle: .canvas).color)
                 .frame(maxWidth: .infinity)
                 .frame(height: 20)
                 .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 1)
@@ -43,7 +43,7 @@ public struct DSShadowModifier: ViewModifier {
 }
 
 public extension View {
-    func topShadow(padding: DSPadding, radius: CGFloat = 10, yOffset: CGFloat = -5) -> some View {
+    func topShadow(padding: DSSpatialToken, radius: CGFloat = 10, yOffset: CGFloat = -5) -> some View {
         self.modifier(DSShadowModifier(padding: padding, radius: radius, yOffset: yOffset))
     }
 }
@@ -64,7 +64,7 @@ struct DSShadowModifier_Previews: PreviewProvider {
                     .dsCornerRadius()
                     .dsPadding(.horizontal)
                     .dsPadding(.horizontal)
-                    .topShadow(padding: .regular)
+                    .topShadow(padding: .space8)
             }
         }
         }

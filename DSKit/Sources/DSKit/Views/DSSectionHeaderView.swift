@@ -43,7 +43,7 @@ public struct DSSectionHeaderView: View {
             Spacer()
             DSButton.callToActionLink(
                 title: actionTitle,
-                textFont: .smallHeadline,
+                textFont: .label,
                 rightSystemName: "chevron.right",
                 action: action
             )

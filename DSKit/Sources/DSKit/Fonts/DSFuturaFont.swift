@@ -11,7 +11,7 @@ import UIKit
 import AppKit
 #endif
 
-public class DSFuturaFont: DSFontsProtocol {
+public class DSFuturaFont: DSTypographyProtocol {
 
     public var body: DSFont {
         return regularFont(size: 17.0)

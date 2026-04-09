@@ -30,22 +30,22 @@ extension Categories1 {
     struct CategoryView: View {
         let category: Data
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 if category.image != nil {
                     DSImageView(url: category.image, size: .size(width: 60, height: 60))
                         .dsCornerRadius()
-                        .dsPadding(.leading, .regular)
-                        .dsPadding(.top, .regular)
-                        .dsPadding(.bottom, .regular)
+                        .dsPadding(.leading, .space8)
+                        .dsPadding(.top, .space8)
+                        .dsPadding(.bottom, .space8)
                 }
 
                 DSVStack {
-                    DSVStack(spacing: .zero) {
-                        DSText(category.title).dsTextStyle(.smallHeadline)
-                        DSText(category.description).dsTextStyle(.smallSubheadline)
+                    DSVStack(spacing: .custom(0)) {
+                        DSText(category.title).dsTextStyle(DSTypographyToken.label)
+                        DSText(category.description).dsTextStyle(.caption1)
                     }
                 }
-                .dsPadding(category.image != nil ? .zero : .medium)
+                .dsPadding(category.image != nil ? .custom(0) : .space16)
                 .dsFullWidth()
             }
             .overlay(alignment: .trailing) {

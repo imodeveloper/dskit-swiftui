@@ -22,7 +22,7 @@ public extension EnvironmentValues {
 public struct DSDebuggableModifier: ViewModifier {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var viewStyle: DSSurfaceStyle
     @Environment(\.debugLayout) var debugLayout: Bool
 
     var debugColor: Color
@@ -59,15 +59,15 @@ public extension View {
                 DSVStack {
                     DSText("Primary")
                 }
-                .dsPadding(.medium)
+                .dsPadding(.space16)
                 .dsBackground(.secondary)
                 .dsCornerRadius()
             }
-            .dsPadding(.custom(1))
+            .dsPadding(.space1)
             .dsBackground(.primary)
             .dsCornerRadius()
         }
-        .dsPadding(.small)
+        .dsPadding(.space4)
         .dsSecondaryBackground()
         .dsCornerRadius()
 

@@ -15,7 +15,7 @@ struct ProfileScreen3: View {
     var body: some View {
         DSList {
             DSSection {
-                DSHStack(spacing: .medium) {
+                DSHStack(spacing: .space16) {
                     DSImageView(
                         systemName: "exclamationmark.shield.fill",
                         size: 50,
@@ -30,7 +30,7 @@ struct ProfileScreen3: View {
                 .dsSecondaryBackground()
                 .dsCornerRadius()
 
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSTextField.password(value: viewModel.currentPassword)
                     DSTextField.newPassword(value: viewModel.newPassword)
                     DSTextField.password(value: viewModel.repeatPassword, placeholder: "Repeat Password")

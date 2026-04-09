@@ -17,7 +17,7 @@ struct ProfileScreen2: View {
             DSSection {
                 ProfileView(title: "Jane Doe", subtitle: "12 April 200", profileImageUrl: personOnOrangeBg)
                 DSVStack {
-                    DSVStack(spacing: .small) {
+                    DSVStack(spacing: .space4) {
                         DSTextField.name(value: viewModel.fullName)
                         DSTextField.email(value: viewModel.email)
                         DSTextField.phone(value: viewModel.phone)
@@ -53,11 +53,11 @@ extension ProfileScreen2 {
                 )
                 DSVStack(alignment: .center) {
                     DSText(title).dsTextStyle(.headline)
-                    DSText(subtitle).dsTextStyle(.smallSubheadline)
+                    DSText(subtitle).dsTextStyle(.caption1)
                 }
             }
             .frame(maxWidth: .infinity)
-            .dsPadding(.vertical, .large)
+            .dsPadding(.vertical, .space24)
         }
     }
 }

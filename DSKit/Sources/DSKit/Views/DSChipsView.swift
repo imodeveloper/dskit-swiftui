@@ -31,15 +31,15 @@ public struct DSChipsView<Data, ID, Content>: View where Data: RandomAccessColle
 
     private let data: Data
     private let id: KeyPath<Data.Element, ID>
-    private let horizontalSpacing: DSSpace
-    private let verticalSpacing: DSSpace
+    private let horizontalSpacing: DSSpatialToken
+    private let verticalSpacing: DSSpatialToken
     private let content: (Data.Element) -> Content
 
     public init(
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        horizontalSpacing: DSSpace = .regular,
-        verticalSpacing: DSSpace = .regular,
+        horizontalSpacing: DSSpatialToken = .space8,
+        verticalSpacing: DSSpatialToken = .space8,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.data = data
@@ -136,16 +136,16 @@ struct Testable_DSChipsView: View {
 struct DSChipsPreviewChip: Identifiable {
     let id: String
     let title: String
-    let style: DSViewStyle
+    let style: DSSurfaceStyle
 }
 
 private struct DSChipsPreviewTag: View {
     let title: String
-    let style: DSViewStyle
+    let style: DSSurfaceStyle
 
     var body: some View {
         DSText(title)
-            .dsCardStyle(padding: .regular)
+            .dsCardStyle(padding: .space8)
     }
 }
 

@@ -42,13 +42,13 @@ extension BookingScreen2 {
         let subtitle: String
 
         var body: some View {
-            DSHStack(spacing: .medium) {
+            DSHStack(spacing: .space16) {
                 DSImageView(systemName: icon, size: 23, tint: .text(.headline))
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText(title)
-                        .dsTextStyle(.smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
                     DSText(subtitle)
-                        .dsTextStyle(.smallSubheadline)
+                        .dsTextStyle(.caption1)
                 }.dsFullWidth()
                 DSChevronView()
             }.dsCardStyle()
@@ -58,18 +58,18 @@ extension BookingScreen2 {
     struct Location: View {
         let address: Data
         var body: some View {
-            DSVStack(spacing: .zero) {
-                DSVStack(spacing: .small) {
+            DSVStack(spacing: .custom(0)) {
+                DSVStack(spacing: .space4) {
                     DSText(address.name)
                         .dsTextStyle(.headline)
                     DSHStack {
                         DSImageView(
                             systemName: "house",
                             size: .font(.subheadline),
-                            tint: .text(.smallSubheadline)
+                            tint: .text(.caption1)
                         )
                         DSText(address.address)
-                            .dsTextStyle(.smallSubheadline)
+                            .dsTextStyle(.caption1)
                     }
                 }.dsPadding()
                 Map(

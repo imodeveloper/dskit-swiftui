@@ -25,7 +25,7 @@ Initializes a `DSText` with the text content and optional alignment.
 public struct DSText: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
     @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
     @Environment(\.textStyle) var textStyle: DSTextStyle
 
@@ -42,7 +42,7 @@ public struct DSText: View {
     public var body: some View {
         Text(text)
             .font(textStyle.font(for: appearance, sizeCategory: sizeCategory))
-            .foregroundStyle(textStyle.color(for: appearance, and: viewStyle))
+            .foregroundStyle(textStyle.color(for: appearance, in: surfaceStyle))
             .multilineTextAlignment(alignment)
             .lineSpacing(lineSpacing)
             .dsDebuggable(debugColor: Color.orange.opacity(0.3))
@@ -51,61 +51,37 @@ public struct DSText: View {
 
 public extension DSText {
 
-    func dsTextStyle(_ textFont: DSTextFontKey) -> some View {
+    func dsTextStyle(_ textFont: DSTypographyToken) -> some View {
         return self.environment(\.textStyle, DSTextStyle.textFont(textFont))
     }
 
-    func dsTextStyle(_ textStyle: DSTextStyle) -> some View {
-        return self.environment(\.textStyle, textStyle)
-    }
-
-    func dsTextStyle(_ textFont: DSTextFontKey, _ size: CGFloat) -> some View {
-        return self.environment(\.textStyle, .textFont(.fontWithSize(textFont, size)))
-    }
-
-    func dsTextStyle(_ textFont: DSTextFontKey, _ size: CGFloat, _ dsColor: DSColorKey) -> some View {
-        return self.environment(\.textStyle, .textFontWithColor(.fontWithSize(textFont, size), dsColor))
-    }
-
-    func dsTextStyle(_ textFont: DSTextFontKey, _ size: CGFloat, _ color: Color) -> some View {
-        return self.environment(\.textStyle, .textFontWithColor(.fontWithSize(textFont, size), .color(color)))
-    }
-
-    func dsTextStyle(_ textStyle: DSTextStyle, _ dsColor: DSColorKey) -> some View {
-        return self.environment(\.textStyle, .reStyleWithColor(textStyle, dsColor))
-    }
-
-    func dsTextStyle(_ textStyle: DSTextStyle, _ color: Color) -> some View {
-        return self.environment(\.textStyle, .reStyleWithColor(textStyle, .color(color)))
-    }
-
-    func dsTextStyle(_ textFont: DSTextFontKey, _ dsColor: DSColorKey) -> some View {
+    func dsTextStyle(_ textFont: DSTypographyToken, _ dsColor: DSColorToken) -> some View {
         return self.environment(\.textStyle, .textFontWithColor(textFont, dsColor))
     }
 
-    func dsTextStyle(_ textFont: DSTextFontKey, _ color: Color) -> some View {
-        return self.environment(\.textStyle, .textFontWithColor(textFont, .color(color)))
+    func dsTextStyle(_ textFont: DSTypographyToken, _ color: Color) -> some View {
+        return self.environment(\.textStyle, .textFontWithColor(textFont, .custom(color)))
     }
 }
 
 public indirect enum DSTextStyle: Equatable, Hashable {
 
-    case textFont(DSTextFontKey)
-    case textFontWithColor(DSTextFontKey, DSColorKey)
-    case reStyleWithColor(DSTextStyle, DSColorKey)
+    case textFont(DSTypographyToken)
+    case textFontWithColor(DSTypographyToken, DSColorToken)
+    case reStyleWithColor(DSTextStyle, DSColorToken)
 
-    func textStyle(for appearance: DSAppearance) -> (font: DSTextFontKey, color: DSTextColorKey) {
+    func textStyle(for appearance: DSAppearance, in surfaceStyle: DSSurfaceStyle) -> (font: DSTypographyToken, color: DSColorToken) {
         switch self {
         case .textFont(let font):
-            return (font: font, color: DSTextColorKey.font(font))
+            return (font: font, color: appearance.colors.defaultTextColorToken(for: font, in: surfaceStyle))
         case .textFontWithColor(let font, let color):
-            return (font: font, color: .dsColor(color))
+            return (font: font, color: color)
         case .reStyleWithColor(let textStyle, let color):
-            return (font: .fontWithSize(textStyle.dsTextFont, textStyle.dsTextFont.pointSize(for: appearance)), color: .dsColor(color))
+            return (font: textStyle.dsTextFont, color: color)
         }
     }
 
-    var dsTextFont: DSTextFontKey {
+    var dsTextFont: DSTypographyToken {
         return switch self {
         case .textFont(let font):
             font
@@ -127,8 +103,8 @@ public indirect enum DSTextStyle: Equatable, Hashable {
         dsTextFont.font(for: appearance, sizeCategory: sizeCategory)
     }
 
-    func color(for appearance: DSAppearance, and viewStyle: DSViewStyle) -> Color {
-        textStyle(for: appearance).color.color(for: appearance, and: viewStyle)
+    func color(for appearance: DSAppearance, in surfaceStyle: DSSurfaceStyle) -> Color {
+        textStyle(for: appearance, in: surfaceStyle).color.color(for: appearance, in: surfaceStyle)
     }
 
     func size(_ appearance: DSAppearance) -> CGFloat {
@@ -155,14 +131,16 @@ struct Testable_DSText: View {
             DSText("Title 2").dsTextStyle(.title2)
             DSText("Title 3").dsTextStyle(.title3)
             DSText("Headline").dsTextStyle(.headline)
-            DSText("Headline with size 20").dsTextStyle(.headline, 20)
+            DSText("Label").dsTextStyle(DSTypographyToken.label)
             DSText("Subheadline").dsTextStyle(.subheadline)
-            DSText("Subheadline with size 20").dsTextStyle(.headline, 20)
+            DSText("Body small").dsTextStyle(.bodySmall)
+            DSText("Body large").dsTextStyle(.bodyLarge)
             DSText("Body").dsTextStyle(.body)
             DSText("Callout").dsTextStyle(.callout)
             DSText("Caption 1").dsTextStyle(.caption1)
             DSText("Caption 2").dsTextStyle(.caption2)
             DSText("Footnote").dsTextStyle(.footnote)
+            DSText("Custom 20 semibold headline").dsTextStyle(DSTypographyToken.custom(size: 20, weight: .semibold, relativeTo: .headline))
 
             DSHStack {
                 DSText(
@@ -227,7 +205,7 @@ private struct DSTextDynamicTypeInteractivePreview: View {
     }
 
     var body: some View {
-        DSVStack(spacing: .small) {
+        DSVStack(spacing: .space4) {
             DSText("Size Category: \(selectedLabel)")
                 .dsTextStyle(.subheadline)
             Slider(

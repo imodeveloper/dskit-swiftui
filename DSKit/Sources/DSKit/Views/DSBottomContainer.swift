@@ -34,7 +34,7 @@ public struct DSBottomContainer<Content: View>: View {
             content()
         }
         .dsPadding(.bottom)
-        .topShadow(padding: .medium)
+        .topShadow(padding: .space16)
         .dsBackground(.primary)
         .dsContentMargins()
     }

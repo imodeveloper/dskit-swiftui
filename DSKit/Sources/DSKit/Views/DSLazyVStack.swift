@@ -16,7 +16,7 @@ import SwiftUI
 Initializes a `DSLazyVStack` with alignment, spacing, and dynamic content.
 - Parameters:
 - `alignment`: The horizontal alignment of content within the stack. Defaults to `.leading`.
-- `spacing`: Specifies the space between each item within the stack. Defaults to `.regular`.
+- `spacing`: Specifies the space between each item within the stack. Defaults to `.space8`.
 - `content`: A `@ViewBuilder` closure that generates the content of the stack.
 
 #### Usage:
@@ -27,13 +27,13 @@ public struct DSLazyVStack<Content: View>: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
 
-    let spacing: DSSpace
+    let spacing: DSSpatialToken
     let alignment: HorizontalAlignment
     let content: () -> Content
 
     public init(
         alignment: HorizontalAlignment = .leading,
-        spacing: DSSpace = .regular,
+        spacing: DSSpatialToken = .space8,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.content = content
@@ -54,7 +54,7 @@ public struct DSLazyVStack<Content: View>: View {
 struct Testable_DSLazyVStack: View {
     var body: some View {
         ScrollView {
-            DSLazyVStack(spacing: .small) {
+            DSLazyVStack(spacing: .space4) {
                 Color.yellow.dsHeight(60)
                 Color.green.dsHeight(60)
                 Color.blue.dsHeight(60)

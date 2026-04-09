@@ -26,9 +26,9 @@ struct Shipping2: View {
         }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSHStack {
-                    DSText("Next Step:").dsTextStyle(.smallHeadline)
+                    DSText("Next Step:").dsTextStyle(DSTypographyToken.label)
                     DSText("Order Info")
-                        .dsTextStyle(.subheadline, 14)
+                        .dsTextStyle(DSTypographyToken.custom(size: 14, weight: .regular, relativeTo: .subheadline))
                 }
                 DSButton(
                     title: "Continue",
@@ -42,8 +42,8 @@ struct Shipping2: View {
     }
 
     func section(with title: String, @ViewBuilder content: @escaping () -> some View) -> some View {
-        DSVStack(spacing: .small) {
-            DSText(title).dsTextStyle(.smallHeadline)
+        DSVStack(spacing: .space4) {
+            DSText(title).dsTextStyle(DSTypographyToken.label)
             content()
         }
         .dsPadding(.top)
@@ -59,9 +59,9 @@ extension Shipping2 {
             DSGroupedList(data: orderTotals, id: \.id) { total in
                 DSHStack {
                     DSText(total.title)
-                        .dsTextStyle(total.bold ? .smallHeadline : .smallSubheadline)
+                        .dsTextStyle(total.bold ? DSTypographyToken.label : .caption1)
                     Spacer()
-                    DSPriceView(price: total.price, size: total.bold ? .smallHeadline : .smallSubheadline)
+                    DSPriceView(price: total.price, size: total.bold ? DSTypographyToken.label : .caption1)
                 }.dsHeight(25)
             }
         }
@@ -79,23 +79,23 @@ extension Shipping2 {
     struct ShippingMethodView: View {
         let method: Data
         var body: some View {
-            DSText(method.title).dsTextStyle(.smallHeadline)
-            DSVStack(spacing: .small) {
-                DSHStack(spacing: .small) {
+            DSText(method.title).dsTextStyle(DSTypographyToken.label)
+            DSVStack(spacing: .space4) {
+                DSHStack(spacing: .space4) {
                     DSImageView(systemName: "calendar", size: 12, tint: .text(.subheadline))
-                    DSText(method.description).dsTextStyle(.smallSubheadline)
+                    DSText(method.description).dsTextStyle(.caption1)
                 }
                 if let price = method.price {
-                    DSPriceView(price: .init(amount: price, currency: "$"), size: .smallHeadline)
-                        .dsPadding(.top, .regular)
+                    DSPriceView(price: .init(amount: price, currency: "$"), size: DSTypographyToken.label)
+                        .dsPadding(.top, .space8)
                 } else {
                     DSText("Free")
-                        .dsTextStyle(.smallHeadline, .white)
-                        .dsPadding(.vertical, .regular)
+                        .dsTextStyle(DSTypographyToken.label, .white)
+                        .dsPadding(.vertical, .space8)
                         .dsPadding(.horizontal)
                         .dsBackground(.color(.green))
                         .dsCornerRadius()
-                        .dsPadding(.top, .regular)
+                        .dsPadding(.top, .space8)
                 }
             }
         }

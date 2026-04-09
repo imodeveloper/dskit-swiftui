@@ -24,7 +24,7 @@ import SwiftUI
 Initializes `DSCoverFlow` with specific layout and behavioral settings.
 - Parameters:
 - `height`: `DSDimension` specifying the height of the cover flow.
-- `spacing`: `DSSpace` specifying the spacing between items.
+- `spacing`: `DSSpatialToken` specifying the spacing between items.
 - `showPaginationView`: Boolean indicating whether to show pagination dots.
 - `data`: The collection of data items to display.
 - `id`: KeyPath to the unique identifier for each data item.
@@ -35,7 +35,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
 
     @Environment(\.appearance) var appearance: DSAppearance
     let height: DSDimension
-    let spacing: DSSpace
+    let spacing: DSSpatialToken
     let showPaginationView: Bool
 
     let data: Data
@@ -46,7 +46,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
 
     public init(
         height: DSDimension,
-        spacing: DSSpace = .regular,
+        spacing: DSSpatialToken = .space8,
         showPaginationView: Bool = true,
         data: Data,
         id: KeyPath<Data.Element, ID>,
@@ -62,7 +62,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
     }
 
     public var body: some View {
-        let paginationTopPadding = showPaginationView ? appearance.padding.value(for: .medium) : 0
+        let paginationTopPadding = showPaginationView ? appearance.padding.value(for: .space16) : 0
         let paginationHeight: CGFloat = showPaginationView ? 7 : 0
         let totalHeight = DSDimension.custom(
             height.value(appearance: appearance) + paginationTopPadding + paginationHeight
@@ -72,7 +72,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
             if data.isEmpty {
                 Color.clear
             } else {
-                DSVStack(alignment: .center, spacing: .zero) {
+                DSVStack(alignment: .center, spacing: .space0) {
                     GeometryReader { p in
                         let itemWidth = max(1, p.size.width)
                         DSPaginatedScrollView(
@@ -100,7 +100,7 @@ public struct DSCoverFlow<Data, ID, Content>: View where Data: RandomAccessColle
         DSHStack {
             ForEach(data, id: id) { element in
                 Circle()
-                    .fill(Color(appearance.primaryView.text.headline))
+                    .fill(appearance.color(for: .text(.primary), surfaceStyle: .canvas))
                     .dsSize(7)
                     .opacity(currentElementID == element ? 1 : 0.1)
             }

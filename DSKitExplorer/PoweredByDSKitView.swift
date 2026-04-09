@@ -10,16 +10,16 @@ import DSKit
 
 struct PoweredByDSKitView: View {
     var body: some View {
-        DSVStack(spacing: .small) {
-            DSHStack(spacing: .small) {
-                DSText("Powered by").dsTextStyle(.smallSubheadline)
-                DSImageView(systemName: "square.stack.3d.down.right.fill", size: .smallIcon, tint: .view(.button(.accentColor)))
-                DSText("DSKit").dsTextStyle(.smallSubheadline)
+        DSVStack(spacing: .space4) {
+            DSHStack(spacing: .space4) {
+                DSText("Powered by").dsTextStyle(.caption1)
+                DSImageView(systemName: "square.stack.3d.down.right.fill", size: .smallIcon, tint: .icon(.brand))
+                DSText("DSKit").dsTextStyle(.caption1)
             }.frame(maxWidth: .infinity, alignment: .center)
-            DSHStack(spacing: .small) {
-                DSText("Made with").dsTextStyle(.smallSubheadline)
+            DSHStack(spacing: .space4) {
+                DSText("Made with").dsTextStyle(.caption1)
                 DSImageView(systemName: "heart.fill", size: .smallIcon, tint: .color(.red))
-                DSText("by imodeveloper").dsTextStyle(.smallSubheadline)
+                DSText("by imodeveloper").dsTextStyle(.caption1)
             }.frame(maxWidth: .infinity, alignment: .center)
         }
     }

@@ -16,7 +16,7 @@ struct Order2: View {
     var body: some View {
         DSList {
             DSSection {
-                DSGrid(spacing: .regular, data: viewModel.checkoutInfo, id: \.id) { card in
+                DSGrid(spacing: .space8, data: viewModel.checkoutInfo, id: \.id) { card in
                     CardView(card: card).onTap {}
                 }
 
@@ -49,8 +49,8 @@ struct Order2: View {
     }
 
     func section(with title: String, @ViewBuilder content: @escaping () -> some View) -> some View {
-        DSVStack(spacing: .small) {
-            DSText(title).dsTextStyle(.smallHeadline)
+        DSVStack(spacing: .space4) {
+            DSText(title).dsTextStyle(DSTypographyToken.label)
             content()
         }
         .dsPadding(.horizontal)
@@ -61,20 +61,17 @@ struct Order2: View {
 extension Order2 {
     // MARK: - Card
 
-    struct CardView: View, DSDesignable {
-        @Environment(\.appearance) var appearance: DSAppearance
-        @Environment(\.viewStyle) var viewStyle: DSViewStyle
-
+    struct CardView: View {
         let card: Data
         var body: some View {
             DSVStack(alignment: .center) {
-                DSImageView(systemName: card.icon, size: 28, tint: .view(.button(.accentColor)))
+                DSImageView(systemName: card.icon, size: 28, tint: .icon(.brand))
                 DSVStack(alignment: .center) {
                     DSText(card.title)
-                        .dsTextStyle(.headline, .view(.button(.accentColor)))
-                    DSVStack(alignment: .center, spacing: .small) {
-                        DSText(card.subtitle).dsTextStyle(.smallSubheadline)
-                        DSText(card.description).dsTextStyle(.smallSubheadline)
+                        .dsTextStyle(.headline, .text(.brand))
+                    DSVStack(alignment: .center, spacing: .space4) {
+                        DSText(card.subtitle).dsTextStyle(.caption1)
+                        DSText(card.description).dsTextStyle(.caption1)
                     }
                 }.frame(maxWidth: .infinity, alignment: .center)
             }
@@ -101,9 +98,9 @@ extension Order2 {
             DSGroupedList(data: orderTotals, id: \.id) { total in
                 DSHStack {
                     DSText(total.title)
-                        .dsTextStyle(total.bold ? .smallHeadline : .smallSubheadline)
+                        .dsTextStyle(total.bold ? DSTypographyToken.label : .caption1)
                     Spacer()
-                    DSPriceView(price: total.price, size: total.bold ? .smallHeadline : .smallSubheadline)
+                    DSPriceView(price: total.price, size: total.bold ? DSTypographyToken.label : .caption1)
                 }.dsHeight(25)
             }
         }
@@ -124,11 +121,11 @@ extension Order2 {
 
         var body: some View {
             DSHStack {
-                DSText(code.title).dsTextStyle(.smallHeadline)
+                DSText(code.title).dsTextStyle(DSTypographyToken.label)
                 Spacer()
-                DSPriceView(price: code.price, size: .smallHeadline)
+                DSPriceView(price: code.price, size: DSTypographyToken.label)
                 DSSFSymbolButton(name: "minus.circle.fill", size: .mediumIcon)
-                    .dsPadding(.leading, .regular)
+                    .dsPadding(.leading, .space8)
             }.dsHeight(25)
         }
 

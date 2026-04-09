@@ -10,23 +10,23 @@ import SwiftUI
 struct DSColorModifier: ViewModifier {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
-    let tint: DSColorKey
+    @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
+    let tint: DSColorToken
     func body(content: Content) -> some View {
         content
-            .foregroundColor(tint.color(for: appearance, and: viewStyle))
+            .foregroundColor(tint.color(for: appearance, in: surfaceStyle))
     }
 }
 
 extension View {
-    func setTint(tint: DSColorKey) -> some View {
+    func setTint(tint: DSColorToken) -> some View {
         self.modifier(DSColorModifier(tint: tint))
     }
 }
 
 extension Image {
     @ViewBuilder
-    func setImageTint(tint: DSColorKey?) -> some View {
+    func setImageTint(tint: DSColorToken?) -> some View {
         if let tint {
             self
                 .renderingMode(.template)

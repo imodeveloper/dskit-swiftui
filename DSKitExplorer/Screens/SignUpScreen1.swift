@@ -23,11 +23,11 @@ struct SignUpScreen1: View {
                         style: .custom(color: Color(DSUIColor(0x4267B2)))
                     ) { dismiss() }
 
-                    DSText("or sign up with Email").dsTextStyle(.smallSubheadline).frame(maxWidth: .infinity, alignment: .center)
+                    DSText("or sign up with Email").dsTextStyle(.caption1).frame(maxWidth: .infinity, alignment: .center)
 
                 }.hideWhenKeyboardIsDisplayed()
 
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     DSTextField.name(value: viewModel.fullName)
                     DSTextField.email(value: viewModel.email)
                     DSTextField.phone(value: viewModel.phone)

@@ -51,14 +51,14 @@ extension NewsScreen1 {
         @Binding var style: Style
 
         var body: some View {
-            DSVStack(alignment: .center, spacing: .zero) {
+            DSVStack(alignment: .center, spacing: .custom(0)) {
                 if style == .regular {
                     if let image = article.image {
                         DSImageView(url: image)
                             .dsHeight(180)
                     }
 
-                    DSVStack(spacing: .regular) {
+                    DSVStack(spacing: .space8) {
                         DSText(article.title)
                             .dsTextStyle(.headline)
                             .dsFullWidth()
@@ -76,27 +76,27 @@ extension NewsScreen1 {
                         }
                     }.dsPadding()
                 } else {
-                    DSHStack(alignment: .top, spacing: .medium) {
+                    DSHStack(alignment: .top, spacing: .space16) {
                         if let image = article.image {
                             DSImageView(url: image)
                                 .frame(width: 75, height: 75)
                                 .dsCornerRadius()
                         }
 
-                        DSVStack(spacing: .regular) {
+                        DSVStack(spacing: .space8) {
                             DSText(article.title)
-                                .dsTextStyle(.smallHeadline)
+                                .dsTextStyle(DSTypographyToken.label)
                                 .dsFullWidth()
 
                             DSText(article.description, alignment: .leading)
-                                .dsTextStyle(.smallSubheadline)
+                                .dsTextStyle(.caption1)
                                 .dsFullWidth()
                         }
 
                         if article.bookmarked {
                             DSImageView(
                                 systemName: "bookmark.fill",
-                                size: .font(.smallSubheadline),
+                                size: .font(.caption1),
                                 tint: .color(.orange)
                             )
                         }

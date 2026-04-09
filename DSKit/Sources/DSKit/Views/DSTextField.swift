@@ -26,7 +26,7 @@ public struct DSTextField: View {
 
     // Environment properties for theming and color customization
     @Environment(\.appearance) private var appearance: DSAppearance
-    @Environment(\.viewStyle) private var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) private var surfaceStyle: DSSurfaceStyle
 
     // State variables to manage the visibility of secure text entry and editing status
     @State private var isSecureEntryVisible: Bool = false
@@ -57,7 +57,7 @@ public struct DSTextField: View {
                 DSImageView(
                     systemName: symbolName,
                     size: .font(.subheadline),
-                    tint: hasText ? .view(.textField(.text)) : .view(.textField(.placeholder))
+                    tint: hasText ? .text(.primary) : .text(.secondary)
                 )
             }
 
@@ -75,24 +75,24 @@ public struct DSTextField: View {
             // Toggles visibility of the secure text entry (password visibility)
             if isSecureEntry {
                 let systemName = isSecureEntryVisible ? "eye.slash" : "eye"
-                DSImageView(systemName: systemName, size: .font(.subheadline), tint: .view(.textField(.text)))
+                DSImageView(systemName: systemName, size: .font(.subheadline), tint: .text(.primary))
                     .onTap {
                         isSecureEntryVisible.toggle()
                     }
             } else if isEditing && hasText {
-                DSImageView(systemName: "xmark.circle.fill", size: .font(.subheadline), tint: .view(.textField(.text))).onTapGesture {
+                DSImageView(systemName: "xmark.circle.fill", size: .font(.subheadline), tint: .text(.primary)).onTapGesture {
                     model.text = ""
                 }
             }
         }
         .dsHeight(.custom(appearance.actionElementHeight))
-        .dsPadding(.horizontal, .custom(appearance.spacing.value(for: .medium) - 1))
-        .dsBackground(.viewStyle(viewStyle, .textField(.background)))
+        .dsPadding(.horizontal, .custom(appearance.spacing.value(for: .space16) - 1))
+        .dsBackground(.background(.surfaceSunken))
         .dsCornerRadius()
         .overlay(
             // Outlines the text field in red if the content is invalid
-            RoundedRectangle(cornerRadius: viewStyle.colors(from: appearance).cornerRadius)
-                .stroke(model.isValid ? viewStyle.colors(from: appearance).textField.background.color : Color.red, lineWidth: 1)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .stroke(model.isValid ? appearance.color(for: .border(.default), surfaceStyle: surfaceStyle) : appearance.color(for: .border(.danger), surfaceStyle: surfaceStyle), lineWidth: 1)
         )
         .padding(1)
         .onChange(of: model.text) { newValue in

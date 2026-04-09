@@ -30,7 +30,7 @@ public struct DSImageView: View {
     let unitTestMode = ProcessInfo.processInfo.arguments.contains("TESTMODE")
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var viewStyle: DSSurfaceStyle
     let image: DSImage
 
     public init(dsImage: DSImage) {
@@ -40,7 +40,7 @@ public struct DSImageView: View {
     public init(
         systemName: String,
         size: DSSize,
-        tint: DSColorKey? = nil
+        tint: DSColorToken? = nil
     ) {
         self.image = DSImage(
             systemName: systemName,
@@ -55,7 +55,7 @@ public struct DSImageView: View {
         uiImage: DSUIImage?,
         displayShape: DSDisplayShape = .none,
         size: DSSize = .fillUpTheSpace,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFill
     ) {
         self.image = DSImage(
@@ -71,7 +71,7 @@ public struct DSImageView: View {
         named: String,
         displayShape: DSDisplayShape = .none,
         size: DSSize = .fillUpTheSpace,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFill
     ) {
         self.image = DSImage(
@@ -87,7 +87,7 @@ public struct DSImageView: View {
         url: URL?,
         style: DSDisplayShape = .none,
         size: DSSize = .fillUpTheSpace,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFill
     ) {
         self.image = .init(
@@ -522,13 +522,13 @@ public struct DSImage {
     public var content: DSImageContentType
     public var contentMode: DSContentMode
     public var size: DSSize
-    public var tintColor: DSColorKey?
+    public var tintColor: DSColorToken?
 
     public init(
         content: DSImageContentType,
         displayShape: DSDisplayShape = .none,
         size: DSSize,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFit
     ) {
         self.content = content
@@ -542,7 +542,7 @@ public struct DSImage {
         systemName: String,
         displayShape: DSDisplayShape = .none,
         size: DSSize,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFit
     ) {
         self.init(
@@ -558,7 +558,7 @@ public struct DSImage {
         named: String,
         displayShape: DSDisplayShape = .none,
         size: DSSize,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFit
     ) {
         self.init(
@@ -574,7 +574,7 @@ public struct DSImage {
         uiImage: DSUIImage?,
         displayShape: DSDisplayShape = .none,
         size: DSSize = .fillUpTheSpace,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFit
     ) {
         self.init(
@@ -590,7 +590,7 @@ public struct DSImage {
         imageURL: URL?,
         displayShape: DSDisplayShape = .none,
         size: DSSize = .fillUpTheSpace,
-        tintColor: DSColorKey? = nil,
+        tintColor: DSColorToken? = nil,
         contentMode: DSContentMode = .scaleAspectFit
     ) {
         self.init(
@@ -604,7 +604,7 @@ public struct DSImage {
 }
 
 extension DSImage {
-    func imageWith(tint tintColor: DSColorKey) -> DSImage {
+    func imageWith(tint tintColor: DSColorToken) -> DSImage {
         var image = self
         image.tintColor = tintColor
         return image

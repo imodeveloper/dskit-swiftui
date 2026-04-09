@@ -70,10 +70,10 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - `DSCoverFlow.height` is the carousel viewport height; when `showPaginationView` is enabled, total view height must also include pagination dot height and its top padding.
 
 ## Design tokens reference
-- `DSAppearance` is the source of theme, spacing, and typography tokens.
-- Spacing system: `DSSpacingSystem` and `DSPaddingSystem` expose `.small/.regular/.medium` scales from `appearance`.
-- Typography system: `DSFonts` + `DSTextFontKey`, resolved through `DSText` via `dsTextStyle(...)`.
-- Colors and surface tokens are exposed via `DSColorKey` and mapped through `DSViewStyle`/`DSAppearance`.
+- `DSAppearance` is the source of theme, spacing, typography, and semantic color tokens.
+- Spacing system uses `DSSpatialToken` through `appearance.spacing` and `appearance.padding`.
+- Typography system uses `DSTypographyToken`, resolved through `DSText` via `dsTextStyle(...)`.
+- Colors are exposed through `DSColorToken` and resolved against `DSSurfaceStyle` through `appearance.colors`.
 
 ## File Header Rule
 - Never use `Created by Codex` in source file headers.

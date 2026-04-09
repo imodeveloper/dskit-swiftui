@@ -57,11 +57,11 @@ extension Items2 {
                 }.overlay(alignment: .topLeading) {
                     if let tag = product.tag {
                         DSText(tag)
-                            .dsTextStyle(.headline, 9)
-                            .dsPadding(.small)
+                            .dsTextStyle(DSTypographyToken.custom(size: 9, weight: .semibold, relativeTo: .headline))
+                            .dsPadding(.space4)
                             .dsBackground(.primary)
                             .dsCornerRadius()
-                            .dsPadding(.regular)
+                            .dsPadding(.space8)
                     }
                 }.overlay(alignment: .topTrailing) {
                     DSImageView(
@@ -69,18 +69,18 @@ extension Items2 {
                         size: .font(.subheadline),
                         tint: .color(product.favorite ? .red : .white)
                     )
-                    .dsPadding(.regular)
+                    .dsPadding(.space8)
                     .dsBlurBackgroundLight()
                     .dsCornerRadius()
-                    .dsPadding(.regular)
+                    .dsPadding(.space8)
                 }
 
-                DSVStack(alignment: .center, spacing: .zero) {
+                DSVStack(alignment: .center, spacing: .custom(0)) {
                     DSText(product.title)
-                        .dsTextStyle(.smallHeadline, .white)
+                        .dsTextStyle(DSTypographyToken.label, .white)
                     DSText(product.description)
-                        .dsTextStyle(.smallSubheadline, .white.opacity(0.8))
-                    DSPriceView(price: product.price, size: .smallHeadline, color: .white)
+                        .dsTextStyle(.caption1, .white.opacity(0.8))
+                    DSPriceView(price: product.price, size: DSTypographyToken.label, color: .white)
                 }
                 .dsPadding(.bottom)
             }

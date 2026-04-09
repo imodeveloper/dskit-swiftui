@@ -10,7 +10,7 @@ import SwiftUI
 struct DSCustomUITextField: DSViewRepresentable {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
 
     @Binding var text: String
     @Binding var isSecureEntry: Bool
@@ -41,16 +41,16 @@ struct DSCustomUITextField: DSViewRepresentable {
         textField.placeholder = placeholder
         textField.attributedPlaceholder = NSAttributedString(
             string: placeholder,
-            attributes: [NSAttributedString.Key.foregroundColor: viewStyle.colors(from: appearance).textField.placeHolder]
+            attributes: [NSAttributedString.Key.foregroundColor: appearance.uiColor(for: .text(.secondary), surfaceStyle: surfaceStyle)]
         )
-        textField.font = appearance.fonts.subheadline
+        textField.font = appearance.typography.subheadline
         textField.adjustsFontForContentSizeCategory = true
         textField.isSecureTextEntry = isSecureEntry
         textField.keyboardType = keyboardType
         textField.textContentType = textContentType
         textField.autocapitalizationType = autocapitalizationType
         textField.delegate = context.coordinator
-        textField.textColor = viewStyle.colors(from: appearance).textField.text
+        textField.textColor = appearance.uiColor(for: .text(.primary), surfaceStyle: surfaceStyle)
     }
     #elseif canImport(AppKit)
     func makeNSView(context: Context) -> NSTextField {
@@ -67,7 +67,7 @@ struct DSCustomUITextField: DSViewRepresentable {
         textField.placeholderString = placeholder
         textField.font = NSFont.systemFont(ofSize: 14)
         textField.delegate = context.coordinator
-        textField.textColor = viewStyle.colors(from: appearance).textField.text
+        textField.textColor = appearance.uiColor(for: .text(.primary), surfaceStyle: surfaceStyle)
         textField.isBezeled = true
         textField.isBordered = true
         textField.isEditable = true

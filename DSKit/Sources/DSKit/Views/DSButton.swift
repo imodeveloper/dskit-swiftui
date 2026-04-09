@@ -53,7 +53,7 @@ public struct DSButton: View {
     }
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
 
     let title: String
     var leftImage: DSImage? = nil
@@ -61,8 +61,8 @@ public struct DSButton: View {
     var pushContentToSides: Bool = false
     var style: Style = .default
     var maxWidth: Bool
-    var spacing: DSSpace
-    var titleFont: DSTextFontKey = .headline
+    var spacing: DSSpatialToken
+    var titleFont: DSTypographyToken = .headline
     let action: () -> Void
 
     public init(
@@ -72,8 +72,8 @@ public struct DSButton: View {
         pushContentToSides: Bool = false,
         style: Style = .default,
         maxWidth: Bool = true,
-        spacing: DSSpace = .regular,
-        titleFont: DSTextFontKey = .headline,
+        spacing: DSSpatialToken = .space8,
+        titleFont: DSTypographyToken = .headline,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -94,8 +94,8 @@ public struct DSButton: View {
         pushContentToSides: Bool = false,
         style: Style = .default,
         maxWidth: Bool = true,
-        spacing: DSSpace = .regular,
-        titleFont: DSTextFontKey = .headline,
+        spacing: DSSpatialToken = .space8,
+        titleFont: DSTypographyToken = .headline,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -121,8 +121,8 @@ public struct DSButton: View {
         pushContentToSides: Bool = false,
         style: Style = .default,
         maxWidth: Bool = true,
-        spacing: DSSpace = .regular,
-        titleFont: DSTextFontKey = .headline,
+        spacing: DSSpatialToken = .space8,
+        titleFont: DSTypographyToken = .headline,
         action: @escaping () -> Void
     ) {
         self.init(
@@ -144,8 +144,8 @@ public struct DSButton: View {
         pushContentToSides: Bool = false,
         style: Style = .default,
         maxWidth: Bool = true,
-        spacing: DSSpace = .regular,
-        titleFont: DSTextFontKey = .headline,
+        spacing: DSSpatialToken = .space8,
+        titleFont: DSTypographyToken = .headline,
         action: @escaping () -> Void
     ) {
         var leftImage: DSImage?
@@ -180,7 +180,7 @@ public struct DSButton: View {
             case .default, .light, .custom:
                 buttonView
                     .frame(maxWidth: maxWidth ? .infinity : .none)
-                    .dsPadding(.horizontal, .medium)
+                    .dsPadding(.horizontal, .space16)
                     .dsMinHeight(.custom(appearance.actionElementHeight))
                     .background(backgroundColor)
                     .dsCornerRadius()
@@ -202,8 +202,8 @@ public struct DSButton: View {
                     .background(backgroundColor)
                     .dsCornerRadius()
                     .overlay(
-                        RoundedRectangle(cornerRadius: viewStyle.colors(from: appearance).cornerRadius)
-                            .stroke(titleColor.color(for: appearance, and: viewStyle), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                            .stroke(titleColor.color(for: appearance, in: surfaceStyle), lineWidth: 1)
                     ).padding(1)
             }
         }).buttonStyle(.plain)
@@ -237,43 +237,43 @@ public struct DSButton: View {
     var backgroundColor: Color {
         switch style {
         case .light:
-            dsBackgroundColor.color(for: appearance, and: viewStyle).opacity(0.1)
+            dsBackgroundColor.color(for: appearance, in: surfaceStyle).opacity(0.1)
         default:
-            dsBackgroundColor.color(for: appearance, and: viewStyle)
+            dsBackgroundColor.color(for: appearance, in: surfaceStyle)
         }
     }
 
-    var dsBackgroundColor: DSColorKey {
+    var dsBackgroundColor: DSColorToken {
         switch style {
         case .default:
-            return .view(.button(.accentColor))
+            return .background(.brand)
         case .light:
-            return .view(.button(.accentColor))
+            return .background(.brand)
         case .custom(color: let color):
-            return .color(color)
+            return .custom(color)
         case .clear:
-            return .color(.clear)
+            return .custom(.clear)
         case .toolbar:
-            return .color(.clear)
+            return .custom(.clear)
         case .borderedLight:
-            return .viewStyle(.primary, .button(.supportColor))
+            return .background(.surface)
         }
     }
 
-    var titleColor: DSColorKey {
+    var titleColor: DSColorToken {
         switch style {
         case .default:
-            return .view(.button(.supportColor))
+            return .text(.brandOnBold)
         case .light:
-            return .view(.button(.accentColor))
+            return .text(.brand)
         case .custom:
-            return .color(.white)
+            return .custom(.white)
         case .clear:
-            return .view(.button(.accentColor))
+            return .text(.brand)
         case .toolbar:
-            return .view(.button(.accentColor))
+            return .icon(.brand)
         case .borderedLight:
-            return .viewStyle(.primary, .button(.accentColor))
+            return .text(.brand)
         }
     }
 }
@@ -282,7 +282,7 @@ public extension DSButton {
 
     static func callToActionLink(
         title: String,
-        textFont: DSTextFontKey = .headline,
+        textFont: DSTypographyToken = .headline,
         rightSystemName: String? = nil,
         action: @escaping () -> Void
     ) -> DSButton {
@@ -323,7 +323,7 @@ public extension DSButton {
 struct Testable_DSButton: View {
     var body: some View {
         DSVStack {
-            DSVStack(spacing: .small) {
+            DSVStack(spacing: .space4) {
                 DSButton(
                     title: "Default",
                     action: { }
@@ -333,7 +333,7 @@ struct Testable_DSButton: View {
                     style: .light, action: { }
                 )
             }
-            .dsPadding(.medium)
+            .dsPadding(.space16)
             .dsSecondaryBackground()
             .dsCornerRadius()
 
@@ -408,7 +408,7 @@ private struct DSButtonDynamicTypeInteractivePreview: View {
     }
 
     var body: some View {
-        DSVStack(spacing: .small) {
+        DSVStack(spacing: .space4) {
             DSText("Size Category: \(selectedLabel)").dsTextStyle(.subheadline)
             Slider(
                 value: $selectedIndex,

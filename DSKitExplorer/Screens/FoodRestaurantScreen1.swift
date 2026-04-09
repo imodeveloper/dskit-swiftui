@@ -17,12 +17,12 @@ struct FoodRestaurantScreen1: View {
             DSSection {
                 BannerView()
 
-                DSVStack(spacing: .regular) {
+                DSVStack(spacing: .space8) {
                     DSText("Popular Products")
                         .dsTextStyle(.headline)
 
                     DSGrid(
-                        spacing: .regular,
+                        spacing: .space8,
                         data: viewModel.popularProducts,
                         id: \.id
                     ) { product in
@@ -43,51 +43,51 @@ extension FoodRestaurantScreen1 {
         let product: Data
 
         var body: some View {
-            DSVStack(spacing: .zero) {
+            DSVStack(spacing: .custom(0)) {
                 DSImageView(named: product.image)
                     .dsHeight(160)
                     .overlay(alignment: .topLeading) {
                         DSText(product.discount)
-                            .dsTextStyle(.smallSubheadline, .color(.white))
-                            .dsPadding(.small)
-                            .dsBackground(.view(.button(.accentColor)))
+                            .dsTextStyle(.caption1, .color(.white))
+                            .dsPadding(.space4)
+                            .dsBackground(.background(.brand))
                             .dsPadding(.top)
                     }
 
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText(product.title)
-                        .dsTextStyle(.smallHeadline)
-                        .dsPadding(.small)
+                        .dsTextStyle(DSTypographyToken.label)
+                        .dsPadding(.space4)
                         .dsFullWidth()
                     Spacer()
 
                     DSHStack {
-                        DSHStack(spacing: .zero) {
+                        DSHStack(spacing: .custom(0)) {
                             DSImageView(
                                 systemName: "star.fill",
-                                size: .font(.smallSubheadline),
+                                size: .font(.caption1),
                                 tint: .color(.yellow)
                             )
 
                             DSText(product.rating)
-                                .dsTextStyle(.smallSubheadline)
-                                .dsPadding(.small)
+                                .dsTextStyle(.caption1)
+                                .dsPadding(.space4)
                         }
 
-                        DSHStack(spacing: .zero) {
+                        DSHStack(spacing: .custom(0)) {
                             DSImageView(
                                 systemName: "clock.fill",
-                                size: .font(.smallSubheadline),
+                                size: .font(.caption1),
                                 tint: .text(.headline)
                             )
 
                             DSText(product.time)
-                                .dsTextStyle(.smallSubheadline)
-                                .dsPadding(.small)
+                                .dsTextStyle(.caption1)
+                                .dsPadding(.space4)
                         }
                     }.dsPadding(.leading, 3)
                 }
-                .dsPadding(.regular)
+                .dsPadding(.space8)
             }
             .dsSecondaryBackground()
             .dsCornerRadius()
@@ -112,40 +112,40 @@ extension FoodRestaurantScreen1 {
                     .dsHeight(200)
                     .dsCornerRadius()
                     .overlay(alignment: .bottomLeading) {
-                        DSVStack(spacing: .small) {
+                        DSVStack(spacing: .space4) {
                             DSText("Express Ramen Shop")
-                                .dsTextStyle(.headline, 25, .color(.white))
+                                .dsTextStyle(DSTypographyToken.custom(size: 25, weight: .semibold, relativeTo: .headline), .color(.white))
 
-                            DSHStack(spacing: .zero) {
+                            DSHStack(spacing: .custom(0)) {
                                 DSImageView(
                                     systemName: "star.fill",
-                                    size: .font(.smallSubheadline),
+                                    size: .font(.caption1),
                                     tint: .color(.yellow)
                                 )
 
                                 DSText("4.5")
-                                    .dsTextStyle(.smallHeadline, .color(.white))
-                                    .dsPadding(.small)
+                                    .dsTextStyle(DSTypographyToken.label, .color(.white))
+                                    .dsPadding(.space4)
 
                                 DSText("(678)")
-                                    .dsTextStyle(.smallSubheadline, .color(.white))
-                                    .dsPadding(.small)
+                                    .dsTextStyle(.caption1, .color(.white))
+                                    .dsPadding(.space4)
 
                                 DSText("Bread, Cacke $$")
-                                    .dsTextStyle(.smallHeadline, .color(.white))
-                                    .dsPadding(.small)
+                                    .dsTextStyle(DSTypographyToken.label, .color(.white))
+                                    .dsPadding(.space4)
                             }
 
                             DSHStack {
                                 DSText("Pickup")
-                                    .dsTextStyle(.smallHeadline)
-                                    .dsPadding(.small)
+                                    .dsTextStyle(DSTypographyToken.label)
+                                    .dsPadding(.space4)
                                     .dsSecondaryBackground()
                                     .dsCornerRadius()
 
                                 DSText("Free Delivery")
-                                    .dsTextStyle(.smallHeadline)
-                                    .dsPadding(.small)
+                                    .dsTextStyle(DSTypographyToken.label)
+                                    .dsPadding(.space4)
                                     .dsSecondaryBackground()
                                     .dsCornerRadius()
                             }

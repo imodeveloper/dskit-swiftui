@@ -27,7 +27,7 @@ struct HomeScreen3: View {
 
                 DSHScroll(data: viewModel.categories, id: \.self) { category in
                     CategoryView(title: category) { dismiss() }
-                }.dsPadding(.top, .small)
+                }.dsPadding(.top, .space4)
 
                 DSVStack {
                     DSSectionHeaderView(title: "Discounts", actionTitle: "View all", action: { dismiss() })
@@ -46,13 +46,13 @@ extension HomeScreen3 {
     struct ProductView: View {
         let product: Product
         var body: some View {
-            DSVStack(spacing: .zero) {
+            DSVStack(spacing: .custom(0)) {
                 DSImageView(url: product.imageUrl)
-                DSVStack(spacing: .zero) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
-                    DSText(product.description).dsTextStyle(.smallSubheadline)
-                    DSPriceView(price: product.price, size: .smallHeadline)
-                        .dsPadding(.top, .regular)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                    DSText(product.description).dsTextStyle(.caption1)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
+                        .dsPadding(.top, .space8)
                 }.dsPadding()
             }
             .dsSecondaryBackground()
@@ -76,8 +76,8 @@ extension HomeScreen3 {
         let profileImageUrl: URL?
         var body: some View {
             DSHStack {
-                DSVStack(spacing: .zero) {
-                    DSText(title).dsTextStyle(.largeHeadline)
+                DSVStack(spacing: .custom(0)) {
+                    DSText(title).dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                     DSText(subtitle).dsTextStyle(.subheadline)
                 }
                 Spacer()
@@ -92,10 +92,10 @@ extension HomeScreen3 {
         let title: String
         let action: () -> Void
         var body: some View {
-            DSText(title).dsTextStyle(.smallHeadline)
+            DSText(title).dsTextStyle(DSTypographyToken.label)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .dsHeight(35)
-                .dsPadding(.horizontal, .large)
+                .dsPadding(.horizontal, .space24)
                 .dsSecondaryBackground()
                 .dsCornerRadius()
                 .onTap { action() }

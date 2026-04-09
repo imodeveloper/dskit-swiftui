@@ -26,7 +26,7 @@ public extension EnvironmentValues {
 #### Initialization:
 Initializes a `DSList` with a spacing value and dynamic content.
 - Parameters:
-- `spacing`: Specifies the vertical spacing between list rows. Defaults to `.regular`.
+- `spacing`: Specifies the vertical spacing between list rows. Defaults to `.space8`.
 - `content`: A `@ViewBuilder` closure that generates the list content.
 
 #### Usage:
@@ -36,15 +36,15 @@ Initializes a `DSList` with a spacing value and dynamic content.
 public struct DSList<Content: View>: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
 
-    let sectionSpacing: DSSpace
-    let sectionHeaderSpacing: DSSpace
+    let sectionSpacing: DSSpatialToken
+    let sectionHeaderSpacing: DSSpatialToken
     let content: () -> Content
 
     public init(
-        sectionSpacing: DSSpace = .regular,
-        sectionHeaderSpacing: DSSpace = .zero,
+        sectionSpacing: DSSpatialToken = .space8,
+        sectionHeaderSpacing: DSSpatialToken = .space0,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.content = content
@@ -53,12 +53,12 @@ public struct DSList<Content: View>: View {
     }
 
     public init(
-        spacing: DSSpace = .regular,
+        spacing: DSSpatialToken = .space8,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.init(
             sectionSpacing: spacing,
-            sectionHeaderSpacing: .zero,
+            sectionHeaderSpacing: .space0,
             content: content
         )
     }
@@ -68,7 +68,7 @@ public struct DSList<Content: View>: View {
             List {
                 content()
             }
-            .background(Color(viewStyle.colors(from: appearance).background))
+            .background(appearance.color(for: .background(surfaceStyle.backgroundToken), surfaceStyle: surfaceStyle))
             .listStyle(.plain)
             .listRowSpacing(0)
             .environment(\.dsContentMarginKey, appearance.screenMargins)
@@ -155,12 +155,12 @@ struct Testable_DSList: View {
     ]
 
     var body: some View {
-        DSList(sectionSpacing: .medium, sectionHeaderSpacing: .medium) {
+        DSList(sectionSpacing: .space16, sectionHeaderSpacing: .space16) {
 
             DSSection {
                 DSHStack {
-                    DSVStack(spacing: .zero) {
-                        DSText("Shop").dsTextStyle(.largeHeadline)
+                    DSVStack(spacing: .space0) {
+                        DSText("Shop").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
                         DSText("Over 45k items available for you").dsTextStyle(.subheadline)
                     }
                     Spacer()
@@ -181,7 +181,7 @@ struct Testable_DSList: View {
             DSSection {
                 DSSectionHeaderView(title: "Categories", actionTitle: "View all", action: { })
                 DSGrid(data: categories, id: \.id) { category in
-                    DSText(category.title).dsTextStyle(.smallHeadline)
+                    DSText(category.title).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .dsCardStyle()
                 }
@@ -195,11 +195,11 @@ struct Testable_DSList: View {
                             url: product.imageURL,
                             style: .capsule
                         )
-                        DSVStack(spacing: .zero) {
-                            DSText(product.title).dsTextStyle(.smallHeadline)
-                            DSText(product.description).dsTextStyle(.smallSubheadline)
-                            DSPriceView(price: product.price, size: .smallHeadline)
-                                .dsPadding(.top, .regular)
+                        DSVStack(spacing: .space0) {
+                            DSText(product.title).dsTextStyle(DSTypographyToken.label)
+                            DSText(product.description).dsTextStyle(.caption1)
+                            DSPriceView(price: product.price, size: DSTypographyToken.label)
+                                .dsPadding(.top, .space8)
                         }
                     }.dsPadding(.bottom)
                 }

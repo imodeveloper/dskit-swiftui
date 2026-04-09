@@ -20,7 +20,7 @@ struct ScreensView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     ForEach(ScreenKey.allCases) { screen in
                         NavigationLink {
                             ScreenView(screen: screen)
@@ -39,7 +39,7 @@ struct ScreensView: View {
             .dsScreen()
         }
         .environment(\.appearance, appearance)
-        .accentColor(appearance.navigationBar.buttons.color)
+        .accentColor(DSColorToken.icon(.brand).color(for: appearance, in: .canvas))
     }
 }
 
@@ -49,7 +49,7 @@ fileprivate struct CustomActionView: View {
 
     var body: some View {
         DSHStack {
-            DSText(title).dsTextStyle(.smallHeadline)
+            DSText(title).dsTextStyle(DSTypographyToken.label)
             Spacer()
             DSChevronView()
         }.dsCardStyle()

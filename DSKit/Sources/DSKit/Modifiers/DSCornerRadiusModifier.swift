@@ -22,8 +22,6 @@ extension EnvironmentValues {
 public struct DSCornerRadiusModifier: ViewModifier {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
-
     @Environment(\.parentPadding) var parentPadding: CGFloat
     @Environment(\.parentCornerRadius) var parentCornerRadius: CGFloat
 
@@ -36,7 +34,7 @@ public struct DSCornerRadiusModifier: ViewModifier {
 
     func resolveCornerRadius() -> CGFloat {
         if parentCornerRadius == 0 {
-            return viewStyle.colors(from: appearance).cornerRadius
+            return appearance.cornerRadius
         } else {
             return max(parentCornerRadius - parentPadding, 2)
         }
@@ -76,7 +74,7 @@ struct Testable_DSCornerRadiusModifier: View {
             .dsCornerRadius()
         }
         .dsPadding()
-        .dsBackground(.primary)
+        .dsBackground(.canvas)
     }
 }
 

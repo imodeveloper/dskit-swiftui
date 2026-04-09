@@ -22,7 +22,10 @@ struct Filters2: View {
                     selected: $viewModel.selectedSortByOption
                 ) { option, selected in
                     DSText(option)
-                        .dsTextStyle(selected ? .smallHeadline : .subheadline, 14)
+                        .dsTextStyle(
+                            selected
+                            ? DSTypographyToken.label : .custom(size: 14, weight: .regular, relativeTo: .subheadline)
+                        )
                 }.dsSectionStyle(title: "Style")
 
                 DSPickerView(
@@ -39,13 +42,13 @@ struct Filters2: View {
                     id: \.self,
                     selected: $viewModel.selectedSize
                 ) { size in
-                    DSText(size).dsTextStyle(.smallHeadline)
+                    DSText(size).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity)
                         .dsSize(dimension: .actionElement)
                         .dsSecondaryBackground()
                 }.dsSectionStyle(title: "Size")
 
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     ForEach(viewModel.filters) { filter in
                         OptionView(option: filter)
                     }
@@ -73,9 +76,9 @@ extension Filters2 {
         let option: Data
         var body: some View {
             DSHStack {
-                DSText(option.title).dsTextStyle(.smallHeadline)
+                DSText(option.title).dsTextStyle(DSTypographyToken.label)
                 Spacer()
-                DSText(option.option).dsTextStyle(.subheadline, 14)
+                DSText(option.option).dsTextStyle(DSTypographyToken.custom(size: 14, weight: .regular, relativeTo: .subheadline))
                 DSChevronView()
             }.dsCardStyle()
         }

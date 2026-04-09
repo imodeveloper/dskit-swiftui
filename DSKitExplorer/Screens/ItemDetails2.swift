@@ -19,8 +19,8 @@ struct ItemDetails2: View {
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
-                DSVStack(spacing: .medium) {
-                    DSVStack(spacing: .zero) {
+                DSVStack(spacing: .space16) {
+                    DSVStack(spacing: .custom(0)) {
                         DSText(viewModel.title).dsTextStyle(.title2)
                         DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                     }
@@ -34,7 +34,7 @@ struct ItemDetails2: View {
                     data: viewModel.sizes,
                     id: \.self, selected: $viewModel.selectedSize
                 ) { size in
-                    DSText(size).dsTextStyle(.smallHeadline)
+                    DSText(size).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity)
                         .dsPadding(.horizontal)
                         .dsHeight(.actionElement)

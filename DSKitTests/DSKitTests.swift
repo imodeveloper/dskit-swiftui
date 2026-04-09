@@ -197,6 +197,29 @@ final class DSKitTests: SnapshotTestCase {
         XCTAssertEqual(measuredSize.height, targetSize.height, accuracy: 0.5)
     }
 
+    func testDSTypographyTokenSizing() {
+        let appearance = LightBlueAppearance()
+
+        XCTAssertEqual(DSTypographyToken.label.pointSize(for: appearance), 14, accuracy: 0.5)
+        XCTAssertEqual(DSTypographyToken.bodySmall.pointSize(for: appearance), 14, accuracy: 0.5)
+        XCTAssertEqual(DSTypographyToken.bodyLarge.pointSize(for: appearance), 18, accuracy: 0.5)
+        XCTAssertEqual(
+            DSTypographyToken.custom(size: 19, weight: .bold, relativeTo: .headline).pointSize(for: appearance),
+            19,
+            accuracy: 0.5
+        )
+    }
+
+    func testDSTypographyTokenColorRoles() {
+        XCTAssertEqual(DSTypographyToken.label.baseColorRoleToken, .headline)
+        XCTAssertEqual(DSTypographyToken.bodySmall.baseColorRoleToken, .body)
+        XCTAssertEqual(DSTypographyToken.bodyLarge.baseColorRoleToken, .body)
+        XCTAssertEqual(
+            DSTypographyToken.custom(size: 12, weight: .regular, relativeTo: .subheadline).baseColorRoleToken,
+            .subheadline
+        )
+    }
+
     private func measureSize(
         targetSize: CGSize,
         content: some View,

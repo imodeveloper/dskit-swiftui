@@ -17,7 +17,7 @@ import SwiftUI
 Initializes a `DSPriceView` with a given `DSPrice` model, text font key for style, and an optional color.
 - Parameters:
 - `price`: `DSPrice` struct containing amount, currency, and optional regular amount and discount badge.
-- `size`: `DSTextFontKey` indicating the text size and style.
+- `size`: `DSTypographyToken` indicating the text size and style.
 - `color`: Optional `Color` for the price text, defaults to nil.
  
 #### Usage:
@@ -27,16 +27,16 @@ The `DSPriceView` can display a standard price, a regular (crossed-out) price wh
 public struct DSPriceView: View, DSDesignable {
 
     @Environment(\.appearance) public var appearance: DSAppearance
-    @Environment(\.viewStyle) public var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) public var surfaceStyle: DSSurfaceStyle
 
     let amount: String
     let regularAmount: String?
     let currency: String
     var discountBadge: String?
-    var textFont: DSTextFontKey
+    var textFont: DSTypographyToken
     var color: Color?
 
-    public init(price: DSPrice, size: DSTextFontKey, color: Color? = nil) {
+    public init(price: DSPrice, size: DSTypographyToken, color: Color? = nil) {
         self.amount = price.amount
         self.currency = price.currency
         self.regularAmount = price.regularAmount
@@ -45,19 +45,19 @@ public struct DSPriceView: View, DSDesignable {
         self.color = color
     }
 
-    var amountColor: DSColorKey {
+    var amountColor: DSColorToken {
         if let color {
-            .color(color)
+            .custom(color)
         } else {
-            .price(.regularAmount)
+            .text(.secondary)
         }
     }
 
     public var body: some View {
 
-        DSHStack(spacing: .small) {
+        DSHStack(spacing: .space4) {
 
-            DSHStack(spacing: .zero) {
+            DSHStack(spacing: .space0) {
                 DSText(currency)
                     .dsTextStyle(textFont, amountColor)
                 DSText(amount)
@@ -79,11 +79,18 @@ public struct DSPriceView: View, DSDesignable {
 
             if let discountBadge = discountBadge {
                 DSText(discountBadge)
-                    .dsTextStyle(textFont, textFont.pointSize(for: appearance) * 0.72, .price(.badgeText))
-                    .dsPadding(.horizontal, .regular)
+                    .dsTextStyle(
+                        .custom(
+                            size: textFont.pointSize(for: appearance) * 0.72,
+                            weight: .regular,
+                            relativeTo: textFont
+                        ),
+                        .text(.brandOnBold)
+                    )
+                    .dsPadding(.horizontal, .space8)
                     .dsPadding(.vertical, .custom(2))
-                    .dsBackground(.price(.badgeBackground))
-                    .cornerRadius(4)
+                    .dsBackground(.background(.brand))
+                    .cornerRadius(appearance.price.badgeCornerRadius)
             }
         }
     }
@@ -111,7 +118,7 @@ struct Testable_DSPriceView: View {
         discountBadge: "10% OFF"
     )
     var body: some View {
-        DSVStack(spacing: .regular) {
+        DSVStack(spacing: .space8) {
             DSPriceView(price: price, size: .title1)
             DSPriceView(price: price, size: .title2)
             DSPriceView(price: price, size: .title3)
@@ -120,7 +127,7 @@ struct Testable_DSPriceView: View {
             DSPriceView(price: price, size: .caption1, color: .green)
             DSPriceView(price: price, size: .caption2, color: .green)
             DSPriceView(price: price, size: .footnote)
-            DSPriceView(price: price, size: .fontWithSize(.headline, 20))
+            DSPriceView(price: price, size: .custom(size: 20, weight: .semibold, relativeTo: .headline))
         }
     }
 }

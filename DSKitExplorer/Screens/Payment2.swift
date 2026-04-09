@@ -49,7 +49,7 @@ extension Payment2 {
                         .dsPadding()
                     }
                     .overlay(alignment: .topLeading) {
-                        DSVStack(spacing: .small) {
+                        DSVStack(spacing: .space4) {
                             DSText(card.holder).dsTextStyle(.title2, .white)
                             DSText("\(card.type) **** \(card.end)").dsTextStyle(.headline, .white).opacity(0.9)
                             DSText(card.expire)

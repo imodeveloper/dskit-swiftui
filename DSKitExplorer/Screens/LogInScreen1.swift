@@ -15,16 +15,16 @@ public struct LogInScreen1: View {
     public init() {}
 
     public var body: some View {
-        DSVStack(spacing: .zero) {
+        DSVStack(spacing: .custom(0)) {
             Spacer()
 
-            DSVStack(spacing: .medium) {
-                DSVStack(alignment: .leading, spacing: .small) {
+            DSVStack(spacing: .space16) {
+                DSVStack(alignment: .leading, spacing: .space4) {
                     DSText("DSKit")
-                        .dsTextStyle(.headline, 38)
+                        .dsTextStyle(DSTypographyToken.custom(size: 38, weight: .semibold, relativeTo: .headline))
                         .showWhenKeyboardIsDisplayed()
                     DSText("Welcome to\nDSKit shop")
-                        .dsTextStyle(.headline, 35)
+                        .dsTextStyle(DSTypographyToken.custom(size: 35, weight: .semibold, relativeTo: .headline))
                         .hideWhenKeyboardIsDisplayed()
                     DSText("An exciting place for the whole\nfamily to shop").dsTextStyle(.subheadline)
                 }.fixedSize(horizontal: false, vertical: true)

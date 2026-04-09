@@ -36,18 +36,18 @@ public struct DSQuantityPicker: View {
 
     public var body: some View {
 
-        DSHStack(spacing: .zero) {
+        DSHStack(spacing: .space0) {
 
-            DSText("Quantity").dsTextStyle(.smallHeadline)
+            DSText("Quantity").dsTextStyle(DSTypographyToken.label)
 
             Spacer()
 
-            DSHStack(alignment: .center, spacing: .regular) {
+            DSHStack(alignment: .center, spacing: .space8) {
 
                 DSSFSymbolButton(name: "minus", size: .smallIcon)
                     .saturation(quantity > 1 ? 1 : 0)
                     .opacity(quantity > 1 ? 1 : 0.2)
-                    .dsPadding(.horizontal, .regular)
+                    .dsPadding(.horizontal, .space8)
                     .onTap {
                         if quantity > 1 {
                             quantity -= 1
@@ -60,7 +60,7 @@ public struct DSQuantityPicker: View {
                 DSText("\(quantity)").dsTextStyle(.body).dsWidth(25)
                 DSDivider()
                 DSSFSymbolButton(name: "plus", size: .smallIcon)
-                    .dsPadding(.horizontal, .regular)
+                    .dsPadding(.horizontal, .space8)
                     .onTap {
                         quantity += 1
                         #if canImport(UIKit)
@@ -69,7 +69,7 @@ public struct DSQuantityPicker: View {
                     }
             }
             .dsHeight(20)
-            .dsPadding(.regular)
+            .dsPadding(.space8)
             .dsSecondaryBackground()
             .dsCornerRadius()
         }

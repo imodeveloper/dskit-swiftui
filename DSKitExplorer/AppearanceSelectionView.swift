@@ -18,10 +18,10 @@ struct AppearanceSelectionView: View {
     var body: some View {
         DSVStack {
             DSVStack {
-                DSVStack(spacing: .zero) {
-                    DSHStack(spacing: .small) {
-                        DSText("Welcome to").dsTextStyle(.largeHeadline)
-                        DSText("DSKit").dsTextStyle(.largeHeadline, .view(.button(.accentColor)))
+                DSVStack(spacing: .custom(0)) {
+                    DSHStack(spacing: .space4) {
+                        DSText("Welcome to").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
+                        DSText("DSKit").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline), .text(.brand))
                     }
                     DSText("Please select an appearance to continue").dsTextStyle(.subheadline)
                 }
@@ -51,21 +51,27 @@ struct AppearanceSelectionView: View {
 }
 
 fileprivate struct AppearanceView: View {
-
     let appearance: DSAppearance
+
+    private let swatches: [(DSColorToken, DSSurfaceStyle)] = [
+        (.text(.primary), .canvas),
+        (.text(.secondary), .canvas),
+        (.background(.brand), .canvas),
+        (.background(.canvas), .canvas),
+        (.text(.primary), .surface),
+        (.text(.secondary), .surface),
+        (.background(.surface), .surface),
+        (.border(.brand), .surface)
+    ]
 
     var body: some View {
         DSVStack {
             DSText(appearance.title).dsTextStyle(.headline)
-            DSHStack(spacing: .zero) {
-                appearance.primaryView.text.headline.color
-                appearance.primaryView.text.subheadline.color
-                appearance.primaryView.button.accentColor.color
-                appearance.primaryView.background.color
-                appearance.secondaryView.text.headline.color
-                appearance.secondaryView.text.subheadline.color
-                appearance.secondaryView.background.color
-                appearance.secondaryView.button.accentColor.color
+            DSHStack(spacing: .custom(0)) {
+                ForEach(Array(swatches.enumerated()), id: \.offset) { _, swatch in
+                    Rectangle()
+                        .fill(swatch.0.color(for: appearance, in: swatch.1))
+                }
             }
             .dsHeight(40)
             .dsCornerRadius()

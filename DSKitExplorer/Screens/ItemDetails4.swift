@@ -20,16 +20,16 @@ struct ItemDetails4: View {
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
 
-                DSVStack(spacing: .zero) {
+                DSVStack(spacing: .custom(0)) {
                     DSText(viewModel.title).dsTextStyle(.title2)
                     DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                 }
 
-                DSHStack(alignment: .center, spacing: .regular) {
+                DSHStack(alignment: .center, spacing: .space8) {
                     DSText("New")
-                        .dsTextStyle(.headline, 12, .white)
-                        .dsPadding(.vertical, .small)
-                        .dsPadding(.horizontal, .regular)
+                        .dsTextStyle(DSTypographyToken.custom(size: 12, weight: .semibold, relativeTo: .headline), .white)
+                        .dsPadding(.vertical, .space4)
+                        .dsPadding(.horizontal, .space8)
                         .dsBackground(.color(.green))
                         .dsCornerRadius()
                     DSRatingView(rating: 4.5, size: 16)
@@ -45,7 +45,7 @@ struct ItemDetails4: View {
                     id: \.self,
                     selected: $viewModel.selectedSize
                 ) { size in
-                    DSText(size).dsTextStyle(.smallHeadline)
+                    DSText(size).dsTextStyle(DSTypographyToken.label)
                         .frame(maxWidth: .infinity)
                         .dsSize(dimension: .actionElement)
                         .dsSecondaryBackground()
@@ -60,7 +60,7 @@ struct ItemDetails4: View {
                         .dsSize(dimension: .actionElement)
                 }.dsSectionStyle(title: "Color")
 
-                DSVStack(spacing: .small) {
+                DSVStack(spacing: .space4) {
                     ActionView(title: "Size Guides")
                     ActionView(title: "Return Policy")
                 }
@@ -95,7 +95,7 @@ extension ItemDetails4 {
 
         var body: some View {
             DSHStack {
-                DSText(title).dsTextStyle(.smallHeadline)
+                DSText(title).dsTextStyle(DSTypographyToken.label)
                 Spacer()
                 DSChevronView()
             }

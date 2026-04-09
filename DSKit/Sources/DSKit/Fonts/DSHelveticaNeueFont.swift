@@ -11,7 +11,7 @@ import UIKit
 import AppKit
 #endif
 
-public class DSHelveticaNeueFont: DSFontsProtocol {
+public class DSHelveticaNeueFont: DSTypographyProtocol {
 
     public var body: DSFont {
         return regularFont(size: 17.0)

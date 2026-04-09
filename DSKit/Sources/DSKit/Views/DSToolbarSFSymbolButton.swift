@@ -24,7 +24,7 @@ Initializes a `DSToolbarSFSymbolButton` with the SF Symbol name.
 public struct DSToolbarSFSymbolButton: View, DSDesignable {
 
     @Environment(\.appearance) public var appearance: DSAppearance
-    @Environment(\.viewStyle) public var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) public var surfaceStyle: DSSurfaceStyle
 
     let name: String
 
@@ -36,7 +36,7 @@ public struct DSToolbarSFSymbolButton: View, DSDesignable {
         DSImageView(
             systemName: name,
             size: .mediumIcon,
-            tint: .navBar(.button)
+            tint: .icon(.brand)
         )
     }
 }

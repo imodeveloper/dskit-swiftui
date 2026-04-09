@@ -30,12 +30,12 @@ extension Categories5 {
         let category: Data
         var body: some View {
             Group {
-                DSVStack(alignment: .center, spacing: .zero) {
+                DSVStack(alignment: .center, spacing: .custom(0)) {
                     DSImageView(url: category.image)
-                    DSVStack(alignment: .center, spacing: .zero) {
-                        DSText(category.title).dsTextStyle(.smallHeadline)
+                    DSVStack(alignment: .center, spacing: .custom(0)) {
+                        DSText(category.title).dsTextStyle(DSTypographyToken.label)
                         DSText(category.description).dsTextStyle(.subheadline)
-                    }.dsPadding(.regular)
+                    }.dsPadding(.space8)
                 }
                 .dsSecondaryBackground()
                 .dsHeight(220)
@@ -45,19 +45,19 @@ extension Categories5 {
                         size: .font(.subheadline),
                         tint: .color(category.favourite ? .red : .white)
                     )
-                    .dsPadding(.regular)
+                    .dsPadding(.space8)
                     .dsBlurBackgroundLight()
                     .dsCornerRadius()
-                    .dsPadding(.regular)
+                    .dsPadding(.space8)
                 }
                 .overlay(alignment: .topLeading) {
                     if let tag = category.tag {
                         DSText(tag)
-                            .dsTextStyle(.headline, 10, Color.white)
-                            .dsPadding(.regular)
+                            .dsTextStyle(DSTypographyToken.custom(size: 10, weight: .semibold, relativeTo: .headline), Color.white)
+                            .dsPadding(.space8)
                             .dsBlurBackgroundLight()
                             .dsCornerRadius()
-                            .dsPadding(.regular)
+                            .dsPadding(.space8)
                     }
                 }
             }

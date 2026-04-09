@@ -11,22 +11,23 @@ import SwiftUI
 public struct DSBackgroundModifier: ViewModifier {
 
     @Environment(\.appearance) var appearance: DSAppearance
-    @Environment(\.viewStyle) var viewStyle: DSViewStyle
+    @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
 
-    let group: DSViewStyle
+    let group: DSSurfaceStyle
 
-    public init(group: DSViewStyle) {
+    public init(group: DSSurfaceStyle) {
         self.group = group
     }
 
     public func body(content: Content) -> some View {
-        content.background(Color(group.colors(from: appearance).background))
-            .environment(\.viewStyle, viewStyle)
+        content
+            .background(appearance.color(for: .background(group.backgroundToken), surfaceStyle: surfaceStyle))
+            .environment(\.surfaceStyle, group)
     }
 }
 
 public extension View {
-    func dsBackground(_ group: DSViewStyle) -> some View {
+    func dsBackground(_ group: DSSurfaceStyle) -> some View {
         let modifier = DSBackgroundModifier(group: group)
         return self.modifier(modifier)
     }
@@ -44,16 +45,16 @@ struct Testable_DSBackgroundModifier: View {
                         DSText("Decondary Background")
                     }
                     .dsPadding()
-                    .dsBackground(.secondary)
+                    .dsBackground(.surface)
                 }
                 .dsPadding()
-                .dsBackground(.primary)
+                .dsBackground(.canvas)
             }
             .dsPadding()
-            .dsBackground(.secondary)
+            .dsBackground(.surface)
         }
         .dsPadding()
-        .dsBackground(.primary)
+        .dsBackground(.canvas)
     }
 }
 

@@ -22,7 +22,7 @@ struct CartScreen5: View {
         }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
-                DSText("You may also like").dsTextStyle(.smallSubheadline)
+                DSText("You may also like").dsTextStyle(.caption1)
                 DSHScroll(data: viewModel.suggestedProducts, id: \.id) { product in
                     SuggestedProductView(product: product)
                 }
@@ -47,7 +47,7 @@ extension CartScreen5 {
     struct ProductView: View {
         let product: Product
         var body: some View {
-            DSHStack(alignment: .center, spacing: .medium) {
+            DSHStack(alignment: .center, spacing: .space16) {
                 Group {
                     DSImageView(url: product.image, size: .size(width: 80, height: 100))
                         .overlay(alignment: .bottomLeading) {
@@ -57,26 +57,26 @@ extension CartScreen5 {
                         }
                 }.dsCornerRadius()
 
-                DSVStack(alignment: .leading, spacing: .small) {
-                    DSText(product.title).dsTextStyle(.smallHeadline)
+                DSVStack(alignment: .leading, spacing: .space4) {
+                    DSText(product.title).dsTextStyle(DSTypographyToken.label)
                     DSHStack {
-                        DSText("Color:").dsTextStyle(.smallSubheadline)
-                        DSText(product.color).dsTextStyle(.smallHeadline)
-                        DSText("Size:").dsTextStyle(.smallSubheadline)
-                        DSText(product.size).dsTextStyle(.smallHeadline)
+                        DSText("Color:").dsTextStyle(.caption1)
+                        DSText(product.color).dsTextStyle(DSTypographyToken.label)
+                        DSText("Size:").dsTextStyle(.caption1)
+                        DSText(product.size).dsTextStyle(DSTypographyToken.label)
                     }
                     DSHStack {
                         DSImageView(systemName: "star.fill", size: .smallIcon, tint: .color(Color.yellow))
                         DSText("3k Reviews").dsTextStyle(.caption1)
                     }
-                    DSPriceView(price: product.price, size: .smallHeadline)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
 
                 }.dsFullWidth()
 
                 DSSFSymbolButton(name: "minus.circle.fill", size: .mediumIcon)
-                    .dsPadding(.trailing, .regular)
+                    .dsPadding(.trailing, .space8)
             }
-            .dsPadding(.regular)
+            .dsPadding(.space8)
             .dsSecondaryBackground()
             .dsCornerRadius()
             .onTap {}
@@ -103,9 +103,9 @@ extension CartScreen5 {
             DSHStack {
                 DSText("Total").dsTextStyle(.headline)
                 Spacer()
-                DSHStack(alignment: .firstTextBaseline, spacing: .small) {
+                DSHStack(alignment: .firstTextBaseline, spacing: .space4) {
                     DSText("for").dsTextStyle(.subheadline)
-                    DSText(itemsCount).dsTextStyle(.smallHeadline)
+                    DSText(itemsCount).dsTextStyle(DSTypographyToken.label)
                     DSText("items").dsTextStyle(.subheadline)
                     DSPriceView(price: price, size: .headline)
                 }
@@ -118,12 +118,12 @@ extension CartScreen5 {
     struct TagView: View {
         let tag: String
         var body: some View {
-            DSText(tag).dsTextStyle(.headline, 9)
-                .dsPadding(.horizontal, .regular)
-                .dsPadding(.vertical, .small)
+            DSText(tag).dsTextStyle(DSTypographyToken.custom(size: 9, weight: .semibold, relativeTo: .headline))
+                .dsPadding(.horizontal, .space8)
+                .dsPadding(.vertical, .space4)
                 .dsBackground(.primary)
                 .dsCornerRadius()
-                .dsPadding(.small)
+                .dsPadding(.space4)
         }
     }
 
@@ -135,13 +135,13 @@ extension CartScreen5 {
             DSHStack(alignment: .center) {
                 DSImageView(url: product.image, size: .size(width: 60, height: 40))
                     .dsCornerRadius()
-                DSVStack(alignment: .leading, spacing: .small) {
+                DSVStack(alignment: .leading, spacing: .space4) {
                     DSText(product.title, alignment: .leading)
-                        .dsTextStyle(.smallHeadline)
-                    DSPriceView(price: product.price, size: .smallHeadline)
+                        .dsTextStyle(DSTypographyToken.label)
+                    DSPriceView(price: product.price, size: DSTypographyToken.label)
                 }
             }
-            .dsPadding(.regular)
+            .dsPadding(.space8)
             .dsSecondaryBackground()
             .dsCornerRadius()
         }
