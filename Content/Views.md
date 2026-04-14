@@ -1337,6 +1337,72 @@ Code example result:
 <table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSTextField.snapshot.png" width="35%"/></td></tr><table/>
 
 
+## DSFloatingBannerView
+
+`DSFloatingBannerView` is a reusable top overlay banner for transient actions and status updates.
+
+#### Usage:
+- Provide a `DSFloatingBannerContent` value describing the title, accessory style, accessibility, and interaction behavior.
+- Mount the banner through `dsFloatingBanner(...)` to overlay it on top of any screen content.
+- Keep domain-specific state machines outside DSKit and map them into generic banner content values.
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+private struct Testable_DSFloatingBannerView: View {
+    @State private var selection = 0
+
+    private let banners: [DSFloatingBannerContent] = [
+        DSFloatingBannerContent(
+            title: "Scroll to top",
+            style: .label(systemImage: "arrow.up")
+        ),
+        DSFloatingBannerContent(
+            title: "12 new articles",
+            style: .label(systemImage: "arrow.trianglehead.2.clockwise.rotate.90", placement: .trailing),
+            titleUsesMonospacedDigits: true
+        ),
+        DSFloatingBannerContent(
+            title: "Syncing...",
+            style: .progress,
+            isInteractive: false
+        ),
+        DSFloatingBannerContent(
+            title: "Updated",
+            style: .status(systemImage: "checkmark.circle.fill"),
+            isInteractive: false
+        )
+    ]
+
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [.white, Color(.systemGray6)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+
+            VStack(spacing: 16) {
+                DSButton(title: "Next", style: .light, maxWidth: false) {
+                    selection = (selection + 1) % banners.count
+                }
+                .padding(.top, 120)
+
+                Spacer()
+            }
+        }
+        .dsFloatingBanner(
+            isPresented: true,
+            content: banners[selection]
+        )
+    }
+}
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSFloatingBannerView.snapshot.png" width="35%"/></td></tr><table/>
+
+
 ## DSLazyVStack
 
 `DSLazyVStack` is a SwiftUI component within the DSKit framework that provides a lazily loaded vertical stack with DSKit spacing and content margins.

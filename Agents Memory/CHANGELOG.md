@@ -160,3 +160,11 @@
 - Kept the custom and native `DSSection` separator paths intact, since `DSSection` already hides native separators before applying DSKit-managed divider or custom separator content.
 - Expanded the `DSList` preview surface to show default no-separator rows, native divider rows, and custom separator rows side by side.
 - Regenerated `Content/Views.md` for the updated `DSList` behavior and previews.
+
+### Request
+- Move the floating banner rendering out of Monitor into DSKit as a reusable generic component, keep it flexible enough for app-specific mappings, and prepare current DSKit repo changes for commit/push.
+
+### Done
+- Added `DSFloatingBannerView` plus a generic `DSFloatingBannerContent` model, generic label/progress/status styles, icon placement, accessory emphasis, and the `dsFloatingBanner(...)` overlay helper.
+- Kept the DSKit API domain-agnostic by making callers provide title, interaction, accessibility, transition ids, and icon emphasis instead of hardcoding Monitor-specific banner cases.
+- Added a DSKit preview surface for the new floating banner component and prepared the repo for regenerated docs/build verification.
