@@ -89,6 +89,16 @@
   - `DSKit/Sources/DSKit/Views/DSSectionHeaderView.swift`
 - Updated changelog before commit/push as required.
 
+## 2026-04-17
+
+### Request
+- Fix DSKit list/header spacing behavior so header-to-content spacing and section-to-section spacing are controlled independently, add opt-in exact header-row sizing support, document the new spacing contract, and prepare current repository changes for commit/push.
+
+### Done
+- Reworked `DSList`/`DSSection` spacing so `DSList(sectionSpacing: ...)` controls section gaps while `.dsSpacing(...)` controls row spacing inside a section, with DSKit owning spacing instead of native SwiftUI list section spacing.
+- Added header-role handling and exact header-row sizing support so header sections can use zero header-to-content spacing and opt in to exact rendered row heights when needed.
+- Updated DSKit tests and repo guidance to document the new section/header spacing contract and exact-header-row behavior.
+
 ## 2026-03-17
 
 ### Request

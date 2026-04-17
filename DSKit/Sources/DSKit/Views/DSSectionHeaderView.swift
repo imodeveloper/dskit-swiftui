@@ -26,6 +26,7 @@ Initializes a `DSSectionHeaderView` with a title, action title, and a closure fo
 public struct DSSectionHeaderView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.dsSectionHeaderSpacingKey) var sectionHeaderSpacing
+    @Environment(\.dsExactSectionHeaderRowHeightKey) var exactSectionHeaderRowHeight
     let title: String
     let actionTitle: String
     let action: () -> Void
@@ -48,8 +49,16 @@ public struct DSSectionHeaderView: View {
                 action: action
             )
         }
-        .dsHeight(20)
+        .dsHeight(headerHeight)
         .padding(.bottom, sectionHeaderSpacing)
+    }
+
+    private var headerHeight: DSDimension {
+        if let exactSectionHeaderRowHeight {
+            return .custom(exactSectionHeaderRowHeight)
+        }
+
+        return 20
     }
 }
 

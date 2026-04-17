@@ -11,10 +11,19 @@ public struct DSSectionHeaderSpacingKey: EnvironmentKey {
     public static let defaultValue: CGFloat = .zero
 }
 
+public struct DSExactSectionHeaderRowHeightKey: EnvironmentKey {
+    public static let defaultValue: CGFloat? = nil
+}
+
 public extension EnvironmentValues {
     var dsSectionHeaderSpacingKey: CGFloat {
         get { self[DSSectionHeaderSpacingKey.self] }
         set { self[DSSectionHeaderSpacingKey.self] = newValue }
+    }
+
+    var dsExactSectionHeaderRowHeightKey: CGFloat? {
+        get { self[DSExactSectionHeaderRowHeightKey.self] }
+        set { self[DSExactSectionHeaderRowHeightKey.self] = newValue }
     }
 }
 
@@ -37,54 +46,75 @@ public struct DSList<Content: View>: View {
 
     @Environment(\.appearance) var appearance: DSAppearance
     @Environment(\.surfaceStyle) var surfaceStyle: DSSurfaceStyle
+    @Environment(\.sizeCategory) var sizeCategory: ContentSizeCategory
 
     let sectionSpacing: DSSpatialToken
     let sectionHeaderSpacing: DSSpatialToken
+    let exactSectionHeaderRowHeight: DSDimension?
     let content: () -> Content
 
     public init(
         sectionSpacing: DSSpatialToken = .space8,
         sectionHeaderSpacing: DSSpatialToken = .space0,
+        exactSectionHeaderRowHeight: DSDimension? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.content = content
         self.sectionSpacing = sectionSpacing
         self.sectionHeaderSpacing = sectionHeaderSpacing
+        self.exactSectionHeaderRowHeight = exactSectionHeaderRowHeight
     }
 
     public init(
-        spacing: DSSpatialToken = .space8,
+        spacing: DSSpatialToken = .space16,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.init(
             sectionSpacing: spacing,
             sectionHeaderSpacing: .space0,
+            exactSectionHeaderRowHeight: nil,
             content: content
         )
     }
 
     public var body: some View {
-        applySectionSpacing(
-            List {
-                content()
-            }
-            .background(appearance.color(for: .background(surfaceStyle.backgroundToken), surfaceStyle: surfaceStyle))
-            .listStyle(.plain)
-            .listRowSeparator(.hidden, edges: [.top, .bottom])
-            .listRowSpacing(0)
-            .environment(\.dsContentMarginKey, appearance.screenMargins)
-            .environment(\.dsScrollableContentMarginKey, appearance.screenMargins)
-            .environment(\.dsScreenMarginsAlreadyApplied, true)
-            .environment(\.dsSectionHeaderSpacingKey, appearance.spacing.value(for: sectionHeaderSpacing))
+        let resolvedExactSectionHeaderRowHeight = exactSectionHeaderRowHeight?.value(
+            appearance: appearance,
+            sizeCategory: sizeCategory
         )
+
+        applySectionSpacing(
+            exactSectionHeaderRowHeight == nil
+                ? AnyView(baseList(exactSectionHeaderRowHeight: resolvedExactSectionHeaderRowHeight))
+                : AnyView(
+                    baseList(exactSectionHeaderRowHeight: resolvedExactSectionHeaderRowHeight)
+                        .environment(\.defaultMinListRowHeight, 0)
+                )
+        )
+    }
+
+    private func baseList(exactSectionHeaderRowHeight: CGFloat?) -> some View {
+        List {
+            content()
+        }
+        .background(appearance.color(for: .background(surfaceStyle.backgroundToken), surfaceStyle: surfaceStyle))
+        .listStyle(.plain)
+        .listRowSeparator(.hidden, edges: [.top, .bottom])
+        .listRowSpacing(0)
+        .environment(\.dsContentMarginKey, appearance.screenMargins)
+        .environment(\.dsScrollableContentMarginKey, appearance.screenMargins)
+        .environment(\.dsScreenMarginsAlreadyApplied, true)
+        .environment(\.dsSectionSpacingKey, sectionSpacing)
+        .environment(\.dsSectionHeaderSpacingKey, appearance.spacing.value(for: sectionHeaderSpacing))
+        .environment(\.dsExactSectionHeaderRowHeightKey, exactSectionHeaderRowHeight)
     }
 
     @ViewBuilder
     private func applySectionSpacing<ListContent: View>(_ view: ListContent) -> some View {
         if #available(iOS 17, *) {
-            view.listSectionSpacing(appearance.spacing.value(for: sectionSpacing))
+            view.listSectionSpacing(0)
         } else {
-            view.listRowSpacing(appearance.spacing.value(for: sectionSpacing))
+            view.listRowSpacing(0)
         }
     }
 }

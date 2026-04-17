@@ -11,10 +11,39 @@ public struct DSSectionSpacingKey: EnvironmentKey {
     public static let defaultValue: DSSpatialToken? = nil
 }
 
+public struct DSSectionRowSpacingKey: EnvironmentKey {
+    public static let defaultValue: DSSpatialToken? = nil
+}
+
+public enum DSSectionRole: Sendable {
+    case standard
+    case header
+}
+
+public struct DSSectionRoleKey: EnvironmentKey {
+    public static let defaultValue: DSSectionRole = .standard
+}
+
 public extension EnvironmentValues {
     var dsSectionSpacingKey: DSSpatialToken? {
         get { self[DSSectionSpacingKey.self] }
         set { self[DSSectionSpacingKey.self] = newValue }
+    }
+
+    var dsSectionRowSpacingKey: DSSpatialToken? {
+        get { self[DSSectionRowSpacingKey.self] }
+        set { self[DSSectionRowSpacingKey.self] = newValue }
+    }
+
+    var dsSectionRoleKey: DSSectionRole {
+        get { self[DSSectionRoleKey.self] }
+        set { self[DSSectionRoleKey.self] = newValue }
+    }
+}
+
+public extension View {
+    func dsSectionRole(_ role: DSSectionRole) -> some View {
+        environment(\.dsSectionRoleKey, role)
     }
 }
 
@@ -175,6 +204,7 @@ where Data: RandomAccessCollection, ID: Hashable, RowContent: View, TopSeparator
     @Environment(\.surfaceStyle) private var viewStyle
     @Environment(\.dsContentMarginKey) private var contentMargin
     @Environment(\.dsSectionSpacingKey) private var inheritedSpacing
+    @Environment(\.dsSectionRowSpacingKey) private var inheritedRowSpacing
 
     fileprivate let data: Data
     fileprivate let id: KeyPath<Data.Element, ID>
@@ -214,13 +244,18 @@ where Data: RandomAccessCollection, ID: Hashable, RowContent: View, TopSeparator
                 applyingSeparator(
                     to: content(item.element, context.position),
                     with: context
-                )
+                ),
+                position: context.position
             )
         }
     }
 
     private var resolvedSpacing: DSSpatialToken {
         inheritedSpacing ?? .space16
+    }
+
+    private var resolvedRowSpacing: DSSpatialToken {
+        inheritedRowSpacing ?? resolvedSpacing
     }
 
     private var allSeparatorEdges: VerticalEdge.Set {
@@ -485,17 +520,29 @@ where Data: RandomAccessCollection, ID: Hashable, RowContent: View, TopSeparator
         }
     }
 
-    private func styledRow<Content: View>(_ row: Content) -> some View {
+    private func styledRow<Content: View>(
+        _ row: Content,
+        position: DSSectionRowPosition
+    ) -> some View {
         row
             .listRowInsets(
                 EdgeInsets(
                     top: 0,
                     leading: contentMargin,
-                    bottom: appearance.spacing.value(for: resolvedSpacing),
+                    bottom: bottomInset(for: position),
                     trailing: contentMargin
                 )
             )
             .listRowBackground(appearance.color(for: .background(viewStyle.backgroundToken), surfaceStyle: viewStyle))
+    }
+
+    private func bottomInset(for position: DSSectionRowPosition) -> CGFloat {
+        switch position {
+        case .first, .middle:
+            appearance.spacing.value(for: resolvedRowSpacing)
+        case .single, .last:
+            appearance.spacing.value(for: resolvedSpacing)
+        }
     }
 }
 
@@ -504,6 +551,7 @@ public struct DSSection<Content: View>: View {
     @Environment(\.surfaceStyle) private var viewStyle: DSSurfaceStyle
     @Environment(\.dsContentMarginKey) private var contentMargin: CGFloat
     @Environment(\.dsSectionSpacingKey) private var inheritedSpacing
+    @Environment(\.dsSectionRoleKey) private var sectionRole
 
     let plainRowSeparatorVisibility: Visibility?
     let contentOwnsRowStyle: Bool
@@ -564,11 +612,24 @@ public struct DSSection<Content: View>: View {
                 EdgeInsets(
                     top: 0,
                     leading: contentMargin,
-                    bottom: appearance.spacing.value(for: resolvedSpacing),
+                    bottom: sectionBottomInset(for: sectionRole, spacing: resolvedSpacing, appearance: appearance),
                     trailing: contentMargin
                 )
             )
             .listRowBackground(appearance.color(for: .background(viewStyle.backgroundToken), surfaceStyle: viewStyle))
+    }
+}
+
+func sectionBottomInset(
+    for role: DSSectionRole,
+    spacing: DSSpatialToken,
+    appearance: DSAppearance
+) -> CGFloat {
+    switch role {
+    case .standard:
+        appearance.spacing.value(for: spacing)
+    case .header:
+        0
     }
 }
 
@@ -655,7 +716,7 @@ public extension DSSection {
 
 public extension View {
     func dsSpacing(_ spacing: DSSpatialToken) -> some View {
-        environment(\.dsSectionSpacingKey, spacing)
+        environment(\.dsSectionRowSpacingKey, spacing)
     }
 }
 

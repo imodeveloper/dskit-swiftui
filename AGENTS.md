@@ -56,6 +56,18 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - Wrapping all rows in one container can collapse the section into a single giant list cell, causing freeze/memory spikes in consuming apps.
 - Preserve native `Section { content() }` row structure for large feeds.
 
+## DSList Spacing Contract
+- `DSList(sectionSpacing: ...)` controls spacing between logical sections.
+- `.dsSpacing(...)` on `DSSection` controls spacing between rows inside that section.
+- Do not treat `.dsSpacing(...)` as a substitute for list-level section spacing.
+- DSKit intentionally zeroes native SwiftUI `List` section spacing and owns spacing through DSKit row/section insets.
+- If a header is implemented as its own `DSSection`, mark it with `.dsSectionRole(.header)` so list `sectionSpacing` does not leak into the header-to-content gap.
+- Use `DSList(sectionHeaderSpacing: ...)` for the gap between a header section and the rows it introduces.
+- `DSList(exactSectionHeaderRowHeight: ...)` is opt-in exact header-row sizing:
+  - use it only when the rendered `List` header row must match a fixed height exactly
+  - when enabled, DSKit applies `defaultMinListRowHeight = 0` so SwiftUI `List` does not inflate the row height
+- Keep the default path unchanged for screens that do not need exact header-row sizing.
+
 ## DSHScroll Margin Keys
 - `dsScrollableContentMarginKey` is the inset used by `DSHScroll` for horizontal content alignment.
 - `dsContentMarginKey` represents host/container margins and should not be re-applied in `DSHScroll` outer compensation.

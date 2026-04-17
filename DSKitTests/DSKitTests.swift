@@ -220,6 +220,21 @@ final class DSKitTests: SnapshotTestCase {
         )
     }
 
+    func testDSSectionHeaderRoleBottomInsetIgnoresSectionSpacing() {
+        let appearance = LightBlueAppearance()
+
+        XCTAssertEqual(
+            sectionBottomInset(for: .header, spacing: .space32, appearance: appearance),
+            0,
+            accuracy: 0.5
+        )
+        XCTAssertEqual(
+            sectionBottomInset(for: .standard, spacing: .space32, appearance: appearance),
+            appearance.spacing.value(for: .space32),
+            accuracy: 0.5
+        )
+    }
+
     private func measureSize(
         targetSize: CGSize,
         content: some View,
