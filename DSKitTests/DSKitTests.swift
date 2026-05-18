@@ -31,6 +31,20 @@ final class DSKitTests: SnapshotTestCase {
         )
     }
 
+    private var imageRenderingOptions: SnapshotAssertionOptions {
+        SnapshotAssertionOptions(
+            recordDelay: 0.5,
+            retries: 20,
+            retryDelay: 0.01,
+            precision: 0.95,
+            perceptualPrecision: 1.0,
+            minimumPrecision: 0.95,
+            minimumPerceptualPrecision: 1.0,
+            precisionStep: 0,
+            perceptualPrecisionStep: 0
+        )
+    }
+
     func testDSCustomBackgroundModifier() throws {
         assertSnapshot(for: Testable_DSBackgroundModifier(), named: "DSBackgroundModifier", options: crossSimulatorOptions)
     }
@@ -137,7 +151,7 @@ final class DSKitTests: SnapshotTestCase {
     }
     
     func testDSImageView() throws {
-        assertSnapshot(for: Testable_DSImageView(), named: "DSImageView", options: crossSimulatorOptions)
+        assertSnapshot(for: Testable_DSImageView(), named: "DSImageView", options: imageRenderingOptions)
     }
     
     func testDSText() throws {

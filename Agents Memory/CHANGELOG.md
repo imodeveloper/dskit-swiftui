@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-05-18 (DSKit Snapshot Refresh)
+
+### Request
+- Check the pending DSKit snapshot changes, run the DSKit tests, fix any snapshot issues, visually review the updated goldens, then commit and push the result.
+
+### Done
+- Ran `DSKitTests` through the `DSKitExplorer` scheme on the available `Capone` iOS 26.2 simulator after the documented `iPhone 17 Pro` destination was unavailable.
+- Verified 34 DSKit tests passed with 0 failures and SwiftLint reported 0 violations during the test build.
+- Reviewed before/current contact sheets for the 71 updated component snapshot goldens and confirmed the refreshed images are coherent with the current fixtures.
+- Regenerated DSKit documentation with `Scripts/documentation_generator.sh`; generated content was already current.
+- Kept the unrelated tracked `.DS_Store` change out of the commit.
+
 ## 2026-04-09 (Restore Pre-Refactor Color Behavior)
 
 ### Request
