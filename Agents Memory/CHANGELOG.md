@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-05-18 (Workspace Metadata Commit)
+
+### Request
+- Commit and push all remaining repository changes before Monitor TestFlight delivery.
+
+### Done
+- Included the remaining tracked DSKit workspace metadata change so the checkout is clean before Monitor delivery work continues.
+
 ## 2026-05-18 (DSKit Snapshot Refresh)
 
 ### Request
