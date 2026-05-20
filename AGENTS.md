@@ -24,13 +24,29 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - Current key references:
   - `Agents Memory/ARCHITECTURE.md`
   - `Agents Memory/PROJECT_ANALYSIS.md`
-  - `Agents Memory/CHANGELOG.md`
+  - `Agents Memory/File Changes/README.md`
+  - `Agents Memory/CHANGELOG.md` (legacy chronological memory; do not scan for normal file-scoped work)
 
-## Commit/Push Changelog Rule
-- Before every commit + push, update `Agents Memory/CHANGELOG.md`.
-- Each entry must include:
-  - `Request`: what was asked.
-  - `Done`: what was implemented.
+### File Change Memory
+- Use `Agents Memory/File Changes/` as the primary required memory for meaningful source/config/doc changes.
+- Each source path has one memory file under `Agents Memory/File Changes/files/`.
+- Each per-file memory file is capped at 300 lines and keeps the most recent entries at the top.
+- Before editing a meaningful tracked file, search the file-change memory for that repo-relative path:
+  - `rg '<repo-relative-path>' 'Agents Memory/File Changes/files'`
+- Before commit + push, create or update per-file memory for meaningful source/config/doc changes.
+- Use the helper script for staged changes:
+  - `Agents\ Memory/tools/agent_memory_file_changes.sh --check`
+  - `Agents\ Memory/tools/agent_memory_file_changes.sh`
+- Do not create file-change memory for generated docs, snapshots, build outputs, vendor checkouts, `.DS_Store`, or pure formatting-only churn unless the change intentionally documents behavior.
+
+## Commit/Push Memory Rule
+- Before every commit + push, run the file-change memory helper and fill the generated entries with real rationale.
+- `Agents Memory/CHANGELOG.md` is legacy chronological memory. Do not append to it for normal file-scoped changes unless a release/global summary is explicitly useful.
+
+## Agent-Oriented Comment Policy
+- Add comments only when they preserve rationale the next agent needs: invariants, design-system contracts, snapshot determinism, integration constraints, or prior regression context.
+- Keep comments durable and implementation-focused.
+- Do not add comments that merely narrate the code or say an agent/person changed it.
 
 ## Project map
 - DSKit library: `DSKit/Sources/DSKit`
