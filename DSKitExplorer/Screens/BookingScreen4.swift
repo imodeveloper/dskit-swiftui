@@ -17,8 +17,9 @@ struct BookingScreen4: View {
         DSList {
             DSSection {
                 ForEach(viewModel.barbers) { barber in
-                    Barber(barber: barber)
-                        .dsCardStyle()
+                    DSCardSurface {
+                        Barber(barber: barber)
+                    }
                         .onTap { dismiss() }
                 }
             }
@@ -41,7 +42,7 @@ extension BookingScreen4 {
                             .dsTextStyle(.subheadline)
                     }.dsFullWidth()
 
-                    DSSFSymbolButton(name: "info.circle", size: .smallIcon)
+                    DSCardAccessory(.info, size: .smallIcon)
                 }
 
                 DSText("Nearest time for appointment")

@@ -16,6 +16,54 @@ final class DSKitExplorerTests: SnapshotTestCase {
         recordAll = false
     }
 
+    func testFoodHomeScreen1() throws {
+        assertSnapshot(for: Testable_FoodHomeScreen1(), named: "FoodHomeScreen1", layout: .screen())
+    }
+
+    func testFoodCategoriesScreen1() throws {
+        assertSnapshot(for: Testable_FoodCategoriesScreen1(), named: "FoodCategoriesScreen1", layout: .screen())
+    }
+
+    func testFoodDetailsScreen1() throws {
+        assertSnapshot(for: Testable_FoodDetailsScreen1(), named: "FoodDetailsScreen1", layout: .screen())
+    }
+
+    func testFoodNearbyRestaurantScreen1() throws {
+        assertSnapshot(for: Testable_FoodNearbyRestaurantScreen1(), named: "FoodNearbyRestaurantScreen1", layout: .screen())
+    }
+
+    func testFoodRestaurantScreen1() throws {
+        assertSnapshot(for: Testable_FoodRestaurantScreen1(), named: "FoodRestaurantScreen1", layout: .screen())
+    }
+
+    func testBookingScreen1() throws {
+        assertSnapshot(for: Testable_BookingScreen1(), named: "BookingScreen1", layout: .screen())
+    }
+
+    func testBookingScreen2() throws {
+        assertSnapshot(for: Testable_BookingScreen2(), named: "BookingScreen2", layout: .screen())
+    }
+
+    func testBookingScreen3() throws {
+        assertSnapshot(for: Testable_BookingScreen3(), named: "BookingScreen3", layout: .screen())
+    }
+
+    func testBookingScreen4() throws {
+        assertSnapshot(for: Testable_BookingScreen4(), named: "BookingScreen4", layout: .screen())
+    }
+
+    func testBookingScreen5() throws {
+        assertSnapshot(for: Testable_BookingScreen5(), named: "BookingScreen5", layout: .screen())
+    }
+
+    func testImageGalleryScreen1() throws {
+        assertSnapshot(for: Testable_ImageGalleryScreen1(), named: "ImageGalleryScreen1", layout: .screen())
+    }
+
+    func testImageGalleryScreen2() throws {
+        assertSnapshot(for: Testable_ImageGalleryScreen2(), named: "ImageGalleryScreen2", layout: .screen())
+    }
+
     func testHomeScreen1() throws {
         assertSnapshot(for: Testable_HomeScreen1(), named: "HomeScreen1", layout: .screen())
     }
@@ -144,12 +192,16 @@ final class DSKitExplorerTests: SnapshotTestCase {
         assertSnapshot(for: Testable_Payment1(), named: "Payment1", layout: .screen())
     }
 
+    func testPayment2() throws {
+        assertSnapshot(for: Testable_Payment2(), named: "Payment2", layout: .screen())
+    }
+
     func testFilters1() throws {
         assertSnapshot(for: Testable_Filters1(), named: "Filters1", layout: .screen())
     }
 
     func testFilters2() throws {
-        assertSnapshot(for: Testable_Filters1(), named: "Filters2", layout: .screen())
+        assertSnapshot(for: Testable_Filters2(), named: "Filters2", layout: .screen())
     }
 
     func testFilters3() throws {

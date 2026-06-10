@@ -291,6 +291,43 @@ public extension DSThreadSection where Footer == EmptyView {
     }
 }
 
+public struct DSThreadFooterConnector<Content: View>: View {
+    private let lineWidth: CGFloat
+    private let lineHeight: CGFloat
+    private let lineTopOverlap: CGFloat
+    private let lineLeadingPadding: CGFloat
+    private let lineOpacity: Double
+    private let content: Content
+
+    public init(
+        lineWidth: CGFloat = 2,
+        lineHeight: CGFloat,
+        lineTopOverlap: CGFloat,
+        lineLeadingPadding: CGFloat,
+        lineOpacity: Double = 0.1,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.lineWidth = lineWidth
+        self.lineHeight = lineHeight
+        self.lineTopOverlap = lineTopOverlap
+        self.lineLeadingPadding = lineLeadingPadding
+        self.lineOpacity = lineOpacity
+        self.content = content()
+    }
+
+    public var body: some View {
+        content
+            .overlay(alignment: .topLeading) {
+                Color.secondary
+                    .frame(width: lineWidth, height: lineHeight)
+                    .opacity(lineOpacity)
+                    .padding(.top, -lineTopOverlap)
+                    .padding(.leading, lineLeadingPadding)
+                    .allowsHitTesting(false)
+            }
+    }
+}
+
 struct ThreadItem<T: Hashable>: Hashable {
     let item: T
 }
@@ -362,9 +399,15 @@ struct Testable_DSThreadSection: View {
                     .frame(height: position == .top ? 100 : 60)
                     .clipShape(.rect(cornerRadius: 12))
             } footer: {
-                DSText("Footer")
-                    .dsTextStyle(.subheadline)
-                    .dsPadding(.top, .space4)
+                DSThreadFooterConnector(
+                    lineHeight: 36,
+                    lineTopOverlap: 24,
+                    lineLeadingPadding: 6
+                ) {
+                    DSText("Footer")
+                        .dsTextStyle(.subheadline)
+                        .dsPadding(.top, .space4)
+                }
             }
         }
     }

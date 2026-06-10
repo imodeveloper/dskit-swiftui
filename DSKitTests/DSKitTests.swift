@@ -91,6 +91,30 @@ final class DSKitTests: SnapshotTestCase {
         assertSnapshot(for: Testable_DSChevronView(), named: "DSChevronView", options: crossSimulatorOptions)
     }
 
+    func testDSContentCardComponents() throws {
+        assertSnapshot(
+            for: Testable_DSContentCardComponents(),
+            named: "DSContentCardComponents",
+            options: crossSimulatorOptions
+        )
+    }
+
+    func testDSArticleThreadComponents() throws {
+        assertSnapshot(
+            for: Testable_DSArticleThreadComponents(),
+            named: "DSArticleThreadComponents",
+            options: crossSimulatorOptions
+        )
+    }
+
+    func testDSThreadSection() throws {
+        assertSnapshot(
+            for: Testable_DSThreadSection(),
+            named: "DSThreadSection",
+            options: crossSimulatorOptions
+        )
+    }
+
     func testDSChipsView() throws {
         assertSnapshot(for: Testable_DSChipsView(), named: "DSChipsView", options: crossSimulatorOptions)
     }

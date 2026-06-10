@@ -64,24 +64,22 @@ extension BookingScreen5 {
     struct FeedbackView: View {
         let feedback: Data
         var body: some View {
-            DSHStack(spacing: .space16) {
-                DSImageView(url: feedback.image, style: .circle)
-                    .dsSize(60)
-                DSVStack(spacing: .space4) {
-                    DSText(feedback.userName).dsTextStyle(.headline)
-                        .dsFullWidth()
-                    DSHStack {
-                        DSImageView(systemName: "calendar", size: .font(.caption1), tint: .text(.caption1))
-                        DSText("14.05.2024").dsTextStyle(.caption1)
+            DSCardSurface {
+                DSHStack(spacing: .space16) {
+                    DSImageView(url: feedback.image, style: .circle)
+                        .dsSize(60)
+                    DSVStack(spacing: .space4) {
+                        DSText(feedback.userName).dsTextStyle(.headline)
+                            .dsFullWidth()
+                        DSMetadataRow {
+                            DSMetadataTag("14.05.2024", systemName: "calendar")
+                        }
+                        DSRatingView(rating: 4.5, size: 12)
+                        DSText(feedback.feedbackText).dsTextStyle(.caption1)
+                            .dsFullWidth()
                     }
-                    DSRatingView(rating: 4.5, size: 12)
-                    DSText(feedback.feedbackText).dsTextStyle(.caption1)
-                        .dsFullWidth()
                 }
             }
-            .dsPadding()
-            .dsSecondaryBackground()
-            .dsCornerRadius()
         }
 
         struct Data: Identifiable {

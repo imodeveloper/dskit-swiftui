@@ -852,6 +852,113 @@ Code example result:
 <table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSList.snapshot.png" width="35%"/></td></tr><table/>
 
 
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+struct Testable_DSContentCardComponents: View {
+    private let fixedDate = Date(timeIntervalSince1970: 1_780_000_000)
+
+    var body: some View {
+        DSVStack(spacing: .space12) {
+            DSContentCard {
+                DSVStack(spacing: .space8) {
+                    DSText("Barbershop Broadway")
+                        .dsTextStyle(.headline)
+                    DSMetadataRow {
+                        DSMetadataTag("325 Broadway", systemName: "house")
+                        DSRelativeTimeTag(
+                            date: fixedDate.addingTimeInterval(-3600),
+                            locale: Locale(identifier: "en_US"),
+                            referenceDate: fixedDate
+                        )
+                    }
+                }
+                .dsPadding()
+            } media: {
+                Rectangle()
+                    .fill(Color.blue.opacity(0.2))
+                    .dsHeight(90)
+            }
+
+            DSCardSurface {
+                DSEntityRow(
+                    title: "Service",
+                    subtitle: "Select service",
+                    accessory: .chevron
+                ) {
+                    DSSymbolIconView(systemName: "scissors", textStyle: .headline)
+                }
+            }
+
+            DSInfoCallout(
+                lines: [
+                    "Use one card for one topic.",
+                    "Keep actions clear and predictable."
+                ],
+                systemName: "sparkles"
+            )
+
+            DSEntityCardRow(
+                title: "Maia Sandu",
+                subtitle: "President",
+                badgeText: "2",
+                accessorySystemName: "chevron.right"
+            )
+        }
+    }
+}
+struct Testable_DSArticleThreadComponents: View {
+    private let fixedDate = Date(timeIntervalSince1970: 1_780_000_000)
+
+    var body: some View {
+        DSVStack(alignment: .leading, spacing: .space12) {
+            DSArticleAuthorLabel(
+                name: "Moldova 1",
+                textStyle: .custom(size: 15, weight: .semibold, relativeTo: .headline)
+            )
+
+            DSArticleThreadRow(
+                title: "Guvernul anunta un nou calendar pentru proiectele de infrastructura",
+                titleTextStyle: .bodyLarge
+            ) {
+                Rectangle()
+                    .fill(Color.blue.opacity(0.2))
+                    .frame(width: 64, height: 64)
+                    .dsCornerRadius()
+                    .padding(.top, 4)
+            }
+
+            DSArticleAuthorLabel(
+                name: "NewsMaker",
+                textStyle: .custom(size: 12, weight: .semibold, relativeTo: .headline)
+            )
+
+            DSArticleThreadRow(
+                title: "Ministerul spune ca primele contracte vor fi semnate in urmatoarele saptamani.",
+                titleTextStyle: .bodySmall
+            )
+
+            DSArticleMetadataFooter {
+                DSMetadataRow(spacing: .space16) {
+                    DSRelativeTimeTag(
+                        date: fixedDate.addingTimeInterval(-7200),
+                        locale: Locale(identifier: "en_US"),
+                        referenceDate: fixedDate
+                    )
+                    DSMetadataTag("Politics", systemName: "building.columns", textStyle: .caption1)
+                    DSMetadataTag("3 sources", systemName: "line.3.horizontal.decrease.circle", textStyle: .caption1)
+                }
+            }
+        }
+        .dsPadding()
+    }
+}
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSContentCard.snapshot.png" width="35%"/></td></tr><table/>
+
+
 ## DSSFSymbolButton
 
 `DSSFSymbolButton` is a SwiftUI component within the DSKit framework designed to create a button with a system symbol icon. This view leverages SwiftUI's SF Symbols to provide a versatile and scalable button that can be used across various parts of an application, ensuring consistency with the design system.
@@ -1043,9 +1150,15 @@ struct Testable_DSThreadSection: View {
                     .frame(height: position == .top ? 100 : 60)
                     .clipShape(.rect(cornerRadius: 12))
             } footer: {
-                DSText("Footer")
-                    .dsTextStyle(.subheadline)
-                    .dsPadding(.top, .space4)
+                DSThreadFooterConnector(
+                    lineHeight: 36,
+                    lineTopOverlap: 24,
+                    lineLeadingPadding: 6
+                ) {
+                    DSText("Footer")
+                        .dsTextStyle(.subheadline)
+                        .dsPadding(.top, .space4)
+                }
             }
         }
     }
@@ -1435,6 +1548,15 @@ struct Testable_DSLazyVStack: View {
 Code example result:
 
 <table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSLazyVStack.snapshot.png" width="35%"/></td></tr><table/>
+
+
+#### Code example:
+Here is how you might set up it within your views:
+```swift
+```
+Code example result:
+
+<table><tr><td><img src="../DSKitTests/__Snapshots__/DSKitTests/DSScrollAnchorAffordance.snapshot.png" width="35%"/></td></tr><table/>
 
 
 #### Code example:

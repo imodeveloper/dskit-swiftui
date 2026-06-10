@@ -39,19 +39,18 @@ extension BookingScreen3 {
     struct DateAndTime: View {
         let dateAndTime: String
         var body: some View {
-            DSHStack(spacing: .space16) {
-                DSImageView(
-                    systemName: "calendar",
-                    size: .mediumIcon,
-                    tint: .text(.headline)
-                )
-
-                DSText(dateAndTime)
-                    .dsTextStyle(DSTypographyToken.label)
-                    .dsFullWidth()
-                DSSFSymbolButton(name: "pencil.circle.fill", size: .mediumIcon)
+            DSCardSurface {
+                DSEntityRow(
+                    title: dateAndTime,
+                    accessory: .edit
+                ) {
+                    DSImageView(
+                        systemName: "calendar",
+                        size: .mediumIcon,
+                        tint: .text(.headline)
+                    )
+                }
             }
-            .dsCardStyle()
             .dsSectionStyle(title: "Date & Time")
         }
 
@@ -66,19 +65,16 @@ extension BookingScreen3 {
     struct Barber: View {
         let barber: Data
         var body: some View {
-            DSHStack(spacing: .space16) {
-                DSImageView(url: barber.image, style: .circle)
-                    .dsSize(50)
-                DSVStack(spacing: .custom(0)) {
-                    DSText(barber.name)
-                        .dsTextStyle(DSTypographyToken.label)
-                    DSText(barber.grade)
-                        .dsTextStyle(.caption1)
-                }.dsFullWidth()
-
-                DSSFSymbolButton(name: "pencil.circle.fill", size: .mediumIcon)
+            DSCardSurface {
+                DSEntityRow(
+                    title: barber.name,
+                    subtitle: barber.grade,
+                    accessory: .edit
+                ) {
+                    DSImageView(url: barber.image, style: .circle)
+                        .dsSize(50)
+                }
             }
-            .dsCardStyle()
             .dsSectionStyle(title: "Barber")
         }
 
@@ -95,7 +91,8 @@ extension BookingScreen3 {
         var body: some View {
             DSVStack(spacing: .space4) {
                 ForEach(services) { service in
-                    DSHStack(spacing: .space16) {
+                    DSCardSurface {
+                        DSHStack(spacing: .space16) {
                         DSVStack(spacing: .space4) {
                             DSText(service.title)
                                 .dsTextStyle(DSTypographyToken.label)
@@ -111,21 +108,20 @@ extension BookingScreen3 {
                             DSPriceView(price: service.price, size: DSTypographyToken.label)
                         }
                         .dsFullWidth()
-                        DSSFSymbolButton(
-                            name: "minus.circle.fill",
-                            size: .mediumIcon
-                        )
+                        DSCardAccessory(.remove)
+                        }
                     }
                 }
-                .dsCardStyle()
 
-                DSHStack {
-                    DSText("Manage selected services")
-                        .dsTextStyle(DSTypographyToken.label)
-                        .dsFullWidth()
-                        .onTap { print("Manage services") }
-                    DSChevronView()
-                }.dsCardStyle()
+                DSCardSurface {
+                    DSHStack {
+                        DSText("Manage selected services")
+                            .dsTextStyle(DSTypographyToken.label)
+                            .dsFullWidth()
+                            .onTap { print("Manage services") }
+                        DSCardAccessory(.chevron)
+                    }
+                }
             }
             .dsSectionStyle(title: "Services")
         }
@@ -141,7 +137,7 @@ extension BookingScreen3 {
     struct Location: View {
         let address: Data
         var body: some View {
-            DSVStack(spacing: .custom(0)) {
+            DSContentCard {
                 DSVStack(spacing: .space4) {
                     DSText(address.name)
                         .dsTextStyle(.headline)
@@ -154,7 +150,9 @@ extension BookingScreen3 {
                         DSText(address.address)
                             .dsTextStyle(.caption1)
                     }
-                }.dsPadding()
+                }
+                .dsPadding()
+            } media: {
                 Map(
                     coordinateRegion: address.$region,
                     annotationItems: [address]
@@ -167,8 +165,6 @@ extension BookingScreen3 {
                 .dsHeight(90)
                 .disabled(true)
             }
-            .dsSecondaryBackground()
-            .dsCornerRadius()
         }
 
         struct Data: Identifiable {

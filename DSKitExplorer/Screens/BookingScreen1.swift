@@ -27,7 +27,7 @@ extension BookingScreen1 {
     struct Location: View {
         let address: Data
         var body: some View {
-            DSVStack(spacing: .custom(0)) {
+            DSContentCard {
                 DSVStack(spacing: .space4) {
                     DSText(address.name)
                         .dsTextStyle(DSTypographyToken.label)
@@ -40,7 +40,9 @@ extension BookingScreen1 {
                         DSText(address.address)
                             .dsTextStyle(.caption1)
                     }
-                }.dsPadding()
+                }
+                .dsPadding()
+            } media: {
                 Map(
                     coordinateRegion: address.$region,
                     annotationItems: [address]
@@ -53,8 +55,6 @@ extension BookingScreen1 {
                 .dsHeight(150)
                 .disabled(true)
             }
-            .dsSecondaryBackground()
-            .dsCornerRadius()
         }
 
         struct Data: Identifiable {

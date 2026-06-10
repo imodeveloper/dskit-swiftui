@@ -42,23 +42,22 @@ extension BookingScreen2 {
         let subtitle: String
 
         var body: some View {
-            DSHStack(spacing: .space16) {
-                DSImageView(systemName: icon, size: 23, tint: .text(.headline))
-                DSVStack(spacing: .custom(0)) {
-                    DSText(title)
-                        .dsTextStyle(DSTypographyToken.label)
-                    DSText(subtitle)
-                        .dsTextStyle(.caption1)
-                }.dsFullWidth()
-                DSChevronView()
-            }.dsCardStyle()
+            DSCardSurface {
+                DSEntityRow(
+                    title: title,
+                    subtitle: subtitle,
+                    accessory: .chevron
+                ) {
+                    DSImageView(systemName: icon, size: 23, tint: .text(.headline))
+                }
+            }
         }
     }
 
     struct Location: View {
         let address: Data
         var body: some View {
-            DSVStack(spacing: .custom(0)) {
+            DSContentCard {
                 DSVStack(spacing: .space4) {
                     DSText(address.name)
                         .dsTextStyle(.headline)
@@ -71,7 +70,9 @@ extension BookingScreen2 {
                         DSText(address.address)
                             .dsTextStyle(.caption1)
                     }
-                }.dsPadding()
+                }
+                .dsPadding()
+            } media: {
                 Map(
                     coordinateRegion: address.$region,
                     annotationItems: [address]
@@ -84,8 +85,6 @@ extension BookingScreen2 {
                 .dsHeight(180)
                 .disabled(true)
             }
-            .dsSecondaryBackground()
-            .dsCornerRadius()
         }
 
         struct Data: Identifiable {
