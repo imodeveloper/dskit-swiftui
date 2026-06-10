@@ -4,15 +4,12 @@
 //
 //  Created by Ivan Borinschi on 31.13.3033.
 //
-
 import DSKit
 import MapKit
-import Observation
 import SwiftUI
-
 struct BookingScreen2: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = BookingScreen2Model()
+    @StateObject private var viewModel = BookingScreen2Model()
     var body: some View {
         DSList {
             DSSection {
@@ -34,13 +31,11 @@ struct BookingScreen2: View {
         }
     }
 }
-
 extension BookingScreen2 {
     struct Option: View {
         let icon: String
         let title: String
         let subtitle: String
-
         var body: some View {
             DSCardSurface {
                 DSEntityRow(
@@ -53,7 +48,6 @@ extension BookingScreen2 {
             }
         }
     }
-
     struct Location: View {
         let address: Data
         var body: some View {
@@ -86,14 +80,12 @@ extension BookingScreen2 {
                 .disabled(true)
             }
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let name: String
             let address: String
             let coordinated: CLLocationCoordinate2D
             @State var region: MKCoordinateRegion
-
             init(
                 name: String,
                 address: String,
@@ -110,21 +102,16 @@ extension BookingScreen2 {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class BookingScreen2Model {
+final class BookingScreen2Model: ObservableObject {
     let address: BookingScreen2.Location.Data = .init(
         name: "Barbershop Broadway",
         address: "325 Broadway, Bayonne, NJ 07002, 7km away",
         coordinated: CLLocationCoordinate2D(latitude: 40.764382, longitude: -73.973045)
     )
 }
-
 // MARK: - Testable
-
 struct Testable_BookingScreen2: View {
     var body: some View {
         NavigationView {
@@ -133,9 +120,7 @@ struct Testable_BookingScreen2: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct BookingScreen2_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {

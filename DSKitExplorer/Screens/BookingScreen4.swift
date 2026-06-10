@@ -4,15 +4,12 @@
 //
 //  Created by Ivan Borinschi on 31.13.3033.
 //
-
 import DSKit
 import MapKit
-import Observation
 import SwiftUI
-
 struct BookingScreen4: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = BookingScreen4Model()
+    @StateObject private var viewModel = BookingScreen4Model()
     var body: some View {
         DSList {
             DSSection {
@@ -26,7 +23,6 @@ struct BookingScreen4: View {
         }
     }
 }
-
 extension BookingScreen4 {
     struct Barber: View {
         let barber: Data
@@ -41,13 +37,10 @@ extension BookingScreen4 {
                         DSText(barber.grade)
                             .dsTextStyle(.subheadline)
                     }.dsFullWidth()
-
                     DSCardAccessory(.info, size: .smallIcon)
                 }
-
                 DSText("Nearest time for appointment")
                     .dsTextStyle(.caption2)
-
                 DSGrid(columns: 4, data: barber.hours, id: \.self) { hour in
                     DSText(hour)
                         .dsTextStyle(DSTypographyToken.label)
@@ -58,7 +51,6 @@ extension BookingScreen4 {
                 }
             }
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let name: String
@@ -68,12 +60,9 @@ extension BookingScreen4 {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class BookingScreen4Model {
+final class BookingScreen4Model: ObservableObject {
     let barbers: [BookingScreen4.Barber.Data] = [
         .init(
             name: "Ms. Ole Thompson",
@@ -113,9 +102,7 @@ final class BookingScreen4Model {
         )
     ]
 }
-
 // MARK: - Testable
-
 struct Testable_BookingScreen4: View {
     var body: some View {
         NavigationView {
@@ -124,9 +111,7 @@ struct Testable_BookingScreen4: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct BookingScreen4_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {
@@ -134,15 +119,9 @@ struct BookingScreen4_Previews: PreviewProvider {
         }
     }
 }
-
 private let p1Image = URL(string: "https://images.unsplash.com/photo-1554387415-b0c2fcce17fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-
 private let p2Image = URL(string: "https://images.unsplash.com/photo-1567894340315-735d7c361db0?q=80&w=2537&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-
 private let p3Image = URL(string: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-
 private let p4Image = URL(string: "https://images.unsplash.com/photo-1614289371518-722f2615943d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-
 private let p5Image = URL(string: "https://images.unsplash.com/photo-1578875315363-076171ddef21?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-
 private let p6Image = URL(string: "https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")

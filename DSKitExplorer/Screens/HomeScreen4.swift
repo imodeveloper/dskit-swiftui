@@ -6,11 +6,10 @@
 //
 
 import DSKit
-import Observation
 import SwiftUI
 
 struct HomeScreen4: View {
-    @State private var viewModel = HomeScreen4Model()
+    @StateObject private var viewModel = HomeScreen4Model()
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -173,14 +172,13 @@ extension HomeScreen4 {
 
 // MARK: - Model
 
-@Observable
 @MainActor
-final class HomeScreen4Model {
+final class HomeScreen4Model: ObservableObject {
     init() {
         selectedCategory = categories.first!.id
     }
 
-    var selectedCategory: UUID
+    @Published var selectedCategory: UUID
 
     let categories: [HomeScreen4.CategoryView.Category] = [
         .init(title: "Nike", count: "12"),

@@ -4,15 +4,12 @@
 //
 //  Created by Ivan Borinschi on 31.13.3033.
 //
-
 import DSKit
 import MapKit
-import Observation
 import SwiftUI
-
 struct BookingScreen3: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = BookingScreen3Model()
+    @StateObject private var viewModel = BookingScreen3Model()
     var body: some View {
         DSList {
             DSSection {
@@ -34,7 +31,6 @@ struct BookingScreen3: View {
         }
     }
 }
-
 extension BookingScreen3 {
     struct DateAndTime: View {
         let dateAndTime: String
@@ -53,7 +49,6 @@ extension BookingScreen3 {
             }
             .dsSectionStyle(title: "Date & Time")
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let name: String
@@ -61,7 +56,6 @@ extension BookingScreen3 {
             let image: URL?
         }
     }
-
     struct Barber: View {
         let barber: Data
         var body: some View {
@@ -77,7 +71,6 @@ extension BookingScreen3 {
             }
             .dsSectionStyle(title: "Barber")
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let name: String
@@ -85,7 +78,6 @@ extension BookingScreen3 {
             let image: URL?
         }
     }
-
     struct Services: View {
         let services: [Data]
         var body: some View {
@@ -112,7 +104,6 @@ extension BookingScreen3 {
                         }
                     }
                 }
-
                 DSCardSurface {
                     DSHStack {
                         DSText("Manage selected services")
@@ -125,7 +116,6 @@ extension BookingScreen3 {
             }
             .dsSectionStyle(title: "Services")
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -133,7 +123,6 @@ extension BookingScreen3 {
             let duration: String
         }
     }
-
     struct Location: View {
         let address: Data
         var body: some View {
@@ -166,14 +155,12 @@ extension BookingScreen3 {
                 .disabled(true)
             }
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let name: String
             let address: String
             let coordinated: CLLocationCoordinate2D
             @State var region: MKCoordinateRegion
-
             init(
                 name: String,
                 address: String,
@@ -190,18 +177,14 @@ extension BookingScreen3 {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class BookingScreen3Model {
+final class BookingScreen3Model: ObservableObject {
     let barber: BookingScreen3.Barber.Data = .init(
         name: "Ms. Ole Thompson",
         grade: "Pro Barber",
         image: p1Image
     )
-
     let services: [BookingScreen3.Services.Data] = [
         .init(
             title: "Eybrow Correction",
@@ -209,16 +192,13 @@ final class BookingScreen3Model {
             duration: "1h"
         )
     ]
-
     let address: BookingScreen3.Location.Data = .init(
         name: "Barbershop Broadway",
         address: "325 Broadway, Bayonne, NJ 07002, 7km away",
         coordinated: CLLocationCoordinate2D(latitude: 40.764382, longitude: -73.973045)
     )
 }
-
 // MARK: - Testable
-
 struct Testable_BookingScreen3: View {
     var body: some View {
         NavigationView {
@@ -227,9 +207,7 @@ struct Testable_BookingScreen3: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct BookingScreen3_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {
@@ -237,5 +215,4 @@ struct BookingScreen3_Previews: PreviewProvider {
         }
     }
 }
-
 private let p1Image = URL(string: "https://images.unsplash.com/photo-1554387415-b0c2fcce17fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")

@@ -4,27 +4,21 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct ItemDetails4: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = ItemDetails4Model()
-
+    @StateObject private var viewModel = ItemDetails4Model()
     var body: some View {
         DSList {
             DSSection {
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
-
                 DSVStack(spacing: .custom(0)) {
                     DSText(viewModel.title).dsTextStyle(.title2)
                     DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                 }
-
                 DSHStack(alignment: .center, spacing: .space8) {
                     DSText("New")
                         .dsTextStyle(DSTypographyToken.custom(size: 12, weight: .semibold, relativeTo: .headline), .white)
@@ -36,10 +30,8 @@ struct ItemDetails4: View {
                     DSText("24K Ratings")
                         .dsTextStyle(.callout)
                 }
-
                 DSText(viewModel.description).dsTextStyle(.caption1)
                     .dsSectionStyle(title: "Description")
-
                 DSPickerView(
                     data: viewModel.sizes,
                     id: \.self,
@@ -50,7 +42,6 @@ struct ItemDetails4: View {
                         .dsSize(dimension: .actionElement)
                         .dsSecondaryBackground()
                 }.dsSectionStyle(title: "Size")
-
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -59,7 +50,6 @@ struct ItemDetails4: View {
                     Color(color)
                         .dsSize(dimension: .actionElement)
                 }.dsSectionStyle(title: "Color")
-
                 DSVStack(spacing: .space4) {
                     ActionView(title: "Size Guides")
                     ActionView(title: "Return Policy")
@@ -74,7 +64,6 @@ struct ItemDetails4: View {
                     DSPriceView(price: viewModel.price, size: .headline)
                 }
                 DSButton(title: "Buy Now") { dismiss() }
-
                 DSTermsAndConditions(message: "By continuing you agree to our")
             }
         }.toolbar {
@@ -87,12 +76,10 @@ struct ItemDetails4: View {
         }
     }
 }
-
 extension ItemDetails4 {
     struct ActionView: View {
         @Environment(\.appearance) var appearance: DSAppearance
         let title: String
-
         var body: some View {
             DSHStack {
                 DSText(title).dsTextStyle(DSTypographyToken.label)
@@ -106,28 +93,21 @@ extension ItemDetails4 {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class ItemDetails4Model {
+final class ItemDetails4Model: ObservableObject {
     let title = "Ditsy Floral Sweetheart Neck Dress"
     let subtitle = "Dolce & Gabbana"
     let description = "In the 11th century, women in Europe wore dresses that were similar to men's tunics and were loose, with a hemline reaching to below the knees or lower."
-
     let price = DSPrice(
         amount: "120.0",
         regularAmount: "200",
         currency: "$",
         discountBadge: "80$ OFF"
     )
-
-    var selectedSize: String = "10"
-    var selectedColor: DSUIColor = .init(0xF88F6F)
-
+    @Published var selectedSize: String = "10"
+    @Published var selectedColor: DSUIColor = .init(0xF88F6F)
     let imageGallery = [p2Image, p1Image, p3Image]
-
     let colors = [DSUIColor(0xFFC6A3),
                   DSUIColor(0xF88F6F),
                   DSUIColor(0x5CB946),
@@ -135,12 +115,9 @@ final class ItemDetails4Model {
                   DSUIColor(0x28527A),
                   DSUIColor(0x8AC4D0),
                   DSUIColor(0xFBEEAC)]
-
     let sizes = ["8", "9", "10", "11", "12", "13", "14", "15", "16"]
 }
-
 // MARK: - Testable
-
 struct Testable_ItemDetails4: View {
     var body: some View {
         NavigationView {
@@ -150,17 +127,13 @@ struct Testable_ItemDetails4: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct ItemDetails4_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_ItemDetails4() }
     }
 }
-
 // MARK: - Image Links
-
 private let p1Image = URL(string: "https://images.pexels.com/photos/5085329/pexels-photo-5085329.jpeg?cs=srgb&dl=pexels-jonathan-borba-5085329.jpg&fm=jpg")
 private let p2Image = URL(string: "https://images.pexels.com/photos/2122361/pexels-photo-2122361.jpeg?cs=srgb&dl=pexels-kyle-roxas-2122361.jpg&fm=jpg")
 private let p3Image = URL(string: "https://images.pexels.com/photos/2946811/pexels-photo-2946811.jpeg?cs=srgb&dl=pexels-engin-akyurt-2946811.jpg&fm=jpg")

@@ -4,15 +4,11 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct Shipping1: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = Shipping1Model()
-
+    @StateObject private var viewModel = Shipping1Model()
     var body: some View {
         DSList {
             DSSection {
@@ -42,10 +38,8 @@ struct Shipping1: View {
         }
     }
 }
-
 extension Shipping1 {
     // MARK: - Delivery Address
-
     struct DeliveryAddressView: View {
         let address: Data
         var body: some View {
@@ -57,7 +51,6 @@ extension Shipping1 {
                 }
             }
         }
-
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let holder: String
@@ -67,12 +60,9 @@ extension Shipping1 {
         }
     }
 }
-
 // MARK: - View Model
-
-@Observable
 @MainActor
-final class Shipping1Model {
+final class Shipping1Model: ObservableObject {
     let deliveryAddresses: [Shipping1.DeliveryAddressView.Data] = [
         .init(
             holder: "John Doe",
@@ -96,16 +86,12 @@ final class Shipping1Model {
             phone: "+1(513)616-5699"
         )
     ]
-
-    var selected: Shipping1.DeliveryAddressView.Data
-
+    @Published var selected: Shipping1.DeliveryAddressView.Data
     init() {
         selected = deliveryAddresses.first!
     }
 }
-
 // MARK: - Testable
-
 struct Testable_Shipping1: View {
     var body: some View {
         NavigationView {
@@ -114,9 +100,7 @@ struct Testable_Shipping1: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct Shipping1_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_Shipping1() }

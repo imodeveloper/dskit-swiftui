@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-import SDWebImage
-import SDWebImageSwiftUI
+import NukeUI
 
 /*
  ## DSImageView
@@ -166,10 +165,6 @@ public struct DSImageView: View {
 
 private struct DSRemoteImageView: View {
 
-    @Environment(\.displayScale) private var displayScale
-    @StateObject private var imageManager = ImageManager()
-    @State private var imageLoaded = false
-    @State private var lastLoadRequest: LoadRequest?
     @State private var currentWidth: CGFloat = 0
     @State private var resolvedAspectRatio: CGFloat?
 
@@ -179,53 +174,38 @@ private struct DSRemoteImageView: View {
     var body: some View {
         GeometryReader { geometry in
             let layoutSize = effectiveLayoutSize(from: geometry.size)
-            let loadFailed = imageManager.image == nil && imageManager.error != nil
 
             Group {
-                if imageManager.image != nil {
-                    Color.gray.opacity(0.1)
-                        .overlay(alignment: .center) {
-                            if let uiImage = imageManager.image {
-                                Image(dsUIImage: uiImage)
+                LazyImage(url: url) { state in
+                    if let uiImage = state.image {
+                        Color.gray.opacity(0.1)
+                            .overlay(alignment: .center) {
+                                uiImage
                                     .resizable()
                                     .setContentMode(mode: image.contentMode)
-                                    .opacity(imageLoaded ? 1 : 0)
-                                    .onAppear {
-                                        registerMetadata(for: uiImage)
-                                        if imageManager.cacheType == .none {
-                                            withAnimation { imageLoaded = true }
-                                        } else {
-                                            imageLoaded = true
-                                        }
-                                    }
                             }
-                        }
-                        .setDisplayShape(shape: image.displayShape)
-                } else {
-                    placeholderView(
-                        for: layoutSize,
-                        failed: loadFailed
-                    )
+                            .setDisplayShape(shape: image.displayShape)
+                            .onAppear { registerMetadata(from: state) }
+                            .onChange(of: state.isLoading) { isLoading in
+                                if !isLoading { registerMetadata(from: state) }
+                            }
+                    } else if state.error != nil {
+                        placeholderView(for: layoutSize, failed: true)
+                    } else {
+                        placeholderView(for: layoutSize, failed: false)
+                    }
                 }
             }
             .onAppear {
                 updateLayoutState(for: geometry.size)
-                loadImageIfNeeded(for: layoutSize)
             }
-            .onChange(of: geometry.size) { _, newSize in
+            .onChange(of: geometry.size) { newSize in
                 updateLayoutState(for: newSize)
-                loadImageIfNeeded(for: effectiveLayoutSize(from: newSize))
             }
-            .onChange(of: url) { _, _ in
-                imageLoaded = false
-                lastLoadRequest = nil
+            .onChange(of: url) { _ in
                 currentWidth = 0
                 resolvedAspectRatio = nil
                 updateLayoutState(for: geometry.size)
-                loadImageIfNeeded(for: effectiveLayoutSize(from: geometry.size))
-            }
-            .onDisappear {
-                imageManager.cancel()
             }
         }
         .frame(height: adaptiveDisplayHeight)
@@ -244,39 +224,6 @@ private struct DSRemoteImageView: View {
                     .frame(width: placeholderIconSize, height: placeholderIconSize)
             }
             .setDisplayShape(shape: image.displayShape)
-    }
-
-    private func loadImageIfNeeded(for size: CGSize) {
-        guard size.width > 0, size.height > 0 else { return }
-
-        let targetSize = CGSize(
-            width: max(CGFloat(1), ceil(size.width * displayScale)),
-            height: max(CGFloat(1), ceil(size.height * displayScale))
-        )
-        let request = LoadRequest(url: url, pixelSize: targetSize)
-
-        guard request != lastLoadRequest else { return }
-        lastLoadRequest = request
-
-        // Use decoder thumbnail context instead of image transformer to avoid
-        // transformed WebP disk re-encoding on iOS simulators without WebP writer support.
-        let context: [SDWebImageContextOption: Any] = [
-            .imageThumbnailPixelSize: targetSize,
-            .imagePreserveAspectRatio: true,
-            .imageScaleFactor: displayScale,
-            // Keep the derived (thumbnail) variant in memory only to avoid
-            // disk encode attempts for unsupported writer formats like WebP.
-            .storeCacheType: SDImageCacheType.memory.rawValue,
-            // Reuse source bytes when possible and avoid encoding opaque images
-            // with an alpha channel when SDWebImage has to write disk data.
-            .cacheSerializer: DSOpaqueAwareCacheSerializer.instance,
-            // Keep the original payload on disk so subsequent requests can
-            // reuse source bytes without another network fetch.
-            .originalStoreCacheType: SDImageCacheType.disk.rawValue
-        ]
-
-        imageManager.cancel()
-        imageManager.load(url: url, context: context)
     }
 
     private func updateLayoutState(for size: CGSize) {
@@ -351,28 +298,11 @@ private struct DSRemoteImageView: View {
             resolvedAspectRatio = aspectRatio
         }
     }
-}
 
-private struct LoadRequest: Equatable {
-    let url: URL?
-    let pixelSize: CGSize
-}
-
-private enum DSOpaqueAwareCacheSerializer {
-    static let instance = SDWebImageCacheSerializer(block: { image, originalData, _ in
-        if let originalData, !originalData.isEmpty {
-            return originalData
-        }
-
-        // SDWebImage sometimes needs to re-encode cache payloads (for example
-        // transformed thumbnails). Prefer JPEG for opaque images to avoid alpha
-        // storage warnings and reduce decode memory pressure.
-        if image.dsHasAlphaChannel {
-            return image.sd_imageData(as: .PNG)
-        } else {
-            return image.sd_imageData(as: .JPEG, compressionQuality: 0.9)
-        }
-    })
+    private func registerMetadata(from state: LazyImageState) {
+        guard case .success(let response) = state.result else { return }
+        registerMetadata(for: response.image)
+    }
 }
 
 private extension DSUIImage {

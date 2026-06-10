@@ -4,15 +4,11 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct ItemDetails3: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = ItemDetails3Model()
-
+    @StateObject private var viewModel = ItemDetails3Model()
     var body: some View {
         DSList {
             DSSection {
@@ -26,12 +22,10 @@ struct ItemDetails3: View {
                             DSText(viewModel.subtitle).dsTextStyle(.subheadline)
                         }.dsFullWidth()
                     }
-
                     DSHStack(alignment: .center, spacing: .space8) {
                         DSRatingView(rating: 4.5, size: 16)
                         DSText("24K Ratings").dsTextStyle(.callout)
                     }
-
                     DSVStack(spacing: .custom(0)) {
                         DSHStack(alignment: .center, spacing: .space8) {
                             DSImageView(systemName: "circlebadge.fill", size: 5, tint: .text(.caption1))
@@ -42,15 +36,12 @@ struct ItemDetails3: View {
                             DSText("Style: CW6575-001").dsTextStyle(.caption2)
                         }
                     }
-
                     DSPriceView(price: viewModel.price, size: .headline)
-
                     DSHStack(alignment: .center) {
                         DSImageView(systemName: "info.circle.fill", size: .font(.caption1), tint: .color(.yellow))
                         DSText(viewModel.priceDisclaimer, alignment: .leading).dsTextStyle(.caption2)
                     }
                 }
-
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -58,7 +49,6 @@ struct ItemDetails3: View {
                 ) { color in
                     DSImageView(named: color, size: .size(width: 70, height: 50))
                 }.dsSectionStyle(title: "Model")
-
                 DSPickerView(
                     data: viewModel.sizes,
                     id: \.self, selected: $viewModel.selectedSize
@@ -69,7 +59,6 @@ struct ItemDetails3: View {
                         .dsHeight(.actionElement)
                         .dsSecondaryBackground()
                 }.dsSectionStyle(title: "Size")
-
                 DSText(viewModel.description).dsTextStyle(.caption1)
             }
         }
@@ -89,10 +78,8 @@ struct ItemDetails3: View {
         }
     }
 }
-
 extension ItemDetails3 {
     // MARK: - Select Size View
-
     struct SelectSizeView: View {
         let viewModel: ItemDetails3Model
         var body: some View {
@@ -115,9 +102,7 @@ extension ItemDetails3 {
             }
         }
     }
-
     // MARK: - Select Color
-
     struct SelectModelView: View {
         let viewModel: ItemDetails3Model
         var body: some View {
@@ -137,14 +122,11 @@ extension ItemDetails3 {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class ItemDetails3Model {
-    var selectedSize: String = "US 5.5"
-    var selectedColor: String = "nike_2"
+final class ItemDetails3Model: ObservableObject {
+    @Published var selectedSize: String = "US 5.5"
+    @Published var selectedColor: String = "nike_2"
     let colors = ["nike_1", "nike_2", "nike_3", "nike_4", "nike_5", "nike_6"]
     let sizes = ["US 5", "US 5.5", "US 6", "US 6.5", "US 7", "US 7.5", "US 8", "US 8.5", "US 9"]
     let imageGallery = [p1Image, p3Image, p2Image]
@@ -159,9 +141,7 @@ final class ItemDetails3Model {
         discountBadge: "80$ OFF"
     )
 }
-
 // MARK: - Testable
-
 struct Testable_ItemDetails3: View {
     var body: some View {
         NavigationView {
@@ -171,17 +151,13 @@ struct Testable_ItemDetails3: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct ItemDetails3_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_ItemDetails3() }
     }
 }
-
 // MARK: - Image Links
-
 private let p1Image = URL(string: "https://images.pexels.com/photos/1456705/pexels-photo-1456705.jpeg?cs=srgb&dl=pexels-ray-piedra-1456705.jpg&fm=jpg")
 private let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
 private let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")

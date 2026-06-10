@@ -4,15 +4,11 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct Payment1: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = Payment1Model()
-
+    @StateObject private var viewModel = Payment1Model()
     var body: some View {
         DSList {
             DSSection {
@@ -23,7 +19,6 @@ struct Payment1: View {
                 ) { method, _ in
                     PaymentMethod(method: method)
                 }
-
                 DSButton(
                     title: "Add new credit card",
                     rightSystemName: "plus.circle",
@@ -49,10 +44,8 @@ struct Payment1: View {
         }
     }
 }
-
 extension Payment1 {
     // MARK: - Payment Method
-
     struct PaymentMethod: View {
         let method: Data
         var body: some View {
@@ -69,7 +62,6 @@ extension Payment1 {
                 }.frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
             }
         }
-
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let holder: String
@@ -80,12 +72,9 @@ extension Payment1 {
         }
     }
 }
-
 // MARK: - View Model
-
-@Observable
 @MainActor
-final class Payment1Model {
+final class Payment1Model: ObservableObject {
     let paymentMethods: [Payment1.PaymentMethod.Data] = [
         .init(
             holder: "John Doe",
@@ -113,16 +102,12 @@ final class Payment1Model {
             end: "3481"
         )
     ]
-
-    var selected: Payment1.PaymentMethod.Data
-
+    @Published var selected: Payment1.PaymentMethod.Data
     init() {
         selected = paymentMethods.first!
     }
 }
-
 // MARK: - Testable
-
 struct Testable_Payment1: View {
     var body: some View {
         NavigationView {
@@ -131,9 +116,7 @@ struct Testable_Payment1: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct Payment1_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_Payment1() }

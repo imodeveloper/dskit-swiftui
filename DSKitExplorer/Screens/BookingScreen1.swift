@@ -4,14 +4,11 @@
 //
 //  Created by Ivan Borinschi on 31.13.3033.
 //
-
 import DSKit
 import MapKit
-import Observation
 import SwiftUI
-
 struct BookingScreen1: View {
-    @State private var viewModel = BookingScreen1Model()
+    @StateObject private var viewModel = BookingScreen1Model()
     var body: some View {
         DSList {
             DSSection {
@@ -22,7 +19,6 @@ struct BookingScreen1: View {
         }
     }
 }
-
 extension BookingScreen1 {
     struct Location: View {
         let address: Data
@@ -56,14 +52,12 @@ extension BookingScreen1 {
                 .disabled(true)
             }
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let name: String
             let address: String
             let coordinated: CLLocationCoordinate2D
             @State var region: MKCoordinateRegion
-
             init(
                 name: String,
                 address: String,
@@ -80,12 +74,9 @@ extension BookingScreen1 {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class BookingScreen1Model {
+final class BookingScreen1Model: ObservableObject {
     let addresses: [BookingScreen1.Location.Data] = [
         .init(
             name: "Barbershop Broadway",
@@ -114,9 +105,7 @@ final class BookingScreen1Model {
         )
     ]
 }
-
 // MARK: - Testable
-
 struct Testable_BookingScreen1: View {
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -150,9 +139,7 @@ struct Testable_BookingScreen1: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct BookingScreen1_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {

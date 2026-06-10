@@ -4,22 +4,17 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct ItemDetails5: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = ItemDetails5Model()
-
+    @StateObject private var viewModel = ItemDetails5Model()
     var body: some View {
         DSList {
             DSSection {
                 DSCoverFlow(height: 250, data: viewModel.imageGallery, id: \.self) { imageUrl in
                     DSImageView(url: imageUrl).dsCornerRadius()
                 }
-
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -27,7 +22,6 @@ struct ItemDetails5: View {
                 ) { color in
                     DSImageView(named: color, size: .size(width: 70, height: 50))
                 }
-
                 DSVStack(spacing: .space16) {
                     DSHStack {
                         DSVStack(spacing: .custom(0)) {
@@ -36,7 +30,6 @@ struct ItemDetails5: View {
                         }.dsFullWidth()
                     }
                 }
-
                 DSPickerView(
                     style: .grid(columns: 4),
                     data: viewModel.sizes,
@@ -48,7 +41,6 @@ struct ItemDetails5: View {
                         .dsHeight(.actionElement)
                         .dsSecondaryBackground()
                 }
-
                 DSText(viewModel.description).dsTextStyle(.caption1)
             }
         }
@@ -59,10 +51,8 @@ struct ItemDetails5: View {
                     Spacer()
                     DSPriceView(price: viewModel.price, size: .headline)
                 }
-
                 DSButton(title: "Add to cart", style: .borderedLight) { dismiss() }
                 DSButton(title: "Buy Now") { dismiss() }
-
                 DSTermsAndConditions(message: "By continuing you agree to our")
             }
         }
@@ -76,14 +66,11 @@ struct ItemDetails5: View {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class ItemDetails5Model {
-    var selectedSize: String = "US 5.5"
-    var selectedColor: String = "nike_2"
+final class ItemDetails5Model: ObservableObject {
+    @Published var selectedSize: String = "US 5.5"
+    @Published var selectedColor: String = "nike_2"
     let colors = ["nike_1", "nike_2", "nike_3", "nike_4", "nike_5", "nike_6"]
     let sizes = ["US 5", "US 5.5", "US 6", "US 6.5", "US 7", "US 7.5", "US 8", "US 8.5", "US 9"]
     let imageGallery = [p1Image, p3Image, p2Image]
@@ -97,9 +84,7 @@ final class ItemDetails5Model {
         discountBadge: "80$ OFF"
     )
 }
-
 // MARK: - Testable
-
 struct Testable_ItemDetails5: View {
     var body: some View {
         NavigationView {
@@ -109,15 +94,12 @@ struct Testable_ItemDetails5: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct ItemDetails5_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_ItemDetails5() }
     }
 }
-
 private let p1Image = URL(string: "https://images.unsplash.com/photo-1710643301117-4d738aeb1e69?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
 private let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
 private let p3Image = URL(string: "https://images.pexels.com/photos/1456705/pexels-photo-1456705.jpeg?cs=srgb&dl=pexels-ray-piedra-1456705.jpg&fm=jpg")

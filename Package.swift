@@ -11,15 +11,14 @@ let package = Package(
         .library(name: "DSKit", targets: ["DSKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI.git", from: "3.0.4"),
-        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.19.2")
+        .package(url: "https://github.com/kean/Nuke.git", from: "12.0.0")
     ],
     targets: [
         .target(
             name: "DSKit",
             dependencies: [
-                .product(name: "SDWebImageSwiftUI", package: "SDWebImageSwiftUI"),
-                .product(name: "SDWebImage", package: "SDWebImage")
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke")
             ],
             path: "DSKit/Sources"
         )

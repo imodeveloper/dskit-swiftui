@@ -4,15 +4,11 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct Shipping2: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = Shipping2Model()
-
+    @StateObject private var viewModel = Shipping2Model()
     var body: some View {
         DSList {
             DSSection {
@@ -40,7 +36,6 @@ struct Shipping2: View {
             }
         }
     }
-
     func section(with title: String, @ViewBuilder content: @escaping () -> some View) -> some View {
         DSVStack(spacing: .space4) {
             DSText(title).dsTextStyle(DSTypographyToken.label)
@@ -49,10 +44,8 @@ struct Shipping2: View {
         .dsPadding(.top)
     }
 }
-
 extension Shipping2 {
     // MARK: - Order Info
-
     struct OrderInfo: View {
         let orderTotals: [Data]
         var body: some View {
@@ -65,7 +58,6 @@ extension Shipping2 {
                 }.dsHeight(25)
             }
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -73,9 +65,7 @@ extension Shipping2 {
             var bold: Bool = false
         }
     }
-
     // MARK: - Shipping Method
-
     struct ShippingMethodView: View {
         let method: Data
         var body: some View {
@@ -99,7 +89,6 @@ extension Shipping2 {
                 }
             }
         }
-
         struct Data: Identifiable, Equatable {
             let id = UUID()
             let title: String
@@ -109,18 +98,14 @@ extension Shipping2 {
         }
     }
 }
-
 // MARK: - View Model
-
-@Observable
 @MainActor
-final class Shipping2Model {
+final class Shipping2Model: ObservableObject {
     let orderTotals: [Shipping2.OrderInfo.Data] = [
         .init(title: "Subtotal", price: DSPrice(amount: "160.00", currency: "$")),
         .init(title: "Shipping", price: DSPrice(amount: "4.70", currency: "$")),
         .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), bold: true)
     ]
-
     let shippingMethods: [Shipping2.ShippingMethodView.Data] = [
         .init(
             title: "Free Shipping",
@@ -138,16 +123,12 @@ final class Shipping2Model {
             price: "30.00"
         )
     ]
-
-    var selected: Shipping2.ShippingMethodView.Data
-
+    @Published var selected: Shipping2.ShippingMethodView.Data
     init() {
         selected = shippingMethods.first!
     }
 }
-
 // MARK: - Testable
-
 struct Testable_Shipping2: View {
     var body: some View {
         NavigationView {
@@ -156,9 +137,7 @@ struct Testable_Shipping2: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct Shipping2_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_Shipping2() }

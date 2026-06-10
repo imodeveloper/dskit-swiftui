@@ -50,9 +50,29 @@ public struct DSChipsView<Data, ID, Content>: View where Data: RandomAccessColle
     }
 
     public var body: some View {
-        _DSChipsFlowLayout(
-            horizontalSpacing: appearance.spacing.value(for: horizontalSpacing),
-            verticalSpacing: appearance.spacing.value(for: verticalSpacing)
+        let horizontalSpacing = appearance.spacing.value(for: horizontalSpacing)
+        let verticalSpacing = appearance.spacing.value(for: verticalSpacing)
+
+        if #available(iOS 16.0, *) {
+            _DSChipsFlowLayout(
+                horizontalSpacing: horizontalSpacing,
+                verticalSpacing: verticalSpacing
+            ) {
+                ForEach(data, id: id) { item in
+                    content(item)
+                }
+            }
+        } else {
+            fallbackChipsView(horizontalSpacing: horizontalSpacing, verticalSpacing: verticalSpacing)
+        }
+    }
+
+    @ViewBuilder
+    private func fallbackChipsView(horizontalSpacing: CGFloat, verticalSpacing: CGFloat) -> some View {
+        LazyVGrid(
+            columns: [.init(.adaptive(minimum: 1, maximum: .infinity), spacing: horizontalSpacing)],
+            alignment: .leading,
+            spacing: verticalSpacing
         ) {
             ForEach(data, id: id) { item in
                 content(item)
@@ -61,6 +81,7 @@ public struct DSChipsView<Data, ID, Content>: View where Data: RandomAccessColle
     }
 }
 
+@available(iOS 16.0, *)
 private struct _DSChipsFlowLayout: Layout {
     let horizontalSpacing: CGFloat
     let verticalSpacing: CGFloat

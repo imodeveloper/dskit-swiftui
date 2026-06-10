@@ -4,15 +4,11 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct Filters3: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = Filters3Model()
-
+    @StateObject private var viewModel = Filters3Model()
     var body: some View {
         DSList {
             DSSection {
@@ -20,7 +16,6 @@ struct Filters3: View {
                 OptionToggleView(title: "Free shipping")
                 OptionView(title: "Shipping to", option: "London UK")
                 OptionRangeView(title: "Range")
-
                 DSPickerView(
                     data: viewModel.sizes,
                     id: \.self,
@@ -31,7 +26,6 @@ struct Filters3: View {
                         .dsSize(dimension: .actionElement)
                         .dsSecondaryBackground()
                 }.dsSectionStyle(title: "Size")
-
                 DSPickerView(
                     data: viewModel.colors,
                     id: \.self,
@@ -56,10 +50,8 @@ struct Filters3: View {
         }
     }
 }
-
 extension Filters3 {
     // MARK: - Option View
-
     struct OptionView: View {
         let title: String
         let option: String
@@ -72,14 +64,11 @@ extension Filters3 {
             }.dsCardStyle()
         }
     }
-
     // MARK: - Toggle View
-
     struct OptionToggleView: View {
         let title: String
         @State private var isSwitchOn = true
         @Environment(\.appearance) var appearance: DSAppearance
-
         var body: some View {
             DSHStack {
                 DSText(title).dsTextStyle(DSTypographyToken.label)
@@ -90,14 +79,11 @@ extension Filters3 {
             }.dsCardStyle()
         }
     }
-
     // MARK: - Range View
-
     struct OptionRangeView: View {
         let title: String
         @State private var value: Double = 20
         @Environment(\.appearance) var appearance: DSAppearance
-
         var body: some View {
             DSHStack {
                 DSText(title).dsTextStyle(DSTypographyToken.label)
@@ -109,16 +95,12 @@ extension Filters3 {
         }
     }
 }
-
 // MARK: - View Model
-
-@Observable
 @MainActor
-final class Filters3Model {
-    var selectedSize: String = "10"
+final class Filters3Model: ObservableObject {
+    @Published var selectedSize: String = "10"
     let sizes = ["8", "9", "10", "11", "12", "13", "14", "15", "16"]
-
-    var selectedColor: DSUIColor = .init(0xF88F6F)
+    @Published var selectedColor: DSUIColor = .init(0xF88F6F)
     let colors = [DSUIColor(0xFFC6A3),
                   DSUIColor(0xF88F6F),
                   DSUIColor(0x5CB946),
@@ -126,13 +108,10 @@ final class Filters3Model {
                   DSUIColor(0x28527A),
                   DSUIColor(0x8AC4D0),
                   DSUIColor(0xFBEEAC)]
-
-    var selectedSortByOption = "Chelsea Boots"
+    @Published var selectedSortByOption = "Chelsea Boots"
     let sortByOptions = ["Boots", "Chelsea Boots", "Casual Sneakers", "Casual Shoes"]
 }
-
 // MARK: - Testable
-
 struct Testable_Filters3: View {
     var body: some View {
         NavigationView {
@@ -141,9 +120,7 @@ struct Testable_Filters3: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct Filters3_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_Filters3() }

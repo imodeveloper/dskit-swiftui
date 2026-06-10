@@ -4,15 +4,11 @@
 //
 //  Created by Ivan Borinschi on 21.12.2022.
 //
-
 import DSKit
-import Observation
 import SwiftUI
-
 struct Filters1: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = Filters1Model()
-
+    @StateObject private var viewModel = Filters1Model()
     var body: some View {
         DSList {
             DSSection {
@@ -23,14 +19,12 @@ struct Filters1: View {
                             ? DSTypographyToken.label : .custom(size: 14, weight: .regular, relativeTo: .subheadline)
                         )
                 }.dsSectionStyle(title: "Sort By")
-
                 DSVStack(spacing: .space4) {
                     ForEach(viewModel.filters) { filter in
                         OptionView(option: filter)
                     }
                 }.dsSectionStyle(title: "Options")
             }
-
         }.safeAreaInset(edge: .bottom) {
             DSBottomContainer {
                 DSButton(
@@ -45,10 +39,8 @@ struct Filters1: View {
         }
     }
 }
-
 extension Filters1 {
     // MARK: - Option View
-
     struct OptionView: View {
         let option: Data
         var body: some View {
@@ -59,7 +51,6 @@ extension Filters1 {
                 DSChevronView()
             }.dsCardStyle()
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let title: String
@@ -67,13 +58,10 @@ extension Filters1 {
         }
     }
 }
-
 // MARK: - View Model
-
-@Observable
 @MainActor
-final class Filters1Model {
-    var selectedSortByOption = "New Items"
+final class Filters1Model: ObservableObject {
+    @Published var selectedSortByOption = "New Items"
     let sortByOptions = ["Featured", "New Items", "Price (Hight First)", "Price (Low First)", "Range"]
     let filters: [Filters1.OptionView.Data] = [
         .init(title: "Size", option: "All"),
@@ -83,9 +71,7 @@ final class Filters1Model {
         .init(title: "Range", option: "All")
     ]
 }
-
 // MARK: - Testable
-
 struct Testable_Filters1: View {
     var body: some View {
         NavigationView {
@@ -94,9 +80,7 @@ struct Testable_Filters1: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct Filters1_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance { Testable_Filters1() }

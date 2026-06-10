@@ -4,22 +4,18 @@
 //
 //  Created by Ivan Borinschi on 31.13.3033.
 //
-
 import DSKit
 import MapKit
-import Observation
 import SwiftUI
-
 struct BookingScreen5: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = BookingScreen5Model()
+    @StateObject private var viewModel = BookingScreen5Model()
     var body: some View {
         DSList {
             DSSection {
                 Barber(barber: viewModel.barber)
                     .dsFullWidth(alignment: .center)
                     .onTap { dismiss() }
-
                 DSVStack(spacing: .custom(0)) {
                     DSVStack {
                         ForEach(viewModel.feedbackArray) { feedback in
@@ -37,7 +33,6 @@ struct BookingScreen5: View {
         }
     }
 }
-
 extension BookingScreen5 {
     struct Barber: View {
         let barber: Data
@@ -52,7 +47,6 @@ extension BookingScreen5 {
             }.dsPadding(.top, 25)
                 .dsPadding(.bottom, 25)
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let name: String
@@ -60,7 +54,6 @@ extension BookingScreen5 {
             let image: URL?
         }
     }
-
     struct FeedbackView: View {
         let feedback: Data
         var body: some View {
@@ -81,7 +74,6 @@ extension BookingScreen5 {
                 }
             }
         }
-
         struct Data: Identifiable {
             let id = UUID()
             let userName: String
@@ -90,18 +82,14 @@ extension BookingScreen5 {
         }
     }
 }
-
 // MARK: - Model
-
-@Observable
 @MainActor
-final class BookingScreen5Model {
+final class BookingScreen5Model: ObservableObject {
     let barber: BookingScreen5.Barber.Data = .init(
         name: "Ms. Ole Thompson",
         grade: "Pro Barber",
         image: p1Image
     )
-
     let feedbackArray: [BookingScreen5.FeedbackView.Data] = [
         .init(
             userName: "Sophia",
@@ -130,9 +118,7 @@ final class BookingScreen5Model {
         )
     ]
 }
-
 // MARK: - Testable
-
 struct Testable_BookingScreen5: View {
     var body: some View {
         NavigationView {
@@ -142,9 +128,7 @@ struct Testable_BookingScreen5: View {
         }
     }
 }
-
 // MARK: - Preview
-
 struct BookingScreen5_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {
@@ -152,9 +136,7 @@ struct BookingScreen5_Previews: PreviewProvider {
         }
     }
 }
-
 private let p1Image = URL(string: "https://images.unsplash.com/photo-1554387415-b0c2fcce17fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-
 private let userProfile1 = URL(string: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2459&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
 private let userProfile2 = URL(string: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
 private let userProfile3 = URL(string: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")

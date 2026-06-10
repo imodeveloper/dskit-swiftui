@@ -75,8 +75,8 @@ public struct DSInfoCallout: View {
     @ViewBuilder
     private func lineView(_ line: DSInfoCalloutLine) -> some View {
         if let emphasizedSuffix = line.emphasizedSuffix {
-            (Text(line.text).foregroundStyle(.secondary) +
-                Text(emphasizedSuffix).foregroundStyle(.primary).bold())
+            (Text(line.text).foregroundColor(.secondary) +
+                Text(emphasizedSuffix).foregroundColor(.primary).bold())
                 .font(.caption)
                 .frame(maxWidth: .infinity, alignment: .leading)
         } else {

@@ -222,13 +222,22 @@ public struct DSFloatingBannerView: View {
     }
 
     private func titleText(minimumScaleFactor: CGFloat) -> some View {
-        Text(content.title)
-            .monospacedDigit()
-            .contentTransition(content.titleUsesMonospacedDigits ? .numericText() : .identity)
-            .font(.subheadline.weight(.semibold))
-            .lineLimit(1)
-            .minimumScaleFactor(minimumScaleFactor)
-            .foregroundStyle(.primary)
+        if #available(iOS 16.0, *) {
+            return Text(content.title)
+                .monospacedDigit()
+                .contentTransition(content.titleUsesMonospacedDigits ? .numericText() : .identity)
+                .font(.subheadline.weight(.semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(minimumScaleFactor)
+                .foregroundStyle(.primary)
+        } else {
+            return Text(content.title)
+                .monospacedDigit()
+                .font(.subheadline.weight(.semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(minimumScaleFactor)
+                .foregroundStyle(.primary)
+        }
     }
 
     private func surfaceContent<Inner: View>(@ViewBuilder _ inner: () -> Inner) -> some View {

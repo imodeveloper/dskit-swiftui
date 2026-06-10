@@ -49,7 +49,13 @@ public struct DSLetterBadgeView: View {
             .padding(.vertical, verticalPadding)
             .padding(.horizontal, horizontalPadding)
             .frame(minWidth: badgeHeight, minHeight: badgeHeight)
-            .background(badgeShape.fill(backgroundColor))
+            .background {
+                if isCircular {
+                    Circle().fill(backgroundColor)
+                } else {
+                    Capsule().fill(backgroundColor)
+                }
+            }
     }
 
     private var badgeTextStyle: DSTypographyToken {
@@ -89,14 +95,6 @@ public struct DSLetterBadgeView: View {
 
     private var horizontalPadding: CGFloat {
         isCircular ? 0 : max(verticalPadding * 1.5, badgeHeight * 0.3)
-    }
-
-    private var badgeShape: AnyShape {
-        if isCircular {
-            AnyShape(Circle())
-        } else {
-            AnyShape(Capsule())
-        }
     }
 
     private static let palette: [Color] = [

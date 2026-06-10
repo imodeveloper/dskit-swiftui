@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		41A858162BF340A400375D4D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858152BF340A400375D4D /* SnapshotTesting */; };
 		41A858182BF340AF00375D4D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858172BF340AF00375D4D /* SnapshotTesting */; };
-		41A8581D2BF3414A00375D4D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41A8581C2BF3414A00375D4D /* SDWebImageSwiftUI */; };
-		41A8581F2BF3415300375D4D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41A8581E2BF3415300375D4D /* SDWebImageSwiftUI */; };
-		41A858222BF3420000375D4D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858212BF3420000375D4D /* SDWebImage */; };
-		41A858242BF3421200375D4D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858232BF3421200375D4D /* SDWebImage */; };
+		41A858232BF3421200375D4D /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858232BF3421200375D4D /* NukeUI */; };
+		41A858252BF3421200375D4D /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 41A858292BF3421200375D4D /* Nuke */; };
 		542DDEF12F3D1A710064563A /* DSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604EED482BD23BE9009E3278 /* DSKit.framework */; };
 		604EED4F2BD23BE9009E3278 /* DSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 604EED482BD23BE9009E3278 /* DSKit.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		604EED602BD23D23009E3278 /* DSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604EED482BD23BE9009E3278 /* DSKit.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (Required, ); }; };
@@ -131,8 +129,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41A858242BF3421200375D4D /* SDWebImage in Frameworks */,
-				41A8581F2BF3415300375D4D /* SDWebImageSwiftUI in Frameworks */,
+				41A858242BF3421200375D4D /* NukeUI in Frameworks */,
+				41A858252BF3421200375D4D /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,8 +138,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41A858222BF3420000375D4D /* SDWebImage in Frameworks */,
-				41A8581D2BF3414A00375D4D /* SDWebImageSwiftUI in Frameworks */,
 				604EED602BD23D23009E3278 /* DSKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,8 +226,8 @@
 			);
 			name = DSKit;
 			packageProductDependencies = (
-				41A8581E2BF3415300375D4D /* SDWebImageSwiftUI */,
-				41A858232BF3421200375D4D /* SDWebImage */,
+				41A858292BF3421200375D4D /* Nuke */,
+				41A858232BF3421200375D4D /* NukeUI */,
 			);
 			productName = DSKit;
 			productReference = 604EED482BD23BE9009E3278 /* DSKit.framework */;
@@ -250,7 +246,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				604EED3B2BD19FDB009E3278 /* PBXTargetDependency */,
 				604EED4D2BD23BE9009E3278 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -258,8 +253,6 @@
 			);
 			name = DSKitExplorer;
 			packageProductDependencies = (
-				41A8581C2BF3414A00375D4D /* SDWebImageSwiftUI */,
-				41A858212BF3420000375D4D /* SDWebImage */,
 			);
 			productName = DSKitExplorer;
 			productReference = 60D4696E2BCAF07F00A6F7FC /* DSKitExplorer.app */;
@@ -356,8 +349,7 @@
 			mainGroup = 60D469652BCAF07F00A6F7FC;
 			packageReferences = (
 				41A858142BF340A400375D4D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
-				41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				41A858202BF3420000375D4D /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = 60D4696F2BCAF07F00A6F7FC /* Products */;
 			projectDirPath = "";
@@ -473,10 +465,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		604EED3B2BD19FDB009E3278 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 604EED3A2BD19FDB009E3278 /* SDWebImageSwiftUI */;
-		};
 		604EED4D2BD23BE9009E3278 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilters = (
@@ -929,28 +917,12 @@
 				version = 1.16.0;
 			};
 		};
-		41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+		41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			repositoryURL = "https://github.com/kean/Nuke.git";
 			requirement = {
 				kind = exactVersion;
-				version = 3.0.4;
-			};
-		};
-		41A858202BF3420000375D4D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
-			requirement = {
-				kind = exactVersion;
-				version = 5.19.2;
-			};
-		};
-		604EED2E2BD198CA009E3278 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				version = 12.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -966,30 +938,15 @@
 			package = 41A858142BF340A400375D4D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
 		};
-		41A8581C2BF3414A00375D4D /* SDWebImageSwiftUI */ = {
+		41A858232BF3421200375D4D /* NukeUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
+			package = 41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
 		};
-		41A8581E2BF3415300375D4D /* SDWebImageSwiftUI */ = {
+		41A858292BF3421200375D4D /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
-		};
-		41A858212BF3420000375D4D /* SDWebImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 41A858202BF3420000375D4D /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImage;
-		};
-		41A858232BF3421200375D4D /* SDWebImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 41A858202BF3420000375D4D /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImage;
-		};
-		604EED3A2BD19FDB009E3278 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 604EED2E2BD198CA009E3278 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
+			package = 41A858192BF3412600375D4D /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
