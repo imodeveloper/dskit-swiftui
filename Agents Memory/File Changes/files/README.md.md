@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 14:48:58 EEST (`pending`)
+
+- task_or_issue: `separate-readme-showcase`
+
+#### Request
+Move the large DSKitExplorer showcase section out of the README and into a separate page.
+
+#### Change Summary
+Replaced the inline E-Commerce, Barbershop, and Food Delivery showcase images with a compact link to `Content/Showcase.md` and retained the generated `Content/Screens.md` reference for source-linked implementation details.
+
+#### Rationale
+The README should remain a concise package entrypoint. Large visual examples are still discoverable, but no longer dominate the top of the README before setup and docs links.
+
+#### Invariants
+Keep the README top section compact. Link to dedicated repo-local docs for expanded visual and generated reference content.
+
+#### Tests Or Evidence
+Verified the removed image block moved to `Content/Showcase.md` and local Markdown links resolve.
+
+#### Related Files
+`Content/Showcase.md`, `Content/Screens.md`, `Content/Images/e-commerce.png`, `Content/Images/barbershop.png`, `Content/Images/food.png`.
+
+#### Follow-up Risks
+If the showcase page moves, update the README link in the same change.
+
 ### 2026-06-29 14:46:49 EEST (`pending`)
 
 - task_or_issue: `remove-uikit-version-note`

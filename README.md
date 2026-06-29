@@ -19,19 +19,7 @@ The Swift Package currently declares **iOS 17+** and **macOS 12+** support. The 
 
 <img src="Content/Images/Preview.png">
 
-DSKit includes a demonstration app, **DSKitExplorer**, with 60+ ready-to-use screens. Use it to inspect real screen compositions, switch appearances, and find working source examples before integrating a component into your app.
-
-#### E-Commerce 
-
-<img src="Content/Images/e-commerce.png">
-
-#### Barbershop
-
-<img src="Content/Images/barbershop.png">
-
-#### Food Delivery
-
-<img src="Content/Images/food.png">
+DSKit includes a demonstration app, **DSKitExplorer**, with 60+ ready-to-use screens. Use the [DSKitExplorer showcase](Content/Showcase.md) for visual examples and the generated [screen catalog](Content/Screens.md) for source-linked implementation references.
 
 ## Get Started
 
