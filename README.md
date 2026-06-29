@@ -15,8 +15,6 @@
 
 DSKit is a SwiftUI design system for building iOS interfaces from reusable views, design tokens, and appearance themes. The repo is organized for both developers and AI agents: generated docs connect every component and Explorer screen to source files, snapshot previews, examples, and real usage references.
 
-The Swift Package currently declares **iOS 17+** and **macOS 12+** support. The DSKitExplorer app and snapshot test targets use an **iOS 17.6+** deployment target.
-
 <img src="Content/Images/Preview.png">
 
 DSKit includes **DSKitExplorer**, a catalog app with 60+ ready-to-use screens that show complete SwiftUI flows in context. Use the [showcase](Content/Showcase.md) for a visual overview, the generated [screen catalog](Content/Screens.md) for full-screen examples, and the generated [component catalog](Content/Views.md) for individual DSKit views.

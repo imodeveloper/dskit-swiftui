@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:01:35 EEST (`pending`)
+
+- task_or_issue: `remove-platform-support-sentence`
+
+#### Request
+Remove the README sentence that listed Swift Package and target deployment support versions.
+
+#### Change Summary
+Removed the platform-support sentence from the README intro so the top section moves directly from the DSKit description to the preview image.
+
+#### Rationale
+The package-support wording was distracting in the public intro and may drift separately from project settings.
+
+#### Invariants
+Keep the README intro concise. If platform support needs documentation later, put it in a focused compatibility section or workflow doc where it can be kept aligned with project settings.
+
+#### Tests Or Evidence
+Verified the removed sentence no longer appears in `README.md`.
+
+#### Related Files
+`README.md`.
+
+#### Follow-up Risks
+If public compatibility promises are needed, add them back as an intentional compatibility section backed by project settings.
+
 ### 2026-06-29 14:54:15 EEST (`pending`)
 
 - task_or_issue: `simplify-agent-readme-copy`
