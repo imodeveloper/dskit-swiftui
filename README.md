@@ -13,13 +13,13 @@
 
 # DSKit
 
-DSKit is a SwiftUI design system package for building consistent iOS interfaces with reusable views, appearance themes, spacing tokens, typography tokens, and snapshot-backed examples.
+DSKit is a SwiftUI design system package built to be easy for developers and coding agents to inspect, compose, and reuse. It organizes views, appearance themes, spacing tokens, typography tokens, source-linked examples, and snapshot previews into predictable repo-native documentation.
 
 The Swift Package currently declares **iOS 17+** and **macOS 12+** support. The DSKitExplorer app and snapshot test targets use an **iOS 17.6+** deployment target.
 
 <img src="Content/Images/Preview.png">
 
-DSKit includes a demonstration app, **DSKitExplorer**, with 60+ ready-to-use screens. Use the [DSKitExplorer showcase](Content/Showcase.md) for visual examples and the generated [screen catalog](Content/Screens.md) for source-linked implementation references.
+DSKit includes **DSKitExplorer**, a catalog app with 60+ ready-to-use screens that show complete SwiftUI flows in context. Use the [DSKitExplorer showcase](Content/Showcase.md) for a visual overview, then open the generated [screen catalog](Content/Screens.md) or [component catalog](Content/Views.md) when you need source files, snapshots, and usage references that agents can follow directly.
 
 ## Get Started
 

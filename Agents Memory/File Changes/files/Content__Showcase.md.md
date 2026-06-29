@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 14:51:20 EEST (`pending`)
+
+- task_or_issue: `agent-oriented-intro-copy`
+
+#### Request
+Rewrite the showcase introduction with AI and coding agents in mind.
+
+#### Change Summary
+Updated the showcase intro to describe DSKitExplorer as the visual entrypoint into complete SwiftUI flows and added explicit agent navigation guidance: start from the visual group, open the generated screen page, then use the linked source and component references.
+
+#### Rationale
+Agents need deterministic navigation cues from visual examples to source-backed implementation references. The showcase page should bridge visual scanning and generated screen documentation.
+
+#### Invariants
+Keep this page focused on visual overview and references into generated screen docs. Keep implementation details on generated screen and component pages.
+
+#### Tests Or Evidence
+Verified README and showcase relative links.
+
+#### Related Files
+`README.md`, `Content/Screens.md`, `Content/Screens/*.md`.
+
+#### Follow-up Risks
+If screen catalog links are renamed by generator changes, update this page in the same docs pass.
+
 ### 2026-06-29 14:48:48 EEST (`pending`)
 
 - task_or_issue: `separate-readme-showcase`

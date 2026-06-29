@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 14:51:20 EEST (`pending`)
+
+- task_or_issue: `agent-oriented-intro-copy`
+
+#### Request
+Rewrite the DSKit intro and Explorer summary with AI and coding agents in mind.
+
+#### Change Summary
+Reworded the README opening copy to describe DSKit as a repo-native SwiftUI design system that is easy for developers and agents to inspect, compose, and reuse. The Explorer summary now points to visual, screen, and component catalogs with source files, snapshots, and usage references.
+
+#### Rationale
+The top-level README should explain not just what DSKit is, but how an agent should navigate from a UI need to generated docs, source-backed examples, and reusable SwiftUI patterns.
+
+#### Invariants
+Keep the README truthful to current platform support and repo-native docs. Do not imply generated docs are hand-authored or that agents should scrape the old website path.
+
+#### Tests Or Evidence
+Verified README and showcase relative links.
+
+#### Related Files
+`Content/Showcase.md`, `Content/Screens.md`, `Content/Views.md`.
+
+#### Follow-up Risks
+If generated docs change shape, keep this intro aligned with the actual navigation path.
+
 ### 2026-06-29 14:48:58 EEST (`pending`)
 
 - task_or_issue: `separate-readme-showcase`
