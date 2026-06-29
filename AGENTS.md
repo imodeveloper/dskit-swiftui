@@ -87,6 +87,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - `Content/Screens.md`
   - `Content/Screens/*.md`
   - `Content/Screens/Frames/*.framed.png`
+  - `Content/Screens/Groups/*.strip.png`
 - Generator inputs:
   - DSKit view source: `DSKit/Sources/DSKit/Views/*.swift`
   - component docs and examples: source comments and `Testable_*` structs in view files
@@ -95,6 +96,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - screen source: `DSKitExplorer/Screens/*.swift` plus supported playground screens in `DSKitExplorer/ScreenView.swift`
   - screen previews: `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/<Screen>.snapshot.png` or numbered variants such as `<Screen>_0.snapshot.png`
   - screen preview frames: generated flattened PNG wrappers under `Content/Screens/Frames`
+  - screen catalog strips: generated responsive PNG rows under `Content/Screens/Groups`
 - The generator is intentionally strict:
   - every `DSKit/Sources/DSKit/Views/*.swift` file needs a matching component page and exact component snapshot
   - every generated screen page needs at least one matching screen snapshot

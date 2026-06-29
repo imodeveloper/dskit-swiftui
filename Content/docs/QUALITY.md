@@ -16,7 +16,7 @@
 2. Validate boundaries instead of guessing external data shapes.
    - If a component consumes external-like structures, type-check and sanitize at boundaries.
 3. Keep style and sizing systems centralized.
-4. Keep generated docs and assets (`Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Content/Screens.md`, `Content/Screens/*.md`, and `Content/Screens/Frames/*.framed.png`) regenerated from source and snapshots, not manually rewritten.
+4. Keep generated docs and assets (`Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Content/Screens.md`, `Content/Screens/*.md`, `Content/Screens/Frames/*.framed.png`, and `Content/Screens/Groups/*.strip.png`) regenerated from source and snapshots, not manually rewritten.
 
 ## Stability checks before broad refactors
 

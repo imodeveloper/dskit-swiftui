@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:48:40 EEST (`pending`)
+
+- task_or_issue: `showcase-style-screen-catalog`
+
+#### Request
+Update script guidance after adding generated screen catalog strip PNGs.
+
+#### Change Summary
+Added `Content/Screens/Groups/*.strip.png` to the documentation generator output list and documented that strip PNGs are generated from frame PNGs.
+
+#### Rationale
+Script-area guidance should name every generated output produced by the generator.
+
+#### Invariants
+Keep strip PNGs generated and deterministic. Do not hand-edit files under `Content/Screens/Groups`.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens/Groups/*.strip.png`.
+
+#### Follow-up Risks
+If strip generation is removed, update this script guide and workflow docs in the same change.
+
 ### 2026-06-29 20:25:34 EEST (`pending`)
 
 - task_or_issue: `flatten-screen-frame-previews`

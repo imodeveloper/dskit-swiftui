@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:48:40 EEST (`pending`)
+
+- task_or_issue: `showcase-style-screen-catalog`
+
+#### Request
+Keep documentation workflow guidance aligned with generated Showcase-style screen catalog strips.
+
+#### Change Summary
+Added `Screens/Groups/` to generated outputs and added validation language for generated screen catalog strips rebuilt from frame PNGs.
+
+#### Rationale
+The workflow page should identify all generated documentation assets, including the new responsive strip images used by `Screens.md`.
+
+#### Invariants
+Keep this page hand-maintained. Generated strips are refreshed through `Scripts/documentation_generator.sh`, not edited directly.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens/Groups/*.strip.png`, `Content/docs/WORKFLOWS.md`.
+
+#### Follow-up Risks
+If generated strip output changes, update this workflow page in the same change.
+
 ### 2026-06-29 20:25:34 EEST (`pending`)
 
 - task_or_issue: `flatten-screen-frame-previews`

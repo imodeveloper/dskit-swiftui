@@ -28,14 +28,18 @@ CONTENT_DIR = ROOT / "Content"
 VIEW_DOCS_DIR = CONTENT_DIR / "Views"
 SCREEN_DOCS_DIR = CONTENT_DIR / "Screens"
 SCREEN_FRAME_DIR = SCREEN_DOCS_DIR / "Frames"
+SCREEN_GROUP_DIR = SCREEN_DOCS_DIR / "Groups"
 INDEX_FILE = CONTENT_DIR / "Views.md"
 USAGE_INDEX_FILE = VIEW_DOCS_DIR / "UsageIndex.md"
 SCREEN_INDEX_FILE = CONTENT_DIR / "Screens.md"
 PAGE_PREVIEW_WIDTH = "60%"
 INDEX_PREVIEW_WIDTH = "240"
-SCREEN_INDEX_COLUMNS = 3
-SCREEN_INDEX_PREVIEW_HEIGHT = "520"
+SCREEN_GROUP_ROW_SIZE = 5
+SCREEN_GROUP_PHONE_HEIGHT = 1224
+SCREEN_GROUP_GAP = 64
+SCREEN_GROUP_MARGIN = 48
 SCREEN_FRAME_SUFFIX = ".framed.png"
+SCREEN_GROUP_SUFFIX = ".strip.png"
 IPHONE_FRAME_DEVICE_NAME = "iPhone 15 Pro"
 IPHONE_FRAME_MODEL_IDENTIFIER = "iPhone16,1"
 IPHONE_FRAME_CHROME_IDENTIFIER = "com.apple.dt.devicekit.chrome.phone9"
@@ -399,6 +403,15 @@ def framed_screen_path(snapshot_path: Path) -> Path:
     return SCREEN_FRAME_DIR / frame_name
 
 
+def screen_group_slug(family: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", family.lower()).strip("-")
+    return slug or "screens"
+
+
+def screen_group_path(family: str, row_index: int) -> Path:
+    return SCREEN_GROUP_DIR / f"{screen_group_slug(family)}-{row_index + 1}{SCREEN_GROUP_SUFFIX}"
+
+
 def scaled_point(value: float) -> float:
     return value * IPHONE_FRAME_SCALE
 
@@ -573,6 +586,49 @@ def write_screen_frames(docs: List["ScreenDoc"]) -> int:
                 continue
             write_screen_frame(snapshot_path)
             seen.add(snapshot_path)
+            written += 1
+    return written
+
+
+def write_screen_group_preview(family: str, row_index: int, row_docs: List["ScreenDoc"]) -> Path:
+    SCREEN_GROUP_DIR.mkdir(parents=True, exist_ok=True)
+    source_width, source_height = screen_frame_output_size()
+    phone_width = round(source_width * (SCREEN_GROUP_PHONE_HEIGHT / source_height))
+    canvas_width = (
+        (SCREEN_GROUP_ROW_SIZE * phone_width)
+        + ((SCREEN_GROUP_ROW_SIZE - 1) * SCREEN_GROUP_GAP)
+        + (SCREEN_GROUP_MARGIN * 2)
+    )
+    canvas_height = SCREEN_GROUP_PHONE_HEIGHT + (SCREEN_GROUP_MARGIN * 2)
+    canvas = Image.new("RGBA", (canvas_width, canvas_height), (0, 0, 0, 0))
+
+    for slot, doc in enumerate(row_docs):
+        frame = Image.open(framed_screen_path(doc.snapshot_paths[0])).convert("RGBA")
+        resized = frame.resize((phone_width, SCREEN_GROUP_PHONE_HEIGHT), Image.Resampling.LANCZOS)
+        x = SCREEN_GROUP_MARGIN + (slot * (phone_width + SCREEN_GROUP_GAP))
+        canvas.alpha_composite(resized, (x, SCREEN_GROUP_MARGIN))
+
+    png_info = PngImagePlugin.PngInfo()
+    screen_names = ", ".join(doc.name for doc in row_docs)
+    png_info.add_text("Description", f"{family} DSKitExplorer screen previews: {screen_names}")
+    group_path = screen_group_path(family, row_index)
+    canvas.save(group_path, pnginfo=png_info, optimize=True)
+    return group_path
+
+
+def write_screen_group_previews(docs_by_family: Dict[str, List["ScreenDoc"]]) -> int:
+    SCREEN_GROUP_DIR.mkdir(parents=True, exist_ok=True)
+    for old_preview in SCREEN_GROUP_DIR.glob(f"*{SCREEN_GROUP_SUFFIX}"):
+        old_preview.unlink()
+
+    written = 0
+    for family in SCREEN_FAMILY_ORDER:
+        family_docs = docs_by_family.get(family, [])
+        if not family_docs:
+            continue
+        for index in range(0, len(family_docs), SCREEN_GROUP_ROW_SIZE):
+            row_docs = family_docs[index:index + SCREEN_GROUP_ROW_SIZE]
+            write_screen_group_preview(family, index // SCREEN_GROUP_ROW_SIZE, row_docs)
             written += 1
     return written
 
@@ -776,16 +832,6 @@ def preview_thumbnail(doc: ComponentDoc, from_dir: Path) -> str:
     return f'<img src="{preview_link}" width="{INDEX_PREVIEW_WIDTH}" alt="{doc.name} preview" />'
 
 
-def screen_preview_thumbnail(doc: ScreenDoc, from_dir: Path) -> str:
-    preview_link = rel_link(framed_screen_path(doc.snapshot_paths[0]), from_dir)
-    screen_link = rel_link(doc.page_path, from_dir)
-    return (
-        f'<a href="{screen_link}">'
-        f'<img src="{preview_link}" height="{SCREEN_INDEX_PREVIEW_HEIGHT}" alt="{doc.name} screen preview" />'
-        f'</a><br /><sub>{doc.name}</sub>'
-    )
-
-
 def write_screen_page(doc: ScreenDoc) -> None:
     lines: List[str] = [
         f"# {doc.name}",
@@ -833,7 +879,7 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         "## Agent Quick Start",
         "",
         "- Start here when you need a concrete screen example rather than a component API reference.",
-        "- Scan the preview grid to find the screen pattern you need, then open its dedicated page.",
+        "- Scan each preview strip to find the screen pattern you need, then open the related screen reference below it.",
         "- Each screen page includes source links, snapshot previews, and detected DSKit view references.",
         "",
         "## Screen Catalog",
@@ -844,6 +890,8 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
     for doc in docs:
         docs_by_family.setdefault(doc.family, []).append(doc)
 
+    write_screen_group_previews(docs_by_family)
+
     for family in SCREEN_FAMILY_ORDER:
         family_docs = docs_by_family.get(family, [])
         if not family_docs:
@@ -851,21 +899,18 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         lines.extend([
             f"### {family}",
             "",
-            "<table>",
         ])
-        for index in range(0, len(family_docs), SCREEN_INDEX_COLUMNS):
-            row_docs = family_docs[index:index + SCREEN_INDEX_COLUMNS]
-            lines.append("<tr>")
-            for doc in row_docs:
-                lines.append(
-                    '<td align="center" valign="top">'
-                    f"{screen_preview_thumbnail(doc, SCREEN_INDEX_FILE.parent)}"
-                    "</td>"
-                )
-            for _ in range(SCREEN_INDEX_COLUMNS - len(row_docs)):
-                lines.append('<td></td>')
-            lines.append("</tr>")
-        lines.append("</table>")
+        for index in range(0, len(family_docs), SCREEN_GROUP_ROW_SIZE):
+            row_index = index // SCREEN_GROUP_ROW_SIZE
+            group_link = rel_link(screen_group_path(family, row_index), SCREEN_INDEX_FILE.parent)
+            lines.append(f'<img src="{group_link}" alt="{family} screen previews {row_index + 1}" />')
+            lines.append("")
+
+        screen_links = ", ".join(
+            f"[{doc.name}]({rel_link(doc.page_path, SCREEN_INDEX_FILE.parent)})"
+            for doc in family_docs
+        )
+        lines.append(f"Related screen references: {screen_links}.")
         lines.append("")
 
     lines.extend([
@@ -875,6 +920,7 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         "- Every screen page must have at least one matching snapshot image in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`.",
         "- A screen named `ExampleScreen` uses `ExampleScreen.snapshot.png` and may also include variants such as `ExampleScreen_0.snapshot.png`.",
         "- Framed screen previews are generated PNG files under `Content/Screens/Frames` from the source snapshot PNGs.",
+        "- Screen catalog strip previews are generated PNG files under `Content/Screens/Groups` from the framed screen previews.",
     ])
 
     SCREEN_INDEX_FILE.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
@@ -936,10 +982,12 @@ def main() -> None:
     for doc in screen_docs:
         write_screen_page(doc)
     write_screen_index(screen_docs)
+    screen_group_count = len(list(SCREEN_GROUP_DIR.glob(f"*{SCREEN_GROUP_SUFFIX}")))
 
     print(f"Generated {len(docs)} component pages")
     print(f"Generated {len(screen_docs)} screen pages")
     print(f"Generated {screen_frame_count} screen frame previews")
+    print(f"Generated {screen_group_count} screen catalog strip previews")
     print(f"Wrote {INDEX_FILE.relative_to(ROOT)}")
     print(f"Wrote {USAGE_INDEX_FILE.relative_to(ROOT)}")
     print(f"Wrote {SCREEN_INDEX_FILE.relative_to(ROOT)}")

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:48:40 EEST (`pending`)
+
+- task_or_issue: `showcase-style-screen-catalog`
+
+#### Request
+Keep Content-area guidance aligned with generated screen catalog strip assets.
+
+#### Change Summary
+Added `Screens/Groups/*.strip.png` as generated output from framed screen previews and extended the no-hand-edit rule to screen strip PNGs.
+
+#### Rationale
+Content agents need to know that `Screens.md` now uses generated strip assets in addition to generated per-screen pages and frame PNGs.
+
+#### Invariants
+Do not hand-edit generated strip PNGs; update snapshots, frames, or generator logic and regenerate docs.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens.md`, `Content/Screens/Groups/*.strip.png`.
+
+#### Follow-up Risks
+If strip naming changes, update related generated-output guidance.
+
 ### 2026-06-29 20:25:34 EEST (`pending`)
 
 - task_or_issue: `flatten-screen-frame-previews`

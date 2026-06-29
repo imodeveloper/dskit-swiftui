@@ -23,6 +23,7 @@ Do not hand-edit these generated docs or assets:
 - [Screens.md](Screens.md)
 - [Screens/](Screens/)
 - [Screens/Frames/](Screens/Frames/)
+- [Screens/Groups/](Screens/Groups/)
 
 To change generated content, update the source comments, `Testable_*` examples, snapshots, Explorer screen source, or the generator.
 
@@ -45,6 +46,7 @@ After a documentation refresh, check that:
 - Every DSKit view has a matching component page and preview snapshot.
 - Every generated screen page has at least one matching screen snapshot.
 - Every generated screen preview frame is rebuilt from an existing screen snapshot.
+- Every generated screen catalog strip is rebuilt from generated screen preview frames.
 - Relative links resolve locally.
 - No generated Markdown contains local absolute paths.
 

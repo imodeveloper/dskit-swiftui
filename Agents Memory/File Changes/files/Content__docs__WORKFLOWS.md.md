@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:48:40 EEST (`pending`)
+
+- task_or_issue: `showcase-style-screen-catalog`
+
+#### Request
+Keep workflow guidance current after adding generated screen catalog strip previews.
+
+#### Change Summary
+Updated the snapshot documentation generation workflow to include screen catalog strips, no-hand-edit guidance for `Content/Screens/Groups`, and validation language for strip assets.
+
+#### Rationale
+Agents refreshing docs need to understand that `Screens.md` now depends on generated strip images as well as individual frame images.
+
+#### Invariants
+Generated docs, frame assets, and strip assets remain derived from source and snapshots. Do not hand-edit `Content/Screens/Groups`.
+
+#### Tests Or Evidence
+Ran `cd Scripts && ./documentation_generator.sh`, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Documentation.md`, `Content/Screens/Groups/*.strip.png`.
+
+#### Follow-up Risks
+If strip generation changes density or output path, update this workflow guide alongside the generator.
+
 ### 2026-06-29 20:25:34 EEST (`pending`)
 
 - task_or_issue: `flatten-screen-frame-previews`

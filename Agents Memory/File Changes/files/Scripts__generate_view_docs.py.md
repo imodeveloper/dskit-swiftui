@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:48:40 EEST (`pending`)
+
+- task_or_issue: `showcase-style-screen-catalog`
+
+#### Request
+Display generated screen catalog previews like the Showcase page instead of as a table of differently sized/clipped phone cells on GitHub mobile.
+
+#### Change Summary
+Added generated screen catalog strip PNGs under `Content/Screens/Groups/*.strip.png`. `Content/Screens.md` now renders one responsive strip image per screen group row plus related screen reference links, instead of a fixed three-column HTML table.
+
+#### Rationale
+GitHub mobile handles a single responsive image strip predictably, while wide HTML tables overflow and make identical frame PNGs appear different sizes or clipped.
+
+#### Invariants
+Keep individual screen frames in `Content/Screens/Frames` as the source for catalog strips. Keep strip output generated, fixed-row, transparent, and repo-relative so `Screens.md` remains mobile-friendly.
+
+#### Tests Or Evidence
+Ran `python3 -m py_compile Scripts/generate_view_docs.py`, `cd Scripts && ./documentation_generator.sh`, generated 17 strip previews, verified `Screens.md` has no table/fixed-height image markup, checked local Markdown links/images, ran `git diff --check`, and visually inspected `food-1.strip.png`.
+
+#### Related Files
+`Content/Screens.md`, `Content/Screens/Groups/*.strip.png`, `Content/Screens/Frames/*.framed.png`, `AGENTS.md`, `Content/AGENTS.md`, `Scripts/AGENTS.md`, `Content/Documentation.md`, `Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`.
+
+#### Follow-up Risks
+If a group grows very large, the generator writes multiple fixed-width strips. Keep row size stable unless GitHub mobile rendering needs a different density.
+
 ### 2026-06-29 20:25:34 EEST (`pending`)
 
 - task_or_issue: `flatten-screen-frame-previews`

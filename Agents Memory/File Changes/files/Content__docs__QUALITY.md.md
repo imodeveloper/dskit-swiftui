@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:48:40 EEST (`pending`)
+
+- task_or_issue: `showcase-style-screen-catalog`
+
+#### Request
+Keep quality guidance aligned with generated screen catalog strip assets.
+
+#### Change Summary
+Added `Content/Screens/Groups/*.strip.png` to the generated docs/assets list.
+
+#### Rationale
+The quality guide should include every generated asset surface that must be regenerated rather than manually rewritten.
+
+#### Invariants
+Generated strip PNGs remain source/snapshot-derived and should not be hand-edited.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Documentation.md`, `Content/docs/WORKFLOWS.md`, `Content/Screens/Groups/*.strip.png`.
+
+#### Follow-up Risks
+If output naming changes, keep this generated-assets list synchronized.
+
 ### 2026-06-29 20:25:34 EEST (`pending`)
 
 - task_or_issue: `flatten-screen-frame-previews`

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:48:40 EEST (`pending`)
+
+- task_or_issue: `showcase-style-screen-catalog`
+
+#### Request
+Keep top-level agent guidance aligned with generated Showcase-style screen catalog strips.
+
+#### Change Summary
+Added `Content/Screens/Groups/*.strip.png` to generated documentation outputs and described the strips as responsive rows generated from screen frame previews.
+
+#### Rationale
+Agents should know that the screen catalog now depends on both individual frame PNGs and group strip PNGs.
+
+#### Invariants
+Keep generated outputs repo-relative and regenerated through `Scripts/documentation_generator.sh`.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/AGENTS.md`, `Scripts/AGENTS.md`, `Content/Screens/Groups/*.strip.png`.
+
+#### Follow-up Risks
+If strip output moves or changes format, update all agent guides together.
+
 ### 2026-06-29 20:25:34 EEST (`pending`)
 
 - task_or_issue: `flatten-screen-frame-previews`

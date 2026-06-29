@@ -20,7 +20,7 @@
 
 ## Snapshot documentation generation
 
-- Generate/refresh `Content/Views.md`, per-component pages, `Content/Screens.md`, per-screen pages, framed screen previews, and the Explorer usage index:
+- Generate/refresh `Content/Views.md`, per-component pages, `Content/Screens.md`, per-screen pages, framed screen previews, screen catalog strips, and the Explorer usage index:
   - `cd Scripts`
   - `./documentation_generator.sh`
 - The Python generator requires Pillow to build flattened screen frame PNGs.
@@ -30,12 +30,13 @@
   - `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/<Screen>.snapshot.png`
 - The script reads view source comments, snapshot images in `DSKitTests/__Snapshots__/DSKitTests`, screen snapshots in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`, and direct usage references in `DSKitExplorer/Screens`.
 - Run it after API/visual changes in `DSKit/Sources/DSKit/Views` or snapshot-backed screen changes in `DSKitExplorer/Screens`.
-- Do not hand-edit generated pages under `Content/Views/`, `Content/Screens/`, or generated frames under `Content/Screens/Frames/`; change source comments, `Testable_*` examples, snapshots, or the generator.
+- Do not hand-edit generated pages under `Content/Views/`, `Content/Screens/`, generated frames under `Content/Screens/Frames/`, or generated strips under `Content/Screens/Groups/`; change source comments, `Testable_*` examples, snapshots, or the generator.
 - After generation, validate that:
   - every `DSKit/Sources/DSKit/Views/*.swift` file has `Content/Views/<Component>.md`
   - every component page has `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`
   - every generated screen page has at least one snapshot in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`
   - every generated screen frame in `Content/Screens/Frames` is rebuilt from an existing snapshot PNG
+  - every generated screen strip in `Content/Screens/Groups` is rebuilt from generated frame PNGs
   - relative links resolve locally
 
 ## Running on CLI and automation
