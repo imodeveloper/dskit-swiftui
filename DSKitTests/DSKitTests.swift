@@ -9,6 +9,7 @@ import SwiftUI
 import XCTest
 import SnapshotTesting
 import UIKit
+import Foundation
 @testable import DSKit
 
 final class DSKitTests: SnapshotTestCase {
@@ -249,6 +250,52 @@ final class DSKitTests: SnapshotTestCase {
         }
     }
 
+    func testEveryDSKitViewHasSnapshotCoverageAndDocumentationPreview() throws {
+        let root = repositoryRoot
+        let components = try componentNames(in: root)
+        let testSource = try String(contentsOf: URL(fileURLWithPath: #filePath), encoding: .utf8)
+        let viewIndex = try String(
+            contentsOf: root.appendingPathComponent("Content/Views.md"),
+            encoding: .utf8
+        )
+
+        var missingAssertions: [String] = []
+        var missingSnapshots: [String] = []
+        var missingPages: [String] = []
+        var missingPagePreviews: [String] = []
+        var missingIndexPreviews: [String] = []
+
+        for component in components {
+            let snapshotName = "\(component).snapshot.png"
+            if !testSource.contains("named: \"\(component)\"") {
+                missingAssertions.append(component)
+            }
+            if !root.appendingPathComponent("DSKitTests/__Snapshots__/DSKitTests/\(snapshotName)").fileExists {
+                missingSnapshots.append(component)
+            }
+
+            let pageURL = root.appendingPathComponent("Content/Views/\(component).md")
+            guard pageURL.fileExists else {
+                missingPages.append(component)
+                continue
+            }
+
+            let page = try String(contentsOf: pageURL, encoding: .utf8)
+            if !page.contains("<img src=") || !page.contains(snapshotName) {
+                missingPagePreviews.append(component)
+            }
+            if !viewIndex.contains(snapshotName) {
+                missingIndexPreviews.append(component)
+            }
+        }
+
+        assertNoMissing(missingAssertions, "Missing exact DSKit component snapshot assertions")
+        assertNoMissing(missingSnapshots, "Missing DSKit component snapshot PNG files")
+        assertNoMissing(missingPages, "Missing generated DSKit component documentation pages")
+        assertNoMissing(missingPagePreviews, "Missing snapshot preview images in component pages")
+        assertNoMissing(missingIndexPreviews, "Missing snapshot preview images in Content/Views.md")
+    }
+
     func testDSSizeModifierFillWidthFixedHeight() throws {
         let targetSize = CGSize(width: 200, height: 100)
         let measuredSize = measureSize(
@@ -331,6 +378,40 @@ final class DSKitTests: SnapshotTestCase {
         RunLoop.main.run(until: Date().addingTimeInterval(0.05))
         wait(for: [expectation], timeout: timeout)
         return probe.measuredSize
+    }
+
+    private var repositoryRoot: URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+    }
+
+    private func componentNames(in root: URL) throws -> [String] {
+        try FileManager.default
+            .contentsOfDirectory(
+                at: root.appendingPathComponent("DSKit/Sources/DSKit/Views"),
+                includingPropertiesForKeys: nil
+            )
+            .filter { $0.pathExtension == "swift" }
+            .map { $0.deletingPathExtension().lastPathComponent }
+            .sorted()
+    }
+
+    private func assertNoMissing(
+        _ missing: [String],
+        _ message: String,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        if !missing.isEmpty {
+            XCTFail("\(message):\n- \(missing.joined(separator: "\n- "))", file: file, line: line)
+        }
+    }
+}
+
+private extension URL {
+    var fileExists: Bool {
+        FileManager.default.fileExists(atPath: path)
     }
 }
 
