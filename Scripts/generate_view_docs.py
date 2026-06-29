@@ -550,7 +550,7 @@ def doc_kind_for(component_name: str) -> str:
 
 def preview_thumbnail(doc: ComponentDoc, from_dir: Path) -> str:
     preview_link = rel_link(doc.preview_path, from_dir)
-    return f'<img src="{preview_link}" width="120" alt="{doc.name} preview" />'
+    return f'<img src="{preview_link}" width="240" alt="{doc.name} preview" />'
 
 
 def screen_preview_thumbnail(doc: ScreenDoc, from_dir: Path) -> str:
@@ -663,48 +663,24 @@ def write_main_index(docs: List[ComponentDoc]) -> None:
         "",
         "## Agent Quick Start",
         "",
-        "- Start here to find the DSKit view you need, then open its dedicated page.",
-        "- Use [Screens.md](Screens.md) when you need snapshot-backed full-screen examples.",
-        "- Use [Views/UsageIndex.md](Views/UsageIndex.md) for exhaustive `DSKitExplorer/Screens` references.",
-        "- Component pages include source links, examples, required preview images, curated Explorer usage, and related components.",
-        "- Use `Primitives` for low-level building blocks and `Components` for composed interface patterns.",
+        "- Scan the preview column to find the DSKit view you need, then open its dedicated page.",
+        "- Each preview comes from the required snapshot image in `DSKitTests/__Snapshots__/DSKitTests`.",
         "- Generated files should be refreshed from source comments and snapshots, not edited by hand.",
         "",
-        "## Quick Links",
+        "## Component Catalog",
         "",
+        "| Preview | Component |",
+        "| --- | --- |",
     ]
 
     for doc in docs:
-        lines.append(f"- [{doc.name}](Views/{doc.name}.md)")
+        lines.append(
+            "| "
+            f"{preview_thumbnail(doc, INDEX_FILE.parent)} | "
+            f"[{doc.name}](Views/{doc.name}.md) |"
+        )
 
-    lines.extend(["", "## Component Catalog", ""])
-
-    docs_by_kind: Dict[str, List[ComponentDoc]] = {kind: [] for kind in DOC_KIND_ORDER}
-    for doc in docs:
-        docs_by_kind.setdefault(doc.doc_kind, []).append(doc)
-
-    for kind in DOC_KIND_ORDER:
-        kind_docs = docs_by_kind.get(kind, [])
-        if not kind_docs:
-            continue
-        lines.extend([
-            f"### {kind}",
-            "",
-            "| Preview | Component | Category | Purpose | Source | Explorer usage |",
-            "| --- | --- | --- | --- | --- | ---: |",
-        ])
-        for doc in kind_docs:
-            source_link = rel_link(doc.source_path, INDEX_FILE.parent)
-            lines.append(
-                "| "
-                f"{preview_thumbnail(doc, INDEX_FILE.parent)} | "
-                f"[{doc.name}](Views/{doc.name}.md) | "
-                f"{category_for(doc.name)} | "
-                f"{table_cell(purpose_line(doc.documentation_lines, doc.name))} | "
-                f"[source]({source_link}) | "
-                f"{len(doc.explorer_usage)} |"
-            )
-        lines.append("")
+    lines.append("")
 
     lines.extend([
         "## Maintenance",
@@ -712,7 +688,6 @@ def write_main_index(docs: List[ComponentDoc]) -> None:
         "- Refresh these docs with `cd Scripts && ./documentation_generator.sh`.",
         "- Update source comments and `Testable_*` examples in `DSKit/Sources/DSKit/Views` to improve generated pages.",
         "- Every `DSKit/Sources/DSKit/Views/*.swift` file must have a matching preview image at `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`.",
-        "- Explorer usage references are direct word-boundary matches in `DSKitExplorer/Screens/*.swift`.",
     ])
 
     INDEX_FILE.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
