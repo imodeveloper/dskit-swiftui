@@ -4,21 +4,22 @@
     <img src="Content/Images/Logo.png" width="150" max-width="100%" alt="DSKit"/>
 </p>
 <p align="center">
-    <img src="https://img.shields.io/badge/iOS-15%2B-brightgreen.svg?style=flat" alt="iOS"/>
+    <img src="https://img.shields.io/badge/iOS-17%2B-brightgreen.svg?style=flat" alt="iOS"/>
     <img src="https://img.shields.io/badge/SwiftUI-5.0-brightgreen.svg"/>
     <a href="https://swift.org/package-manager">
         <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager"/>
     </a>
 </p>
 
+# DSKit
 
-# What is DSKit?
+DSKit is a SwiftUI design system package for building consistent iOS interfaces with reusable views, appearance themes, spacing tokens, typography tokens, and snapshot-backed examples.
 
-DSKit is a simple Design System Kit for **iOS 15+ SwiftUI**, designed to help developers create simple, consistent, and attractive user interfaces with ease. To help you start, DSKit includes demonstration screen code showcasing a wide range of possibilities. With over 60 ready-to-use screens, you can see the full potential of DSKit in action. This extensive collection of ready-made code can be directly utilized in your next project, making it easier to integrate DSKit's features and functionalities seamlessly.
+The Swift Package currently declares **iOS 17+** and **macOS 12+** support. The DSKitExplorer app and snapshot test targets use an **iOS 17.6+** deployment target.
 
 <img src="Content/Images/Preview.png">
 
-To help you get started, DSKit includes demonstration screen code showcasing a wide range of possibilities. With over 60 ready-to-use screens, you can see the full potential of DSKit in action. This extensive collection of ready-made code can be directly utilized in your next project, making it easier to integrate DSKit's features and functionalities seamlessly.
+DSKit includes a demonstration app, **DSKitExplorer**, with 60+ ready-to-use screens. Use it to inspect real screen compositions, switch appearances, and find working source examples before integrating a component into your app.
 
 #### E-Commerce 
 
@@ -37,7 +38,7 @@ To help you get started, DSKit includes demonstration screen code showcasing a w
 > [!Note]
 > If you're looking for the UIKit version of DSKit, you can find it here: [UIKit Version](https://github.com/imodeveloper/dskit).
 
-To get started with DSKit, you can integrate it into your projects using Swift Package Manager (SPM)
+To get started with DSKit, add the package using Swift Package Manager.
 
 ### Step 1: Adding DSKit via Swift Package Manager (SPM)
 To add DSKit to your project, follow these steps:
@@ -46,12 +47,12 @@ To add DSKit to your project, follow these steps:
 
 2. Add the package dependency:
    - Go to `File` > `Swift Packages` > `Add Package Dependency...`
-   - Enter the repository URL `git@github.com:imodeveloper/dskit-swiftui.git`.
+   - Enter the repository URL `https://github.com/imodeveloper/dskit-swiftui.git`.
    - Select the version of the package you wish to add. You can choose a specific release or the latest commit.
    - Xcode will download the package and ask which of your project's targets to add it to. Select the target where you want to use DSKit.
 
 ### Step 2: Set Up
-Once DSKit is added to your project, you can start using it by importing the package at the top of your Swift files where you intend to use the design system components. First, set up the appearance of your app by applying `.dsAppearance(RetroAppearance())`. the RetroAppearance is one of DSKit's appearances. You can create your own [appearance](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Appearance-in-DSKit.md) by copying one that you like and then modifying it as needed.
+Once DSKit is added to your project, import it where you build SwiftUI screens. Apply an appearance at the root of your app with `.dsAppearance(...)`. You can start with a built-in appearance such as `RetroAppearance()` and then copy or customize an appearance when you need a brand-specific theme.
 
 ```swift
 import SwiftUI
@@ -69,7 +70,7 @@ struct DSKitDemoApp: App {
 ```
 
 ### Step 3: Using DSKit in Your Screens
-To integrate [DSKit components](Content/Views.md) and modifiers into your SwiftUI views, simply use them like any other SwiftUI component or modifier. The component catalog links to dedicated pages for each view, including source files, snapshot-backed examples, related components, and DSKit Explorer usage references. Here’s an example of how you might use DSKit:
+Use [DSKit components](Content/Views.md) and modifiers like regular SwiftUI views. The generated component catalog links to a dedicated page for each view, including source files, snapshot previews, testable examples, related components, and DSKitExplorer usage references.
 
 ```swift
 import SwiftUI
@@ -87,7 +88,7 @@ struct ContentView: View {
                 .dsBackground(.secondary)
                 .dsCornerRadius()
             DSButton(
-                title: "Start Now!!!", 
+                title: "Start Now",
                 action: { print("Do something") }
             )
         }
@@ -100,35 +101,38 @@ In this example, [DSVStack](Content/Views/DSVStack.md), [DSText](Content/Views/D
 
 ## Documentation
 
-The most effective way to familiarize yourself with DSKit and its capabilities is by utilizing the DSKit Explorer app. To begin, clone the repository and launch the **DSKit Explorer app**. Within the app, you'll have access to all available screens, which you can open in preview mode. This feature allows you to interactively switch between different appearances and make modifications to the screens according to your preferences.
+Start with the generated docs when you need to find a component or screen quickly:
 
-### Components and Layouts
+- [Views / Components](Content/Views.md): generated component catalog split into primitives and composed components.
+- [DSKitExplorer Screens](Content/Screens.md): generated screen catalog with snapshot previews and source links.
+- [DSKitExplorer Usage Index](Content/Views/UsageIndex.md): exhaustive component-to-screen usage references.
+- [Layout](Content/Layout-in-DSKit.md): hand-written layout and spacing guidance.
+- [Appearance](Content/Appearance-in-DSKit.md): hand-written appearance and theming guidance.
 
-DSKit offers a library of ready-to-use UI components and full-screen [layouts](Content/Layout-in-DSKit.md) that are designed to be easily integrated and customized within your projects. Start with the generated [component catalog](Content/Views.md), then open an individual view page such as [DSImageView](Content/Views/DSImageView.md), [DSList](Content/Views/DSList.md), or [DSSection](Content/Views/DSSection.md) when you need source links, testable examples, rendered snapshots, and Explorer usage references. For exhaustive screen-to-component references, use the generated [DSKitExplorer usage index](Content/Views/UsageIndex.md).
+The generated docs are refreshed from Swift source comments, `Testable_*` examples, snapshots, and Explorer usage references. Do not hand-edit generated pages under `Content/Views/` or `Content/Screens/`; update source, snapshots, or the generator and then run `cd Scripts && ./documentation_generator.sh`.
+
+### Components, Screens, and Layouts
+
+DSKit offers a library of ready-to-use UI components and full-screen [layouts](Content/Layout-in-DSKit.md) that are designed to be easily integrated and customized within your projects. Start with the generated [component catalog](Content/Views.md), then open an individual view page such as [DSImageView](Content/Views/DSImageView.md), [DSList](Content/Views/DSList.md), or [DSSection](Content/Views/DSSection.md) when you need source links, testable examples, required preview images, and Explorer usage references. Use the generated [screen catalog](Content/Screens.md) when you need full DSKitExplorer examples with snapshot previews, source links, and the DSKit views used by each screen. For exhaustive component-to-screen references, use the generated [DSKitExplorer usage index](Content/Views/UsageIndex.md).
 
 ### Appearances
 
 DSKit includes a selection of ready-to-use [appearances](Content/Appearance-in-DSKit.md) that support both light and dark modes, suitable for immediate integration into your projects. These appearances are fully customizable, allowing you to tweak and modify them according to your specific requirements. This flexibility ensures that you can maintain consistency across different themes while adapting to user preferences. 
 
-To dive deeper into specific features and functionalities, continue to the sections below. These segments offer detailed insights into the individual elements of DSKit, helping you leverage its full potential in your projects.
+### Running DSKitExplorer
 
-### Documents
-
-- [Layout](Content/Layout-in-DSKit.md)
-- [Views / Components](Content/Views.md)
-- [DSKitExplorer Usage Index](Content/Views/UsageIndex.md)
-- [Appearance](Content/Appearance-in-DSKit.md)
+Open `DSKitExplorer.xcodeproj`, select the `DSKitExplorer` scheme, and run it on an iPhone simulator. The repo's current automation target is `iPhone 17 Pro`; see [docs/WORKFLOWS.md](docs/WORKFLOWS.md) for CLI build, test, and documentation refresh commands.
 
 ## Contributions and support
 
-DSKit is developed completely in the open, and your contributions are more than welcome.
+DSKit is developed completely in the open, and contributions are welcome.
 
-Before you start using DSKit in any of your projects, it’s highly recommended that you spend a few minutes familiarizing yourself with its documentation and internal implementation, so that you’ll be ready to tackle any issues or edge cases that you might encounter.
+Before changing DSKit, read [CONTRIBUTING.md](CONTRIBUTING.md), [docs/WORKFLOWS.md](docs/WORKFLOWS.md), and the generated component or screen page for the area you are changing.
 
-Since this is a very young project, it’s likely to have many limitations and missing features, which is something that can really only be discovered and addressed as more people start using it.
+Generated docs are not edited by hand. Update Swift source comments, `Testable_*` examples, snapshots, or the generator, then run `cd Scripts && ./documentation_generator.sh`.
 
-This project does not come with GitHub Issues-based support, and users are instead encouraged to become active participants in its continued development — by fixing any bugs that they encounter, or by improving the documentation wherever it’s found to be lacking.
+This project does not come with GitHub Issues-based support. Users are encouraged to become active participants by fixing bugs they encounter or improving documentation wherever it is lacking.
 
-If you wish to make a change, open a [Pull Request](https://github.com/imodeveloper/dskit-swiftui/pulls) — even if it just contains a draft of the changes you’re planning, or a test that reproduces an issue — and we can discuss it further from there.
+If you wish to make a change, open a [Pull Request](https://github.com/imodeveloper/dskit-swiftui/pulls), even if it just contains a draft of the changes you are planning or a test that reproduces an issue.
 
-Hope you’ll enjoy using DSKit!
+Hope you will enjoy using DSKit.

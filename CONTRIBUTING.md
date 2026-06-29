@@ -1,11 +1,19 @@
-DSKit is developed completely in the open, and your contributions are more than welcome.
+DSKit is developed completely in the open, and contributions are welcome.
 
-Before you start using DSKit in any of your projects, it’s highly recommended that you spend a few minutes familiarizing yourself with its documentation and internal implementation, so that you’ll be ready to tackle any issues or edge cases that you might encounter.
+Before changing DSKit, spend a few minutes with the repo-native docs:
 
-Since this is a very young project, it’s likely to have many limitations and missing features, which is something that can really only be discovered and addressed as more people start using it.
+- [README.md](README.md) for setup and documentation entry points.
+- [Content/Views.md](Content/Views.md) for generated component references.
+- [Content/Screens.md](Content/Screens.md) for generated DSKitExplorer screen references.
+- [docs/WORKFLOWS.md](docs/WORKFLOWS.md) for build, test, snapshot, and documentation generation commands.
 
-This project does not come with GitHub Issues-based support, and users are instead encouraged to become active participants in its continued development — by fixing any bugs that they encounter, or by improving the documentation wherever it’s found to be lacking.
+Generated docs are not edited by hand. Update Swift source comments, `Testable_*` examples, snapshots, or the generator, then run:
 
-If you wish to make a change, open a Pull Request — even if it just contains a draft of the changes you’re planning, or a test that reproduces an issue — and we can discuss it further from there.
+```sh
+cd Scripts
+./documentation_generator.sh
+```
 
-Hope you’ll enjoy using DSKit!
+This project does not come with GitHub Issues-based support. Users are encouraged to become active participants by fixing bugs they encounter or improving documentation wherever it is lacking.
+
+If you wish to make a change, open a [Pull Request](https://github.com/imodeveloper/dskit-swiftui/pulls), even if it just contains a draft of the changes you are planning or a test that reproduces an issue.

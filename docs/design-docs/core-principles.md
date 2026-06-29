@@ -7,5 +7,7 @@
 - Keep visual docs aligned to implementation:
   - code in `DSKit/Sources/DSKit`
   - snapshots in `DSKitTests/__Snapshots__/DSKitTests`
-  - generated docs in `Content/Views.md`
+  - screen snapshots in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`
+  - generated component docs in `Content/Views.md` and `Content/Views/*.md`
+  - generated screen docs in `Content/Screens.md` and `Content/Screens/*.md`
 - For wrapper/token reasoning and styling systems, use `ds-wrapper-principles.md`.

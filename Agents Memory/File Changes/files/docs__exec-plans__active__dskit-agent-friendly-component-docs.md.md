@@ -11,10 +11,10 @@
 - task_or_issue: `agent-friendly-component-docs`
 
 #### Request
-Add a short active execution plan because the docs refactor touches generator code, generated docs, README, and repo guidance.
+Keep a short active execution plan because the docs refactor touches generator code, generated docs, README, repo guidance, and snapshots.
 
 #### Change Summary
-Created an active plan describing goals, scope, constraints, implementation steps, and validation evidence for the component documentation refactor.
+Updated the active plan with component preview coverage, primitive/component split, generated screen pages, and validation evidence.
 
 #### Rationale
 The change spans multiple generated and hand-maintained surfaces. The active plan gives future agents a compact trail for what was changed and why.
@@ -23,10 +23,10 @@ The change spans multiple generated and hand-maintained surfaces. The active pla
 Keep the plan scoped to the component documentation refactor. Retire or move it when the repo's active-plan process expects completed work to be archived.
 
 #### Tests Or Evidence
-The plan records generator, link validation, and build validation results.
+The plan records generator, link validation, focused snapshot validation, and build/simulator constraints.
 
 #### Related Files
-`Scripts/generate_view_docs.py`, `Scripts/documentation_generator.sh`, `Content/Views.md`, `Content/Views/*.md`, `README.md`.
+`Scripts/generate_view_docs.py`, `Scripts/documentation_generator.sh`, `Content/Views.md`, `Content/Screens.md`, `DSKitTests/DSKitTests.swift`, `README.md`.
 
 #### Follow-up Risks
 The plan is intentionally active until the team decides whether to archive completed docs plans.

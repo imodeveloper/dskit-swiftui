@@ -11,22 +11,22 @@
 - task_or_issue: `agent-friendly-component-docs`
 
 #### Request
-Update the main README so repo-native Markdown is the canonical entrypoint for DSKit component docs.
+Update the main README so repo-native Markdown is the canonical entrypoint for DSKit docs.
 
 #### Change Summary
-Pointed component documentation at `Content/Views.md`, added examples of per-component pages, linked the Explorer usage index, kept layout and appearance docs linked, and corrected the pull request link to the SwiftUI repository.
+Updated platform/support copy, SPM URL, setup guidance, generated component and screen documentation links, DSKitExplorer run guidance, and contribution notes. The README now points readers at `Content/Views.md`, `Content/Screens.md`, `UsageIndex.md`, Layout, Appearance, and workflow docs.
 
 #### Rationale
-The retired website should no longer be the documentation path. Developers and agents need the README to lead directly to generated repo docs.
+The retired website should no longer be the documentation path. Developers and agents need the README to lead directly to generated repo docs and current local workflows.
 
 #### Invariants
-Keep README documentation links relative and local. Preserve existing Layout and Appearance links unless those docs are deliberately refactored later.
+Keep README documentation links relative and local. Keep platform wording aligned with `Package.swift` and Xcode project deployment targets.
 
 #### Tests Or Evidence
-Validated local relative links and ran the generated docs validation script plus DSKitExplorer build.
+Validated local relative links across 155 Markdown files, ran generated docs coverage checks, and reran the focused component preview snapshot test.
 
 #### Related Files
-`Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Content/Layout-in-DSKit.md`, `Content/Appearance-in-DSKit.md`.
+`Content/Views.md`, `Content/Screens.md`, `Content/Views/UsageIndex.md`, `Content/Layout-in-DSKit.md`, `Content/Appearance-in-DSKit.md`, `docs/WORKFLOWS.md`.
 
 #### Follow-up Risks
-If README examples name specific component pages, keep those pages generated from matching Swift view filenames.
+If package deployment targets change, update the README, architecture memory, and workflow docs together.

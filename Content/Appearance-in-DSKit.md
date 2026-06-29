@@ -1,143 +1,138 @@
-## Appearance in DSKit
+# Appearance In DSKit
 
-DSKit provides a robust theming mechanism that allows developers to define and apply consistent visual styles throughout an application. The appearance system in DSKit is designed to manage and apply consistent styling across all UI components within an application. It encapsulates colors, fonts, spacing, padding, and other style-related properties. This system ensures that all components adhere to a unified design language, which can be easily adjusted or themed.
+DSKit appearance is the theme layer that resolves colors, typography, spacing, padding, corner radius, navigation bars, tab bars, and price styling for DSKit views.
 
-### How Appearance Works
+Use this page for the appearance model. Use the generated [component catalog](Views.md) and [screen catalog](Screens.md) to see how components and full screens render with the active appearance.
 
-The appearance in DSKit is managed through the `DSAppearance` environment object. This object holds all the theme-related settings that determine the look and feel of the components. By leveraging SwiftUI's environment capabilities, `DSAppearance` can be passed down the view hierarchy, ensuring that all components conform to the chosen theme seamlessly.
+## Applying An Appearance
 
-### Implementation and Usage
-
-1. **Protocol-Driven Design**:
-   - `DSAppearance` is a protocol that defines the required properties and methods for an appearance configuration. This includes aspects like views, text fields, buttons, navigation bars, and other UI components.
-   - Example properties might include `primaryView`, `secondaryView`, `navigationBar`, `tabBar`, `textField`, and `price`.
-2. **Environment Propagation**:
-   - Appearance settings are propagated using the environment. SwiftUI's environment allows these settings to be accessed anywhere in the view hierarchy.
-   - This is achieved through the `EnvironmentValues` structure, where an appearance instance can be stored and retrieved using an environment key.
-3. **Dynamic Theming**:
-   - The appearance system supports dynamic theming, allowing for real-time theme switching (e.g., light to dark mode) without the need for a complete reload of the UI.
-
-### Create your custom appearance
-
-When creating a new appearance within a system like DSKit, you leverage the `DSAppearance` protocol. This protocol acts as a template for defining the visual attributes that affect all parts of your application's UI, such as colors, fonts, and component-specific styles. Here’s a step-by-step guide on how to create a new appearance:
-
-#### Step 1: Understand `DSAppearance`
-First, review the `DSAppearance` protocol to understand what properties and methods it expects. Typically, this protocol includes properties for:
-
-- View appearances (primary and secondary)
-- Spacing and padding standards
-- Component-specific appearances (like tab bars and navigation bars)
-- Text styles and fonts
-- General UI dimensions and color themes
-
-#### Step 2: Create Your Appearance Struct
-Create a new Swift file and define a struct that conforms to `DSAppearance`. Here, you will provide concrete implementations of each protocol requirement:
+Inject an appearance at the root of your SwiftUI app with `.dsAppearance(...)`.
 
 ```swift
 import SwiftUI
+import DSKit
 
-struct CustomAppearance: DSAppearance {
-    var title: String = "Custom Theme"
-
-    var primaryView: DSViewAppearanceProtocol
-    var secondaryView: DSViewAppearanceProtocol
-    var spacing: DSSpacingProtocol = DSSpacingSystem(spatialSystem: 8)
-    var padding: DPaddingsProtocol = DSPaddingSystem(spatialSystem: 8)
-    var tabBar: DSTabBarAppearanceProtocol
-    var navigationBar: DSNavigationBarAppearanceProtocol
-    var textField: DSTextFieldAppearanceProtocol
-    var price: DSPriceAppearanceProtocol
-    var fonts: DSFontsProtocol = DSFonts()
-    var actionElementHeight: CGFloat = 50
-    var screenMargins: CGFloat = 20
-
-    init() {
-        // Initialize primary and secondary views with specific colors and styles
-        primaryView = DSViewAppearance(
-            button: DSButtonAppearance(accentColor: .blue, supportColor: .white),
-            text: DSTextAppearance(largeTitle: .black),
-            textField: DSTextFieldAppearance(background: .lightGray, text: .black, placeHolder: .gray),
-            background: .white,
-            separator: .gray,
-            cornerRadius: 10
-        )
-
-        secondaryView = DSViewAppearance(
-            button: DSButtonAppearance(accentColor: .green, supportColor: .white),
-            text: DSTextAppearance(largeTitle: .darkGray),
-            textField: DSTextFieldAppearance(background: .darkGray, text: .white, placeHolder: .lightGray),
-            background: .black,
-            separator: .lightGray,
-            cornerRadius: 8
-        )
-
-        // Set up other properties as needed
-        tabBar = DSTabbarAppearance(
-            barTint: .blue,
-            itemTint: .white,
-            unselectedItemTint: .gray,
-            badge: .red,
-            translucent: false
-        )
-
-        navigationBar = DSNavigationBarAppearance(
-            buttons: .blue,
-            text: .white,
-            bar: .blue,
-            translucent: false
-        )
-
-        textField = DSTextFieldAppearance(
-            background: .lightGray,
-            text: .black,
-            placeHolder: .gray
-        )
-
-        price = DSPriceAppearance(
-            regularAmount: .black,
-            badgeBackground: .red
-        )
-    }
-
-    func style(for viewStyle: DSViewStyle) -> DSViewAppearanceProtocol {
-        switch viewStyle {
-        case .primary:
-            return primaryView
-        case .secondary:
-            return secondaryView
-        }
-    }
-}
-```
-
-#### Step 3: Inject Your Appearance
-Once your custom appearance is defined, inject it into your SwiftUI environment at the top level of your app:
-
-```swift
 @main
-struct MyApp: App {
+struct DSKitDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.appearance, CustomAppearance())
+                .dsAppearance(RetroAppearance())
         }
     }
 }
 ```
 
-#### Step 4: Use Your Appearance
-Now that your custom appearance is part of the environment, you can use its properties to style your views:
+If the app should also apply DSKit navigation bar and tab bar styling to UIKit-backed system chrome, enable `overrideSystemAppearance`.
 
 ```swift
-struct ContentView: View {
-    @Environment(\.appearance) var appearance: DSAppearance
-
-    var body: some View {
-        DSText("Welcome to DSKit!")
-            .dsPadding()
-            .background(Color(appearance.primaryView.background))
-    }
-}
+ContentView()
+    .dsAppearance(
+        RetroAppearance(),
+        overrideSystemAppearance: true,
+        opaqueNavigationBar: true,
+        opaqueTabBar: true
+    )
 ```
 
-This setup allows you to maintain a consistent look throughout your app while making it easy to switch themes or appearances without significant refactoring. By following these steps, developers can effectively extend an existing appearance protocol to suit their unique design needs.
+## Built-In Appearances
+
+Built-in appearances live in `DSKit/Sources/DSKit/Appearances`.
+
+Useful starting points include:
+
+- `LightBlueAppearance`
+- `DarkAppearance`
+- `RetroAppearance`
+- `BlueAppearance`
+- `PeachAppearance`
+
+Most custom themes should start by copying a built-in appearance and changing brand colors, typography, surfaces, and component-specific values.
+
+## What `DSAppearance` Provides
+
+`DSAppearance` is a protocol with the current theme contract:
+
+- `colors`: semantic `DSColorTheme`
+- `primaryView` and `secondaryView`: legacy-compatible surface containers for text, buttons, fields, backgrounds, separators, and corner radius
+- `spacing`: `DSSpacingProtocol`
+- `padding`: `DPaddingsProtocol`
+- `tabBar`: `DSTabBarAppearanceProtocol`
+- `navigationBar`: `DSNavigationBarAppearanceProtocol`
+- `price`: `DSPriceAppearanceProtocol`
+- `typography`: `DSTypographyProtocol`
+- `actionElementHeight`, `screenMargins`, and `cornerRadius`
+
+DSKit still supports older `DSViewStyle` and `DSColorKey` paths, but new component work should prefer `DSColorToken`, `DSSurfaceStyle`, `DSTypographyToken`, and `DSSpatialToken`.
+
+## Tokens Used By Components
+
+### Spacing
+
+Use `DSSpatialToken` for layout and padding values:
+
+```swift
+DSVStack(spacing: .space16) {
+    DSText("Profile")
+    DSText("Manage account details")
+}
+.dsPadding(.space16)
+```
+
+### Typography
+
+Use `DSTypographyToken` through `DSText.dsTextStyle(...)`:
+
+```swift
+DSText("Featured")
+    .dsTextStyle(.title2)
+
+DSText("Updated today")
+    .dsTextStyle(.caption1)
+```
+
+### Colors And Surfaces
+
+Use semantic surface and color APIs instead of hardcoded values where possible:
+
+```swift
+DSText("Saved")
+    .dsTextStyle(.headline)
+    .dsPadding(.horizontal, .space12)
+    .dsPadding(.vertical, .space8)
+    .dsBackground(.secondary)
+    .dsCornerRadius()
+```
+
+## Customizing A Theme
+
+The lowest-risk path is to copy a built-in appearance and adjust the values in its initializer. A custom appearance should keep these invariants:
+
+- define both `primaryView` and `secondaryView`
+- keep `colors` synchronized with the legacy-compatible view appearances
+- keep text colors readable in light and dark mode
+- keep `spacing` and `padding` token-based
+- preserve deterministic values for snapshot tests
+
+For a brand color override, use a built-in initializer when it exists:
+
+```swift
+ContentView()
+    .dsAppearance(
+        RetroAppearance(
+            brandColor: .dynamic(light: 0x0A84FF, dark: 0x64D2FF),
+            title: "Brand"
+        )
+    )
+```
+
+For a deeper custom theme, copy one of the built-in files under `DSKit/Sources/DSKit/Appearances` and rename it. That keeps the full `DSAppearance` contract visible and avoids partial themes that compile but render inconsistently.
+
+## Documentation Maintenance
+
+When appearance behavior changes:
+
+1. Update the relevant appearance or token source comments.
+2. Update affected component or screen snapshots.
+3. Regenerate docs with `cd Scripts && ./documentation_generator.sh`.
+4. Check generated component and screen pages for stale examples or previews.

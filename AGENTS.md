@@ -17,6 +17,22 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - `Scripts/AGENTS.md`
   - `Content/AGENTS.md`
 
+## How to read this repo
+- Start with `README.md` for public product positioning, then use this file for agent rules and repo routing.
+- Use `docs/WORKFLOWS.md`, `docs/QUALITY.md`, and `docs/PLANS.md` for validation, testing, and current work shape.
+- For DSKit component work:
+  - read `DSKit/AGENTS.md`
+  - read the target file under `DSKit/Sources/DSKit/Views`
+  - read the matching generated page under `Content/Views/<Component>.md` for examples, snapshots, and Explorer references
+  - search `Agents Memory/File Changes/files` for the repo-relative file path before editing meaningful tracked files
+- For DSKitExplorer screen work:
+  - read `DSKitExplorer/AGENTS.md`
+  - read the target file under `DSKitExplorer/Screens`
+  - read the matching generated page under `Content/Screens/<Screen>.md` for snapshot previews and component references
+  - check `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests` before changing visual output
+- For snapshot or test work, read the matching subscope guide first: `DSKitTests/AGENTS.md` or `DSKitExplorerTests/AGENTS.md`.
+- Treat generated Markdown as output. Change Swift source comments, testable examples, snapshots, or the generator, then regenerate docs.
+
 ## Agents Memory
 - Canonical memory/reference folder:
   - `Agents Memory/`
@@ -54,9 +70,32 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - Snapshot test surfaces:
   - Component goldens in `DSKitTests/__Snapshots__/DSKitTests`
   - Screen goldens in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`
-- Generated documentation: `Content/Views.md`, `Content/Views/*.md`, and `Content/Views/UsageIndex.md`
+- Generated documentation: `Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Content/Screens.md`, and `Content/Screens/*.md`
 - Determinism-sensitive tooling: `Scripts/documentation_generator.sh`
 - Workspace integration: this package is consumed by `../imodeveloperlab/Workspace.xcworkspace`.
+
+## Documentation generation
+- Canonical command:
+  - `cd Scripts`
+  - `./documentation_generator.sh`
+- Generated outputs:
+  - `Content/Views.md`
+  - `Content/Views/*.md`
+  - `Content/Views/UsageIndex.md`
+  - `Content/Screens.md`
+  - `Content/Screens/*.md`
+- Generator inputs:
+  - DSKit view source: `DSKit/Sources/DSKit/Views/*.swift`
+  - component docs and examples: source comments and `Testable_*` structs in view files
+  - component previews: `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`
+  - Explorer usage: direct word-boundary references in `DSKitExplorer/Screens/*.swift`
+  - screen source: `DSKitExplorer/Screens/*.swift` plus supported playground screens in `DSKitExplorer/ScreenView.swift`
+  - screen previews: `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/<Screen>.snapshot.png` or numbered variants such as `<Screen>_0.snapshot.png`
+- The generator is intentionally strict:
+  - every `DSKit/Sources/DSKit/Views/*.swift` file needs a matching component page and exact component snapshot
+  - every generated screen page needs at least one matching screen snapshot
+  - generated links must stay relative and must not contain local absolute paths
+- After changing docs generation, run the generator and a local link/coverage check. After changing component preview snapshots, also run the focused component preview snapshot test.
 
 ## Runtime constraints
 - Build target: `DSKitExplorer` scheme in `DSKitExplorer.xcodeproj`
@@ -121,6 +160,6 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - `swiftlint lint --config swiftlint.yml`
 
 ## Quick workflow
-- Regenerate `Content/Views.md` after view or snapshot changes:
+- Regenerate generated component and screen docs after view, screen, or snapshot changes:
   - `cd Scripts`
   - `./documentation_generator.sh`

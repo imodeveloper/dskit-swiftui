@@ -16,13 +16,14 @@
 2. Validate boundaries instead of guessing external data shapes.
    - If a component consumes external-like structures, type-check and sanitize at boundaries.
 3. Keep style and sizing systems centralized.
-4. Keep generated content (e.g., `Content/Views.md`) regenerated from source, not manually rewritten.
+4. Keep generated docs (`Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Content/Screens.md`, and `Content/Screens/*.md`) regenerated from source and snapshots, not manually rewritten.
 
 ## Stability checks before broad refactors
 
 - Confirm package boundaries (`DSKit`, `DSKitExplorer`, tests) still compile together.
 - Confirm snapshot paths and fixture names remain valid.
 - Confirm `Testable_*` screens/components continue to run in deterministic mode.
+- Confirm generated docs still have one page per DSKit view and one snapshot-backed page per documented DSKitExplorer screen.
 
 ## Recurring cleanup
 

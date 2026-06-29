@@ -1,7 +1,7 @@
 # Agent Instructions
 
 ## Purpose
-- DSKit is the Swift Package source for the design system library used by DSKitExplorer and MNews.
+- DSKit is the Swift Package source for the design system library used by DSKitExplorer and Monitor.
 
 ## Structure
 - `Sources/DSKit/Views`: reusable SwiftUI components.
@@ -11,7 +11,7 @@
 
 ## Integration Points
 - Built as `DSKit.framework` by `DSKitExplorer.xcodeproj`.
-- Embedded into MNews when using `../imodeveloperlab/Workspace.xcworkspace`.
+- Embedded into Monitor when using `../imodeveloperlab/Workspace.xcworkspace`.
 
 ## Conventions / Pitfalls
 - Keep components deterministic for snapshot tests.

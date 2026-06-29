@@ -28,7 +28,7 @@
 
 - `Content/`
   - Human-facing docs and reference images.
-  - `Views.md` is generated from source comments/snapshots.
+  - `Views.md`, `Views/*.md`, `Views/UsageIndex.md`, `Screens.md`, and `Screens/*.md` are generated from source comments, snapshots, and Explorer usage.
 
 - `Scripts/`
   - Automation for documentation generation and consistency tasks.
@@ -38,10 +38,11 @@
 
 - Package-level target:
   - Swift package target: `DSKit`
-  - Platforms: iOS 17.6+, macOS 12+
+  - Package platforms: iOS 17+, macOS 12+
+  - Xcode project deployment targets: iOS 17.6+, macOS 14.6+
   - External dependencies:
-    - `SDWebImageSwiftUI`
-    - `SDWebImage`
+    - `Nuke`
+    - `NukeUI`
 
 - App target:
   - `DSKitExplorer.xcodeproj` compiles `DSKitExplorer`
@@ -57,3 +58,5 @@
 - For snapshot and test quality constraints: `docs/QUALITY.md`
 - For active work planning and cleanup: `docs/PLANS.md`
 - For DS wrapper/token rationale: `docs/design-docs/ds-wrapper-principles.md`
+- For generated component references: `Content/Views.md`
+- For generated screen references: `Content/Screens.md`

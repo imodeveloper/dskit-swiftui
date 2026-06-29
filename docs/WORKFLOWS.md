@@ -3,11 +3,12 @@
 ## Daily and PR workflows
 
 - Build DSKitExplorer locally:
-  - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/ivan.borinschi/Work/dskit-swiftui/DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' build`
+  - `/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project DSKitExplorer.xcodeproj -scheme DSKitExplorer -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2' build`
 - Preferred runtime flow:
   - Open `DSKitExplorer.xcodeproj`
   - Select scheme `DSKitExplorer`
-  - Run on simulator `iPhone 17 Pro (iOS 26.1)`
+  - Run on simulator `iPhone 17 Pro`
+- If the exact documented simulator runtime is not installed, use the installed `iPhone 17 Pro` runtime and record the OS version in your validation notes.
 
 ## Testing
 
@@ -19,11 +20,21 @@
 
 ## Snapshot documentation generation
 
-- Generate/refresh `Content/Views.md`, per-component pages, and the Explorer usage index:
+- Generate/refresh `Content/Views.md`, per-component pages, `Content/Screens.md`, per-screen pages, and the Explorer usage index:
   - `cd Scripts`
   - `./documentation_generator.sh`
-- The script reads view source comments, snapshot images in `DSKitTests/__Snapshots__/DSKitTests`, and direct usage references in `DSKitExplorer/Screens`.
-- Run it after API/visual changes in `DSKit/Sources/DSKit/Views`.
+- If a new view file is added under `DSKit/Sources/DSKit/Views`, add or record its exact preview snapshot first:
+  - `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`
+- If a new screen file is added under `DSKitExplorer/Screens`, add or record at least one screen snapshot first:
+  - `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/<Screen>.snapshot.png`
+- The script reads view source comments, snapshot images in `DSKitTests/__Snapshots__/DSKitTests`, screen snapshots in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`, and direct usage references in `DSKitExplorer/Screens`.
+- Run it after API/visual changes in `DSKit/Sources/DSKit/Views` or snapshot-backed screen changes in `DSKitExplorer/Screens`.
+- Do not hand-edit generated pages under `Content/Views/` or `Content/Screens/`; change source comments, `Testable_*` examples, snapshots, or the generator.
+- After generation, validate that:
+  - every `DSKit/Sources/DSKit/Views/*.swift` file has `Content/Views/<Component>.md`
+  - every component page has `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`
+  - every generated screen page has at least one snapshot in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`
+  - relative links resolve locally
 
 ## Running on CLI and automation
 
@@ -37,3 +48,4 @@
 
 - Snapshot goldens live under `DSKitTests/__Snapshots__/DSKitTests` and `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`.
 - Update goldens only with intended visual changes; otherwise report and fix underlying nondeterminism.
+- Component preview snapshots are documentation inputs. If a new DSKit view is added, add an exact `<Component>.snapshot.png` golden before regenerating docs.

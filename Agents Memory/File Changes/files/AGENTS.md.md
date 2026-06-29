@@ -11,22 +11,22 @@
 - task_or_issue: `agent-friendly-component-docs`
 
 #### Request
-Refactor DSKit component documentation into generated repo-native Markdown and keep future agents oriented to the new generated outputs.
+Refactor DSKit documentation into generated repo-native Markdown and keep future agents oriented to the repo.
 
 #### Change Summary
-Expanded the generated documentation list from the single `Content/Views.md` file to include `Content/Views/*.md` per-component pages and `Content/Views/UsageIndex.md`.
+Added a repo read path, documented generated component and screen docs, listed generator inputs/outputs, and described strict snapshot/link requirements.
 
 #### Rationale
-The docs generator now writes an index plus component pages and an Explorer usage map. The top-level agent guide needs to name the full generated surface so agents do not hand-edit generated Markdown or miss the usage index.
+The top-level guide is the handoff point for future agents. It needs to explain where to start, which docs are generated, and how to refresh them safely.
 
 #### Invariants
-Keep generated documentation listed as generated. Preserve the rule that generated docs are refreshed through `Scripts/documentation_generator.sh`.
+Keep generated documentation listed as generated. Preserve the rule that generated docs are refreshed through `Scripts/documentation_generator.sh`, not hand-edited.
 
 #### Tests Or Evidence
-Ran the documentation generator, generated-link validation, and a DSKitExplorer build on the available `iPhone 17 Pro, OS=26.5` simulator destination.
+Ran the documentation generator, generated coverage/link validation across 155 Markdown files, and the focused component preview snapshot test.
 
 #### Related Files
-`Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Scripts/documentation_generator.sh`, `Scripts/generate_view_docs.py`.
+`Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Content/Screens.md`, `Content/Screens/*.md`, `Scripts/generate_view_docs.py`.
 
 #### Follow-up Risks
 If future generated outputs are added, update this guide and the memory helper exclusions together.

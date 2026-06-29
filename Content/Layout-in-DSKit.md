@@ -1,53 +1,109 @@
-## Layout in DSKit
+# Layout In DSKit
 
-DSKit streamlines the process of creating consistent and visually appealing layouts in SwiftUI applications. By leveraging the design system's predefined spacing and layout rules, DSKit ensures that all interface elements are harmoniously aligned and spaced, significantly simplifying the development process.
+DSKit layout primitives wrap common SwiftUI containers so spacing, margins, surfaces, and snapshot behavior stay consistent across screens.
 
-### Core Layout Components
+Use this page for layout intent. Use the generated [component catalog](Views.md) when you need exact source links, examples, previews, and DSKitExplorer usage references.
 
-#### **DSVStack** and **DSHStack**
-`DSVStack` and `DSHStack` are vertical and horizontal stack views, respectively, that extend SwiftUI's native `VStack` and `HStack`. These components automatically incorporate DSKit's design system spacing, ensuring consistent margins and paddings that adapt across different screen sizes and orientations. They use environmental values from `DSAppearance` to dynamically adjust spacing between elements, making it easy to maintain visual consistency throughout the app.
+## Start Here
 
-#### Spacing in DSKit
-DSKit defines several types of spacing to ensure flexibility and adaptability in various layout contexts:
-- **Regular**: The standard spacing used for most elements within the stacks.
-- **None**: Allows elements to sit flush against each other.
-- **Small**, **Medium**, and **Large**: Provide incremental adjustments to spacing, allowing for finer control over the layout aesthetics.
+- [DSVStack](Views/DSVStack.md): vertical layout with DSKit spacing defaults.
+- [DSHStack](Views/DSHStack.md): horizontal layout with DSKit spacing defaults.
+- [DSLazyVStack](Views/DSLazyVStack.md): lazy vertical layout for scrollable content.
+- [DSGrid](Views/DSGrid.md): token-spaced grid layout.
+- [DSHScroll](Views/DSHScroll.md): horizontal scrolling content aligned to DSKit margins.
+- [DSList](Views/DSList.md): list wrapper for sectioned content.
+- [DSSection](Views/DSSection.md): section wrapper for grouped rows and headers.
+- [DSCardSurface](Views/DSCardSurface.md): reusable padded surface for card-like content.
 
-### Consistent Spacing Across Components
-All components in DSKit, including `DSText`, `DSButton`, `DSImageView`, and others, utilize the same spacing and margins system. This uniform approach ensures that elements within any DSKit layout inherently align with each other, providing a seamless user experience.
+For full-screen examples, start from the generated [screen catalog](Screens.md).
 
-- **DSImageView**: Applies consistent margins and paddings that align with other components within a layout. For example, when used alongside `DSText` within a `DSVStack`, both components will have matching horizontal alignments and spacing.
-  
-- **DSTextField**: Uses predefined spacing rules for internal elements such as icons and clear buttons, ensuring they match the overall layout's rhythm established by `DSVStack` or `DSHStack`.
+## Spacing Model
 
-### Utilizing DSKit for Layouts
-Using DSKit's layout components like `DSVStack` and `DSHStack`, along with text, button, and image components, allows developers to efficiently create layouts that are consistent with the overarching design language.
+DSKit spacing is expressed through `DSSpatialToken`:
 
-### Example: Creating a Consistent Layout
-Here’s a simple example demonstrating how to use DSKit's layout components to create a consistent interface:
+- `.space0`, `.space1`, `.space2`, `.space4`, `.space8`, `.space12`, `.space16`, `.space24`, `.space32`, `.space40`, `.space48`, `.space64`
+- `.custom(CGFloat)` for one-off values that cannot be represented by the standard scale
+
+Components resolve spacing through the active `DSAppearance.spacing` and `DSAppearance.padding` systems. Prefer tokens over raw numbers when building reusable DSKit views.
 
 ```swift
-struct ExampleView: View {
-    var body: some View {
-        DSVStack {
-            DSText("Welcome to DSKit", multilineTextAlignment: .center)
-                .dsTextStyle(.title1)
+DSVStack(spacing: .space16) {
+    DSText("Welcome to DSKit")
+        .dsTextStyle(.title1)
 
-            DSImageView(named: "logo", size: .mediumIcon)
-                .dsPadding(.small)
+    DSText("Token spacing keeps screens consistent.")
+        .dsTextStyle(.body)
 
-            DSText("Start building beautiful and consistent layouts today!")
-                .dsTextStyle(.body)
+    DSButton(title: "Continue") {
+        print("Continue")
+    }
+}
+.dsPadding(.space16)
+.dsBackground(.secondary)
+.dsCornerRadius()
+```
 
-            DSButton(title: "Get Started", action: {
-                print("Button tapped")
-            })
-        }
-        .dsPadding(.medium)
-        .dsSecondaryBackground()
-        .dsCornerRadius()
+## Lists And Sections
+
+`DSList` owns spacing between logical sections. `DSSection` owns spacing between rows inside a section.
+
+Use `DSList(sectionSpacing:)` for the gap between sections:
+
+```swift
+DSList(sectionSpacing: .space16) {
+    DSSection {
+        DSText("First row")
+        DSText("Second row")
+    }
+
+    DSSection {
+        DSText("Another section")
     }
 }
 ```
 
-In this example, `DSVStack` is used to vertically stack the text, image, and button elements. Each component adheres to the same spacing and styling rules, ensuring a cohesive and visually appealing layout.
+Use `.dsSpacing(...)` on `DSSection` only for row spacing inside that section:
+
+```swift
+DSSection {
+    DSText("Title")
+    DSText("Subtitle")
+}
+.dsSpacing(.space4)
+```
+
+Do not wrap a large `ForEach` inside an extra `VStack` when the rows are meant to be virtualized by `List`; that turns many rows into one large cell. Keep row-producing content directly inside `DSSection`.
+
+## Horizontal Scrolling
+
+`DSHScroll` applies DSKit horizontal content margins while preserving first and last item alignment. Use it for horizontally scrolling rows of cards, chips, categories, or images.
+
+```swift
+DSHScroll {
+    DSCardSurface {
+        DSText("Featured")
+    }
+
+    DSCardSurface {
+        DSText("Popular")
+    }
+}
+```
+
+## Choosing A Container
+
+- Use `DSVStack` or `DSHStack` for compact component composition.
+- Use `DSLazyVStack` when scrollable vertical content can grow.
+- Use `DSList` and `DSSection` for native list behavior and row virtualization.
+- Use `DSHScroll` for horizontal collections that must align to screen margins.
+- Use `DSGrid` when the layout is naturally multi-column.
+- Use `DSCardSurface` when the content needs a reusable surface treatment rather than ad-hoc padding/background modifiers.
+
+## Documentation Maintenance
+
+When layout behavior changes:
+
+1. Update the Swift source comments and `Testable_*` examples in `DSKit/Sources/DSKit/Views`.
+2. Update or record the relevant component snapshots under `DSKitTests/__Snapshots__/DSKitTests`.
+3. Regenerate docs with `cd Scripts && ./documentation_generator.sh`.
+4. Check the generated component page and any affected screen pages.
