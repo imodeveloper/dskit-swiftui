@@ -17,12 +17,14 @@ DSKit is a SwiftUI design system for building iOS interfaces from reusable views
 
 <img src="Content/Images/Preview.png">
 
-DSKit includes **DSKitExplorer**, a catalog app with 60+ ready-to-use screens that show complete SwiftUI flows in context. Use the [showcase](Content/Showcase.md) for a visual overview, the generated [screen catalog](Content/Screens.md) for full-screen examples, and the generated [component catalog](Content/Views.md) for individual DSKit views.
-
 ## Documentation
 
-Use these entrypoints before guessing APIs:
+Use these entrypoints before guessing APIs or recreating patterns that already exist in the repo.
 
+DSKit includes **DSKitExplorer**, a catalog app with 60+ ready-to-use screens that show complete SwiftUI flows in context. Start with the showcase when choosing a visual direction, use the screen catalog when you need complete screen examples, and use the component catalog when you need individual DSKit views with source, previews, examples, and usage references.
+
+- [Showcase](Content/Showcase.md): visual overview of the main DSKitExplorer flows.
+- [Screen catalog](Content/Screens.md): generated full-screen examples with iPhone-framed snapshot previews and per-screen pages.
 - [Views / Components](Content/Views.md): generated visual component catalog with snapshot previews and links to per-component pages.
 - [Screen construction](Content/Screen-Construction.md): how DSKitExplorer examples map into production Monitor screens.
 - [Layout](Content/Layout-in-DSKit.md): hand-written layout and spacing guidance.
