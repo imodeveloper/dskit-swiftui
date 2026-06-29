@@ -89,7 +89,7 @@ In this example, [DSVStack](Content/Views/DSVStack.md), [DSText](Content/Views/D
 
 DSKit is developed completely in the open, and contributions are welcome.
 
-Before changing DSKit, read [CONTRIBUTING.md](Content/CONTRIBUTING.md), [docs/WORKFLOWS.md](docs/WORKFLOWS.md), and the generated component or screen page for the area you are changing. Generated docs are not edited by hand; update Swift source comments, `Testable_*` examples, snapshots, or the generator, then run `cd Scripts && ./documentation_generator.sh`.
+Before changing DSKit, read the [contribution guide](Content/CONTRIBUTING.md), the [workflow guide](docs/WORKFLOWS.md), and the generated component or screen page for the area you are changing. Generated docs are not edited by hand; update Swift source comments, `Testable_*` examples, snapshots, or the generator, then run `cd Scripts && ./documentation_generator.sh`.
 
 This project does not come with GitHub Issues-based support. Users are encouraged to become active participants by fixing bugs they encounter or improving documentation wherever it is lacking.
 

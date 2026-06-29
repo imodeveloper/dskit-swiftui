@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:36:19 EEST (`pending`)
+
+- task_or_issue: `humanize-readme-doc-link-labels`
+
+#### Request
+Keep the README contribution links, but do not expose filenames as the visible link text.
+
+#### Change Summary
+Changed the visible README link labels from `CONTRIBUTING.md` and `docs/WORKFLOWS.md` to `contribution guide` and `workflow guide` while preserving the same relative destinations.
+
+#### Rationale
+The rendered README should read as polished prose instead of displaying implementation filenames in the sentence.
+
+#### Invariants
+Keep README links relative and repo-local. Link labels should describe the destination purpose rather than repeat file paths.
+
+#### Tests Or Evidence
+Checked README Markdown links and ran staged diff whitespace validation.
+
+#### Related Files
+`Content/CONTRIBUTING.md`, `docs/WORKFLOWS.md`.
+
+#### Follow-up Risks
+If other README links are later made prose-only, preserve enough specificity for agents to still find canonical docs quickly.
+
 ### 2026-06-29 15:32:19 EEST (`pending`)
 
 - task_or_issue: `move-governance-docs-into-content`
