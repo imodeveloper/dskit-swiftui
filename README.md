@@ -24,9 +24,6 @@ DSKit includes **DSKitExplorer**, a catalog app with 60+ ready-to-use screens th
 Use these entrypoints before guessing APIs:
 
 - [Views / Components](Content/Views.md): generated component catalog split into primitives and composed components, with source links, snapshots, examples, and related usage.
-- [DSKitExplorer Screens](Content/Screens.md): generated screen catalog with snapshot previews and source links.
-- [DSKitExplorer Usage Index](Content/Views/UsageIndex.md): exhaustive component-to-screen usage references.
-- [Showcase](Content/Showcase.md): visual overview of the main Explorer flows.
 - [Layout](Content/Layout-in-DSKit.md): hand-written layout and spacing guidance.
 - [Appearance](Content/Appearance-in-DSKit.md): hand-written appearance and theming guidance.
 

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:17:43 EEST (`pending`)
+
+- task_or_issue: `trim-readme-documentation-links`
+
+#### Request
+Remove the DSKitExplorer Screens, DSKitExplorer Usage Index, and Showcase bullets from the README documentation section.
+
+#### Change Summary
+Trimmed the README documentation entrypoint list to keep `Views / Components`, `Layout`, and `Appearance` only.
+
+#### Rationale
+The top-level documentation section should stay focused on the primary documentation paths and avoid overloading the first README list.
+
+#### Invariants
+Keep README documentation links concise. Secondary docs can stay discoverable from generated docs and contextual links outside the main documentation list.
+
+#### Tests Or Evidence
+Verified README relative links and staged whitespace.
+
+#### Related Files
+`README.md`.
+
+#### Follow-up Risks
+If screen or showcase docs need top-level promotion again, add them deliberately with shorter labels.
+
 ### 2026-06-29 15:05:54 EEST (`pending`)
 
 - task_or_issue: `move-start-here-after-documentation`
