@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:19:37 EEST (`pending`)
+
+- task_or_issue: `trim-running-explorer-workflows-link`
+
+#### Request
+Remove the `docs/WORKFLOWS.md` sentence from the README `Running DSKitExplorer` section.
+
+#### Change Summary
+Shortened `Running DSKitExplorer` to only tell readers to open `DSKitExplorer.xcodeproj`, select the `DSKitExplorer` scheme, and run it on an iPhone simulator.
+
+#### Rationale
+The README section should stay focused on launching the demo app without sending readers into workflow automation docs from this paragraph.
+
+#### Invariants
+Keep the `Running DSKitExplorer` section concise. Link workflow docs only where command-line maintenance or agent workflow context is explicitly needed.
+
+#### Tests Or Evidence
+Verified README relative links and staged whitespace.
+
+#### Related Files
+`README.md`.
+
+#### Follow-up Risks
+If CLI workflow discoverability becomes a problem, add a separate concise command-line section instead of expanding this run paragraph.
+
 ### 2026-06-29 15:17:43 EEST (`pending`)
 
 - task_or_issue: `trim-readme-documentation-links`

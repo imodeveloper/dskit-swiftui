@@ -31,7 +31,7 @@ The generated docs are refreshed from Swift source comments, `Testable_*` exampl
 
 ### Running DSKitExplorer
 
-Open `DSKitExplorer.xcodeproj`, select the `DSKitExplorer` scheme, and run it on an iPhone simulator. The repo's current automation target is `iPhone 17 Pro`; see [docs/WORKFLOWS.md](docs/WORKFLOWS.md) for CLI build, test, and documentation refresh commands.
+Open `DSKitExplorer.xcodeproj`, select the `DSKitExplorer` scheme, and run it on an iPhone simulator.
 
 ## Start Here
 
