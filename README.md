@@ -19,6 +19,23 @@ DSKit is a SwiftUI design system for building iOS interfaces from reusable views
 
 DSKit includes **DSKitExplorer**, a catalog app with 60+ ready-to-use screens that show complete SwiftUI flows in context. Use the [showcase](Content/Showcase.md) for a visual overview, the generated [screen catalog](Content/Screens.md) for full-screen examples, and the generated [component catalog](Content/Views.md) for individual DSKit views.
 
+## Documentation
+
+Use these entrypoints before guessing APIs:
+
+- [Views / Components](Content/Views.md): generated component catalog split into primitives and composed components, with source links, snapshots, examples, and related usage.
+- [DSKitExplorer Screens](Content/Screens.md): generated screen catalog with snapshot previews and source links.
+- [DSKitExplorer Usage Index](Content/Views/UsageIndex.md): exhaustive component-to-screen usage references.
+- [Showcase](Content/Showcase.md): visual overview of the main Explorer flows.
+- [Layout](Content/Layout-in-DSKit.md): hand-written layout and spacing guidance.
+- [Appearance](Content/Appearance-in-DSKit.md): hand-written appearance and theming guidance.
+
+The generated docs are refreshed from Swift source comments, `Testable_*` examples, snapshots, and Explorer usage references. Do not hand-edit generated pages under `Content/Views/` or `Content/Screens/`; update source, snapshots, or the generator and then run `cd Scripts && ./documentation_generator.sh`.
+
+### Running DSKitExplorer
+
+Open `DSKitExplorer.xcodeproj`, select the `DSKitExplorer` scheme, and run it on an iPhone simulator. The repo's current automation target is `iPhone 17 Pro`; see [docs/WORKFLOWS.md](docs/WORKFLOWS.md) for CLI build, test, and documentation refresh commands.
+
 ## Start Here
 
 1. Add DSKit with Swift Package Manager:
@@ -70,23 +87,6 @@ struct ContentView: View {
 ```
 
 In this example, [DSVStack](Content/Views/DSVStack.md), [DSText](Content/Views/DSText.md), and [DSButton](Content/Views/DSButton.md) are combined with modifiers like `dsPadding()` and `dsBackground()`.
-
-## Documentation
-
-Use these entrypoints before guessing APIs:
-
-- [Views / Components](Content/Views.md): generated component catalog split into primitives and composed components, with source links, snapshots, examples, and related usage.
-- [DSKitExplorer Screens](Content/Screens.md): generated screen catalog with snapshot previews and source links.
-- [DSKitExplorer Usage Index](Content/Views/UsageIndex.md): exhaustive component-to-screen usage references.
-- [Showcase](Content/Showcase.md): visual overview of the main Explorer flows.
-- [Layout](Content/Layout-in-DSKit.md): hand-written layout and spacing guidance.
-- [Appearance](Content/Appearance-in-DSKit.md): hand-written appearance and theming guidance.
-
-The generated docs are refreshed from Swift source comments, `Testable_*` examples, snapshots, and Explorer usage references. Do not hand-edit generated pages under `Content/Views/` or `Content/Screens/`; update source, snapshots, or the generator and then run `cd Scripts && ./documentation_generator.sh`.
-
-### Running DSKitExplorer
-
-Open `DSKitExplorer.xcodeproj`, select the `DSKitExplorer` scheme, and run it on an iPhone simulator. The repo's current automation target is `iPhone 17 Pro`; see [docs/WORKFLOWS.md](docs/WORKFLOWS.md) for CLI build, test, and documentation refresh commands.
 
 ## Contributions and support
 

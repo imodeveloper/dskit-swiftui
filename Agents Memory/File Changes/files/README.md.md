@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:05:54 EEST (`pending`)
+
+- task_or_issue: `move-start-here-after-documentation`
+
+#### Request
+Move the README `Start Here` section after the `Documentation` section.
+
+#### Change Summary
+Moved the full `Start Here` setup and example block below the documentation entrypoints and `Running DSKitExplorer` guidance.
+
+#### Rationale
+Readers and agents should first see the repo-native documentation entrypoints, then continue into install and first-use steps.
+
+#### Invariants
+Keep the `Start Here` block intact unless setup instructions change. Preserve the generated documentation links before setup details.
+
+#### Tests Or Evidence
+Verified README relative links and staged whitespace.
+
+#### Related Files
+`README.md`.
+
+#### Follow-up Risks
+If the documentation section is split later, revisit whether `Start Here` should sit after just the entrypoint list or after all documentation-related subsections.
+
 ### 2026-06-29 15:01:35 EEST (`pending`)
 
 - task_or_issue: `remove-platform-support-sentence`
