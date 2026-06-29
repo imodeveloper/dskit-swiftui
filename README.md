@@ -23,7 +23,7 @@ DSKit includes **DSKitExplorer**, a catalog app with 60+ ready-to-use screens th
 
 Use these entrypoints before guessing APIs:
 
-- [Views / Components](Content/Views.md): generated component catalog split into primitives and composed components, with source links, snapshots, examples, and related usage.
+- [Views / Components](Content/Views.md): generated visual component catalog with snapshot previews and links to per-component pages.
 - [Layout](Content/Layout-in-DSKit.md): hand-written layout and spacing guidance.
 - [Appearance](Content/Appearance-in-DSKit.md): hand-written appearance and theming guidance.
 
@@ -89,7 +89,7 @@ In this example, [DSVStack](Content/Views/DSVStack.md), [DSText](Content/Views/D
 
 DSKit is developed completely in the open, and contributions are welcome.
 
-Before changing DSKit, read [CONTRIBUTING.md](CONTRIBUTING.md), [docs/WORKFLOWS.md](docs/WORKFLOWS.md), and the generated component or screen page for the area you are changing. Generated docs are not edited by hand; update Swift source comments, `Testable_*` examples, snapshots, or the generator, then run `cd Scripts && ./documentation_generator.sh`.
+Before changing DSKit, read [CONTRIBUTING.md](Content/CONTRIBUTING.md), [docs/WORKFLOWS.md](docs/WORKFLOWS.md), and the generated component or screen page for the area you are changing. Generated docs are not edited by hand; update Swift source comments, `Testable_*` examples, snapshots, or the generator, then run `cd Scripts && ./documentation_generator.sh`.
 
 This project does not come with GitHub Issues-based support. Users are encouraged to become active participants by fixing bugs they encounter or improving documentation wherever it is lacking.
 

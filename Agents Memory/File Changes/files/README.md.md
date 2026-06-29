@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:32:19 EEST (`pending`)
+
+- task_or_issue: `move-governance-docs-into-content`
+
+#### Request
+Move root-level governance docs into `Content/` and update references.
+
+#### Change Summary
+Updated the README contribution paragraph to link to `Content/CONTRIBUTING.md` after the contribution guide moved out of the repository root. Also corrected the component catalog description so it matches the current visual `Content/Views.md` table.
+
+#### Rationale
+The README remains the root entrypoint, so it must point readers to the new repo-local contribution guide path and accurately describe the generated docs.
+
+#### Invariants
+Keep README links relative and repo-local. Contribution guidance should continue to send contributors to generated docs and workflow docs before editing.
+
+#### Tests Or Evidence
+Checked Markdown links for `README.md`, `Content/CONTRIBUTING.md`, and `Content/CODE_OF_CONDUCT.md`; no broken links were found.
+
+#### Related Files
+`Content/CONTRIBUTING.md`, `Content/CODE_OF_CONDUCT.md`.
+
+#### Follow-up Risks
+If the contribution guide moves again, update this README link in the same change.
+
 ### 2026-06-29 15:19:37 EEST (`pending`)
 
 - task_or_issue: `trim-running-explorer-workflows-link`
