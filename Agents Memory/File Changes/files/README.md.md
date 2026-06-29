@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:38:13 EEST (`pending`)
+
+- task_or_issue: `emphasize-readme-audience`
+
+#### Request
+Make `developers` and `AI agents` bold in the README intro sentence.
+
+#### Change Summary
+Added Markdown emphasis around `developers` and `AI agents` in the opening DSKit positioning paragraph.
+
+#### Rationale
+The README intro should make the two target audiences visually prominent without changing the surrounding copy.
+
+#### Invariants
+Keep the intro concise and keep generated docs positioned as useful for both humans and agents.
+
+#### Tests Or Evidence
+Ran README Markdown link validation, staged whitespace validation, and file-change memory check.
+
+#### Related Files
+`README.md`.
+
+#### Follow-up Risks
+None.
+
 ### 2026-06-29 15:36:19 EEST (`pending`)
 
 - task_or_issue: `humanize-readme-doc-link-labels`

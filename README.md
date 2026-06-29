@@ -13,7 +13,7 @@
 
 # DSKit
 
-DSKit is a SwiftUI design system for building iOS interfaces from reusable views, design tokens, and appearance themes. The repo is organized for both developers and AI agents: generated docs connect every component and Explorer screen to source files, snapshot previews, examples, and real usage references.
+DSKit is a SwiftUI design system for building iOS interfaces from reusable views, design tokens, and appearance themes. The repo is organized for both **developers** and **AI agents**: generated docs connect every component and Explorer screen to source files, snapshot previews, examples, and real usage references.
 
 <img src="Content/Images/Preview.png">
 
