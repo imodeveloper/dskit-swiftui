@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 13:40:34 EEST (`pending`)
+
+- task_or_issue: `agent-friendly-component-docs`
+
+#### Request
+Commit the generated DSKit component documentation without making per-file memory for every generated component page.
+
+#### Change Summary
+Added `Content/Views/*` to the helper's ignored generated-documentation paths, alongside the existing `Content/Views.md` exclusion.
+
+#### Rationale
+The component docs refactor introduced many generated Markdown files under `Content/Views/`. Treating those as meaningful hand-maintained files would make memory checks noisy and misleading.
+
+#### Invariants
+Keep generated docs excluded from file-change memory. Continue tracking source scripts, routing docs, README changes, and other hand-maintained files.
+
+#### Tests Or Evidence
+Re-ran `Agents Memory/tools/agent_memory_file_changes.sh` with the generated docs staged and confirmed generated `Content/Views/*` pages were ignored.
+
+#### Related Files
+`Content/Views.md`, `Content/Views/*.md`, `Scripts/generate_view_docs.py`, `AGENTS.md`.
+
+#### Follow-up Risks
+If other generated documentation directories are added, extend the ignore list with the same narrow path-specific approach.
+
 ### 2026-05-18 21:39:14 EEST (`pending`)
 
 - task_or_issue: `agent-file-memory-workflow`

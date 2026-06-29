@@ -19,10 +19,10 @@
 
 ## Snapshot documentation generation
 
-- Generate/refresh `Content/Views.md`:
+- Generate/refresh `Content/Views.md`, per-component pages, and the Explorer usage index:
   - `cd Scripts`
   - `./documentation_generator.sh`
-- The script reads view source comments and snapshot images in `DSKitTests/__Snapshots__/DSKitTests`.
+- The script reads view source comments, snapshot images in `DSKitTests/__Snapshots__/DSKitTests`, and direct usage references in `DSKitExplorer/Screens`.
 - Run it after API/visual changes in `DSKit/Sources/DSKit/Views`.
 
 ## Running on CLI and automation

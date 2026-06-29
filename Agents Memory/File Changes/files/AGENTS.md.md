@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 13:40:34 EEST (`pending`)
+
+- task_or_issue: `agent-friendly-component-docs`
+
+#### Request
+Refactor DSKit component documentation into generated repo-native Markdown and keep future agents oriented to the new generated outputs.
+
+#### Change Summary
+Expanded the generated documentation list from the single `Content/Views.md` file to include `Content/Views/*.md` per-component pages and `Content/Views/UsageIndex.md`.
+
+#### Rationale
+The docs generator now writes an index plus component pages and an Explorer usage map. The top-level agent guide needs to name the full generated surface so agents do not hand-edit generated Markdown or miss the usage index.
+
+#### Invariants
+Keep generated documentation listed as generated. Preserve the rule that generated docs are refreshed through `Scripts/documentation_generator.sh`.
+
+#### Tests Or Evidence
+Ran the documentation generator, generated-link validation, and a DSKitExplorer build on the available `iPhone 17 Pro, OS=26.5` simulator destination.
+
+#### Related Files
+`Content/Views.md`, `Content/Views/*.md`, `Content/Views/UsageIndex.md`, `Scripts/documentation_generator.sh`, `Scripts/generate_view_docs.py`.
+
+#### Follow-up Risks
+If future generated outputs are added, update this guide and the memory helper exclusions together.
+
 ### 2026-05-18 21:39:14 EEST (`pending`)
 
 - task_or_issue: `agent-file-memory-workflow`

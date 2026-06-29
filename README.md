@@ -69,7 +69,7 @@ struct DSKitDemoApp: App {
 ```
 
 ### Step 3: Using DSKit in Your Screens
-To integrate [DSKit components](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Views.md) and modifiers into your SwiftUI views, simply use them like any other SwiftUI component or modifier. Here’s an example of how you might use DSKit:
+To integrate [DSKit components](Content/Views.md) and modifiers into your SwiftUI views, simply use them like any other SwiftUI component or modifier. The component catalog links to dedicated pages for each view, including source files, snapshot-backed examples, related components, and DSKit Explorer usage references. Here’s an example of how you might use DSKit:
 
 ```swift
 import SwiftUI
@@ -96,7 +96,7 @@ struct ContentView: View {
 }
 ```
 
-In this example, [DSVStack](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Views.md), [DSText](https://github.com/imodeveloper/dskit-swiftui/blob/main/Content/Views.md), and various modifiers like `dsPadding()` and `dsBackground()` are used. These components and modifiers are part of DSKit and help apply consistent styling and spacing as defined in your design system.
+In this example, [DSVStack](Content/Views/DSVStack.md), [DSText](Content/Views/DSText.md), and [DSButton](Content/Views/DSButton.md) are combined with modifiers like `dsPadding()` and `dsBackground()`. These components and modifiers are part of DSKit and help apply consistent styling and spacing as defined in your design system.
 
 ## Documentation
 
@@ -104,7 +104,7 @@ The most effective way to familiarize yourself with DSKit and its capabilities i
 
 ### Components and Layouts
 
-DSKit offers a library of ready-to-use UI components and full-screen [layouts](Content/Layout-in-DSKit.md) that are designed to be easily integrated and customized within your projects. Each [component](Content/Views.md) and screen layout is fully adaptable, allowing you to tweak and refine them to perfectly fit the specific needs of your application. This accessibility accelerates the development process, enabling you to implement complex design solutions efficiently while maintaining a high standard of aesthetics and functionality.
+DSKit offers a library of ready-to-use UI components and full-screen [layouts](Content/Layout-in-DSKit.md) that are designed to be easily integrated and customized within your projects. Start with the generated [component catalog](Content/Views.md), then open an individual view page such as [DSImageView](Content/Views/DSImageView.md), [DSList](Content/Views/DSList.md), or [DSSection](Content/Views/DSSection.md) when you need source links, testable examples, rendered snapshots, and Explorer usage references. For exhaustive screen-to-component references, use the generated [DSKitExplorer usage index](Content/Views/UsageIndex.md).
 
 ### Appearances
 
@@ -116,6 +116,7 @@ To dive deeper into specific features and functionalities, continue to the secti
 
 - [Layout](Content/Layout-in-DSKit.md)
 - [Views / Components](Content/Views.md)
+- [DSKitExplorer Usage Index](Content/Views/UsageIndex.md)
 - [Appearance](Content/Appearance-in-DSKit.md)
 
 ## Contributions and support
@@ -128,6 +129,6 @@ Since this is a very young project, it’s likely to have many limitations and m
 
 This project does not come with GitHub Issues-based support, and users are instead encouraged to become active participants in its continued development — by fixing any bugs that they encounter, or by improving the documentation wherever it’s found to be lacking.
 
-If you wish to make a change, open a [Pull Request](https://github.com/imodeveloper/dskit/pulls) — even if it just contains a draft of the changes you’re planning, or a test that reproduces an issue — and we can discuss it further from there.
+If you wish to make a change, open a [Pull Request](https://github.com/imodeveloper/dskit-swiftui/pulls) — even if it just contains a draft of the changes you’re planning, or a test that reproduces an issue — and we can discuss it further from there.
 
 Hope you’ll enjoy using DSKit!

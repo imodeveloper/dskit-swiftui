@@ -54,7 +54,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - Snapshot test surfaces:
   - Component goldens in `DSKitTests/__Snapshots__/DSKitTests`
   - Screen goldens in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`
-- Generated documentation: `Content/Views.md`
+- Generated documentation: `Content/Views.md`, `Content/Views/*.md`, and `Content/Views/UsageIndex.md`
 - Determinism-sensitive tooling: `Scripts/documentation_generator.sh`
 - Workspace integration: this package is consumed by `../imodeveloperlab/Workspace.xcworkspace`.
 
