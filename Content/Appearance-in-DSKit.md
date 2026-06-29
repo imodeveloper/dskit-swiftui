@@ -41,11 +41,11 @@ Built-in appearances live in `DSKit/Sources/DSKit/Appearances`.
 
 Useful starting points include:
 
-- `LightBlueAppearance`
-- `DarkAppearance`
-- `RetroAppearance`
-- `BlueAppearance`
-- `PeachAppearance`
+- [`LightBlueAppearance`](../DSKit/Sources/DSKit/Appearances/DSKitAppearance.swift)
+- [`DarkAppearance`](../DSKit/Sources/DSKit/Appearances/DarkAppearance.swift)
+- [`RetroAppearance`](../DSKit/Sources/DSKit/Appearances/RetroAppearance.swift)
+- [`BlueAppearance`](../DSKit/Sources/DSKit/Appearances/BlueAppearance.swift)
+- [`PeachAppearance`](../DSKit/Sources/DSKit/Appearances/PeachAppearance.swift)
 
 Most custom themes should start by copying a built-in appearance and changing brand colors, typography, surfaces, and component-specific values.
 
