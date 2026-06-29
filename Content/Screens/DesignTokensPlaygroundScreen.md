@@ -4,7 +4,7 @@
 
 ### DesignTokensPlaygroundScreen
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/DesignTokensPlaygroundScreen.snapshot.png" width="60%" alt="DesignTokensPlaygroundScreen snapshot preview" />
+<img src="Frames/DesignTokensPlaygroundScreen.framed.svg" width="60%" alt="DesignTokensPlaygroundScreen snapshot preview" />
 
 ## DSKit Views Used
 

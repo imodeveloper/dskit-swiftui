@@ -4,7 +4,7 @@
 
 ### NewsScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/NewsScreen1.snapshot.png" width="60%" alt="NewsScreen1 snapshot preview" />
+<img src="Frames/NewsScreen1.framed.svg" width="60%" alt="NewsScreen1 snapshot preview" />
 
 ## DSKit Views Used
 

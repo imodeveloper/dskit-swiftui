@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:04:12 EEST (`pending`)
+
+- task_or_issue: `iphone-framed-screen-previews`
+
+#### Request
+Embed generated DSKitExplorer screen snapshots in an iPhone-style frame for the screen catalog and per-screen docs.
+
+#### Change Summary
+Added generated SVG frame output under `Content/Screens/Frames/*.framed.svg`, based on the snapshot harness iPhone 15 Pro profile: `1179x2556` px, `393x852` pt at 3x, `55` pt screen corner radius, and a `126x37` pt Dynamic Island. Changed screen catalog/detail previews to reference the framed SVGs instead of raw snapshot PNGs.
+
+#### Rationale
+GitHub Markdown cannot rely on custom CSS for a reliable device frame. Generated SVG wrappers provide a deterministic frame without duplicating large PNG snapshot assets.
+
+#### Invariants
+Keep original PNG snapshots in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests` as the source of truth. Treat `Content/Screens/Frames` as generated output and do not hand-edit frame SVGs.
+
+#### Tests Or Evidence
+Ran `Scripts/documentation_generator.sh`, generated 69 frame SVGs, verified 117 Markdown files and all frame SVG image references resolve locally, confirmed `Content/Screens.md` has 68 framed preview references, checked the real frame metadata/geometry in `FoodHomeScreen1.framed.svg`, and rendered it through Quick Look as a visual smoke test.
+
+#### Related Files
+`Content/Screens.md`, `Content/Screens/*.md`, `Content/Screens/Frames/*.framed.svg`, `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/*.snapshot.png`.
+
+#### Follow-up Risks
+If GitHub blocks relative PNGs inside SVG image references, replace the SVG wrappers with generated flattened PNG previews despite the larger repo size.
+
 ### 2026-06-29 16:52:44 EEST (`pending`)
 
 - task_or_issue: `remove-screen-testable-examples`

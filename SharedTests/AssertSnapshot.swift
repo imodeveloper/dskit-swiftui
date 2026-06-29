@@ -80,6 +80,8 @@ extension XCTestCase {
             view: testView,
             layout: layout
         )
+        let restoreSystemAppearance = installSnapshotSystemAppearanceIfNeeded(for: layout)
+        defer { restoreSystemAppearance() }
 
         let hostingController = UIHostingController(rootView: rootView)
         hostingController.view.backgroundColor = .clear
@@ -147,6 +149,65 @@ extension XCTestCase {
         if let failure {
             XCTFail(failure, file: file, line: line)
         }
+    }
+}
+
+private func installSnapshotSystemAppearanceIfNeeded(for layout: SnapshotLayout) -> () -> Void {
+    switch layout {
+    case .component:
+        return {}
+    case let .screen(_, _, appearance):
+        return SnapshotSystemAppearance.install(for: appearance)
+    }
+}
+
+private struct SnapshotSystemAppearance {
+    let tabBarStandardAppearance: UITabBarAppearance
+    let tabBarScrollEdgeAppearance: UITabBarAppearance?
+    let tabBarBackgroundColor: UIColor?
+    let tabBarTintColor: UIColor?
+    let tabBarUnselectedItemTintColor: UIColor?
+
+    static func install(for appearance: DSAppearance) -> () -> Void {
+        let tabBarProxy = UITabBar.appearance()
+        let previous = SnapshotSystemAppearance(
+            tabBarStandardAppearance: tabBarProxy.standardAppearance.copy() as? UITabBarAppearance ?? UITabBarAppearance(),
+            tabBarScrollEdgeAppearance: tabBarProxy.scrollEdgeAppearance?.copy() as? UITabBarAppearance,
+            tabBarBackgroundColor: tabBarProxy.backgroundColor,
+            tabBarTintColor: tabBarProxy.tintColor,
+            tabBarUnselectedItemTintColor: tabBarProxy.unselectedItemTintColor
+        )
+
+        let itemAppearance = UITabBarItemAppearance()
+        itemAppearance.normal.iconColor = appearance.tabBar.unselectedItemTint
+        itemAppearance.normal.titleTextAttributes = [.foregroundColor: appearance.tabBar.unselectedItemTint]
+        itemAppearance.selected.iconColor = appearance.tabBar.itemTint
+        itemAppearance.selected.titleTextAttributes = [.foregroundColor: appearance.tabBar.itemTint]
+
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = appearance.tabBar.barTint
+        tabBarAppearance.shadowColor = .clear
+        tabBarAppearance.stackedLayoutAppearance = itemAppearance
+        tabBarAppearance.inlineLayoutAppearance = itemAppearance
+        tabBarAppearance.compactInlineLayoutAppearance = itemAppearance
+
+        tabBarProxy.standardAppearance = tabBarAppearance
+        tabBarProxy.scrollEdgeAppearance = tabBarAppearance
+        tabBarProxy.backgroundColor = appearance.tabBar.barTint
+        tabBarProxy.tintColor = appearance.tabBar.itemTint
+        tabBarProxy.unselectedItemTintColor = appearance.tabBar.unselectedItemTint
+
+        return previous.restore
+    }
+
+    func restore() {
+        let tabBarProxy = UITabBar.appearance()
+        tabBarProxy.standardAppearance = tabBarStandardAppearance
+        tabBarProxy.scrollEdgeAppearance = tabBarScrollEdgeAppearance
+        tabBarProxy.backgroundColor = tabBarBackgroundColor
+        tabBarProxy.tintColor = tabBarTintColor
+        tabBarProxy.unselectedItemTintColor = tabBarUnselectedItemTintColor
     }
 }
 

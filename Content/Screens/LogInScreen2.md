@@ -4,7 +4,7 @@
 
 ### LogInScreen2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/LogInScreen2.snapshot.png" width="60%" alt="LogInScreen2 snapshot preview" />
+<img src="Frames/LogInScreen2.framed.svg" width="60%" alt="LogInScreen2 snapshot preview" />
 
 ## DSKit Views Used
 

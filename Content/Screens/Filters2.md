@@ -4,7 +4,7 @@
 
 ### Filters2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Filters2.snapshot.png" width="60%" alt="Filters2 snapshot preview" />
+<img src="Frames/Filters2.framed.svg" width="60%" alt="Filters2 snapshot preview" />
 
 ## DSKit Views Used
 

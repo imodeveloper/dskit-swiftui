@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import re
 import os
+import struct
 from dataclasses import dataclass
+from html import escape
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -18,6 +20,7 @@ EXPLORER_SNAPSHOT_DIR = ROOT / "DSKitExplorerTests" / "__Snapshots__" / "DSKitEx
 CONTENT_DIR = ROOT / "Content"
 VIEW_DOCS_DIR = CONTENT_DIR / "Views"
 SCREEN_DOCS_DIR = CONTENT_DIR / "Screens"
+SCREEN_FRAME_DIR = SCREEN_DOCS_DIR / "Frames"
 INDEX_FILE = CONTENT_DIR / "Views.md"
 USAGE_INDEX_FILE = VIEW_DOCS_DIR / "UsageIndex.md"
 SCREEN_INDEX_FILE = CONTENT_DIR / "Screens.md"
@@ -25,6 +28,21 @@ PAGE_PREVIEW_WIDTH = "60%"
 INDEX_PREVIEW_WIDTH = "240"
 SCREEN_INDEX_COLUMNS = 3
 SCREEN_INDEX_PREVIEW_HEIGHT = "520"
+SCREEN_FRAME_SUFFIX = ".framed.svg"
+IPHONE_FRAME_DEVICE_NAME = "iPhone 15 Pro"
+IPHONE_FRAME_MODEL_IDENTIFIER = "iPhone16,1"
+IPHONE_FRAME_CHROME_IDENTIFIER = "com.apple.dt.devicekit.chrome.phone9"
+IPHONE_FRAME_SENSOR_BAR = "sensor_bar_class_04"
+IPHONE_FRAME_SCALE = 3
+IPHONE_FRAME_SCREEN_SIZE = (1179, 2556)
+IPHONE_FRAME_SCREEN_POINTS = (393, 852)
+IPHONE_FRAME_CHROME_POINTS = (429, 888)
+IPHONE_FRAME_SCREEN_INSET_POINTS = (18, 18)
+IPHONE_FRAME_BODY_CORNER_RADIUS_POINTS = 75
+IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS = 55
+IPHONE_FRAME_DYNAMIC_ISLAND_POINTS = (126, 37)
+IPHONE_FRAME_DYNAMIC_ISLAND_TOP_POINTS = 11
+IPHONE_FRAME_SENSOR_BAR_POINTS = (393, 47)
 
 PRIORITY_COMPONENTS = [
     "DSVStack",
@@ -358,6 +376,143 @@ def find_screen_snapshots(screen_name: str) -> List[Path]:
     return snapshots
 
 
+def png_dimensions(path: Path) -> Tuple[int, int]:
+    header = path.read_bytes()[:24]
+    png_signature = b"\x89PNG\r\n\x1a\n"
+    if len(header) < 24 or header[:8] != png_signature or header[12:16] != b"IHDR":
+        raise SystemExit(f"Expected a PNG snapshot image: {repo_path(path)}")
+    return struct.unpack(">II", header[16:24])
+
+
+def framed_screen_path(snapshot_path: Path) -> Path:
+    if snapshot_path.name.endswith(".snapshot.png"):
+        frame_name = snapshot_path.name.removesuffix(".snapshot.png") + SCREEN_FRAME_SUFFIX
+    else:
+        frame_name = snapshot_path.stem + SCREEN_FRAME_SUFFIX
+    return SCREEN_FRAME_DIR / frame_name
+
+
+def scaled_point(value: float) -> float:
+    return value * IPHONE_FRAME_SCALE
+
+
+def format_svg_number(value: float) -> str:
+    if float(value).is_integer():
+        return str(int(value))
+    return f"{value:.2f}".rstrip("0").rstrip(".")
+
+
+def screen_frame_output_size() -> Tuple[int, int]:
+    return (
+        IPHONE_FRAME_CHROME_POINTS[0] * IPHONE_FRAME_SCALE,
+        IPHONE_FRAME_CHROME_POINTS[1] * IPHONE_FRAME_SCALE,
+    )
+
+
+def screen_frame_content_origin() -> Tuple[int, int]:
+    return (
+        IPHONE_FRAME_SCREEN_INSET_POINTS[0] * IPHONE_FRAME_SCALE,
+        IPHONE_FRAME_SCREEN_INSET_POINTS[1] * IPHONE_FRAME_SCALE,
+    )
+
+
+def screen_frame_metadata() -> str:
+    return (
+        f"{IPHONE_FRAME_DEVICE_NAME}; model={IPHONE_FRAME_MODEL_IDENTIFIER}; "
+        f"chrome={IPHONE_FRAME_CHROME_IDENTIFIER}; screen={IPHONE_FRAME_SCREEN_SIZE[0]}x{IPHONE_FRAME_SCREEN_SIZE[1]}px; "
+        f"points={IPHONE_FRAME_SCREEN_POINTS[0]}x{IPHONE_FRAME_SCREEN_POINTS[1]}pt; scale={IPHONE_FRAME_SCALE}; "
+        f"screenCornerRadius={IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS}pt; "
+        f"dynamicIsland={IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[0]}x{IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[1]}pt; "
+        f"sensorBar={IPHONE_FRAME_SENSOR_BAR} ({IPHONE_FRAME_SENSOR_BAR_POINTS[0]}x{IPHONE_FRAME_SENSOR_BAR_POINTS[1]}pt)"
+    )
+
+
+def write_screen_frame(snapshot_path: Path) -> Path:
+    screen_width, screen_height = png_dimensions(snapshot_path)
+    if (screen_width, screen_height) != IPHONE_FRAME_SCREEN_SIZE:
+        raise SystemExit(
+            f"Screen snapshot {repo_path(snapshot_path)} is {screen_width}x{screen_height}, "
+            f"but generated {IPHONE_FRAME_DEVICE_NAME} frames require "
+            f"{IPHONE_FRAME_SCREEN_SIZE[0]}x{IPHONE_FRAME_SCREEN_SIZE[1]} snapshots. "
+            "Update `SnapshotLayout.screen` or add a matching frame profile."
+        )
+
+    frame_path = framed_screen_path(snapshot_path)
+    view_width, view_height = screen_frame_output_size()
+    screen_x, screen_y = screen_frame_content_origin()
+    body_radius = scaled_point(IPHONE_FRAME_BODY_CORNER_RADIUS_POINTS)
+    screen_radius = scaled_point(IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS)
+    island_width = scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[0])
+    island_height = scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[1])
+    island_x = screen_x + ((screen_width - island_width) / 2)
+    island_y = screen_y + scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_TOP_POINTS)
+    button_width = scaled_point(16)
+    mute_height = scaled_point(34)
+    volume_height = scaled_point(64)
+    power_height = scaled_point(101)
+    left_button_x = scaled_point(8)
+    right_button_x = view_width - scaled_point(8) - button_width
+    snapshot_link = escape(rel_link(snapshot_path, SCREEN_FRAME_DIR), quote=True)
+    snapshot_name = escape(snapshot_path.stem.removesuffix(".snapshot"))
+    metadata = escape(screen_frame_metadata())
+
+    svg = f"""<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="{view_width}" height="{view_height}" viewBox="0 0 {view_width} {view_height}" role="img" aria-label="{snapshot_name} framed in {IPHONE_FRAME_DEVICE_NAME}">
+  <metadata>{metadata}</metadata>
+  <defs>
+    <clipPath id="screenClip">
+      <rect x="{screen_x}" y="{screen_y}" width="{screen_width}" height="{screen_height}" rx="{screen_radius}" ry="{screen_radius}" />
+    </clipPath>
+    <linearGradient id="bodyFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#20242b" />
+      <stop offset="42%" stop-color="#05070a" />
+      <stop offset="100%" stop-color="#171a20" />
+    </linearGradient>
+    <linearGradient id="rimStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4b5563" />
+      <stop offset="18%" stop-color="#111827" />
+      <stop offset="50%" stop-color="#6b7280" />
+      <stop offset="82%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#4b5563" />
+    </linearGradient>
+    <filter id="phoneShadow" x="-7%" y="-4%" width="114%" height="112%">
+      <feDropShadow dx="0" dy="24" stdDeviation="34" flood-color="#020617" flood-opacity="0.22" />
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="{view_width}" height="{view_height}" rx="{body_radius}" ry="{body_radius}" fill="url(#bodyFill)" filter="url(#phoneShadow)" />
+  <rect x="6" y="6" width="{view_width - 12}" height="{view_height - 12}" rx="{body_radius - 6}" ry="{body_radius - 6}" fill="none" stroke="url(#rimStroke)" stroke-width="6" opacity="0.9" />
+  <rect x="{left_button_x}" y="{scaled_point(160)}" width="{button_width}" height="{mute_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
+  <rect x="{left_button_x}" y="{scaled_point(221)}" width="{button_width}" height="{volume_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
+  <rect x="{left_button_x}" y="{scaled_point(300)}" width="{button_width}" height="{volume_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
+  <rect x="{right_button_x}" y="{scaled_point(262)}" width="{button_width}" height="{power_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
+  <rect x="{screen_x - 8}" y="{screen_y - 8}" width="{screen_width + 16}" height="{screen_height + 16}" rx="{screen_radius + 8}" ry="{screen_radius + 8}" fill="#030712" />
+  <image href="{snapshot_link}" x="{screen_x}" y="{screen_y}" width="{screen_width}" height="{screen_height}" preserveAspectRatio="xMidYMid slice" clip-path="url(#screenClip)" />
+  <rect x="{screen_x}" y="{screen_y}" width="{screen_width}" height="{screen_height}" rx="{screen_radius}" ry="{screen_radius}" fill="none" stroke="#05070a" stroke-width="6" />
+  <rect x="{format_svg_number(island_x)}" y="{format_svg_number(island_y)}" width="{island_width}" height="{island_height}" rx="{island_height / 2}" ry="{island_height / 2}" fill="#020617" opacity="0.96" />
+</svg>
+"""
+
+    frame_path.write_text(svg, encoding="utf-8")
+    return frame_path
+
+
+def write_screen_frames(docs: List["ScreenDoc"]) -> int:
+    SCREEN_FRAME_DIR.mkdir(parents=True, exist_ok=True)
+    for old_frame in list(SCREEN_FRAME_DIR.glob("*.framed.svg")) + list(SCREEN_FRAME_DIR.glob("*.framed.png")):
+        old_frame.unlink()
+
+    written = 0
+    seen: set[Path] = set()
+    for doc in docs:
+        for snapshot_path in doc.snapshot_paths:
+            if snapshot_path in seen:
+                continue
+            write_screen_frame(snapshot_path)
+            seen.add(snapshot_path)
+            written += 1
+    return written
+
+
 def screen_source_entries() -> List[Tuple[str, Path, str]]:
     entries = [
         (path.stem, path, path.read_text(encoding="utf-8"))
@@ -558,7 +713,7 @@ def preview_thumbnail(doc: ComponentDoc, from_dir: Path) -> str:
 
 
 def screen_preview_thumbnail(doc: ScreenDoc, from_dir: Path) -> str:
-    preview_link = rel_link(doc.snapshot_paths[0], from_dir)
+    preview_link = rel_link(framed_screen_path(doc.snapshot_paths[0]), from_dir)
     screen_link = rel_link(doc.page_path, from_dir)
     return (
         f'<a href="{screen_link}">'
@@ -576,7 +731,7 @@ def write_screen_page(doc: ScreenDoc) -> None:
     ]
 
     for snapshot_path in doc.snapshot_paths:
-        snapshot_link = rel_link(snapshot_path, doc.page_path.parent)
+        snapshot_link = rel_link(framed_screen_path(snapshot_path), doc.page_path.parent)
         lines.append(f"### {snapshot_path.stem.removesuffix('.snapshot')}")
         lines.append("")
         lines.append(f'<img src="{snapshot_link}" width="{PAGE_PREVIEW_WIDTH}" alt="{doc.name} snapshot preview" />')
@@ -655,6 +810,7 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         "- Refresh these docs with `cd Scripts && ./documentation_generator.sh`.",
         "- Every screen page must have at least one matching snapshot image in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`.",
         "- A screen named `ExampleScreen` uses `ExampleScreen.snapshot.png` and may also include variants such as `ExampleScreen_0.snapshot.png`.",
+        "- Framed screen previews are generated SVG files under `Content/Screens/Frames` from the source snapshot PNGs.",
     ])
 
     SCREEN_INDEX_FILE.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
@@ -708,6 +864,7 @@ def main() -> None:
 
     docs = build_component_docs()
     screen_docs = build_screen_docs([doc.name for doc in docs])
+    screen_frame_count = write_screen_frames(screen_docs)
     for doc in docs:
         write_component_page(doc)
     write_usage_index(docs)
@@ -718,6 +875,7 @@ def main() -> None:
 
     print(f"Generated {len(docs)} component pages")
     print(f"Generated {len(screen_docs)} screen pages")
+    print(f"Generated {screen_frame_count} screen frame previews")
     print(f"Wrote {INDEX_FILE.relative_to(ROOT)}")
     print(f"Wrote {USAGE_INDEX_FILE.relative_to(ROOT)}")
     print(f"Wrote {SCREEN_INDEX_FILE.relative_to(ROOT)}")

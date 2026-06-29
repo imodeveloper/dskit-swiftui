@@ -4,7 +4,7 @@
 
 ### AboutUsScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/AboutUsScreen1.snapshot.png" width="60%" alt="AboutUsScreen1 snapshot preview" />
+<img src="Frames/AboutUsScreen1.framed.svg" width="60%" alt="AboutUsScreen1 snapshot preview" />
 
 ## DSKit Views Used
 

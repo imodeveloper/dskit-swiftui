@@ -177,23 +177,27 @@ private struct DSRemoteImageView: View {
 
             Group {
                 LazyImage(url: url) { state in
-                    if let uiImage = state.image {
-                        Color.gray.opacity(0.1)
-                            .overlay(alignment: .center) {
-                                uiImage
-                                    .resizable()
-                                    .setContentMode(mode: image.contentMode)
-                            }
-                            .setDisplayShape(shape: image.displayShape)
-                            .onAppear { registerMetadata(from: state) }
-                            .onChange(of: state.isLoading) { isLoading in
-                                if !isLoading { registerMetadata(from: state) }
-                            }
-                    } else if state.error != nil {
-                        placeholderView(for: layoutSize, failed: true)
-                    } else {
-                        placeholderView(for: layoutSize, failed: false)
+                    Group {
+                        if let uiImage = state.image {
+                            Color.gray.opacity(0.1)
+                                .overlay(alignment: .center) {
+                                    uiImage
+                                        .resizable()
+                                        .setContentMode(mode: image.contentMode)
+                                        .transition(.opacity)
+                                }
+                                .setDisplayShape(shape: image.displayShape)
+                                .onAppear { registerMetadata(from: state) }
+                                .onChange(of: state.isLoading) { isLoading in
+                                    if !isLoading { registerMetadata(from: state) }
+                                }
+                        } else if state.error != nil {
+                            failurePlaceholderView(for: layoutSize)
+                        } else {
+                            loadingView()
+                        }
                     }
+                    .animation(.default, value: state.image != nil)
                 }
             }
             .onAppear {
@@ -212,17 +216,22 @@ private struct DSRemoteImageView: View {
     }
 
     @ViewBuilder
-    private func placeholderView(for layoutSize: CGSize, failed: Bool) -> some View {
+    private func failurePlaceholderView(for layoutSize: CGSize) -> some View {
         let placeholderIconSize = adaptivePlaceholderIconSize(for: layoutSize)
 
         Color.gray.opacity(0.1)
             .overlay(alignment: .center) {
-                Image(systemName: failed ? "photo.badge.exclamationmark" : "photo")
+                Image(systemName: "photo.badge.exclamationmark")
                     .resizable()
                     .scaledToFit()
-                    .foregroundStyle(.secondary.opacity(failed ? 0.95 : 0.75))
+                    .foregroundStyle(.secondary.opacity(0.95))
                     .frame(width: placeholderIconSize, height: placeholderIconSize)
             }
+            .setDisplayShape(shape: image.displayShape)
+    }
+
+    private func loadingView() -> some View {
+        Color.gray.opacity(0.1)
             .setDisplayShape(shape: image.displayShape)
     }
 

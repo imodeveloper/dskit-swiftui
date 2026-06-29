@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:25:51 EEST (`pending`)
+
+- task_or_issue: `iphone-framed-screen-previews`
+
+#### Request
+Update the workflow guide for generated iPhone-framed screen previews.
+
+#### Change Summary
+Added framed screen previews to the documentation generation output list, extended the no-hand-edit rule to `Content/Screens/Frames/`, and added validation that frame SVGs point to existing snapshot PNGs.
+
+#### Rationale
+The workflow guide is the command reference agents use before refreshing docs, so it needs to include the new generated frame output surface.
+
+#### Invariants
+Keep `Scripts/documentation_generator.sh` as the canonical refresh command. Do not imply generated frame SVGs are hand-maintained assets.
+
+#### Tests Or Evidence
+Ran the documentation generator, local generated Markdown/SVG link validation, and whitespace validation after updating the workflow guide.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Documentation.md`, `Content/Screens/Frames/*.framed.svg`.
+
+#### Follow-up Risks
+If frame output becomes PNG or another asset type later, update this guide with the generator change.
+
 ### 2026-06-29 15:49:34 EEST (`pending`)
 
 - task_or_issue: `move-root-docs-under-content`

@@ -4,7 +4,7 @@
 
 ### Filters1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Filters1.snapshot.png" width="60%" alt="Filters1 snapshot preview" />
+<img src="Frames/Filters1.framed.svg" width="60%" alt="Filters1 snapshot preview" />
 
 ## DSKit Views Used
 

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:04:12 EEST (`pending`)
+
+- task_or_issue: `iphone-framed-screen-previews`
+
+#### Request
+Document generated screen frame SVGs inside Content guidance.
+
+#### Change Summary
+Listed `Screens/Frames/*.framed.svg` as generated output from screen snapshot PNGs and extended the no-hand-edit rule to generated frame SVGs.
+
+#### Rationale
+Content-area agents need a clear distinction between hand-maintained pages and generated screen preview assets.
+
+#### Invariants
+Generated screen pages and frame SVGs are refreshed through `Scripts/documentation_generator.sh`; do not edit them directly.
+
+#### Tests Or Evidence
+Ran the documentation generator and local generated-link/image validation after updating Content guidance.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens.md`, `Content/Screens/*.md`, `Content/Screens/Frames/*.framed.svg`.
+
+#### Follow-up Risks
+If generated frame assets move outside `Content/Screens`, update this Content guide in the same change.
+
 ### 2026-06-29 16:09:19 EEST (`pending`)
 
 - task_or_issue: `screen-construction-deep-dive`

@@ -4,7 +4,7 @@
 
 ### SignUpScreen2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/SignUpScreen2.snapshot.png" width="60%" alt="SignUpScreen2 snapshot preview" />
+<img src="Frames/SignUpScreen2.framed.svg" width="60%" alt="SignUpScreen2 snapshot preview" />
 
 ## DSKit Views Used
 

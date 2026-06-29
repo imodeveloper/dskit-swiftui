@@ -4,7 +4,7 @@
 
 ### FoodRestaurantScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/FoodRestaurantScreen1.snapshot.png" width="60%" alt="FoodRestaurantScreen1 snapshot preview" />
+<img src="Frames/FoodRestaurantScreen1.framed.svg" width="60%" alt="FoodRestaurantScreen1 snapshot preview" />
 
 ## DSKit Views Used
 

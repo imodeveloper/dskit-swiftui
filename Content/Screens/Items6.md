@@ -4,7 +4,7 @@
 
 ### Items6
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Items6.snapshot.png" width="60%" alt="Items6 snapshot preview" />
+<img src="Frames/Items6.framed.svg" width="60%" alt="Items6 snapshot preview" />
 
 ## DSKit Views Used
 

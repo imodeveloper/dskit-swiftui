@@ -4,7 +4,7 @@
 
 ### BookingScreen5
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/BookingScreen5.snapshot.png" width="60%" alt="BookingScreen5 snapshot preview" />
+<img src="Frames/BookingScreen5.framed.svg" width="60%" alt="BookingScreen5 snapshot preview" />
 
 ## DSKit Views Used
 

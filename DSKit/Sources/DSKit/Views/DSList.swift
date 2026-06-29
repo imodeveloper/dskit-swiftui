@@ -66,7 +66,7 @@ public struct DSList<Content: View>: View {
     }
 
     public init(
-        spacing: DSSpatialToken = .space16,
+        spacing: DSSpatialToken = .space8,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.init(

@@ -15,13 +15,14 @@ Generated documentation is refreshed from:
 
 ## Generated Outputs
 
-Do not hand-edit these generated docs:
+Do not hand-edit these generated docs or assets:
 
 - [Views.md](Views.md)
 - [Views/](Views/)
 - [Views/UsageIndex.md](Views/UsageIndex.md)
 - [Screens.md](Screens.md)
 - [Screens/](Screens/)
+- [Screens/Frames/](Screens/Frames/)
 
 To change generated content, update the source comments, `Testable_*` examples, snapshots, Explorer screen source, or the generator.
 
@@ -42,6 +43,7 @@ After a documentation refresh, check that:
 
 - Every DSKit view has a matching component page and preview snapshot.
 - Every generated screen page has at least one matching screen snapshot.
+- Every generated screen preview frame points back to an existing screen snapshot.
 - Relative links resolve locally.
 - No generated Markdown contains local absolute paths.
 

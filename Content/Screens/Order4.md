@@ -4,7 +4,7 @@
 
 ### Order4
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Order4.snapshot.png" width="60%" alt="Order4 snapshot preview" />
+<img src="Frames/Order4.framed.svg" width="60%" alt="Order4 snapshot preview" />
 
 ## DSKit Views Used
 

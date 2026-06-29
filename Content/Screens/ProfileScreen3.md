@@ -4,7 +4,7 @@
 
 ### ProfileScreen3
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ProfileScreen3.snapshot.png" width="60%" alt="ProfileScreen3 snapshot preview" />
+<img src="Frames/ProfileScreen3.framed.svg" width="60%" alt="ProfileScreen3 snapshot preview" />
 
 ## DSKit Views Used
 

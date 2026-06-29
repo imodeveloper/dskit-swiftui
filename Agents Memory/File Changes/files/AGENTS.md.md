@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:04:12 EEST (`pending`)
+
+- task_or_issue: `iphone-framed-screen-previews`
+
+#### Request
+Document that screen preview frame SVGs are generated alongside screen docs.
+
+#### Change Summary
+Added `Content/Screens/Frames/*.framed.svg` to generated documentation outputs and noted that screen preview frames are generated wrappers around source screen snapshots.
+
+#### Rationale
+Top-level agent routing should make generated frame assets discoverable without implying they are hand-maintained documentation.
+
+#### Invariants
+Keep this file concise and directive. Generated docs/assets should be listed here only as routing information, not as implementation detail.
+
+#### Tests Or Evidence
+Ran the documentation generator and local generated-link/image validation after updating the guide.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/AGENTS.md`, `Scripts/AGENTS.md`.
+
+#### Follow-up Risks
+If frame output moves, update the generated output list in the same change as the generator path change.
+
 ### 2026-06-29 16:09:19 EEST (`pending`)
 
 - task_or_issue: `screen-construction-deep-dive`

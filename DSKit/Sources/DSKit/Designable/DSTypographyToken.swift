@@ -75,7 +75,7 @@ public indirect enum DSTypographyToken: Equatable, Hashable {
         case .caption2:
             return appearance.typography.caption2
         case .label:
-            return appearance.typography.headline.withSize(14)
+            return appearance.typography.headline.withSize(16)
         case .bodySmall:
             return appearance.typography.body.withSize(14)
         case .bodyLarge:

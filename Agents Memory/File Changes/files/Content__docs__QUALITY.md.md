@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:25:51 EEST (`pending`)
+
+- task_or_issue: `iphone-framed-screen-previews`
+
+#### Request
+Keep quality guardrails current after adding generated screen frame SVGs.
+
+#### Change Summary
+Expanded the generated-docs quality rule to include `Content/Screens/Frames/*.framed.svg`.
+
+#### Rationale
+Generated frame SVGs are documentation assets and should follow the same regenerated-from-source rule as generated Markdown pages.
+
+#### Invariants
+Generated docs and frame assets are refreshed from source, snapshots, and the generator, not manually rewritten.
+
+#### Tests Or Evidence
+Ran the documentation generator, local generated Markdown/SVG link validation, and whitespace validation after updating the quality guide.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Documentation.md`, `Content/docs/WORKFLOWS.md`.
+
+#### Follow-up Risks
+Keep this list synchronized if generated output paths change again.
+
 ### 2026-06-29 15:49:34 EEST (`pending`)
 
 - task_or_issue: `move-root-docs-under-content`

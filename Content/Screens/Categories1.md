@@ -4,7 +4,7 @@
 
 ### Categories1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Categories1.snapshot.png" width="60%" alt="Categories1 snapshot preview" />
+<img src="Frames/Categories1.framed.svg" width="60%" alt="Categories1 snapshot preview" />
 
 ## DSKit Views Used
 

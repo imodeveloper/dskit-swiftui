@@ -4,7 +4,7 @@
 
 ### CartScreen4
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/CartScreen4.snapshot.png" width="60%" alt="CartScreen4 snapshot preview" />
+<img src="Frames/CartScreen4.framed.svg" width="60%" alt="CartScreen4 snapshot preview" />
 
 ## DSKit Views Used
 

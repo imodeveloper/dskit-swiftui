@@ -11,7 +11,7 @@ struct BookingScreen2: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = BookingScreen2Model()
     var body: some View {
-        DSList {
+        DSList(spacing: .space8) {
             DSSection {
                 Location(address: viewModel.address)
                     .onTap { dismiss() }

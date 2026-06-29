@@ -4,7 +4,7 @@
 
 ### ImageGalleryScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ImageGalleryScreen1.snapshot.png" width="60%" alt="ImageGalleryScreen1 snapshot preview" />
+<img src="Frames/ImageGalleryScreen1.framed.svg" width="60%" alt="ImageGalleryScreen1 snapshot preview" />
 
 ## DSKit Views Used
 

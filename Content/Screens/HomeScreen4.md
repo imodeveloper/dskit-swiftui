@@ -4,7 +4,7 @@
 
 ### HomeScreen4
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/HomeScreen4.snapshot.png" width="60%" alt="HomeScreen4 snapshot preview" />
+<img src="Frames/HomeScreen4.framed.svg" width="60%" alt="HomeScreen4 snapshot preview" />
 
 ## DSKit Views Used
 

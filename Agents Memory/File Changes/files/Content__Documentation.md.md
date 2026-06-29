@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:25:51 EEST (`pending`)
+
+- task_or_issue: `iphone-framed-screen-previews`
+
+#### Request
+Keep generated documentation workflow guidance aligned with generated iPhone-framed screen previews.
+
+#### Change Summary
+Expanded generated output guidance to include `Content/Screens/Frames/` and added validation language for generated screen preview frames pointing back to existing screen snapshots.
+
+#### Rationale
+The documentation workflow page should name every generated docs surface so contributors and agents do not hand-edit frame assets.
+
+#### Invariants
+Keep this page hand-maintained. Generated screen frames are refreshed through `Scripts/documentation_generator.sh`, not edited directly.
+
+#### Tests Or Evidence
+Ran the documentation generator, local generated Markdown/SVG link validation, and whitespace validation after updating the workflow page.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens/Frames/*.framed.svg`, `Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`.
+
+#### Follow-up Risks
+If generated frame output changes format or location, update this workflow page in the same change.
+
 ### 2026-06-29 15:40:29 EEST (`pending`)
 
 - task_or_issue: `separate-generated-docs-workflow`

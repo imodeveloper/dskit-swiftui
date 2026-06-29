@@ -16,8 +16,7 @@ struct BookingScreen4: View {
                 ForEach(viewModel.barbers) { barber in
                     DSCardSurface {
                         Barber(barber: barber)
-                    }
-                        .onTap { dismiss() }
+                    }.onTap { dismiss() }
                 }
             }
         }
