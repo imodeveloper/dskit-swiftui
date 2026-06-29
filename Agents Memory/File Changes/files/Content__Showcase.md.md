@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 14:54:15 EEST (`pending`)
+
+- task_or_issue: `simplify-agent-showcase-copy`
+
+#### Request
+Rethink, simplify, and improve the showcase introduction with agents in mind.
+
+#### Change Summary
+Condensed the showcase intro into a visual-to-source navigation path: pick a screenshot group, follow related screen links, inspect Swift source, and reuse the pattern.
+
+#### Rationale
+The showcase page should be a quick visual map into generated screen docs, not a long explanation. Agents need short deterministic instructions for where to go next.
+
+#### Invariants
+Keep showcase text brief. Keep detailed implementation references in generated `Content/Screens/*.md` and component pages.
+
+#### Tests Or Evidence
+Verified README and showcase relative links.
+
+#### Related Files
+`README.md`, `Content/Screens.md`, `Content/Screens/*.md`.
+
+#### Follow-up Risks
+If generated screen names change, update the related screen links in this page.
+
 ### 2026-06-29 14:51:20 EEST (`pending`)
 
 - task_or_issue: `agent-oriented-intro-copy`

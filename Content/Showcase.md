@@ -1,8 +1,8 @@
 # DSKitExplorer Showcase
 
-DSKitExplorer shows how DSKit components compose into complete SwiftUI app flows. Use this page for a quick visual overview of the included examples, then open the generated [screen catalog](Screens.md) when you need source files, snapshot references, and component usage.
+DSKitExplorer shows complete SwiftUI flows built with DSKit. Use this page to pick a visual direction, then open the generated [screen catalog](Screens.md) for source files, snapshots, and component usage.
 
-The structure is intentionally agent-friendly: every showcase group points to concrete screen pages, and those pages link back to the Swift source and DSKit views used in the implementation. Start from the visual flow, follow the screen link, then copy or adapt the source-backed pattern into your app.
+For agent workflows: start with a screenshot group, follow the related screen links, inspect the linked Swift source, then reuse the pattern in your app.
 
 ## E-Commerce
 

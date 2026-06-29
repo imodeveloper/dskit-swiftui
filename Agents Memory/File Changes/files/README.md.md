@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 14:54:15 EEST (`pending`)
+
+- task_or_issue: `simplify-agent-readme-copy`
+
+#### Request
+Rethink, simplify, and improve the README copy with developers and AI agents in mind.
+
+#### Change Summary
+Shortened the intro, Explorer summary, setup flow, documentation section, and contribution guidance. The README now emphasizes a direct path from installation to examples, generated catalogs, source links, snapshots, and usage references without long marketing-style paragraphs.
+
+#### Rationale
+The README should be quick for humans and agents to scan. It should identify what DSKit is, how to install it, how to start using it, and where to inspect source-backed examples.
+
+#### Invariants
+Keep README copy concise. Preserve repo-native links to generated docs and avoid reintroducing legacy website or UIKit routing in the main path.
+
+#### Tests Or Evidence
+Verified README and showcase relative links.
+
+#### Related Files
+`Content/Showcase.md`, `Content/Screens.md`, `Content/Views.md`, `Content/Views/UsageIndex.md`.
+
+#### Follow-up Risks
+If the generated docs move or change shape, update these README links and descriptions together.
+
 ### 2026-06-29 14:51:20 EEST (`pending`)
 
 - task_or_issue: `agent-oriented-intro-copy`
