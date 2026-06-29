@@ -10,7 +10,7 @@ No `Testable_*` example is available in the source file yet.
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSCardSurface.snapshot.png" width="35%" alt="DSCardSurface preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSCardSurface.snapshot.png" width="60%" alt="DSCardSurface preview" />
 
 ## DSKitExplorer Usage
 

@@ -30,7 +30,7 @@ struct Testable_DSSectionHeaderView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSSectionHeaderView.snapshot.png" width="35%" alt="DSSectionHeaderView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSSectionHeaderView.snapshot.png" width="60%" alt="DSSectionHeaderView preview" />
 
 ## DSKitExplorer Usage
 

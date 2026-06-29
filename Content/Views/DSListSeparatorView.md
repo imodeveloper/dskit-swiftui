@@ -50,7 +50,7 @@ struct Testable_DSListSeparatorView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSListSeparatorView.snapshot.png" width="35%" alt="DSListSeparatorView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSListSeparatorView.snapshot.png" width="60%" alt="DSListSeparatorView preview" />
 
 ## DSKitExplorer Usage
 

@@ -95,7 +95,7 @@ struct Testable_DSTabPagingView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSTabPagingView.snapshot.png" width="35%" alt="DSTabPagingView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSTabPagingView.snapshot.png" width="60%" alt="DSTabPagingView preview" />
 
 ## DSKitExplorer Usage
 

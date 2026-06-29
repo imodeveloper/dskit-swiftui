@@ -35,7 +35,7 @@ struct Testable_DSGroupedList: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSGroupedList.snapshot.png" width="35%" alt="DSGroupedList preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSGroupedList.snapshot.png" width="60%" alt="DSGroupedList preview" />
 
 ## DSKitExplorer Usage
 

@@ -4,7 +4,7 @@
 
 ### NotificationsScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/NotificationsScreen1.snapshot.png" width="35%" alt="NotificationsScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/NotificationsScreen1.snapshot.png" width="60%" alt="NotificationsScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -13,16 +13,6 @@
 - [DSImageView](../Views/DSImageView.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_NotificationsScreen1: View {
-    var body: some View {
-        NotificationsScreen1()
-    }
-}
-```
 
 ## Reference
 

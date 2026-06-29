@@ -31,7 +31,7 @@ struct Testable_DSRatingView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSRatingView.snapshot.png" width="35%" alt="DSRatingView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSRatingView.snapshot.png" width="60%" alt="DSRatingView preview" />
 
 ## DSKitExplorer Usage
 

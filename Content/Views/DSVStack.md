@@ -42,7 +42,7 @@ struct Testable_DSVStack: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSVStack.snapshot.png" width="35%" alt="DSVStack preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSVStack.snapshot.png" width="60%" alt="DSVStack preview" />
 
 ## DSKitExplorer Usage
 

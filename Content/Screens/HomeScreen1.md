@@ -4,7 +4,7 @@
 
 ### HomeScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/HomeScreen1.snapshot.png" width="35%" alt="HomeScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/HomeScreen1.snapshot.png" width="60%" alt="HomeScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -18,41 +18,6 @@
 - [DSSectionHeaderView](../Views/DSSectionHeaderView.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_HomeScreen1: View {
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        TabView {
-            HomeScreen1()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
-            Text("Shop")
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Shop")
-                }
-            Text("Cart")
-                .tabItem {
-                    Image(systemName: "cart.fill")
-                    Text("Cart")
-                }
-            DSVStack {
-                DSButton(title: "Dismiss", style: .clear) {
-                    dismiss()
-                }
-            }.tabItem {
-                Image(systemName: "gearshape")
-                Text("Settings")
-            }
-        }
-    }
-}
-```
 
 ## Reference
 

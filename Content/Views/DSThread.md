@@ -43,7 +43,7 @@ struct Testable_DSThread: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSThread.snapshot.png" width="35%" alt="DSThread preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSThread.snapshot.png" width="60%" alt="DSThread preview" />
 
 ## DSKitExplorer Usage
 

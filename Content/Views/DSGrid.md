@@ -38,7 +38,7 @@ struct Testable_DSGrid: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSGrid.snapshot.png" width="35%" alt="DSGrid preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSGrid.snapshot.png" width="60%" alt="DSGrid preview" />
 
 ## DSKitExplorer Usage
 

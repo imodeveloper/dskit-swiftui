@@ -42,7 +42,7 @@ struct Testable_DSPriceView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSPriceView.snapshot.png" width="35%" alt="DSPriceView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSPriceView.snapshot.png" width="60%" alt="DSPriceView preview" />
 
 ## DSKitExplorer Usage
 

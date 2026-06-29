@@ -182,7 +182,7 @@ struct Testable_DSList: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSList.snapshot.png" width="35%" alt="DSList preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSList.snapshot.png" width="60%" alt="DSList preview" />
 
 ## DSKitExplorer Usage
 

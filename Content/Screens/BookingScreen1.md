@@ -4,7 +4,7 @@
 
 ### BookingScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/BookingScreen1.snapshot.png" width="35%" alt="BookingScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/BookingScreen1.snapshot.png" width="60%" alt="BookingScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -16,44 +16,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_BookingScreen1: View {
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        TabView {
-            NavigationView {
-                BookingScreen1()
-                    .navigationTitle("Booking")
-            }
-            .tabItem {
-                Image(systemName: "book.closed.fill")
-                Text("Booking")
-            }
-            Text("Profile")
-                .tabItem {
-                    Image(systemName: "person.circle")
-                    Text("Profile")
-                }
-            Text("About")
-                .tabItem {
-                    Image(systemName: "info.circle.fill")
-                    Text("About")
-                }
-            DSVStack {
-                DSButton(title: "Dismiss", style: .clear) {
-                    dismiss()
-                }
-            }.tabItem {
-                Image(systemName: "bookmark.fill")
-                Text("Bookmark")
-            }
-        }
-    }
-}
-```
 
 ## Reference
 

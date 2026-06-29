@@ -4,7 +4,7 @@
 
 ### SignUpScreen4
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/SignUpScreen4.snapshot.png" width="35%" alt="SignUpScreen4 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/SignUpScreen4.snapshot.png" width="60%" alt="SignUpScreen4 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -15,28 +15,6 @@
 - [DSTextField](../Views/DSTextField.md)
 - [DSToolbarSFSymbolButton](../Views/DSToolbarSFSymbolButton.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_SignUpScreen4: View {
-    var body: some View {
-        Group {
-            if #available(iOS 16.0, *) {
-                NavigationStack {
-                    SignUpScreen4()
-                        .platformBasedNavigationBarTitleDisplayModeInline()
-                }
-            } else {
-                NavigationView {
-                    SignUpScreen4()
-                        .platformBasedNavigationBarTitleDisplayModeInline()
-                }
-            }
-        }
-    }
-}
-```
 
 ## Reference
 

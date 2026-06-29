@@ -72,7 +72,7 @@ struct Testable_DSSection: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSSection.snapshot.png" width="35%" alt="DSSection preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSSection.snapshot.png" width="60%" alt="DSSection preview" />
 
 ## DSKitExplorer Usage
 

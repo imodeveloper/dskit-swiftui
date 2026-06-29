@@ -37,7 +37,7 @@ struct Testable_DSHScroll: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSHScroll.snapshot.png" width="35%" alt="DSHScroll preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSHScroll.snapshot.png" width="60%" alt="DSHScroll preview" />
 
 ## DSKitExplorer Usage
 

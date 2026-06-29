@@ -99,7 +99,7 @@ struct Testable_DSImageView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSImageView.snapshot.png" width="35%" alt="DSImageView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSImageView.snapshot.png" width="60%" alt="DSImageView preview" />
 
 ## DSKitExplorer Usage
 

@@ -4,7 +4,7 @@
 
 ### Order3
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Order3.snapshot.png" width="35%" alt="Order3 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Order3.snapshot.png" width="60%" alt="Order3 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -12,16 +12,6 @@
 - [DSImageView](../Views/DSImageView.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_Order3: View {
-    var body: some View {
-        Order3()
-    }
-}
-```
 
 ## Reference
 

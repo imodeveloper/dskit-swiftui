@@ -4,7 +4,7 @@
 
 ### NewsScreen2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/NewsScreen2.snapshot.png" width="35%" alt="NewsScreen2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/NewsScreen2.snapshot.png" width="60%" alt="NewsScreen2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -15,41 +15,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_NewsScreen2: View {
-    @Environment(\.dismiss) var dismiss
-    @State var selectedTab: Int = 1
-    var body: some View {
-        TabView(selection: $selectedTab) {
-            Text("Home")
-                .tabItem {
-                    Image(systemName: "newspaper.fill")
-                    Text("Home")
-                }.tag(0)
-            NavigationView {
-                NewsScreen2()
-                    .navigationTitle("Bookmarks")
-            }
-            .tabItem {
-                Image(systemName: "bookmark")
-                Text("Bookmarks")
-            }.tag(1)
-            DSVStack {
-                DSButton(title: "Dismiss", style: .clear) {
-                    dismiss()
-                }.dsPadding()
-            }
-            .tabItem {
-                Image(systemName: "gearshape")
-                Text("Settings")
-            }.tag(2)
-        }
-    }
-}
-```
 
 ## Reference
 

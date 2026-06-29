@@ -28,7 +28,7 @@ struct Testable_DSQuantityPicker: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSQuantityPicker.snapshot.png" width="35%" alt="DSQuantityPicker preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSQuantityPicker.snapshot.png" width="60%" alt="DSQuantityPicker preview" />
 
 ## DSKitExplorer Usage
 

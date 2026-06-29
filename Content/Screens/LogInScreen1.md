@@ -4,7 +4,7 @@
 
 ### LogInScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/LogInScreen1.snapshot.png" width="35%" alt="LogInScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/LogInScreen1.snapshot.png" width="60%" alt="LogInScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -12,16 +12,6 @@
 - [DSText](../Views/DSText.md)
 - [DSTextField](../Views/DSTextField.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_LogInScreen1: View {
-    var body: some View {
-        LogInScreen1()
-    }
-}
-```
 
 ## Reference
 

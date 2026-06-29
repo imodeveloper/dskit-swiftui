@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 16:09:19 EEST (`pending`)
+
+- task_or_issue: `screen-construction-deep-dive`
+
+#### Request
+Deep dive into DSKitExplorer and Monitor screen construction, then add the result to the agent guide and README.
+
+#### Change Summary
+Added `Content/Screen-Construction.md` to the read-first list and the repo reading flow for agents translating DSKitExplorer examples into production Monitor screens.
+
+#### Rationale
+The top-level guide should route future agents to the new hand-maintained screen-construction analysis before they compare this repo with `../imodeveloperlab`.
+
+#### Invariants
+Keep this file concise and directive. Do not duplicate the full screen-construction guidance here; link to the dedicated Content page.
+
+#### Tests Or Evidence
+Validated Markdown links for the changed docs and ran whitespace validation on the changed documentation files.
+
+#### Related Files
+`Content/Screen-Construction.md`, `README.md`, `Content/AGENTS.md`.
+
+#### Follow-up Risks
+If the screen-construction page is renamed, update this routing entry and the README in the same change.
+
 ### 2026-06-29 15:49:34 EEST (`pending`)
 
 - task_or_issue: `move-root-docs-under-content`

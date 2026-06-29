@@ -63,7 +63,7 @@ struct Testable_DSContentCardComponents: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSContentCard.snapshot.png" width="35%" alt="DSContentCard preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSContentCard.snapshot.png" width="60%" alt="DSContentCard preview" />
 
 ## DSKitExplorer Usage
 

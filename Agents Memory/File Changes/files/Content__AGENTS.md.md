@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 16:09:19 EEST (`pending`)
+
+- task_or_issue: `screen-construction-deep-dive`
+
+#### Request
+Deep dive into DSKitExplorer and Monitor screen construction, then add the result to the agent guide and README.
+
+#### Change Summary
+Listed `Screen-Construction.md` as a hand-maintained Content guide that compares DSKitExplorer screen patterns with production Monitor screen patterns.
+
+#### Rationale
+Agents working inside `Content/` need to know that the new page is not generated and should be maintained alongside other human-authored documentation.
+
+#### Invariants
+Keep generated docs clearly separated from hand-maintained pages. Do not classify `Screen-Construction.md` as generator output.
+
+#### Tests Or Evidence
+Validated Markdown links for the changed docs and ran whitespace validation on the changed documentation files.
+
+#### Related Files
+`Content/Screen-Construction.md`, `AGENTS.md`, `README.md`.
+
+#### Follow-up Risks
+If future generated docs include similar analysis, clarify which source is canonical.
+
 ### 2026-06-29 15:49:34 EEST (`pending`)
 
 - task_or_issue: `move-root-docs-under-content`

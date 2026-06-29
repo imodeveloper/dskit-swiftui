@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 16:09:19 EEST (`pending`)
+
+- task_or_issue: `screen-construction-deep-dive`
+
+#### Request
+Deep dive into DSKitExplorer and Monitor screen construction, then add the result to the agent guide and README.
+
+#### Change Summary
+Added a Documentation entry for `Content/Screen-Construction.md`, described as the bridge from DSKitExplorer examples to production Monitor screens.
+
+#### Rationale
+The README is the public entrypoint and should expose the new screen-construction guide beside component, layout, appearance, and documentation workflow docs.
+
+#### Invariants
+Keep README documentation links concise, relative, and purpose-labeled. Detailed implementation analysis belongs in the linked Content page.
+
+#### Tests Or Evidence
+Validated Markdown links for the changed docs and ran whitespace validation on the changed documentation files.
+
+#### Related Files
+`Content/Screen-Construction.md`, `AGENTS.md`, `Content/AGENTS.md`.
+
+#### Follow-up Risks
+If Monitor moves away from DSKit or the sibling repo layout changes, update the linked page and this README description.
+
 ### 2026-06-29 15:49:34 EEST (`pending`)
 
 - task_or_issue: `move-root-docs-under-content`

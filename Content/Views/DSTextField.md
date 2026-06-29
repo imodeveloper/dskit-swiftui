@@ -54,7 +54,7 @@ struct Testable_DSTextField: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSTextField.snapshot.png" width="35%" alt="DSTextField preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSTextField.snapshot.png" width="60%" alt="DSTextField preview" />
 
 ## DSKitExplorer Usage
 

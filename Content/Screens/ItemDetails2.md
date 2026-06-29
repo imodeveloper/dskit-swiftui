@@ -4,7 +4,7 @@
 
 ### ItemDetails2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ItemDetails2.snapshot.png" width="35%" alt="ItemDetails2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ItemDetails2.snapshot.png" width="60%" alt="ItemDetails2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -20,20 +20,6 @@
 - [DSText](../Views/DSText.md)
 - [DSToolbarSFSymbolButton](../Views/DSToolbarSFSymbolButton.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_ItemDetails2: View {
-    var body: some View {
-        NavigationView {
-            ItemDetails2()
-                .navigationTitle("Product Details")
-                .platformBasedNavigationBarTitleDisplayModeInline()
-        }
-    }
-}
-```
 
 ## Reference
 

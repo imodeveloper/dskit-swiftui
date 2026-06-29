@@ -4,7 +4,7 @@
 
 ### BookingScreen5
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/BookingScreen5.snapshot.png" width="35%" alt="BookingScreen5 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/BookingScreen5.snapshot.png" width="60%" alt="BookingScreen5 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -19,20 +19,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_BookingScreen5: View {
-    var body: some View {
-        NavigationView {
-            BookingScreen5()
-                .platformBasedNavigationBarTitleDisplayModeInline()
-                .navigationTitle("Barber Details")
-        }
-    }
-}
-```
 
 ## Reference
 

@@ -10,7 +10,7 @@ No `Testable_*` example is available in the source file yet.
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSEntityRow.snapshot.png" width="35%" alt="DSEntityRow preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSEntityRow.snapshot.png" width="60%" alt="DSEntityRow preview" />
 
 ## DSKitExplorer Usage
 

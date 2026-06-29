@@ -62,7 +62,7 @@ struct Testable_DSPickerView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSPickerView.snapshot.png" width="35%" alt="DSPickerView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSPickerView.snapshot.png" width="60%" alt="DSPickerView preview" />
 
 ## DSKitExplorer Usage
 

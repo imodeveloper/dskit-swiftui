@@ -65,7 +65,7 @@ private struct Testable_DSFloatingBannerView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSFloatingBannerView.snapshot.png" width="35%" alt="DSFloatingBannerView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSFloatingBannerView.snapshot.png" width="60%" alt="DSFloatingBannerView preview" />
 
 ## DSKitExplorer Usage
 

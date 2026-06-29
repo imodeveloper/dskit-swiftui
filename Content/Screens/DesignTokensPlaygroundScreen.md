@@ -4,7 +4,7 @@
 
 ### DesignTokensPlaygroundScreen
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/DesignTokensPlaygroundScreen.snapshot.png" width="35%" alt="DesignTokensPlaygroundScreen snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/DesignTokensPlaygroundScreen.snapshot.png" width="60%" alt="DesignTokensPlaygroundScreen snapshot preview" />
 
 ## DSKit Views Used
 
@@ -12,10 +12,6 @@
 - [DSHStack](../Views/DSHStack.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-No `Testable_*` example is available in the screen source file.
 
 ## Reference
 

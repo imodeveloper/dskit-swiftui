@@ -4,7 +4,7 @@
 
 ### SignUpScreen2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/SignUpScreen2.snapshot.png" width="35%" alt="SignUpScreen2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/SignUpScreen2.snapshot.png" width="60%" alt="SignUpScreen2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -13,28 +13,6 @@
 - [DSTermsAndConditions](../Views/DSTermsAndConditions.md)
 - [DSTextField](../Views/DSTextField.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_SignUpScreen2: View {
-    var body: some View {
-        Group {
-            if #available(iOS 16.0, *) {
-                NavigationStack {
-                    SignUpScreen2()
-                        .platformBasedNavigationBarTitleDisplayModeInline()
-                }
-            } else {
-                NavigationView {
-                    SignUpScreen2()
-                        .platformBasedNavigationBarTitleDisplayModeInline()
-                }
-            }
-        }
-    }
-}
-```
 
 ## Reference
 

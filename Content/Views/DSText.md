@@ -61,7 +61,7 @@ struct Testable_DSText: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSText.snapshot.png" width="35%" alt="DSText preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSText.snapshot.png" width="60%" alt="DSText preview" />
 
 ## DSKitExplorer Usage
 

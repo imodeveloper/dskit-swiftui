@@ -4,7 +4,7 @@
 
 ### Shipping1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Shipping1.snapshot.png" width="35%" alt="Shipping1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Shipping1.snapshot.png" width="60%" alt="Shipping1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -17,19 +17,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_Shipping1: View {
-    var body: some View {
-        NavigationView {
-            Shipping1()
-                .navigationTitle("Shipping")
-        }
-    }
-}
-```
 
 ## Reference
 

@@ -4,7 +4,7 @@
 
 ### CartScreen5
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/CartScreen5.snapshot.png" width="35%" alt="CartScreen5 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/CartScreen5.snapshot.png" width="60%" alt="CartScreen5 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -21,20 +21,6 @@
 - [DSText](../Views/DSText.md)
 - [DSToolbarSFSymbolButton](../Views/DSToolbarSFSymbolButton.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_CartScreen5: View {
-    var body: some View {
-        NavigationView {
-            CartScreen5()
-                .navigationTitle("My Cart")
-                .platformBasedNavigationBarTitleDisplayModeInline()
-        }
-    }
-}
-```
 
 ## Reference
 

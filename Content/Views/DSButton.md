@@ -86,7 +86,7 @@ struct Testable_DSButton: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSButton.snapshot.png" width="35%" alt="DSButton preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSButton.snapshot.png" width="60%" alt="DSButton preview" />
 
 ## DSKitExplorer Usage
 

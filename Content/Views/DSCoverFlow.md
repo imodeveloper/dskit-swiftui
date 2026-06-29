@@ -47,7 +47,7 @@ struct Testable_DSCoverFlow: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSCoverFlow.snapshot.png" width="35%" alt="DSCoverFlow preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSCoverFlow.snapshot.png" width="60%" alt="DSCoverFlow preview" />
 
 ## DSKitExplorer Usage
 

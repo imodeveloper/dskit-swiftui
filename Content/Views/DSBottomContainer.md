@@ -33,7 +33,7 @@ struct Testable_DSBottomContainer: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSBottomContainer.snapshot.png" width="35%" alt="DSBottomContainer preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSBottomContainer.snapshot.png" width="60%" alt="DSBottomContainer preview" />
 
 ## DSKitExplorer Usage
 

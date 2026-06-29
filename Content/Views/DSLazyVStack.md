@@ -33,7 +33,7 @@ struct Testable_DSLazyVStack: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSLazyVStack.snapshot.png" width="35%" alt="DSLazyVStack preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSLazyVStack.snapshot.png" width="60%" alt="DSLazyVStack preview" />
 
 ## DSKitExplorer Usage
 

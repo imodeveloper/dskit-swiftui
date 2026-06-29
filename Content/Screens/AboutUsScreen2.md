@@ -4,11 +4,11 @@
 
 ### AboutUsScreen2_0
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/AboutUsScreen2_0.snapshot.png" width="35%" alt="AboutUsScreen2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/AboutUsScreen2_0.snapshot.png" width="60%" alt="AboutUsScreen2 snapshot preview" />
 
 ### AboutUsScreen2_1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/AboutUsScreen2_1.snapshot.png" width="35%" alt="AboutUsScreen2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/AboutUsScreen2_1.snapshot.png" width="60%" alt="AboutUsScreen2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -22,44 +22,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_AboutUsScreen2: View {
-    var selectedTab: Int = 0
-    @Environment(\.dismiss) var dismiss
-    @State var tab: Int = 2
-    var body: some View {
-        TabView(selection: $tab) {
-            Text("Shop")
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }.tag(0)
-            Text("Cart")
-                .tabItem {
-                    Image(systemName: "cart.fill")
-                    Text("Cart")
-                }.tag(1)
-            AboutUsScreen2(selectedTab: selectedTab)
-                .tabItem {
-                    Image(systemName: "info.circle.fill")
-                    Text("About")
-                }.tag(2)
-
-            DSVStack {
-                DSButton(title: "Dismiss", style: .clear) {
-                    dismiss()
-                }
-            }.tabItem {
-                Image(systemName: "gearshape")
-                Text("Settings")
-            }.tag(3)
-        }
-    }
-}
-```
 
 ## Reference
 

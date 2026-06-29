@@ -4,7 +4,7 @@
 
 ### Categories5
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Categories5.snapshot.png" width="35%" alt="Categories5 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Categories5.snapshot.png" width="60%" alt="Categories5 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -14,19 +14,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_Categories5: View {
-    var body: some View {
-        NavigationView {
-            Categories5()
-                .navigationTitle("Categories")
-        }
-    }
-}
-```
 
 ## Reference
 

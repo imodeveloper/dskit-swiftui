@@ -45,7 +45,7 @@ struct Testable_DSChipsView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSChipsView.snapshot.png" width="35%" alt="DSChipsView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSChipsView.snapshot.png" width="60%" alt="DSChipsView preview" />
 
 ## DSKitExplorer Usage
 

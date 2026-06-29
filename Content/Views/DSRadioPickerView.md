@@ -34,7 +34,7 @@ struct Testable_DSRadioPickerView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSRadioPickerView.snapshot.png" width="35%" alt="DSRadioPickerView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSRadioPickerView.snapshot.png" width="60%" alt="DSRadioPickerView preview" />
 
 ## DSKitExplorer Usage
 

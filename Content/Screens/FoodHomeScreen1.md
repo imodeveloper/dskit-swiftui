@@ -4,7 +4,7 @@
 
 ### FoodHomeScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/FoodHomeScreen1.snapshot.png" width="35%" alt="FoodHomeScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/FoodHomeScreen1.snapshot.png" width="60%" alt="FoodHomeScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -20,41 +20,6 @@
 - [DSText](../Views/DSText.md)
 - [DSTextField](../Views/DSTextField.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_FoodHomeScreen1: View {
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        TabView {
-            FoodHomeScreen1()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
-            Text("Menu")
-                .tabItem {
-                    Image(systemName: "menucard.fill")
-                    Text("Menu")
-                }
-            Text("Cart")
-                .tabItem {
-                    Image(systemName: "cart.fill")
-                    Text("Cart")
-                }
-            DSVStack {
-                DSButton(title: "Dismiss", style: .clear) {
-                    dismiss()
-                }
-            }.tabItem {
-                Image(systemName: "gearshape")
-                Text("Settings")
-            }
-        }
-    }
-}
-```
 
 ## Reference
 

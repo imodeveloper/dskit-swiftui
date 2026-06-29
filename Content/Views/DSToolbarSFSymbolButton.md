@@ -24,7 +24,7 @@ struct Testable_DSToolbarSFSymbolButton: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSToolbarSFSymbolButton.snapshot.png" width="35%" alt="DSToolbarSFSymbolButton preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSToolbarSFSymbolButton.snapshot.png" width="60%" alt="DSToolbarSFSymbolButton preview" />
 
 ## DSKitExplorer Usage
 

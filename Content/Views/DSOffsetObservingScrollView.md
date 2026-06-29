@@ -41,7 +41,7 @@ struct Testable_ScrollViewContentFrameReader: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSOffsetObservingScrollView.snapshot.png" width="35%" alt="DSOffsetObservingScrollView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSOffsetObservingScrollView.snapshot.png" width="60%" alt="DSOffsetObservingScrollView preview" />
 
 ## DSKitExplorer Usage
 

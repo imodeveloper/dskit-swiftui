@@ -25,7 +25,7 @@ struct Testable_DSDivider: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSDivider.snapshot.png" width="35%" alt="DSDivider preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSDivider.snapshot.png" width="60%" alt="DSDivider preview" />
 
 ## DSKitExplorer Usage
 

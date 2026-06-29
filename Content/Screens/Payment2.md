@@ -4,7 +4,7 @@
 
 ### Payment2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Payment2.snapshot.png" width="35%" alt="Payment2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Payment2.snapshot.png" width="60%" alt="Payment2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -15,19 +15,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_Payment2: View {
-    var body: some View {
-        NavigationView {
-            Payment2()
-                .navigationTitle("My Cards")
-        }
-    }
-}
-```
 
 ## Reference
 

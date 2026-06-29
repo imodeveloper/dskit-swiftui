@@ -4,7 +4,7 @@
 
 ### AboutUsScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/AboutUsScreen1.snapshot.png" width="35%" alt="AboutUsScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/AboutUsScreen1.snapshot.png" width="60%" alt="AboutUsScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -17,45 +17,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_AboutUsScreen1: View {
-    @Environment(\.dismiss) var dismiss
-    @State var selectedTab: Int = 2
-    var body: some View {
-        TabView(selection: $selectedTab) {
-            Text("Shop")
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }.tag(0)
-
-            Text("Cart")
-                .tabItem {
-                    Image(systemName: "cart.fill")
-                    Text("Cart")
-                }.tag(1)
-
-            AboutUsScreen1()
-                .tabItem {
-                    Image(systemName: "info.circle.fill")
-                    Text("About")
-                }.tag(2)
-
-            DSVStack {
-                DSButton(title: "Dismiss", style: .clear) {
-                    dismiss()
-                }
-            }.tabItem {
-                Image(systemName: "gearshape")
-                Text("Settings")
-            }.tag(3)
-        }
-    }
-}
-```
 
 ## Reference
 

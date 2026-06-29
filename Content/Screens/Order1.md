@@ -4,7 +4,7 @@
 
 ### Order1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Order1.snapshot.png" width="35%" alt="Order1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Order1.snapshot.png" width="60%" alt="Order1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -20,19 +20,6 @@
 - [DSTermsAndConditions](../Views/DSTermsAndConditions.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_Order1: View {
-    var body: some View {
-        NavigationView {
-            Order1()
-                .navigationTitle("Order")
-        }
-    }
-}
-```
 
 ## Reference
 

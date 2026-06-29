@@ -37,6 +37,7 @@ extension FoodCategoriesScreen1 {
         var body: some View {
             DSVStack {
                 DSImageView(named: category.image)
+                    .dsHeight(130)
                 DSHStack {
                     DSVStack(spacing: .custom(0)) {
                         DSText(category.title)

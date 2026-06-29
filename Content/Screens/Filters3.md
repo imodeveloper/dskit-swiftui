@@ -4,7 +4,7 @@
 
 ### Filters3
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Filters3.snapshot.png" width="35%" alt="Filters3 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Filters3.snapshot.png" width="60%" alt="Filters3 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -16,19 +16,6 @@
 - [DSPickerView](../Views/DSPickerView.md)
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
-
-## Testable Example
-
-```swift
-struct Testable_Filters3: View {
-    var body: some View {
-        NavigationView {
-            Filters3()
-                .navigationTitle("Filters")
-        }
-    }
-}
-```
 
 ## Reference
 

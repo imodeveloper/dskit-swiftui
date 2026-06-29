@@ -6,6 +6,106 @@
 
 ## Changes
 
+### 2026-06-29 16:52:44 EEST (`pending`)
+
+- task_or_issue: `remove-screen-testable-examples`
+
+#### Request
+Remove generated `Testable Example` sections from screen documentation pages.
+
+#### Change Summary
+Removed the screen-page `doc.example` output block from `write_screen_page` and updated the screen index guidance so screen pages are described as source, snapshot, and DSKit view references only.
+
+#### Rationale
+Screen pages should stay focused on visual previews and navigable references. The `Testable_*` wrappers are still useful in Swift sources and tests, but including their full code in every generated screen page makes the docs harder to scan.
+
+#### Invariants
+Keep component examples unchanged; this change only removes `Testable Example` sections from generated screen pages. Continue refreshing generated docs through `Scripts/documentation_generator.sh`.
+
+#### Tests Or Evidence
+Ran `Scripts/documentation_generator.sh`, verified no `## Testable Example` or `Testable_` references remain under `Content/Screens` or `Content/Screens.md`, verified generated links/images resolve locally, and ran `git diff --check` over the generator and screen docs.
+
+#### Related Files
+`Content/Screens.md`, `Content/Screens/*.md`.
+
+#### Follow-up Risks
+If agents need the wrapper code later, link to the Swift source rather than expanding the wrapper inline in generated screen pages.
+
+### 2026-06-29 16:48:51 EEST (`pending`)
+
+- task_or_issue: `screen-catalog-matrix-previews`
+
+#### Request
+Make `Content/Screens.md` previews bigger, fix the tall table layout, and make each preview image link to its screen page.
+
+#### Change Summary
+Changed screen index generation from two-column Markdown tables to three-column HTML preview matrices. Each screen preview image now links directly to the generated screen page and uses a fixed `height="520"` display size.
+
+#### Rationale
+The table layout made tall screenshots dominate rows and separated the preview from the destination link. A matrix keeps the catalog visual, gives images a stable display height, and makes the screenshot itself the primary navigation target.
+
+#### Invariants
+Keep the screen catalog generated from screen docs and snapshot paths. Preserve one linked image per generated screen page and keep display sizing centralized through constants.
+
+#### Tests Or Evidence
+Ran `Scripts/documentation_generator.sh`, verified `Content/Screens.md` has 68 linked preview images, 68 fixed-height images, 10 family tables, and no old `Preview | Screen` table.
+
+#### Related Files
+`Content/Screens.md`, `Content/Screens/*.md`, `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/*.snapshot.png`.
+
+#### Follow-up Risks
+If GitHub renders three 520px-high previews too wide on smaller screens, adjust `SCREEN_INDEX_COLUMNS` or `SCREEN_INDEX_PREVIEW_HEIGHT` and regenerate docs.
+
+### 2026-06-29 16:40:20 EEST (`pending`)
+
+- task_or_issue: `larger-generated-page-previews`
+
+#### Request
+Make previews inside generated pages bigger, starting with component pages such as `Content/Views/DSVStack.md`.
+
+#### Change Summary
+Added page and index preview width constants, kept catalog thumbnails at 240px, and changed generated component and screen detail page preview images from `35%` to `60%`.
+
+#### Rationale
+The catalog pages should stay scan-friendly, but dedicated component and screen pages need larger snapshot previews for easier inspection.
+
+#### Invariants
+Keep preview sizing centralized in constants. Regenerate docs after changing page preview width; do not hand-edit generated component or screen pages.
+
+#### Tests Or Evidence
+Ran `Scripts/documentation_generator.sh`, verified `DSVStack.md` and `NewsScreen1.md` use `width="60%"`, verified no `width="35%"` remains under `Content/Views` or `Content/Screens`, and validated links/image references plus whitespace.
+
+#### Related Files
+`Content/Views/*.md`, `Content/Screens/*.md`, `Content/Views.md`, `Content/Screens.md`.
+
+#### Follow-up Risks
+If 60% renders too large on GitHub mobile pages, adjust `PAGE_PREVIEW_WIDTH` and regenerate docs.
+
+### 2026-06-29 16:36:55 EEST (`pending`)
+
+- task_or_issue: `move-views-index-agent-guidance`
+
+#### Request
+Move the generated-note and Agent Quick Start block in `Content/Views.md` to the end of the file.
+
+#### Change Summary
+Changed `write_main_index` so `Content/Views.md` starts directly with the component catalog and places the generated-note plus Agent Quick Start section after Maintenance.
+
+#### Rationale
+The main component index should prioritize the visual catalog at the top while keeping generated-file and agent guidance available at the end.
+
+#### Invariants
+Keep `Content/Views.md` generated from this script. Do not hand-edit the generated index for ordering changes; update `write_main_index` and rerun `Scripts/documentation_generator.sh`.
+
+#### Tests Or Evidence
+Ran `Scripts/documentation_generator.sh` and verified `Content/Views.md` starts with `## Component Catalog` while the generated-note and Agent Quick Start section appear at the end.
+
+#### Related Files
+`Content/Views.md`.
+
+#### Follow-up Risks
+If the screen catalog needs the same ordering treatment, update the screen index generation separately.
+
 ### 2026-06-29 15:59:37 EEST (`pending`)
 
 - task_or_issue: `simplify-screen-index-preview-catalog`

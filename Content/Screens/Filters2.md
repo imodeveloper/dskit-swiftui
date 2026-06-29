@@ -4,7 +4,7 @@
 
 ### Filters2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Filters2.snapshot.png" width="35%" alt="Filters2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/Filters2.snapshot.png" width="60%" alt="Filters2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -18,19 +18,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_Filters2: View {
-    var body: some View {
-        NavigationView {
-            Filters2()
-                .navigationTitle("Filters")
-        }
-    }
-}
-```
 
 ## Reference
 

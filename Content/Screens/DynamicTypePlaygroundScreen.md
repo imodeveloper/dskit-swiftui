@@ -4,16 +4,12 @@
 
 ### DynamicTypePlaygroundScreen
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/DynamicTypePlaygroundScreen.snapshot.png" width="35%" alt="DynamicTypePlaygroundScreen snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/DynamicTypePlaygroundScreen.snapshot.png" width="60%" alt="DynamicTypePlaygroundScreen snapshot preview" />
 
 ## DSKit Views Used
 
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-No `Testable_*` example is available in the screen source file.
 
 ## Reference
 

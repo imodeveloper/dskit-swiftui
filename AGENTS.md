@@ -6,6 +6,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 - `Agents Memory/ARCHITECTURE.md`
 - `Agents Memory/PROJECT_ANALYSIS.md`
 - `Content/docs/design-docs/ds-wrapper-principles.md`
+- `Content/Screen-Construction.md`
 - `Content/docs/WORKFLOWS.md`
 - `Content/docs/QUALITY.md`
 - `Content/docs/PLANS.md`
@@ -20,6 +21,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 ## How to read this repo
 - Start with `README.md` for public product positioning, then use this file for agent rules and repo routing.
 - Use `Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`, and `Content/docs/PLANS.md` for validation, testing, and current work shape.
+- Use `Content/Screen-Construction.md` before translating DSKitExplorer examples into production screens or comparing this repo with `../imodeveloperlab`.
 - For DSKit component work:
   - read `DSKit/AGENTS.md`
   - read the target file under `DSKit/Sources/DSKit/Views`

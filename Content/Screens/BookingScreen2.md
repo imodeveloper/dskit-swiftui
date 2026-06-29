@@ -4,7 +4,7 @@
 
 ### BookingScreen2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/BookingScreen2.snapshot.png" width="35%" alt="BookingScreen2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/BookingScreen2.snapshot.png" width="60%" alt="BookingScreen2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -20,19 +20,6 @@
 - [DSTermsAndConditions](../Views/DSTermsAndConditions.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_BookingScreen2: View {
-    var body: some View {
-        NavigationView {
-            BookingScreen2()
-                .navigationTitle("New Booking")
-        }
-    }
-}
-```
 
 ## Reference
 

@@ -24,7 +24,7 @@ struct Testable_DSTermsAndConditions: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSTermsAndConditions.snapshot.png" width="35%" alt="DSTermsAndConditions preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSTermsAndConditions.snapshot.png" width="60%" alt="DSTermsAndConditions preview" />
 
 ## DSKitExplorer Usage
 

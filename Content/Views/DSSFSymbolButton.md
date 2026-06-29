@@ -25,7 +25,7 @@ struct Testable_DSSFSymbolButton: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSSFSymbolButton.snapshot.png" width="35%" alt="DSSFSymbolButton preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSSFSymbolButton.snapshot.png" width="60%" alt="DSSFSymbolButton preview" />
 
 ## DSKitExplorer Usage
 

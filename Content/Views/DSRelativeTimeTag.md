@@ -10,7 +10,7 @@ No `Testable_*` example is available in the source file yet.
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSRelativeTimeTag.snapshot.png" width="35%" alt="DSRelativeTimeTag preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSRelativeTimeTag.snapshot.png" width="60%" alt="DSRelativeTimeTag preview" />
 
 ## DSKitExplorer Usage
 

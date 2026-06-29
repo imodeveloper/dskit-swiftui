@@ -23,7 +23,7 @@ struct Testable_DSChevronView: View {
 
 ## Preview
 
-<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSChevronView.snapshot.png" width="35%" alt="DSChevronView preview" />
+<img src="../../DSKitTests/__Snapshots__/DSKitTests/DSChevronView.snapshot.png" width="60%" alt="DSChevronView preview" />
 
 ## DSKitExplorer Usage
 

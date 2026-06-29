@@ -4,7 +4,7 @@
 
 ### FoodRestaurantScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/FoodRestaurantScreen1.snapshot.png" width="35%" alt="FoodRestaurantScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/FoodRestaurantScreen1.snapshot.png" width="60%" alt="FoodRestaurantScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -15,20 +15,6 @@
 - [DSSection](../Views/DSSection.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_FoodRestaurantScreen1: View {
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        NavigationView {
-            FoodRestaurantScreen1()
-                .navigationTitle("Restaurant")
-        }
-    }
-}
-```
 
 ## Reference
 

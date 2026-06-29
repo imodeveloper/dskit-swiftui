@@ -4,7 +4,7 @@
 
 ### ImageGalleryScreen1
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ImageGalleryScreen1.snapshot.png" width="35%" alt="ImageGalleryScreen1 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ImageGalleryScreen1.snapshot.png" width="60%" alt="ImageGalleryScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -12,17 +12,6 @@
 - [DSImageView](../Views/DSImageView.md)
 - [DSText](../Views/DSText.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_ImageGalleryScreen1: View {
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        ImageGalleryScreen1()
-    }
-}
-```
 
 ## Reference
 

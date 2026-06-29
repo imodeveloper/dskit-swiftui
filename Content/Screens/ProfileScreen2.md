@@ -4,7 +4,7 @@
 
 ### ProfileScreen2
 
-<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ProfileScreen2.snapshot.png" width="35%" alt="ProfileScreen2 snapshot preview" />
+<img src="../../DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/ProfileScreen2.snapshot.png" width="60%" alt="ProfileScreen2 snapshot preview" />
 
 ## DSKit Views Used
 
@@ -15,16 +15,6 @@
 - [DSText](../Views/DSText.md)
 - [DSTextField](../Views/DSTextField.md)
 - [DSVStack](../Views/DSVStack.md)
-
-## Testable Example
-
-```swift
-struct Testable_ProfileScreen2: View {
-    var body: some View {
-        ProfileScreen2()
-    }
-}
-```
 
 ## Reference
 
