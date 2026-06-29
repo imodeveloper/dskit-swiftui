@@ -555,7 +555,7 @@ def preview_thumbnail(doc: ComponentDoc, from_dir: Path) -> str:
 
 def screen_preview_thumbnail(doc: ScreenDoc, from_dir: Path) -> str:
     preview_link = rel_link(doc.snapshot_paths[0], from_dir)
-    return f'<img src="{preview_link}" width="120" alt="{doc.name} screen preview" />'
+    return f'<img src="{preview_link}" width="240" alt="{doc.name} screen preview" />'
 
 
 def write_screen_page(doc: ScreenDoc) -> None:
@@ -611,8 +611,8 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         "## Agent Quick Start",
         "",
         "- Start here when you need a concrete screen example rather than a component API reference.",
-        "- Each screen page includes source links, one or more snapshot previews, detected DSKit view references, and any `Testable_*` screen wrapper.",
-        "- Snapshot links resolve to `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`.",
+        "- Scan the preview column to find the screen pattern you need, then open its dedicated page.",
+        "- Each screen page includes source links, snapshot previews, detected DSKit view references, and any `Testable_*` screen wrapper.",
         "",
         "## Screen Catalog",
         "",
@@ -629,18 +629,14 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         lines.extend([
             f"### {family}",
             "",
-            "| Preview | Screen | Source | DSKit views | Snapshots |",
-            "| --- | --- | --- | ---: | ---: |",
+            "| Preview | Screen |",
+            "| --- | --- |",
         ])
         for doc in family_docs:
-            source_link = rel_link(doc.source_path, SCREEN_INDEX_FILE.parent)
             lines.append(
                 "| "
                 f"{screen_preview_thumbnail(doc, SCREEN_INDEX_FILE.parent)} | "
-                f"[{doc.name}](Screens/{doc.name}.md) | "
-                f"[source]({source_link}) | "
-                f"{len(doc.used_components)} | "
-                f"{len(doc.snapshot_paths)} |"
+                f"[{doc.name}](Screens/{doc.name}.md) |"
             )
         lines.append("")
 

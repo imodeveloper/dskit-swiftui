@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:59:37 EEST (`pending`)
+
+- task_or_issue: `simplify-screen-index-preview-catalog`
+
+#### Request
+Update `Content/Screens.md` so the screen catalog removes Source, DSKit views, and Snapshots columns, and uses larger previews.
+
+#### Change Summary
+Changed screen index generation to produce `Preview | Screen` tables with 240px screen preview images. Kept source links, detected DSKit view references, and snapshot details on each generated per-screen page.
+
+#### Rationale
+The top-level screen catalog should work as a visual picker. Detailed metadata belongs on the dedicated screen pages.
+
+#### Invariants
+Keep `Content/Screens.md` generated from screen docs and snapshot paths. Every screen row must link to `Content/Screens/<Screen>.md` and use the first matching screen snapshot as its preview.
+
+#### Tests Or Evidence
+Ran `Scripts/documentation_generator.sh`, verified 68 screen rows, 68 `width="240"` preview images, no Source/DSKit views/Snapshots columns, and no broken links in `Content/Screens.md`.
+
+#### Related Files
+`Content/Screens.md`, `Content/Screens/*.md`, `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/*.snapshot.png`.
+
+#### Follow-up Risks
+If GitHub rendering makes 240px screen previews too large on narrow screens, adjust only `screen_preview_thumbnail` width and regenerate docs.
+
 ### 2026-06-29 15:24:27 EEST (`pending`)
 
 - task_or_issue: `simplify-views-index-preview-catalog`
