@@ -35,9 +35,6 @@ DSKit includes a demonstration app, **DSKitExplorer**, with 60+ ready-to-use scr
 
 ## Get Started
 
-> [!Note]
-> If you're looking for the UIKit version of DSKit, you can find it here: [UIKit Version](https://github.com/imodeveloper/dskit).
-
 To get started with DSKit, add the package using Swift Package Manager.
 
 ### Step 1: Adding DSKit via Swift Package Manager (SPM)
