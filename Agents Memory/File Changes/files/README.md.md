@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:40:29 EEST (`pending`)
+
+- task_or_issue: `separate-generated-docs-workflow`
+
+#### Request
+Move the generated documentation maintenance paragraph out of the README and into a separate documentation page.
+
+#### Change Summary
+Removed the long generated-docs maintenance paragraph from the Documentation section and added a concise `Documentation workflow` link to `Content/Documentation.md`.
+
+#### Rationale
+The README should present documentation entrypoints without carrying operational maintenance details inline.
+
+#### Invariants
+Keep README documentation links concise and purpose-labeled. Detailed generated-doc maintenance rules belong in `Content/Documentation.md`.
+
+#### Tests Or Evidence
+Validated Markdown links for README, Content docs, and the new workflow page; ran staged whitespace validation and file-change memory check.
+
+#### Related Files
+`Content/Documentation.md`, `Content/AGENTS.md`, `Content/CONTRIBUTING.md`.
+
+#### Follow-up Risks
+If the generated-doc workflow page is renamed, update the README link in the same change.
+
 ### 2026-06-29 15:38:13 EEST (`pending`)
 
 - task_or_issue: `emphasize-readme-audience`

@@ -26,8 +26,7 @@ Use these entrypoints before guessing APIs:
 - [Views / Components](Content/Views.md): generated visual component catalog with snapshot previews and links to per-component pages.
 - [Layout](Content/Layout-in-DSKit.md): hand-written layout and spacing guidance.
 - [Appearance](Content/Appearance-in-DSKit.md): hand-written appearance and theming guidance.
-
-The generated docs are refreshed from Swift source comments, `Testable_*` examples, snapshots, and Explorer usage references. Do not hand-edit generated pages under `Content/Views/` or `Content/Screens/`; update source, snapshots, or the generator and then run `cd Scripts && ./documentation_generator.sh`.
+- [Documentation workflow](Content/Documentation.md): how generated docs are refreshed and what to edit.
 
 ### Running DSKitExplorer
 

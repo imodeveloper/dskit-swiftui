@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:40:29 EEST (`pending`)
+
+- task_or_issue: `separate-generated-docs-workflow`
+
+#### Request
+Move the generated documentation maintenance paragraph out of the README and into a separate documentation page.
+
+#### Change Summary
+Added `Content/Documentation.md` to the Content guide as a hand-maintained generated-docs workflow guide referenced by README.
+
+#### Rationale
+Agents editing Content need to know that the new workflow page is not generated, while the Views and Screens documentation surfaces remain generated outputs.
+
+#### Invariants
+Keep generated-doc output rules explicit. Do not hand-edit generated `Content/Views*` or `Content/Screens*` pages.
+
+#### Tests Or Evidence
+Validated Markdown links for README, Content docs, and the new workflow page; ran staged whitespace validation and file-change memory check.
+
+#### Related Files
+`Content/Documentation.md`, `README.md`, `Content/CONTRIBUTING.md`.
+
+#### Follow-up Risks
+If more hand-maintained Content pages are added, keep this routing guide current.
+
 ### 2026-06-29 13:40:34 EEST (`pending`)
 
 - task_or_issue: `agent-friendly-component-docs`

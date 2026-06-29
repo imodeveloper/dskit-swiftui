@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:40:29 EEST (`pending`)
+
+- task_or_issue: `separate-generated-docs-workflow`
+
+#### Request
+Move generated documentation maintenance guidance into a separate documentation page.
+
+#### Change Summary
+Added a link to `Documentation.md` from the contributor guide and replaced the inline generator command block with a shorter pointer to the documented workflow.
+
+#### Rationale
+Contributor guidance should point to the canonical docs workflow instead of duplicating the generated-doc maintenance details.
+
+#### Invariants
+Keep generated-doc rules visible to contributors. Links in this file are relative to `Content/`.
+
+#### Tests Or Evidence
+Validated Markdown links for README, Content docs, and the new workflow page; ran staged whitespace validation and file-change memory check.
+
+#### Related Files
+`Content/Documentation.md`, `README.md`, `Content/AGENTS.md`.
+
+#### Follow-up Risks
+If `Content/Documentation.md` changes scope, keep this contributor pointer accurate.
+
 ### 2026-06-29 15:32:19 EEST (`pending`)
 
 - task_or_issue: `move-governance-docs-into-content`

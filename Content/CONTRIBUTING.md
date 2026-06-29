@@ -5,14 +5,10 @@ Before changing DSKit, spend a few minutes with the repo-native docs:
 - [README.md](../README.md) for setup and documentation entry points.
 - [Views.md](Views.md) for generated component references.
 - [Screens.md](Screens.md) for generated DSKitExplorer screen references.
+- [Documentation workflow](Documentation.md) for generated-doc maintenance rules.
 - [docs/WORKFLOWS.md](../docs/WORKFLOWS.md) for build, test, snapshot, and documentation generation commands.
 
-Generated docs are not edited by hand. Update Swift source comments, `Testable_*` examples, snapshots, or the generator, then run:
-
-```sh
-cd Scripts
-./documentation_generator.sh
-```
+Generated docs are not edited by hand. Update Swift source comments, `Testable_*` examples, snapshots, or the generator, then refresh the docs from the documented workflow.
 
 This project does not come with GitHub Issues-based support. Users are encouraged to become active participants by fixing bugs they encounter or improving documentation wherever it is lacking.
 
