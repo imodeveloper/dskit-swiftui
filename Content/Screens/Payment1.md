@@ -4,7 +4,7 @@
 
 ### Payment1
 
-<img src="Frames/Payment1.framed.svg" width="60%" alt="Payment1 snapshot preview" />
+<img src="Frames/Payment1.framed.png" width="60%" alt="Payment1 snapshot preview" />
 
 ## DSKit Views Used
 

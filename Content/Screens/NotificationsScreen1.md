@@ -4,7 +4,7 @@
 
 ### NotificationsScreen1
 
-<img src="Frames/NotificationsScreen1.framed.svg" width="60%" alt="NotificationsScreen1 snapshot preview" />
+<img src="Frames/NotificationsScreen1.framed.png" width="60%" alt="NotificationsScreen1 snapshot preview" />
 
 ## DSKit Views Used
 

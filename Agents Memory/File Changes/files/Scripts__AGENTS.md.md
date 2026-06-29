@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:25:34 EEST (`pending`)
+
+- task_or_issue: `flatten-screen-frame-previews`
+
+#### Request
+Update script-area guidance after replacing generated screen frame SVGs with flattened PNGs.
+
+#### Change Summary
+Changed the documented generator output from `*.framed.svg` to `*.framed.png` and added the Pillow requirement for frame composition.
+
+#### Rationale
+Agents editing scripts need accurate output names and dependency expectations before changing or rerunning the documentation generator.
+
+#### Invariants
+Keep `Content/Screens/Frames` generated from source snapshot PNGs. Do not hand-edit frame assets.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens/Frames/*.framed.png`.
+
+#### Follow-up Risks
+If frame generation moves to another tool, update this guide with the new dependency or command.
+
 ### 2026-06-29 17:04:12 EEST (`pending`)
 
 - task_or_issue: `iphone-framed-screen-previews`

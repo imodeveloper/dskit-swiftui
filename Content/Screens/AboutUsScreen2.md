@@ -4,11 +4,11 @@
 
 ### AboutUsScreen2_0
 
-<img src="Frames/AboutUsScreen2_0.framed.svg" width="60%" alt="AboutUsScreen2 snapshot preview" />
+<img src="Frames/AboutUsScreen2_0.framed.png" width="60%" alt="AboutUsScreen2 snapshot preview" />
 
 ### AboutUsScreen2_1
 
-<img src="Frames/AboutUsScreen2_1.framed.svg" width="60%" alt="AboutUsScreen2 snapshot preview" />
+<img src="Frames/AboutUsScreen2_1.framed.png" width="60%" alt="AboutUsScreen2 snapshot preview" />
 
 ## DSKit Views Used
 

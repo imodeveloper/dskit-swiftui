@@ -4,7 +4,7 @@
 
 ### CartScreen5
 
-<img src="Frames/CartScreen5.framed.svg" width="60%" alt="CartScreen5 snapshot preview" />
+<img src="Frames/CartScreen5.framed.png" width="60%" alt="CartScreen5 snapshot preview" />
 
 ## DSKit Views Used
 

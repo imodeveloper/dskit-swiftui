@@ -4,7 +4,7 @@
 
 ### BookingScreen1
 
-<img src="Frames/BookingScreen1.framed.svg" width="60%" alt="BookingScreen1 snapshot preview" />
+<img src="Frames/BookingScreen1.framed.png" width="60%" alt="BookingScreen1 snapshot preview" />
 
 ## DSKit Views Used
 

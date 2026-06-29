@@ -4,7 +4,7 @@
 
 ### ProfileScreen2
 
-<img src="Frames/ProfileScreen2.framed.svg" width="60%" alt="ProfileScreen2 snapshot preview" />
+<img src="Frames/ProfileScreen2.framed.png" width="60%" alt="ProfileScreen2 snapshot preview" />
 
 ## DSKit Views Used
 

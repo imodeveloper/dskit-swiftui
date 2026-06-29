@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:25:34 EEST (`pending`)
+
+- task_or_issue: `flatten-screen-frame-previews`
+
+#### Request
+Keep workflow guidance current after replacing generated SVG screen frames with flattened PNG frames.
+
+#### Change Summary
+Updated the snapshot documentation generation section to say screen frames are rebuilt from snapshot PNGs and noted that Pillow is required for flattened frame generation.
+
+#### Rationale
+Workflow docs should make the generator dependency and output model obvious before agents regenerate documentation.
+
+#### Invariants
+Generated docs and frame assets remain derived from Swift source and snapshots. Do not hand-edit `Content/Screens/Frames`.
+
+#### Tests Or Evidence
+Ran `cd Scripts && ./documentation_generator.sh`, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Documentation.md`, `Content/Screens/Frames/*.framed.png`.
+
+#### Follow-up Risks
+If the generator moves away from Pillow or frame output changes location, update this workflow guide alongside the generator.
+
 ### 2026-06-29 17:25:51 EEST (`pending`)
 
 - task_or_issue: `iphone-framed-screen-previews`

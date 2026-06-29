@@ -4,7 +4,7 @@
 
 ### ImageGalleryScreen2
 
-<img src="Frames/ImageGalleryScreen2.framed.svg" width="60%" alt="ImageGalleryScreen2 snapshot preview" />
+<img src="Frames/ImageGalleryScreen2.framed.png" width="60%" alt="ImageGalleryScreen2 snapshot preview" />
 
 ## DSKit Views Used
 

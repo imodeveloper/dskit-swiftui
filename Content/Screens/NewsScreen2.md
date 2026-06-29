@@ -4,7 +4,7 @@
 
 ### NewsScreen2
 
-<img src="Frames/NewsScreen2.framed.svg" width="60%" alt="NewsScreen2 snapshot preview" />
+<img src="Frames/NewsScreen2.framed.png" width="60%" alt="NewsScreen2 snapshot preview" />
 
 ## DSKit Views Used
 

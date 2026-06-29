@@ -36,6 +36,7 @@ cd Scripts
 ```
 
 The generator is [Scripts/documentation_generator.sh](../Scripts/documentation_generator.sh), which delegates to [Scripts/generate_view_docs.py](../Scripts/generate_view_docs.py).
+The Python generator requires Pillow so it can build flattened screen frame PNGs.
 
 ## Validation
 
@@ -43,7 +44,7 @@ After a documentation refresh, check that:
 
 - Every DSKit view has a matching component page and preview snapshot.
 - Every generated screen page has at least one matching screen snapshot.
-- Every generated screen preview frame points back to an existing screen snapshot.
+- Every generated screen preview frame is rebuilt from an existing screen snapshot.
 - Relative links resolve locally.
 - No generated Markdown contains local absolute paths.
 

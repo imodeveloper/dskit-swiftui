@@ -6,6 +6,56 @@
 
 ## Changes
 
+### 2026-06-29 20:25:34 EEST (`pending`)
+
+- task_or_issue: `flatten-screen-frame-previews`
+
+#### Request
+Keep the top-level agent guide aligned with flattened PNG screen frames.
+
+#### Change Summary
+Updated generated documentation output and generator input guidance from SVG frame wrappers to flattened PNG frame wrappers.
+
+#### Rationale
+The top-level agent guide is the first routing document agents read; it should describe the generated output surface accurately.
+
+#### Invariants
+Keep `Content/Screens/Frames` generated and repo-relative. Do not treat generated frame assets as hand-maintained documentation.
+
+#### Tests Or Evidence
+Ran `cd Scripts && ./documentation_generator.sh`, verified 69 generated PNG frames and zero SVG frames, and ran local Markdown link/image validation.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/AGENTS.md`, `Scripts/AGENTS.md`, `Content/Screens/Frames/*.framed.png`.
+
+#### Follow-up Risks
+If frame output changes again, update top-level and subscope agent guides together.
+
+### 2026-06-29 17:54:45 EEST (`pending`)
+
+- task_or_issue: `dskit-only-screen-construction`
+
+#### Request
+Make screen construction guidance DSKit-only and remove the instruction to use it for comparing with another app repo.
+
+#### Change Summary
+Updated the top-level agent guide so `Content/Screen-Construction.md` is used before building or refactoring full DSKit screens from DSKitExplorer examples.
+
+#### Rationale
+The repo-level agent map should route agents through DSKit-native documentation without implying that a sibling application is part of this repository.
+
+#### Invariants
+Keep `AGENTS.md` concise and directive. Link to the dedicated Content article instead of duplicating its guidance.
+
+#### Tests Or Evidence
+Validated local links for the changed docs and ran whitespace validation.
+
+#### Related Files
+`Content/Screen-Construction.md`, `README.md`, `Content/AGENTS.md`.
+
+#### Follow-up Risks
+If DSKitExplorer routing changes, update the article and this short instruction together.
+
 ### 2026-06-29 17:04:12 EEST (`pending`)
 
 - task_or_issue: `iphone-framed-screen-previews`

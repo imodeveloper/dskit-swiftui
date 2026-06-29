@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:25:34 EEST (`pending`)
+
+- task_or_issue: `flatten-screen-frame-previews`
+
+#### Request
+Fix GitHub mobile rendering where screen catalog frame previews showed the iPhone shell but black screen contents.
+
+#### Change Summary
+Changed generated screen frames from SVG wrappers with nested snapshot image references to flattened PNG files under `Content/Screens/Frames/*.framed.png`. The generator now composes the iPhone 15 Pro frame, rounded screen mask, Dynamic Island, and source snapshot pixels with Pillow, and removes stale generated SVG frames during regeneration.
+
+#### Rationale
+GitHub mobile can fail to resolve relative PNGs embedded inside SVG `<image>` elements. Flattened PNG frames are self-contained, so the screen pixels render consistently anywhere Markdown image assets are shown.
+
+#### Invariants
+Keep `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests` as the source of truth. Treat `Content/Screens/Frames` as generated output. Preserve the current iPhone 15 Pro frame geometry unless the snapshot harness device profile changes.
+
+#### Tests Or Evidence
+Ran `python3 -m py_compile Scripts/generate_view_docs.py`, `cd Scripts && ./documentation_generator.sh`, verified 69 `.framed.png` files and 0 `.framed.svg` files, checked local Markdown links/images, ran `git diff --check`, and visually inspected `FoodCategoriesScreen1.framed.png`.
+
+#### Related Files
+`Content/Screens.md`, `Content/Screens/*.md`, `Content/Screens/Frames/*.framed.png`, `Content/Documentation.md`, `Content/docs/WORKFLOWS.md`, `AGENTS.md`, `Content/AGENTS.md`, `Scripts/AGENTS.md`.
+
+#### Follow-up Risks
+If Pillow is unavailable, the generator exits with an install hint. If the snapshot device changes, update the frame constants and regenerate the docs.
+
 ### 2026-06-29 17:04:12 EEST (`pending`)
 
 - task_or_issue: `iphone-framed-screen-previews`

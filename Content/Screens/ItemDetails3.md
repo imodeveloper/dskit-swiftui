@@ -4,7 +4,7 @@
 
 ### ItemDetails3
 
-<img src="Frames/ItemDetails3.framed.svg" width="60%" alt="ItemDetails3 snapshot preview" />
+<img src="Frames/ItemDetails3.framed.png" width="60%" alt="ItemDetails3 snapshot preview" />
 
 ## DSKit Views Used
 

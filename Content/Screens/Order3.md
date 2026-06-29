@@ -4,7 +4,7 @@
 
 ### Order3
 
-<img src="Frames/Order3.framed.svg" width="60%" alt="Order3 snapshot preview" />
+<img src="Frames/Order3.framed.png" width="60%" alt="Order3 snapshot preview" />
 
 ## DSKit Views Used
 

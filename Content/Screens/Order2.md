@@ -4,7 +4,7 @@
 
 ### Order2
 
-<img src="Frames/Order2.framed.svg" width="60%" alt="Order2 snapshot preview" />
+<img src="Frames/Order2.framed.png" width="60%" alt="Order2 snapshot preview" />
 
 ## DSKit Views Used
 

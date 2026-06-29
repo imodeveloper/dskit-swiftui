@@ -7,9 +7,16 @@ import re
 import os
 import struct
 from dataclasses import dataclass
-from html import escape
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+try:
+    from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
+except ModuleNotFoundError as error:
+    raise SystemExit(
+        "Scripts/generate_view_docs.py requires Pillow to build flattened screen frame PNGs. "
+        "Install it with `python3 -m pip install Pillow`, then rerun `cd Scripts && ./documentation_generator.sh`."
+    ) from error
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,7 +35,7 @@ PAGE_PREVIEW_WIDTH = "60%"
 INDEX_PREVIEW_WIDTH = "240"
 SCREEN_INDEX_COLUMNS = 3
 SCREEN_INDEX_PREVIEW_HEIGHT = "520"
-SCREEN_FRAME_SUFFIX = ".framed.svg"
+SCREEN_FRAME_SUFFIX = ".framed.png"
 IPHONE_FRAME_DEVICE_NAME = "iPhone 15 Pro"
 IPHONE_FRAME_MODEL_IDENTIFIER = "iPhone16,1"
 IPHONE_FRAME_CHROME_IDENTIFIER = "com.apple.dt.devicekit.chrome.phone9"
@@ -396,12 +403,6 @@ def scaled_point(value: float) -> float:
     return value * IPHONE_FRAME_SCALE
 
 
-def format_svg_number(value: float) -> str:
-    if float(value).is_integer():
-        return str(int(value))
-    return f"{value:.2f}".rstrip("0").rstrip(".")
-
-
 def screen_frame_output_size() -> Tuple[int, int]:
     return (
         IPHONE_FRAME_CHROME_POINTS[0] * IPHONE_FRAME_SCALE,
@@ -425,6 +426,22 @@ def screen_frame_metadata() -> str:
         f"dynamicIsland={IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[0]}x{IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[1]}pt; "
         f"sensorBar={IPHONE_FRAME_SENSOR_BAR} ({IPHONE_FRAME_SENSOR_BAR_POINTS[0]}x{IPHONE_FRAME_SENSOR_BAR_POINTS[1]}pt)"
     )
+
+
+def draw_rounded_rectangle_stroke(
+    draw: ImageDraw.ImageDraw,
+    box: Tuple[int, int, int, int],
+    radius: int,
+    fill: Tuple[int, int, int, int],
+    width: int,
+) -> None:
+    for inset in range(width):
+        draw.rounded_rectangle(
+            (box[0] + inset, box[1] + inset, box[2] - inset, box[3] - inset),
+            radius=max(radius - inset, 0),
+            outline=fill,
+            width=1,
+        )
 
 
 def write_screen_frame(snapshot_path: Path) -> Path:
@@ -452,47 +469,94 @@ def write_screen_frame(snapshot_path: Path) -> Path:
     power_height = scaled_point(101)
     left_button_x = scaled_point(8)
     right_button_x = view_width - scaled_point(8) - button_width
-    snapshot_link = escape(rel_link(snapshot_path, SCREEN_FRAME_DIR), quote=True)
-    snapshot_name = escape(snapshot_path.stem.removesuffix(".snapshot"))
-    metadata = escape(screen_frame_metadata())
 
-    svg = f"""<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="{view_width}" height="{view_height}" viewBox="0 0 {view_width} {view_height}" role="img" aria-label="{snapshot_name} framed in {IPHONE_FRAME_DEVICE_NAME}">
-  <metadata>{metadata}</metadata>
-  <defs>
-    <clipPath id="screenClip">
-      <rect x="{screen_x}" y="{screen_y}" width="{screen_width}" height="{screen_height}" rx="{screen_radius}" ry="{screen_radius}" />
-    </clipPath>
-    <linearGradient id="bodyFill" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#20242b" />
-      <stop offset="42%" stop-color="#05070a" />
-      <stop offset="100%" stop-color="#171a20" />
-    </linearGradient>
-    <linearGradient id="rimStroke" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#4b5563" />
-      <stop offset="18%" stop-color="#111827" />
-      <stop offset="50%" stop-color="#6b7280" />
-      <stop offset="82%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#4b5563" />
-    </linearGradient>
-    <filter id="phoneShadow" x="-7%" y="-4%" width="114%" height="112%">
-      <feDropShadow dx="0" dy="24" stdDeviation="34" flood-color="#020617" flood-opacity="0.22" />
-    </filter>
-  </defs>
-  <rect x="0" y="0" width="{view_width}" height="{view_height}" rx="{body_radius}" ry="{body_radius}" fill="url(#bodyFill)" filter="url(#phoneShadow)" />
-  <rect x="6" y="6" width="{view_width - 12}" height="{view_height - 12}" rx="{body_radius - 6}" ry="{body_radius - 6}" fill="none" stroke="url(#rimStroke)" stroke-width="6" opacity="0.9" />
-  <rect x="{left_button_x}" y="{scaled_point(160)}" width="{button_width}" height="{mute_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
-  <rect x="{left_button_x}" y="{scaled_point(221)}" width="{button_width}" height="{volume_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
-  <rect x="{left_button_x}" y="{scaled_point(300)}" width="{button_width}" height="{volume_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
-  <rect x="{right_button_x}" y="{scaled_point(262)}" width="{button_width}" height="{power_height}" rx="{button_width / 2}" fill="#111827" opacity="0.86" />
-  <rect x="{screen_x - 8}" y="{screen_y - 8}" width="{screen_width + 16}" height="{screen_height + 16}" rx="{screen_radius + 8}" ry="{screen_radius + 8}" fill="#030712" />
-  <image href="{snapshot_link}" x="{screen_x}" y="{screen_y}" width="{screen_width}" height="{screen_height}" preserveAspectRatio="xMidYMid slice" clip-path="url(#screenClip)" />
-  <rect x="{screen_x}" y="{screen_y}" width="{screen_width}" height="{screen_height}" rx="{screen_radius}" ry="{screen_radius}" fill="none" stroke="#05070a" stroke-width="6" />
-  <rect x="{format_svg_number(island_x)}" y="{format_svg_number(island_y)}" width="{island_width}" height="{island_height}" rx="{island_height / 2}" ry="{island_height / 2}" fill="#020617" opacity="0.96" />
-</svg>
-"""
+    canvas = Image.new("RGBA", (view_width, view_height), (0, 0, 0, 0))
+    shadow = Image.new("RGBA", (view_width, view_height), (0, 0, 0, 0))
+    shadow_draw = ImageDraw.Draw(shadow)
+    shadow_draw.rounded_rectangle(
+        (0, 0, view_width - 1, view_height - 1),
+        radius=body_radius,
+        fill=(2, 6, 23, 60),
+    )
+    shadow = shadow.filter(ImageFilter.GaussianBlur(18))
+    canvas.alpha_composite(shadow, (0, 0))
 
-    frame_path.write_text(svg, encoding="utf-8")
+    draw = ImageDraw.Draw(canvas)
+    draw.rounded_rectangle(
+        (0, 0, view_width - 1, view_height - 1),
+        radius=body_radius,
+        fill=(7, 10, 15, 255),
+    )
+    draw_rounded_rectangle_stroke(
+        draw,
+        (6, 6, view_width - 7, view_height - 7),
+        body_radius - 6,
+        (93, 103, 117, 205),
+        6,
+    )
+    draw_rounded_rectangle_stroke(
+        draw,
+        (18, 18, view_width - 19, view_height - 19),
+        body_radius - 18,
+        (15, 23, 42, 220),
+        8,
+    )
+
+    for x, y, width, height in [
+        (left_button_x, scaled_point(160), button_width, mute_height),
+        (left_button_x, scaled_point(221), button_width, volume_height),
+        (left_button_x, scaled_point(300), button_width, volume_height),
+        (right_button_x, scaled_point(262), button_width, power_height),
+    ]:
+        draw.rounded_rectangle(
+            (x, y, x + width, y + height),
+            radius=button_width // 2,
+            fill=(17, 24, 39, 220),
+        )
+
+    draw.rounded_rectangle(
+        (
+            screen_x - 8,
+            screen_y - 8,
+            screen_x + screen_width + 8,
+            screen_y + screen_height + 8,
+        ),
+        radius=screen_radius + 8,
+        fill=(3, 7, 18, 255),
+    )
+
+    snapshot_image = Image.open(snapshot_path).convert("RGBA")
+    screen_mask = Image.new("L", (screen_width, screen_height), 0)
+    screen_mask_draw = ImageDraw.Draw(screen_mask)
+    screen_mask_draw.rounded_rectangle(
+        (0, 0, screen_width, screen_height),
+        radius=screen_radius,
+        fill=255,
+    )
+    canvas.paste(snapshot_image, (screen_x, screen_y), screen_mask)
+
+    draw = ImageDraw.Draw(canvas)
+    draw_rounded_rectangle_stroke(
+        draw,
+        (screen_x, screen_y, screen_x + screen_width, screen_y + screen_height),
+        screen_radius,
+        (5, 7, 10, 255),
+        6,
+    )
+    draw.rounded_rectangle(
+        (
+            int(island_x),
+            int(island_y),
+            int(island_x + island_width),
+            int(island_y + island_height),
+        ),
+        radius=int(island_height / 2),
+        fill=(2, 6, 23, 245),
+    )
+
+    png_info = PngImagePlugin.PngInfo()
+    png_info.add_text("Description", screen_frame_metadata())
+    canvas.save(frame_path, pnginfo=png_info, optimize=True)
     return frame_path
 
 
@@ -810,7 +874,7 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         "- Refresh these docs with `cd Scripts && ./documentation_generator.sh`.",
         "- Every screen page must have at least one matching snapshot image in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`.",
         "- A screen named `ExampleScreen` uses `ExampleScreen.snapshot.png` and may also include variants such as `ExampleScreen_0.snapshot.png`.",
-        "- Framed screen previews are generated SVG files under `Content/Screens/Frames` from the source snapshot PNGs.",
+        "- Framed screen previews are generated PNG files under `Content/Screens/Frames` from the source snapshot PNGs.",
     ])
 
     SCREEN_INDEX_FILE.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")

@@ -14,13 +14,13 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/FoodCategoriesScreen1.md"><img src="Screens/Frames/FoodCategoriesScreen1.framed.svg" height="520" alt="FoodCategoriesScreen1 screen preview" /></a><br /><sub>FoodCategoriesScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/FoodDetailsScreen1.md"><img src="Screens/Frames/FoodDetailsScreen1.framed.svg" height="520" alt="FoodDetailsScreen1 screen preview" /></a><br /><sub>FoodDetailsScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/FoodHomeScreen1.md"><img src="Screens/Frames/FoodHomeScreen1.framed.svg" height="520" alt="FoodHomeScreen1 screen preview" /></a><br /><sub>FoodHomeScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/FoodCategoriesScreen1.md"><img src="Screens/Frames/FoodCategoriesScreen1.framed.png" height="520" alt="FoodCategoriesScreen1 screen preview" /></a><br /><sub>FoodCategoriesScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/FoodDetailsScreen1.md"><img src="Screens/Frames/FoodDetailsScreen1.framed.png" height="520" alt="FoodDetailsScreen1 screen preview" /></a><br /><sub>FoodDetailsScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/FoodHomeScreen1.md"><img src="Screens/Frames/FoodHomeScreen1.framed.png" height="520" alt="FoodHomeScreen1 screen preview" /></a><br /><sub>FoodHomeScreen1</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/FoodNearbyRestaurantScreen1.md"><img src="Screens/Frames/FoodNearbyRestaurantScreen1.framed.svg" height="520" alt="FoodNearbyRestaurantScreen1 screen preview" /></a><br /><sub>FoodNearbyRestaurantScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/FoodRestaurantScreen1.md"><img src="Screens/Frames/FoodRestaurantScreen1.framed.svg" height="520" alt="FoodRestaurantScreen1 screen preview" /></a><br /><sub>FoodRestaurantScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/FoodNearbyRestaurantScreen1.md"><img src="Screens/Frames/FoodNearbyRestaurantScreen1.framed.png" height="520" alt="FoodNearbyRestaurantScreen1 screen preview" /></a><br /><sub>FoodNearbyRestaurantScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/FoodRestaurantScreen1.md"><img src="Screens/Frames/FoodRestaurantScreen1.framed.png" height="520" alt="FoodRestaurantScreen1 screen preview" /></a><br /><sub>FoodRestaurantScreen1</sub></td>
 <td></td>
 </tr>
 </table>
@@ -29,13 +29,13 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/BookingScreen1.md"><img src="Screens/Frames/BookingScreen1.framed.svg" height="520" alt="BookingScreen1 screen preview" /></a><br /><sub>BookingScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/BookingScreen2.md"><img src="Screens/Frames/BookingScreen2.framed.svg" height="520" alt="BookingScreen2 screen preview" /></a><br /><sub>BookingScreen2</sub></td>
-<td align="center" valign="top"><a href="Screens/BookingScreen3.md"><img src="Screens/Frames/BookingScreen3.framed.svg" height="520" alt="BookingScreen3 screen preview" /></a><br /><sub>BookingScreen3</sub></td>
+<td align="center" valign="top"><a href="Screens/BookingScreen1.md"><img src="Screens/Frames/BookingScreen1.framed.png" height="520" alt="BookingScreen1 screen preview" /></a><br /><sub>BookingScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/BookingScreen2.md"><img src="Screens/Frames/BookingScreen2.framed.png" height="520" alt="BookingScreen2 screen preview" /></a><br /><sub>BookingScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/BookingScreen3.md"><img src="Screens/Frames/BookingScreen3.framed.png" height="520" alt="BookingScreen3 screen preview" /></a><br /><sub>BookingScreen3</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/BookingScreen4.md"><img src="Screens/Frames/BookingScreen4.framed.svg" height="520" alt="BookingScreen4 screen preview" /></a><br /><sub>BookingScreen4</sub></td>
-<td align="center" valign="top"><a href="Screens/BookingScreen5.md"><img src="Screens/Frames/BookingScreen5.framed.svg" height="520" alt="BookingScreen5 screen preview" /></a><br /><sub>BookingScreen5</sub></td>
+<td align="center" valign="top"><a href="Screens/BookingScreen4.md"><img src="Screens/Frames/BookingScreen4.framed.png" height="520" alt="BookingScreen4 screen preview" /></a><br /><sub>BookingScreen4</sub></td>
+<td align="center" valign="top"><a href="Screens/BookingScreen5.md"><img src="Screens/Frames/BookingScreen5.framed.png" height="520" alt="BookingScreen5 screen preview" /></a><br /><sub>BookingScreen5</sub></td>
 <td></td>
 </tr>
 </table>
@@ -44,12 +44,12 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/HomeScreen1.md"><img src="Screens/Frames/HomeScreen1.framed.svg" height="520" alt="HomeScreen1 screen preview" /></a><br /><sub>HomeScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/HomeScreen2.md"><img src="Screens/Frames/HomeScreen2.framed.svg" height="520" alt="HomeScreen2 screen preview" /></a><br /><sub>HomeScreen2</sub></td>
-<td align="center" valign="top"><a href="Screens/HomeScreen3.md"><img src="Screens/Frames/HomeScreen3.framed.svg" height="520" alt="HomeScreen3 screen preview" /></a><br /><sub>HomeScreen3</sub></td>
+<td align="center" valign="top"><a href="Screens/HomeScreen1.md"><img src="Screens/Frames/HomeScreen1.framed.png" height="520" alt="HomeScreen1 screen preview" /></a><br /><sub>HomeScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/HomeScreen2.md"><img src="Screens/Frames/HomeScreen2.framed.png" height="520" alt="HomeScreen2 screen preview" /></a><br /><sub>HomeScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/HomeScreen3.md"><img src="Screens/Frames/HomeScreen3.framed.png" height="520" alt="HomeScreen3 screen preview" /></a><br /><sub>HomeScreen3</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/HomeScreen4.md"><img src="Screens/Frames/HomeScreen4.framed.svg" height="520" alt="HomeScreen4 screen preview" /></a><br /><sub>HomeScreen4</sub></td>
+<td align="center" valign="top"><a href="Screens/HomeScreen4.md"><img src="Screens/Frames/HomeScreen4.framed.png" height="520" alt="HomeScreen4 screen preview" /></a><br /><sub>HomeScreen4</sub></td>
 <td></td>
 <td></td>
 </tr>
@@ -59,8 +59,8 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/ImageGalleryScreen1.md"><img src="Screens/Frames/ImageGalleryScreen1.framed.svg" height="520" alt="ImageGalleryScreen1 screen preview" /></a><br /><sub>ImageGalleryScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/ImageGalleryScreen2.md"><img src="Screens/Frames/ImageGalleryScreen2.framed.svg" height="520" alt="ImageGalleryScreen2 screen preview" /></a><br /><sub>ImageGalleryScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/ImageGalleryScreen1.md"><img src="Screens/Frames/ImageGalleryScreen1.framed.png" height="520" alt="ImageGalleryScreen1 screen preview" /></a><br /><sub>ImageGalleryScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/ImageGalleryScreen2.md"><img src="Screens/Frames/ImageGalleryScreen2.framed.png" height="520" alt="ImageGalleryScreen2 screen preview" /></a><br /><sub>ImageGalleryScreen2</sub></td>
 <td></td>
 </tr>
 </table>
@@ -69,18 +69,18 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/LogInScreen1.md"><img src="Screens/Frames/LogInScreen1.framed.svg" height="520" alt="LogInScreen1 screen preview" /></a><br /><sub>LogInScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/LogInScreen2.md"><img src="Screens/Frames/LogInScreen2.framed.svg" height="520" alt="LogInScreen2 screen preview" /></a><br /><sub>LogInScreen2</sub></td>
-<td align="center" valign="top"><a href="Screens/LogInScreen3.md"><img src="Screens/Frames/LogInScreen3.framed.svg" height="520" alt="LogInScreen3 screen preview" /></a><br /><sub>LogInScreen3</sub></td>
+<td align="center" valign="top"><a href="Screens/LogInScreen1.md"><img src="Screens/Frames/LogInScreen1.framed.png" height="520" alt="LogInScreen1 screen preview" /></a><br /><sub>LogInScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/LogInScreen2.md"><img src="Screens/Frames/LogInScreen2.framed.png" height="520" alt="LogInScreen2 screen preview" /></a><br /><sub>LogInScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/LogInScreen3.md"><img src="Screens/Frames/LogInScreen3.framed.png" height="520" alt="LogInScreen3 screen preview" /></a><br /><sub>LogInScreen3</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/LogInScreen4.md"><img src="Screens/Frames/LogInScreen4.framed.svg" height="520" alt="LogInScreen4 screen preview" /></a><br /><sub>LogInScreen4</sub></td>
-<td align="center" valign="top"><a href="Screens/SignUpScreen1.md"><img src="Screens/Frames/SignUpScreen1.framed.svg" height="520" alt="SignUpScreen1 screen preview" /></a><br /><sub>SignUpScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/SignUpScreen2.md"><img src="Screens/Frames/SignUpScreen2.framed.svg" height="520" alt="SignUpScreen2 screen preview" /></a><br /><sub>SignUpScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/LogInScreen4.md"><img src="Screens/Frames/LogInScreen4.framed.png" height="520" alt="LogInScreen4 screen preview" /></a><br /><sub>LogInScreen4</sub></td>
+<td align="center" valign="top"><a href="Screens/SignUpScreen1.md"><img src="Screens/Frames/SignUpScreen1.framed.png" height="520" alt="SignUpScreen1 screen preview" /></a><br /><sub>SignUpScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/SignUpScreen2.md"><img src="Screens/Frames/SignUpScreen2.framed.png" height="520" alt="SignUpScreen2 screen preview" /></a><br /><sub>SignUpScreen2</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/SignUpScreen3.md"><img src="Screens/Frames/SignUpScreen3.framed.svg" height="520" alt="SignUpScreen3 screen preview" /></a><br /><sub>SignUpScreen3</sub></td>
-<td align="center" valign="top"><a href="Screens/SignUpScreen4.md"><img src="Screens/Frames/SignUpScreen4.framed.svg" height="520" alt="SignUpScreen4 screen preview" /></a><br /><sub>SignUpScreen4</sub></td>
+<td align="center" valign="top"><a href="Screens/SignUpScreen3.md"><img src="Screens/Frames/SignUpScreen3.framed.png" height="520" alt="SignUpScreen3 screen preview" /></a><br /><sub>SignUpScreen3</sub></td>
+<td align="center" valign="top"><a href="Screens/SignUpScreen4.md"><img src="Screens/Frames/SignUpScreen4.framed.png" height="520" alt="SignUpScreen4 screen preview" /></a><br /><sub>SignUpScreen4</sub></td>
 <td></td>
 </tr>
 </table>
@@ -89,9 +89,9 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/ProfileScreen1.md"><img src="Screens/Frames/ProfileScreen1.framed.svg" height="520" alt="ProfileScreen1 screen preview" /></a><br /><sub>ProfileScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/ProfileScreen2.md"><img src="Screens/Frames/ProfileScreen2.framed.svg" height="520" alt="ProfileScreen2 screen preview" /></a><br /><sub>ProfileScreen2</sub></td>
-<td align="center" valign="top"><a href="Screens/ProfileScreen3.md"><img src="Screens/Frames/ProfileScreen3.framed.svg" height="520" alt="ProfileScreen3 screen preview" /></a><br /><sub>ProfileScreen3</sub></td>
+<td align="center" valign="top"><a href="Screens/ProfileScreen1.md"><img src="Screens/Frames/ProfileScreen1.framed.png" height="520" alt="ProfileScreen1 screen preview" /></a><br /><sub>ProfileScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/ProfileScreen2.md"><img src="Screens/Frames/ProfileScreen2.framed.png" height="520" alt="ProfileScreen2 screen preview" /></a><br /><sub>ProfileScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/ProfileScreen3.md"><img src="Screens/Frames/ProfileScreen3.framed.png" height="520" alt="ProfileScreen3 screen preview" /></a><br /><sub>ProfileScreen3</sub></td>
 </tr>
 </table>
 
@@ -99,62 +99,62 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/CartScreen1.md"><img src="Screens/Frames/CartScreen1.framed.svg" height="520" alt="CartScreen1 screen preview" /></a><br /><sub>CartScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/CartScreen2.md"><img src="Screens/Frames/CartScreen2.framed.svg" height="520" alt="CartScreen2 screen preview" /></a><br /><sub>CartScreen2</sub></td>
-<td align="center" valign="top"><a href="Screens/CartScreen3.md"><img src="Screens/Frames/CartScreen3.framed.svg" height="520" alt="CartScreen3 screen preview" /></a><br /><sub>CartScreen3</sub></td>
+<td align="center" valign="top"><a href="Screens/CartScreen1.md"><img src="Screens/Frames/CartScreen1.framed.png" height="520" alt="CartScreen1 screen preview" /></a><br /><sub>CartScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/CartScreen2.md"><img src="Screens/Frames/CartScreen2.framed.png" height="520" alt="CartScreen2 screen preview" /></a><br /><sub>CartScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/CartScreen3.md"><img src="Screens/Frames/CartScreen3.framed.png" height="520" alt="CartScreen3 screen preview" /></a><br /><sub>CartScreen3</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/CartScreen4.md"><img src="Screens/Frames/CartScreen4.framed.svg" height="520" alt="CartScreen4 screen preview" /></a><br /><sub>CartScreen4</sub></td>
-<td align="center" valign="top"><a href="Screens/CartScreen5.md"><img src="Screens/Frames/CartScreen5.framed.svg" height="520" alt="CartScreen5 screen preview" /></a><br /><sub>CartScreen5</sub></td>
-<td align="center" valign="top"><a href="Screens/Categories1.md"><img src="Screens/Frames/Categories1.framed.svg" height="520" alt="Categories1 screen preview" /></a><br /><sub>Categories1</sub></td>
+<td align="center" valign="top"><a href="Screens/CartScreen4.md"><img src="Screens/Frames/CartScreen4.framed.png" height="520" alt="CartScreen4 screen preview" /></a><br /><sub>CartScreen4</sub></td>
+<td align="center" valign="top"><a href="Screens/CartScreen5.md"><img src="Screens/Frames/CartScreen5.framed.png" height="520" alt="CartScreen5 screen preview" /></a><br /><sub>CartScreen5</sub></td>
+<td align="center" valign="top"><a href="Screens/Categories1.md"><img src="Screens/Frames/Categories1.framed.png" height="520" alt="Categories1 screen preview" /></a><br /><sub>Categories1</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Categories2.md"><img src="Screens/Frames/Categories2.framed.svg" height="520" alt="Categories2 screen preview" /></a><br /><sub>Categories2</sub></td>
-<td align="center" valign="top"><a href="Screens/Categories3.md"><img src="Screens/Frames/Categories3.framed.svg" height="520" alt="Categories3 screen preview" /></a><br /><sub>Categories3</sub></td>
-<td align="center" valign="top"><a href="Screens/Categories4.md"><img src="Screens/Frames/Categories4.framed.svg" height="520" alt="Categories4 screen preview" /></a><br /><sub>Categories4</sub></td>
+<td align="center" valign="top"><a href="Screens/Categories2.md"><img src="Screens/Frames/Categories2.framed.png" height="520" alt="Categories2 screen preview" /></a><br /><sub>Categories2</sub></td>
+<td align="center" valign="top"><a href="Screens/Categories3.md"><img src="Screens/Frames/Categories3.framed.png" height="520" alt="Categories3 screen preview" /></a><br /><sub>Categories3</sub></td>
+<td align="center" valign="top"><a href="Screens/Categories4.md"><img src="Screens/Frames/Categories4.framed.png" height="520" alt="Categories4 screen preview" /></a><br /><sub>Categories4</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Categories5.md"><img src="Screens/Frames/Categories5.framed.svg" height="520" alt="Categories5 screen preview" /></a><br /><sub>Categories5</sub></td>
-<td align="center" valign="top"><a href="Screens/Filters1.md"><img src="Screens/Frames/Filters1.framed.svg" height="520" alt="Filters1 screen preview" /></a><br /><sub>Filters1</sub></td>
-<td align="center" valign="top"><a href="Screens/Filters2.md"><img src="Screens/Frames/Filters2.framed.svg" height="520" alt="Filters2 screen preview" /></a><br /><sub>Filters2</sub></td>
+<td align="center" valign="top"><a href="Screens/Categories5.md"><img src="Screens/Frames/Categories5.framed.png" height="520" alt="Categories5 screen preview" /></a><br /><sub>Categories5</sub></td>
+<td align="center" valign="top"><a href="Screens/Filters1.md"><img src="Screens/Frames/Filters1.framed.png" height="520" alt="Filters1 screen preview" /></a><br /><sub>Filters1</sub></td>
+<td align="center" valign="top"><a href="Screens/Filters2.md"><img src="Screens/Frames/Filters2.framed.png" height="520" alt="Filters2 screen preview" /></a><br /><sub>Filters2</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Filters3.md"><img src="Screens/Frames/Filters3.framed.svg" height="520" alt="Filters3 screen preview" /></a><br /><sub>Filters3</sub></td>
-<td align="center" valign="top"><a href="Screens/ItemDetails1.md"><img src="Screens/Frames/ItemDetails1.framed.svg" height="520" alt="ItemDetails1 screen preview" /></a><br /><sub>ItemDetails1</sub></td>
-<td align="center" valign="top"><a href="Screens/ItemDetails2.md"><img src="Screens/Frames/ItemDetails2.framed.svg" height="520" alt="ItemDetails2 screen preview" /></a><br /><sub>ItemDetails2</sub></td>
+<td align="center" valign="top"><a href="Screens/Filters3.md"><img src="Screens/Frames/Filters3.framed.png" height="520" alt="Filters3 screen preview" /></a><br /><sub>Filters3</sub></td>
+<td align="center" valign="top"><a href="Screens/ItemDetails1.md"><img src="Screens/Frames/ItemDetails1.framed.png" height="520" alt="ItemDetails1 screen preview" /></a><br /><sub>ItemDetails1</sub></td>
+<td align="center" valign="top"><a href="Screens/ItemDetails2.md"><img src="Screens/Frames/ItemDetails2.framed.png" height="520" alt="ItemDetails2 screen preview" /></a><br /><sub>ItemDetails2</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/ItemDetails3.md"><img src="Screens/Frames/ItemDetails3.framed.svg" height="520" alt="ItemDetails3 screen preview" /></a><br /><sub>ItemDetails3</sub></td>
-<td align="center" valign="top"><a href="Screens/ItemDetails4.md"><img src="Screens/Frames/ItemDetails4.framed.svg" height="520" alt="ItemDetails4 screen preview" /></a><br /><sub>ItemDetails4</sub></td>
-<td align="center" valign="top"><a href="Screens/ItemDetails5.md"><img src="Screens/Frames/ItemDetails5.framed.svg" height="520" alt="ItemDetails5 screen preview" /></a><br /><sub>ItemDetails5</sub></td>
+<td align="center" valign="top"><a href="Screens/ItemDetails3.md"><img src="Screens/Frames/ItemDetails3.framed.png" height="520" alt="ItemDetails3 screen preview" /></a><br /><sub>ItemDetails3</sub></td>
+<td align="center" valign="top"><a href="Screens/ItemDetails4.md"><img src="Screens/Frames/ItemDetails4.framed.png" height="520" alt="ItemDetails4 screen preview" /></a><br /><sub>ItemDetails4</sub></td>
+<td align="center" valign="top"><a href="Screens/ItemDetails5.md"><img src="Screens/Frames/ItemDetails5.framed.png" height="520" alt="ItemDetails5 screen preview" /></a><br /><sub>ItemDetails5</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Items1.md"><img src="Screens/Frames/Items1.framed.svg" height="520" alt="Items1 screen preview" /></a><br /><sub>Items1</sub></td>
-<td align="center" valign="top"><a href="Screens/Items2.md"><img src="Screens/Frames/Items2.framed.svg" height="520" alt="Items2 screen preview" /></a><br /><sub>Items2</sub></td>
-<td align="center" valign="top"><a href="Screens/Items3.md"><img src="Screens/Frames/Items3.framed.svg" height="520" alt="Items3 screen preview" /></a><br /><sub>Items3</sub></td>
+<td align="center" valign="top"><a href="Screens/Items1.md"><img src="Screens/Frames/Items1.framed.png" height="520" alt="Items1 screen preview" /></a><br /><sub>Items1</sub></td>
+<td align="center" valign="top"><a href="Screens/Items2.md"><img src="Screens/Frames/Items2.framed.png" height="520" alt="Items2 screen preview" /></a><br /><sub>Items2</sub></td>
+<td align="center" valign="top"><a href="Screens/Items3.md"><img src="Screens/Frames/Items3.framed.png" height="520" alt="Items3 screen preview" /></a><br /><sub>Items3</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Items4.md"><img src="Screens/Frames/Items4.framed.svg" height="520" alt="Items4 screen preview" /></a><br /><sub>Items4</sub></td>
-<td align="center" valign="top"><a href="Screens/Items5.md"><img src="Screens/Frames/Items5.framed.svg" height="520" alt="Items5 screen preview" /></a><br /><sub>Items5</sub></td>
-<td align="center" valign="top"><a href="Screens/Items6.md"><img src="Screens/Frames/Items6.framed.svg" height="520" alt="Items6 screen preview" /></a><br /><sub>Items6</sub></td>
+<td align="center" valign="top"><a href="Screens/Items4.md"><img src="Screens/Frames/Items4.framed.png" height="520" alt="Items4 screen preview" /></a><br /><sub>Items4</sub></td>
+<td align="center" valign="top"><a href="Screens/Items5.md"><img src="Screens/Frames/Items5.framed.png" height="520" alt="Items5 screen preview" /></a><br /><sub>Items5</sub></td>
+<td align="center" valign="top"><a href="Screens/Items6.md"><img src="Screens/Frames/Items6.framed.png" height="520" alt="Items6 screen preview" /></a><br /><sub>Items6</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Items7.md"><img src="Screens/Frames/Items7.framed.svg" height="520" alt="Items7 screen preview" /></a><br /><sub>Items7</sub></td>
-<td align="center" valign="top"><a href="Screens/Items8.md"><img src="Screens/Frames/Items8.framed.svg" height="520" alt="Items8 screen preview" /></a><br /><sub>Items8</sub></td>
-<td align="center" valign="top"><a href="Screens/Order1.md"><img src="Screens/Frames/Order1.framed.svg" height="520" alt="Order1 screen preview" /></a><br /><sub>Order1</sub></td>
+<td align="center" valign="top"><a href="Screens/Items7.md"><img src="Screens/Frames/Items7.framed.png" height="520" alt="Items7 screen preview" /></a><br /><sub>Items7</sub></td>
+<td align="center" valign="top"><a href="Screens/Items8.md"><img src="Screens/Frames/Items8.framed.png" height="520" alt="Items8 screen preview" /></a><br /><sub>Items8</sub></td>
+<td align="center" valign="top"><a href="Screens/Order1.md"><img src="Screens/Frames/Order1.framed.png" height="520" alt="Order1 screen preview" /></a><br /><sub>Order1</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Order2.md"><img src="Screens/Frames/Order2.framed.svg" height="520" alt="Order2 screen preview" /></a><br /><sub>Order2</sub></td>
-<td align="center" valign="top"><a href="Screens/Order3.md"><img src="Screens/Frames/Order3.framed.svg" height="520" alt="Order3 screen preview" /></a><br /><sub>Order3</sub></td>
-<td align="center" valign="top"><a href="Screens/Order4.md"><img src="Screens/Frames/Order4.framed.svg" height="520" alt="Order4 screen preview" /></a><br /><sub>Order4</sub></td>
+<td align="center" valign="top"><a href="Screens/Order2.md"><img src="Screens/Frames/Order2.framed.png" height="520" alt="Order2 screen preview" /></a><br /><sub>Order2</sub></td>
+<td align="center" valign="top"><a href="Screens/Order3.md"><img src="Screens/Frames/Order3.framed.png" height="520" alt="Order3 screen preview" /></a><br /><sub>Order3</sub></td>
+<td align="center" valign="top"><a href="Screens/Order4.md"><img src="Screens/Frames/Order4.framed.png" height="520" alt="Order4 screen preview" /></a><br /><sub>Order4</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Payment1.md"><img src="Screens/Frames/Payment1.framed.svg" height="520" alt="Payment1 screen preview" /></a><br /><sub>Payment1</sub></td>
-<td align="center" valign="top"><a href="Screens/Payment2.md"><img src="Screens/Frames/Payment2.framed.svg" height="520" alt="Payment2 screen preview" /></a><br /><sub>Payment2</sub></td>
-<td align="center" valign="top"><a href="Screens/Shipping1.md"><img src="Screens/Frames/Shipping1.framed.svg" height="520" alt="Shipping1 screen preview" /></a><br /><sub>Shipping1</sub></td>
+<td align="center" valign="top"><a href="Screens/Payment1.md"><img src="Screens/Frames/Payment1.framed.png" height="520" alt="Payment1 screen preview" /></a><br /><sub>Payment1</sub></td>
+<td align="center" valign="top"><a href="Screens/Payment2.md"><img src="Screens/Frames/Payment2.framed.png" height="520" alt="Payment2 screen preview" /></a><br /><sub>Payment2</sub></td>
+<td align="center" valign="top"><a href="Screens/Shipping1.md"><img src="Screens/Frames/Shipping1.framed.png" height="520" alt="Shipping1 screen preview" /></a><br /><sub>Shipping1</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top"><a href="Screens/Shipping2.md"><img src="Screens/Frames/Shipping2.framed.svg" height="520" alt="Shipping2 screen preview" /></a><br /><sub>Shipping2</sub></td>
+<td align="center" valign="top"><a href="Screens/Shipping2.md"><img src="Screens/Frames/Shipping2.framed.png" height="520" alt="Shipping2 screen preview" /></a><br /><sub>Shipping2</sub></td>
 <td></td>
 <td></td>
 </tr>
@@ -164,9 +164,9 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/NewsScreen1.md"><img src="Screens/Frames/NewsScreen1.framed.svg" height="520" alt="NewsScreen1 screen preview" /></a><br /><sub>NewsScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/NewsScreen2.md"><img src="Screens/Frames/NewsScreen2.framed.svg" height="520" alt="NewsScreen2 screen preview" /></a><br /><sub>NewsScreen2</sub></td>
-<td align="center" valign="top"><a href="Screens/NotificationsScreen1.md"><img src="Screens/Frames/NotificationsScreen1.framed.svg" height="520" alt="NotificationsScreen1 screen preview" /></a><br /><sub>NotificationsScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/NewsScreen1.md"><img src="Screens/Frames/NewsScreen1.framed.png" height="520" alt="NewsScreen1 screen preview" /></a><br /><sub>NewsScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/NewsScreen2.md"><img src="Screens/Frames/NewsScreen2.framed.png" height="520" alt="NewsScreen2 screen preview" /></a><br /><sub>NewsScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/NotificationsScreen1.md"><img src="Screens/Frames/NotificationsScreen1.framed.png" height="520" alt="NotificationsScreen1 screen preview" /></a><br /><sub>NotificationsScreen1</sub></td>
 </tr>
 </table>
 
@@ -174,8 +174,8 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/AboutUsScreen1.md"><img src="Screens/Frames/AboutUsScreen1.framed.svg" height="520" alt="AboutUsScreen1 screen preview" /></a><br /><sub>AboutUsScreen1</sub></td>
-<td align="center" valign="top"><a href="Screens/AboutUsScreen2.md"><img src="Screens/Frames/AboutUsScreen2_0.framed.svg" height="520" alt="AboutUsScreen2 screen preview" /></a><br /><sub>AboutUsScreen2</sub></td>
+<td align="center" valign="top"><a href="Screens/AboutUsScreen1.md"><img src="Screens/Frames/AboutUsScreen1.framed.png" height="520" alt="AboutUsScreen1 screen preview" /></a><br /><sub>AboutUsScreen1</sub></td>
+<td align="center" valign="top"><a href="Screens/AboutUsScreen2.md"><img src="Screens/Frames/AboutUsScreen2_0.framed.png" height="520" alt="AboutUsScreen2 screen preview" /></a><br /><sub>AboutUsScreen2</sub></td>
 <td></td>
 </tr>
 </table>
@@ -184,8 +184,8 @@
 
 <table>
 <tr>
-<td align="center" valign="top"><a href="Screens/DesignTokensPlaygroundScreen.md"><img src="Screens/Frames/DesignTokensPlaygroundScreen.framed.svg" height="520" alt="DesignTokensPlaygroundScreen screen preview" /></a><br /><sub>DesignTokensPlaygroundScreen</sub></td>
-<td align="center" valign="top"><a href="Screens/DynamicTypePlaygroundScreen.md"><img src="Screens/Frames/DynamicTypePlaygroundScreen.framed.svg" height="520" alt="DynamicTypePlaygroundScreen screen preview" /></a><br /><sub>DynamicTypePlaygroundScreen</sub></td>
+<td align="center" valign="top"><a href="Screens/DesignTokensPlaygroundScreen.md"><img src="Screens/Frames/DesignTokensPlaygroundScreen.framed.png" height="520" alt="DesignTokensPlaygroundScreen screen preview" /></a><br /><sub>DesignTokensPlaygroundScreen</sub></td>
+<td align="center" valign="top"><a href="Screens/DynamicTypePlaygroundScreen.md"><img src="Screens/Frames/DynamicTypePlaygroundScreen.framed.png" height="520" alt="DynamicTypePlaygroundScreen screen preview" /></a><br /><sub>DynamicTypePlaygroundScreen</sub></td>
 <td></td>
 </tr>
 </table>
@@ -195,4 +195,4 @@
 - Refresh these docs with `cd Scripts && ./documentation_generator.sh`.
 - Every screen page must have at least one matching snapshot image in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`.
 - A screen named `ExampleScreen` uses `ExampleScreen.snapshot.png` and may also include variants such as `ExampleScreen_0.snapshot.png`.
-- Framed screen previews are generated SVG files under `Content/Screens/Frames` from the source snapshot PNGs.
+- Framed screen previews are generated PNG files under `Content/Screens/Frames` from the source snapshot PNGs.

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:25:34 EEST (`pending`)
+
+- task_or_issue: `flatten-screen-frame-previews`
+
+#### Request
+Keep the documentation workflow aligned with self-contained screen preview frames.
+
+#### Change Summary
+Updated validation wording to describe screen preview frames as rebuilt from snapshot PNGs and documented the Pillow dependency used to compose flattened frame PNGs.
+
+#### Rationale
+The workflow page should describe generated frame output accurately so agents do not assume frames are pointers or SVG wrappers.
+
+#### Invariants
+Keep this page hand-maintained. Generated frames remain refreshed through `Scripts/documentation_generator.sh`, not edited directly.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check` after updating the workflow language.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens/Frames/*.framed.png`, `Content/docs/WORKFLOWS.md`.
+
+#### Follow-up Risks
+If the generator output format changes again, update this workflow page in the same change.
+
 ### 2026-06-29 17:25:51 EEST (`pending`)
 
 - task_or_issue: `iphone-framed-screen-previews`

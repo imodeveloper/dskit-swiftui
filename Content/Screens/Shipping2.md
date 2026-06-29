@@ -4,7 +4,7 @@
 
 ### Shipping2
 
-<img src="Frames/Shipping2.framed.svg" width="60%" alt="Shipping2 snapshot preview" />
+<img src="Frames/Shipping2.framed.png" width="60%" alt="Shipping2 snapshot preview" />
 
 ## DSKit Views Used
 

@@ -4,7 +4,7 @@
 
 ### DynamicTypePlaygroundScreen
 
-<img src="Frames/DynamicTypePlaygroundScreen.framed.svg" width="60%" alt="DynamicTypePlaygroundScreen snapshot preview" />
+<img src="Frames/DynamicTypePlaygroundScreen.framed.png" width="60%" alt="DynamicTypePlaygroundScreen snapshot preview" />
 
 ## DSKit Views Used
 

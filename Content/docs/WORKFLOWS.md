@@ -23,6 +23,7 @@
 - Generate/refresh `Content/Views.md`, per-component pages, `Content/Screens.md`, per-screen pages, framed screen previews, and the Explorer usage index:
   - `cd Scripts`
   - `./documentation_generator.sh`
+- The Python generator requires Pillow to build flattened screen frame PNGs.
 - If a new view file is added under `DSKit/Sources/DSKit/Views`, add or record its exact preview snapshot first:
   - `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`
 - If a new screen file is added under `DSKitExplorer/Screens`, add or record at least one screen snapshot first:
@@ -34,7 +35,7 @@
   - every `DSKit/Sources/DSKit/Views/*.swift` file has `Content/Views/<Component>.md`
   - every component page has `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`
   - every generated screen page has at least one snapshot in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`
-  - every generated screen frame in `Content/Screens/Frames` points to an existing snapshot PNG
+  - every generated screen frame in `Content/Screens/Frames` is rebuilt from an existing snapshot PNG
   - relative links resolve locally
 
 ## Running on CLI and automation

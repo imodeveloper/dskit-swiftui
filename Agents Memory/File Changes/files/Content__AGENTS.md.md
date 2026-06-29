@@ -6,6 +6,56 @@
 
 ## Changes
 
+### 2026-06-29 20:25:34 EEST (`pending`)
+
+- task_or_issue: `flatten-screen-frame-previews`
+
+#### Request
+Keep Content-area guidance aligned with flattened PNG screen frames.
+
+#### Change Summary
+Updated `Screens/Frames` guidance from generated SVG frame assets to generated PNG frame assets.
+
+#### Rationale
+Content agents need accurate generated-output guidance before editing documentation surfaces or rerunning the generator.
+
+#### Invariants
+Do not hand-edit generated component pages, screen pages, or frame PNGs; update source, snapshots, or the generator instead.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Screens.md`, `Content/Screens/*.md`, `Content/Screens/Frames/*.framed.png`.
+
+#### Follow-up Risks
+If frame assets change type or location, update `AGENTS.md`, `Content/AGENTS.md`, and `Scripts/AGENTS.md` together.
+
+### 2026-06-29 17:54:45 EEST (`pending`)
+
+- task_or_issue: `dskit-only-screen-construction`
+
+#### Request
+Update Content-area guidance so `Screen-Construction.md` is described as DSKit documentation, not a Monitor comparison page.
+
+#### Change Summary
+Changed the `Screen-Construction.md` description to identify it as the hand-maintained guide for building full DSKit screens from DSKitExplorer patterns.
+
+#### Rationale
+Content guidance should clearly separate DSKit documentation from external app-specific architecture.
+
+#### Invariants
+Keep generated docs and hand-maintained docs clearly separated. Keep `Screen-Construction.md` classified as hand-maintained.
+
+#### Tests Or Evidence
+Validated local links for changed docs and ran whitespace validation.
+
+#### Related Files
+`Content/Screen-Construction.md`, `README.md`, `AGENTS.md`.
+
+#### Follow-up Risks
+None.
+
 ### 2026-06-29 17:04:12 EEST (`pending`)
 
 - task_or_issue: `iphone-framed-screen-previews`

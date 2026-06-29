@@ -4,7 +4,7 @@
 
 ### Filters3
 
-<img src="Frames/Filters3.framed.svg" width="60%" alt="Filters3 snapshot preview" />
+<img src="Frames/Filters3.framed.png" width="60%" alt="Filters3 snapshot preview" />
 
 ## DSKit Views Used
 

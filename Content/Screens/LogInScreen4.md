@@ -4,7 +4,7 @@
 
 ### LogInScreen4
 
-<img src="Frames/LogInScreen4.framed.svg" width="60%" alt="LogInScreen4 snapshot preview" />
+<img src="Frames/LogInScreen4.framed.png" width="60%" alt="LogInScreen4 snapshot preview" />
 
 ## DSKit Views Used
 

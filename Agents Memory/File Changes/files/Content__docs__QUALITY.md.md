@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 20:25:34 EEST (`pending`)
+
+- task_or_issue: `flatten-screen-frame-previews`
+
+#### Request
+Keep quality guidance aligned with flattened PNG generated screen frames.
+
+#### Change Summary
+Updated the generated docs/assets list from `Content/Screens/Frames/*.framed.svg` to `Content/Screens/Frames/*.framed.png`.
+
+#### Rationale
+The quality guide should name the current generated output assets agents must regenerate rather than manually rewrite.
+
+#### Invariants
+Generated docs and frame PNGs remain source/snapshot-derived and should not be hand-edited.
+
+#### Tests Or Evidence
+Ran the documentation generator, local Markdown link/image validation, and `git diff --check`.
+
+#### Related Files
+`Scripts/generate_view_docs.py`, `Content/Documentation.md`, `Content/docs/WORKFLOWS.md`, `Content/Screens/Frames/*.framed.png`.
+
+#### Follow-up Risks
+If output naming changes, keep this generated-assets list synchronized.
+
 ### 2026-06-29 17:25:51 EEST (`pending`)
 
 - task_or_issue: `iphone-framed-screen-previews`

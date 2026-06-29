@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:54:45 EEST (`pending`)
+
+- task_or_issue: `dskit-only-screen-construction`
+
+#### Request
+Do not describe `Screen-Construction.md` as Monitor-related because this repo documentation should be DSKit-focused.
+
+#### Change Summary
+Changed the README documentation entry for `Screen construction` so it describes assembling DSKit screens from containers, sections, rows, and cards.
+
+#### Rationale
+The README is the public entrypoint for DSKit and should not frame DSKit docs around a separate app repository.
+
+#### Invariants
+Keep README documentation links concise, relative, and purpose-labeled. External application architecture should not be presented as part of DSKit docs.
+
+#### Tests Or Evidence
+Validated local README links/images and ran whitespace validation on the changed docs.
+
+#### Related Files
+`Content/Screen-Construction.md`, `AGENTS.md`, `Content/AGENTS.md`.
+
+#### Follow-up Risks
+If the article scope changes again, update the README description in the same change.
+
 ### 2026-06-29 16:09:19 EEST (`pending`)
 
 - task_or_issue: `screen-construction-deep-dive`

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 17:54:45 EEST (`pending`)
+
+- task_or_issue: `dskit-only-screen-construction`
+
+#### Request
+Remove Monitor/cross-repo framing from `Content/Screen-Construction.md` and make it an article focused only on DSKit.
+
+#### Change Summary
+Rewrote the page as a DSKit-only screen construction article covering DSKitExplorer as a cookbook, construction layers, container selection, example patterns, data/state boundaries, virtualization, interactions, and agent inspection workflow.
+
+#### Rationale
+This repository's public documentation should explain DSKit concepts without depending on or advertising another application repository.
+
+#### Invariants
+Keep this page hand-maintained, DSKit-focused, and repo-local. Do not reintroduce external app-specific architecture or sibling-workspace references.
+
+#### Tests Or Evidence
+Validated local Markdown links for `README.md`, `AGENTS.md`, `Content/AGENTS.md`, and `Content/Screen-Construction.md`; ran whitespace validation on the changed files; searched the public article and README/Content guide references for Monitor mentions.
+
+#### Related Files
+`README.md`, `AGENTS.md`, `Content/AGENTS.md`.
+
+#### Follow-up Risks
+If app-specific adoption notes are needed later, put them in that app's repository instead of this DSKit article.
+
 ### 2026-06-29 16:09:19 EEST (`pending`)
 
 - task_or_issue: `screen-construction-deep-dive`

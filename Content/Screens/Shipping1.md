@@ -4,7 +4,7 @@
 
 ### Shipping1
 
-<img src="Frames/Shipping1.framed.svg" width="60%" alt="Shipping1 snapshot preview" />
+<img src="Frames/Shipping1.framed.png" width="60%" alt="Shipping1 snapshot preview" />
 
 ## DSKit Views Used
 

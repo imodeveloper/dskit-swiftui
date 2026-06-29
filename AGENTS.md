@@ -21,7 +21,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 ## How to read this repo
 - Start with `README.md` for public product positioning, then use this file for agent rules and repo routing.
 - Use `Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`, and `Content/docs/PLANS.md` for validation, testing, and current work shape.
-- Use `Content/Screen-Construction.md` before translating DSKitExplorer examples into production screens or comparing this repo with `../imodeveloperlab`.
+- Use `Content/Screen-Construction.md` before building or refactoring full DSKit screens from DSKitExplorer examples.
 - For DSKit component work:
   - read `DSKit/AGENTS.md`
   - read the target file under `DSKit/Sources/DSKit/Views`
@@ -86,7 +86,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - `Content/Views/UsageIndex.md`
   - `Content/Screens.md`
   - `Content/Screens/*.md`
-  - `Content/Screens/Frames/*.framed.svg`
+  - `Content/Screens/Frames/*.framed.png`
 - Generator inputs:
   - DSKit view source: `DSKit/Sources/DSKit/Views/*.swift`
   - component docs and examples: source comments and `Testable_*` structs in view files
@@ -94,7 +94,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
   - Explorer usage: direct word-boundary references in `DSKitExplorer/Screens/*.swift`
   - screen source: `DSKitExplorer/Screens/*.swift` plus supported playground screens in `DSKitExplorer/ScreenView.swift`
   - screen previews: `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests/<Screen>.snapshot.png` or numbered variants such as `<Screen>_0.snapshot.png`
-  - screen preview frames: generated SVG wrappers under `Content/Screens/Frames`
+  - screen preview frames: generated flattened PNG wrappers under `Content/Screens/Frames`
 - The generator is intentionally strict:
   - every `DSKit/Sources/DSKit/Views/*.swift` file needs a matching component page and exact component snapshot
   - every generated screen page needs at least one matching screen snapshot

@@ -4,7 +4,7 @@
 
 ### HomeScreen1
 
-<img src="Frames/HomeScreen1.framed.svg" width="60%" alt="HomeScreen1 snapshot preview" />
+<img src="Frames/HomeScreen1.framed.png" width="60%" alt="HomeScreen1 snapshot preview" />
 
 ## DSKit Views Used
 

@@ -4,7 +4,7 @@
 
 ### FoodDetailsScreen1
 
-<img src="Frames/FoodDetailsScreen1.framed.svg" width="60%" alt="FoodDetailsScreen1 snapshot preview" />
+<img src="Frames/FoodDetailsScreen1.framed.png" width="60%" alt="FoodDetailsScreen1 snapshot preview" />
 
 ## DSKit Views Used
 
