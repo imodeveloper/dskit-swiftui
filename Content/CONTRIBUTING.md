@@ -6,7 +6,7 @@ Before changing DSKit, spend a few minutes with the repo-native docs:
 - [Views.md](Views.md) for generated component references.
 - [Screens.md](Screens.md) for generated DSKitExplorer screen references.
 - [Documentation workflow](Documentation.md) for generated-doc maintenance rules.
-- [docs/WORKFLOWS.md](../docs/WORKFLOWS.md) for build, test, snapshot, and documentation generation commands.
+- [Workflow guide](docs/WORKFLOWS.md) for build, test, snapshot, and documentation generation commands.
 
 Generated docs are not edited by hand. Update Swift source comments, `Testable_*` examples, snapshots, or the generator, then refresh the docs from the documented workflow.
 

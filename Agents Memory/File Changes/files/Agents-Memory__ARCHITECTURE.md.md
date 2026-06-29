@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/` and update references.
+
+#### Change Summary
+Updated architecture memory context links from root `docs/...` paths to `Content/docs/...`.
+
+#### Rationale
+The architecture memory is a first-stop file for agents and must point to current documentation locations.
+
+#### Invariants
+Keep this file as a high-level map. Do not let routing references drift from the actual repository tree.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`AGENTS.md`, `Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`, `Content/docs/PLANS.md`.
+
+#### Follow-up Risks
+If documentation folders move again, update this memory alongside `AGENTS.md`.
+
 ### 2026-06-29 14:27:48 EEST (`pending`)
 
 - task_or_issue: `documentation-system-audit`

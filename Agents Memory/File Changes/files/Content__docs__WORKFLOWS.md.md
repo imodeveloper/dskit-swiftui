@@ -1,10 +1,35 @@
-# docs/WORKFLOWS.md
+# Content/docs/WORKFLOWS.md
 
-- source_path: `docs/WORKFLOWS.md`
+- source_path: `Content/docs/WORKFLOWS.md`
 - memory_limit: `300 lines`
 - ordering: `newest entries first`
 
 ## Changes
+
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/` and update references.
+
+#### Change Summary
+Moved the workflow guide from `docs/WORKFLOWS.md` to `Content/docs/WORKFLOWS.md`.
+
+#### Rationale
+`Content/` is now the repository documentation home, so workflow documentation should live there instead of keeping a second root docs folder.
+
+#### Invariants
+Keep this as the canonical build, test, snapshot, and documentation refresh command reference.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`AGENTS.md`, `README.md`, `Content/CONTRIBUTING.md`, `Content/docs/PLANS.md`.
+
+#### Follow-up Risks
+If workflow commands drift, update this guide and the README/contributor links together.
 
 ### 2026-06-29 13:40:34 EEST (`pending`)
 

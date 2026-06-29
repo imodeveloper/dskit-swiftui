@@ -54,9 +54,9 @@
 - Deterministic snapshots are required because downstream apps can rely on both API and visual contracts.
 
 ## 4) Where to start for context
-- For build/test execution and commands: `docs/WORKFLOWS.md`
-- For snapshot and test quality constraints: `docs/QUALITY.md`
-- For active work planning and cleanup: `docs/PLANS.md`
-- For DS wrapper/token rationale: `docs/design-docs/ds-wrapper-principles.md`
+- For build/test execution and commands: `Content/docs/WORKFLOWS.md`
+- For snapshot and test quality constraints: `Content/docs/QUALITY.md`
+- For active work planning and cleanup: `Content/docs/PLANS.md`
+- For DS wrapper/token rationale: `Content/docs/design-docs/ds-wrapper-principles.md`
 - For generated component references: `Content/Views.md`
 - For generated screen references: `Content/Screens.md`

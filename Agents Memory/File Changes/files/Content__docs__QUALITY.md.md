@@ -1,10 +1,35 @@
-# docs/QUALITY.md
+# Content/docs/QUALITY.md
 
-- source_path: `docs/QUALITY.md`
+- source_path: `Content/docs/QUALITY.md`
 - memory_limit: `300 lines`
 - ordering: `newest entries first`
 
 ## Changes
+
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/` and update references.
+
+#### Change Summary
+Moved the quality guide from `docs/QUALITY.md` to `Content/docs/QUALITY.md`.
+
+#### Rationale
+Quality and guardrail documentation belongs with the rest of the repo documentation under `Content/`.
+
+#### Invariants
+Keep snapshot and generated-doc guardrails current when test surfaces or generated outputs change.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`AGENTS.md`, `Agents Memory/ARCHITECTURE.md`, `Content/docs/WORKFLOWS.md`.
+
+#### Follow-up Risks
+None beyond keeping quality guidance aligned with the test suite.
 
 ### 2026-06-29 14:27:48 EEST (`pending`)
 

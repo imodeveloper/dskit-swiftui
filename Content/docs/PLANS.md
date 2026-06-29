@@ -2,9 +2,9 @@
 
 ## Plan folders
 
-- Active plans: `docs/exec-plans/active/`
-- Completed plans: `docs/exec-plans/completed/`
-- Debt tracker: `docs/tech-debt-tracker.md` (create when recurring drift is identified)
+- Active plans: `Content/docs/exec-plans/active/`
+- Completed plans: `Content/docs/exec-plans/completed/`
+- Debt tracker: `Content/docs/tech-debt-tracker.md` (create when recurring drift is identified)
 
 ## Plan format
 - Keep each plan short:
@@ -25,5 +25,5 @@
 
 ## When to close a plan
 
-- Move completed plan files to `docs/exec-plans/completed/`.
+- Move completed plan files to `Content/docs/exec-plans/completed/`.
 - Include final decision logs and any follow-up debt items before close.

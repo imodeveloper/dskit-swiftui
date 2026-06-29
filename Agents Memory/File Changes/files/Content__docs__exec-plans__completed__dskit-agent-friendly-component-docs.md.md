@@ -1,10 +1,35 @@
-# docs/exec-plans/active/dskit-agent-friendly-component-docs.md
+# Content/docs/exec-plans/completed/dskit-agent-friendly-component-docs.md
 
-- source_path: `docs/exec-plans/active/dskit-agent-friendly-component-docs.md`
+- source_path: `Content/docs/exec-plans/completed/dskit-agent-friendly-component-docs.md`
 - memory_limit: `300 lines`
 - ordering: `newest entries first`
 
 ## Changes
+
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/`, update references, and update stale plan state.
+
+#### Change Summary
+Moved the DSKit component documentation execution plan from active to completed under `Content/docs/exec-plans/completed/` and updated stale wording about the current `Content/Views.md` visual catalog.
+
+#### Rationale
+The documentation refactor has been completed, so keeping this under active plans was misleading.
+
+#### Invariants
+Completed plans should preserve final validation evidence and should not be treated as active work.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`Content/docs/PLANS.md`, `Content/Views.md`, `Scripts/generate_view_docs.py`.
+
+#### Follow-up Risks
+If new docs work starts, create a new active plan rather than reopening this completed plan.
 
 ### 2026-06-29 13:40:34 EEST (`pending`)
 

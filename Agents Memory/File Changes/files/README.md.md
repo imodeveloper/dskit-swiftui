@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/` and update references.
+
+#### Change Summary
+Updated the README contribution paragraph so the workflow guide link points to `Content/docs/WORKFLOWS.md`.
+
+#### Rationale
+The README is the public root entrypoint and must not link to the removed root `docs/` folder.
+
+#### Invariants
+Keep README links relative and repo-local. Keep link labels purpose-based instead of exposing filenames when prose reads better.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`Content/docs/WORKFLOWS.md`, `Content/CONTRIBUTING.md`.
+
+#### Follow-up Risks
+If workflow docs move again, update this link in the same change.
+
 ### 2026-06-29 15:40:29 EEST (`pending`)
 
 - task_or_issue: `separate-generated-docs-workflow`

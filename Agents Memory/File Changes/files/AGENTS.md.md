@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/` and update references.
+
+#### Change Summary
+Updated the top-level agent read path and workflow references from root `docs/...` to `Content/docs/...`.
+
+#### Rationale
+Agents should no longer look for a root `docs/` folder after the documentation tree is consolidated under `Content/`.
+
+#### Invariants
+Keep this file as the top-level routing guide. Any moved documentation entrypoint must be updated here in the same change.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`, `Content/docs/PLANS.md`, `Content/docs/design-docs/ds-wrapper-principles.md`.
+
+#### Follow-up Risks
+If `Content/docs/` is renamed, update both this guide and `Agents Memory/ARCHITECTURE.md`.
+
 ### 2026-06-29 13:40:34 EEST (`pending`)
 
 - task_or_issue: `agent-friendly-component-docs`

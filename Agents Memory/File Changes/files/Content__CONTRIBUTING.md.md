@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/` and update references.
+
+#### Change Summary
+Updated the contributor guide workflow link from the removed root docs path to `docs/WORKFLOWS.md`, relative to `Content/`.
+
+#### Rationale
+The contributor guide lives in `Content/`, so it should link to the moved workflow guide through the local `docs/` subfolder.
+
+#### Invariants
+Keep links in this file relative to `Content/`. Keep generated-doc maintenance guidance visible.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`Content/docs/WORKFLOWS.md`, `Content/Documentation.md`.
+
+#### Follow-up Risks
+If `Content/docs/WORKFLOWS.md` is renamed, update this link and README together.
+
 ### 2026-06-29 15:40:29 EEST (`pending`)
 
 - task_or_issue: `separate-generated-docs-workflow`

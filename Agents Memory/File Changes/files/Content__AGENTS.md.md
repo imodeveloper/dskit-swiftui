@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-29 15:49:34 EEST (`pending`)
+
+- task_or_issue: `move-root-docs-under-content`
+
+#### Request
+Move the root `docs/` folder into `Content/` and update references.
+
+#### Change Summary
+Documented that `Content/docs/` contains the hand-maintained workflow, quality, planning, design-principle, and execution-plan docs.
+
+#### Rationale
+Agents working inside `Content/` need to distinguish generated docs from the hand-maintained guide tree now nested under `Content/docs/`.
+
+#### Invariants
+Keep generated docs and hand-maintained docs clearly separated in this guide.
+
+#### Tests Or Evidence
+Validated local Markdown links, ran staged whitespace validation, and ran the file-change memory check.
+
+#### Related Files
+`Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`, `Content/docs/PLANS.md`.
+
+#### Follow-up Risks
+If more docs move under `Content/docs/`, keep this routing note current.
+
 ### 2026-06-29 15:40:29 EEST (`pending`)
 
 - task_or_issue: `separate-generated-docs-workflow`

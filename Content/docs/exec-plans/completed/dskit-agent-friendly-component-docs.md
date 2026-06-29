@@ -18,13 +18,13 @@ Refactor component documentation into generated, repo-native Markdown so people 
 - Every Swift file in `DSKit/Sources/DSKit/Views` has a generated component page.
 - Component pages include source links, examples when present, required preview images, curated Explorer usage, and related component links.
 - Every Swift file in `DSKit/Sources/DSKit/Views` has an exact preview image at `DSKitTests/__Snapshots__/DSKitTests/<Component>.snapshot.png`.
-- `Content/Views.md` works as the table of contents and `UsageIndex.md` is exhaustive for `DSKitExplorer/Screens`.
+- `Content/Views.md` works as the visual component table of contents and `UsageIndex.md` is exhaustive for `DSKitExplorer/Screens`.
 - Every `DSKitExplorer/Screens/*.swift` screen has a generated page with at least one snapshot preview, plus source links and detected DSKit view references.
 - README points at the repo-native component docs.
 
 ## Validation Done
 - `cd Scripts && ./documentation_generator.sh` generated 45 component pages plus `Content/Views.md` and `Content/Views/UsageIndex.md`.
-- `Content/Views.md` is split into `Primitives` and `Components` and renders inline preview thumbnails.
+- `Content/Views.md` renders a complete visual component catalog with inline preview thumbnails.
 - `SNAPSHOT_RECORD=1 xcodebuild ... -only-testing:DSKitTests/DSKitTests/testGeneratedComponentPreviewSnapshots test` recorded the 22 missing exact preview images and passed.
 - `cd Scripts && ./documentation_generator.sh` generated 68 screen pages plus `Content/Screens.md` from DSKitExplorer screen source and screen snapshots.
 - Local link/coverage validation confirmed 45 view pages, 45 exact component preview images, 68 screen pages, 68 screen pages with at least one snapshot preview, expected catalog sections, and zero broken checked relative links.

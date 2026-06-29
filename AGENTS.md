@@ -5,10 +5,10 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 ## Read first (30–60 seconds)
 - `Agents Memory/ARCHITECTURE.md`
 - `Agents Memory/PROJECT_ANALYSIS.md`
-- `docs/design-docs/ds-wrapper-principles.md`
-- `docs/WORKFLOWS.md`
-- `docs/QUALITY.md`
-- `docs/PLANS.md`
+- `Content/docs/design-docs/ds-wrapper-principles.md`
+- `Content/docs/WORKFLOWS.md`
+- `Content/docs/QUALITY.md`
+- `Content/docs/PLANS.md`
 - Subscope entry points:
   - `DSKit/AGENTS.md`
   - `DSKitExplorer/AGENTS.md`
@@ -19,7 +19,7 @@ This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the 
 
 ## How to read this repo
 - Start with `README.md` for public product positioning, then use this file for agent rules and repo routing.
-- Use `docs/WORKFLOWS.md`, `docs/QUALITY.md`, and `docs/PLANS.md` for validation, testing, and current work shape.
+- Use `Content/docs/WORKFLOWS.md`, `Content/docs/QUALITY.md`, and `Content/docs/PLANS.md` for validation, testing, and current work shape.
 - For DSKit component work:
   - read `DSKit/AGENTS.md`
   - read the target file under `DSKit/Sources/DSKit/Views`
