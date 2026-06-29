@@ -100,6 +100,6 @@ struct ItemDetails5_Previews: PreviewProvider {
         DSPreviewForEachAppearance { Testable_ItemDetails5() }
     }
 }
-private let p1Image = URL(string: "https://images.unsplash.com/photo-1710643301117-4d738aeb1e69?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
-private let p3Image = URL(string: "https://images.pexels.com/photos/1456705/pexels-photo-1456705.jpeg?cs=srgb&dl=pexels-ray-piedra-1456705.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_home_screen4_sneakers_neon_bbaa5adb52")
+private let p2Image = ExplorerImageAssets.url(named: "web_item_details1_p2_image_cf591e6cdf")
+private let p3Image = ExplorerImageAssets.url(named: "web_item_details3_p1_image_3780bd094f")

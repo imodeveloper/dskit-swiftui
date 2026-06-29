@@ -172,10 +172,10 @@ struct CartScreen4_Previews: PreviewProvider {
     }
 }
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/6347619/pexels-photo-6347619.jpeg?cs=srgb&dl=pexels-liza-summer-6347619.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_cart_screen4_p1_image_463a947f3a")
 
-private let p2Image = URL(string: "https://images.pexels.com/photos/3791648/pexels-photo-3791648.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3791648.jpg&fm=jpg")
+private let p2Image = ExplorerImageAssets.url(named: "web_cart_screen4_p2_image_ef38699005")
 
-private let p3Image = URL(string: "https://images.pexels.com/photos/5255268/pexels-photo-5255268.jpeg?cs=srgb&dl=pexels-samson-katt-5255268.jpg&fm=jpg")
+private let p3Image = ExplorerImageAssets.url(named: "web_cart_screen4_p3_image_1ba7305593")
 
-private let p4Image = URL(string: "https://images.pexels.com/photos/5875215/pexels-photo-5875215.jpeg?cs=srgb&dl=pexels-jonathan-borba-5875215.jpg&fm=jpg")
+private let p4Image = ExplorerImageAssets.url(named: "web_cart_screen4_p4_image_bb514cd7cf")

@@ -148,8 +148,8 @@ struct CartScreen3_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let p1Image = URL(string: "https://images.unsplash.com/photo-1494173853739-c21f58b16055?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80")
-private let p2Image = URL(string: "https://images.unsplash.com/photo-1584695369221-3d8a8ebfeef0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2378&q=80")
+private let p1Image = ExplorerImageAssets.url(named: "web_cart_screen3_p1_image_09a24169e5")
+private let p2Image = ExplorerImageAssets.url(named: "web_cart_screen3_p2_image_96626384d3")
 
-private let p3Image = URL(string: "https://images.unsplash.com/photo-1562075950-23ba332df71c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")
-private let p4Image = URL(string: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1951&q=80")
+private let p3Image = ExplorerImageAssets.url(named: "web_cart_screen3_p3_image_6cf6ed4cfd")
+private let p4Image = ExplorerImageAssets.url(named: "web_cart_screen3_p4_image_09fd271934")

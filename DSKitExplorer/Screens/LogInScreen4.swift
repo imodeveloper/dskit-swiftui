@@ -63,4 +63,4 @@ struct LogInScreen4_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let profileUrl = URL(string: "https://images.unsplash.com/photo-1563237023-b1e970526dcb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1001&q=80")
+private let profileUrl = ExplorerImageAssets.url(named: "web_log_in_screen4_profile_url_b0f6cc477f")

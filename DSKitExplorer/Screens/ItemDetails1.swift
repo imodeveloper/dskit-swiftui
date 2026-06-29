@@ -132,6 +132,6 @@ struct ItemDetails1_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?cs=srgb&dl=pexels-melvin-buezo-2529148.jpg&fm=jpg")
-private let p2Image = URL(string: "https://images.pexels.com/photos/3261069/pexels-photo-3261069.jpeg?cs=srgb&dl=pexels-wallace-chuck-3261069.jpg&fm=jpg")
-private let p3Image = URL(string: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?cs=srgb&dl=pexels-ox-street-5710082.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_item_details1_p1_image_d1e3d2a7d5")
+private let p2Image = ExplorerImageAssets.url(named: "web_item_details1_p2_image_cf591e6cdf")
+private let p3Image = ExplorerImageAssets.url(named: "web_item_details1_p3_image_05393dc177")

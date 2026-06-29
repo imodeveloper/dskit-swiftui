@@ -215,12 +215,12 @@ struct HomeScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let profileImageUrl = URL(string: "https://images.pexels.com/photos/3760707/pexels-photo-3760707.jpeg?cs=srgb&dl=pexels-sound-on-3760707.jpg&fm=jpg")
-private let sneakersBlackOnBlueBg = URL(string: "https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg?cs=srgb&dl=pexels-ray-piedra-1478442.jpg&fm=jpg")
-private let sneakersWhiteOnYellowBg = URL(string: "https://images.pexels.com/photos/2421374/pexels-photo-2421374.jpeg?cs=srgb&dl=pexels-hoang-loc-2421374.jpg&fm=jpg")
-private let sneakersThreePairs = URL(string: "https://images.pexels.com/photos/2300334/pexels-photo-2300334.jpeg?cs=srgb&dl=pexels-adrian-dorobantu-2300334.jpg&fm=jpg")
-private let shirtsThreePairs = URL(string: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2hpcnRzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60")
-private let shoesThreePairs = URL(string: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg")
-private let watchesOnYellowBg = URL(string: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?cs=srgb&dl=pexels-pixabay-277390.jpg&fm=jpg")
-private let jeansOnBlackBg = URL(string: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?cs=srgb&dl=pexels-mnz-1598507.jpg&fm=jpg")
-private let tShirtGirlOnYellowBg = URL(string: "https://images.pexels.com/photos/761963/pexels-photo-761963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
+private let profileImageUrl = ExplorerImageAssets.url(named: "web_home_screen2_profile_image_url_be9c908d69")
+private let sneakersBlackOnBlueBg = ExplorerImageAssets.url(named: "web_home_screen1_sneakers_black_on_blue_bg_578f6ebc68")
+private let sneakersWhiteOnYellowBg = ExplorerImageAssets.url(named: "web_cart_screen5_sneakers_white_on_yellow_bg_100c84f711")
+private let sneakersThreePairs = ExplorerImageAssets.url(named: "web_cart_screen5_sneakers_three_pairs_32ce2597b8")
+private let shirtsThreePairs = ExplorerImageAssets.url(named: "web_categories2_shirts_three_pairs_81d5027b53")
+private let shoesThreePairs = ExplorerImageAssets.url(named: "web_categories2_shoes_three_pairs_f3c4a5232b")
+private let watchesOnYellowBg = ExplorerImageAssets.url(named: "web_categories1_watches_on_yellow_bg_9722965ee2")
+private let jeansOnBlackBg = ExplorerImageAssets.url(named: "web_categories2_jeans_on_black_bg_4d0da7b9a3")
+private let tShirtGirlOnYellowBg = ExplorerImageAssets.url(named: "web_home_screen1_t_shirt_girl_on_yellow_bg_543f1bf17b")

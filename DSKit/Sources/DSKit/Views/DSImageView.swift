@@ -26,6 +26,8 @@ import NukeUI
 
 public struct DSImageView: View {
 
+    private static let localAssetURLScheme = "dskit-asset"
+
     let unitTestMode = ProcessInfo.processInfo.arguments.contains("TESTMODE")
 
     @Environment(\.appearance) var appearance: DSAppearance
@@ -124,7 +126,16 @@ public struct DSImageView: View {
                     .setDisplayShape(shape: image.displayShape)
             }
         case .imageURL(url: let url):
-            if unitTestMode {
+            if let uiImage = localAssetImage(for: url) {
+                Color.gray.opacity(0.1)
+                    .overlay(alignment: .center) {
+                        Image(dsUIImage: uiImage)
+                            .resizable()
+                            .setContentMode(mode: image.contentMode)
+                    }
+                    .dsSize(image.size)
+                    .setDisplayShape(shape: image.displayShape)
+            } else if unitTestMode {
                 if let uiImage = fileImage(for: url) {
                     Color.gray.opacity(0.1)
                         .overlay(alignment: .center) {
@@ -144,6 +155,19 @@ public struct DSImageView: View {
                     .dsSize(image.size)
             }
         }
+    }
+
+    private func localAssetImage(for url: URL?) -> DSUIImage? {
+        guard
+            let url,
+            url.scheme == Self.localAssetURLScheme,
+            let assetName = url.host,
+            !assetName.isEmpty
+        else {
+            return nil
+        }
+
+        return DSUIImage(named: assetName)
     }
 
     private func fileImage(for url: URL?) -> DSUIImage? {

@@ -164,16 +164,16 @@ struct Items4_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/1816643/pexels-photo-1816643.jpeg?cs=srgb&dl=pexels-atef-khaled-1816643.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_items4_p1_image_b216c2a7ad")
 
-private let p2Image = URL(string: "https://images.pexels.com/photos/5325554/pexels-photo-5325554.jpeg?cs=srgb&dl=pexels-anna-shvets-5325554.jpg&fm=jpg")
+private let p2Image = ExplorerImageAssets.url(named: "web_items4_p2_image_c684808f16")
 
-private let p3Image = URL(string: "https://images.pexels.com/photos/2909735/pexels-photo-2909735.jpeg?cs=srgb&dl=pexels-lad-fury-2909735.jpg&fm=jpg")
+private let p3Image = ExplorerImageAssets.url(named: "web_items4_p3_image_52f5dd6b13")
 
-private let p4Image = URL(string: "https://images.pexels.com/photos/2755165/pexels-photo-2755165.jpeg?cs=srgb&dl=pexels-matt-hardy-2755165.jpg&fm=jpg")
+private let p4Image = ExplorerImageAssets.url(named: "web_items4_p4_image_b4a2221c83")
 
-private let p5Image = URL(string: "https://images.pexels.com/photos/3289663/pexels-photo-3289663.jpeg?cs=srgb&dl=pexels-tnarg-3289663.jpg&fm=jpg")
+private let p5Image = ExplorerImageAssets.url(named: "web_items4_p5_image_8934e104ab")
 
-private let p6Image = URL(string: "https://images.pexels.com/photos/3608205/pexels-photo-3608205.jpeg?cs=srgb&dl=pexels-the-happiest-face-%29-3608205.jpg&fm=jpg")
+private let p6Image = ExplorerImageAssets.url(named: "web_items4_p6_image_f846e43b99")
 
-private let p7Image = URL(string: "https://images.pexels.com/photos/5999891/pexels-photo-5999891.jpeg?cs=srgb&dl=pexels-ono-kosuki-5999891.jpg&fm=jpg")
+private let p7Image = ExplorerImageAssets.url(named: "web_items4_p7_image_b347645433")

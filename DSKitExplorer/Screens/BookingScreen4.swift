@@ -118,9 +118,9 @@ struct BookingScreen4_Previews: PreviewProvider {
         }
     }
 }
-private let p1Image = URL(string: "https://images.unsplash.com/photo-1554387415-b0c2fcce17fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let p2Image = URL(string: "https://images.unsplash.com/photo-1567894340315-735d7c361db0?q=80&w=2537&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let p3Image = URL(string: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let p4Image = URL(string: "https://images.unsplash.com/photo-1614289371518-722f2615943d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let p5Image = URL(string: "https://images.unsplash.com/photo-1578875315363-076171ddef21?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let p6Image = URL(string: "https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let p1Image = ExplorerImageAssets.url(named: "web_booking_screen3_p1_image_fcc128bbd4")
+private let p2Image = ExplorerImageAssets.url(named: "web_booking_screen4_p2_image_b9751a1173")
+private let p3Image = ExplorerImageAssets.url(named: "web_booking_screen4_p3_image_c3502cfb22")
+private let p4Image = ExplorerImageAssets.url(named: "web_booking_screen4_p4_image_04c6dac8d2")
+private let p5Image = ExplorerImageAssets.url(named: "web_booking_screen4_p5_image_92b1deb00c")
+private let p6Image = ExplorerImageAssets.url(named: "web_booking_screen4_p6_image_71ac7c85da")

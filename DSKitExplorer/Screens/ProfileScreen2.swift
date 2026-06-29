@@ -104,4 +104,4 @@ struct ProfileScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let personOnOrangeBg = URL(string: "https://images.pexels.com/photos/3641363/pexels-photo-3641363.jpeg?cs=srgb&dl=pexels-mikotoraw-3641363.jpg&fm=jpg")
+private let personOnOrangeBg = ExplorerImageAssets.url(named: "web_categories2_person_on_orange_bg_97e98d1709")

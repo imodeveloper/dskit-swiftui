@@ -145,6 +145,6 @@ struct CartScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let p1Image = URL(string: "https://images.unsplash.com/photo-1568605560195-9f979ffc11ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")
+private let p1Image = ExplorerImageAssets.url(named: "web_cart_screen2_p1_image_8f1220b3c8")
 
-private let p2Image = URL(string: "https://images.unsplash.com/photo-1536627217140-899b0bc9d881?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2110&q=80")
+private let p2Image = ExplorerImageAssets.url(named: "web_cart_screen2_p2_image_1f0bc5594e")

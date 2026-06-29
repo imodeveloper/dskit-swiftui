@@ -118,6 +118,6 @@ struct AboutUsScreen1_Previews: PreviewProvider {
     }
 }
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/1036857/pexels-photo-1036857.jpeg?cs=srgb&dl=pexels-artem-beliaikin-1036857.jpg&fm=jpg")
-private let p2Image = URL(string: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?cs=srgb&dl=pexels-pixabay-264636.jpg&fm=jpg")
-private let p3Image = URL(string: "https://images.pexels.com/photos/1402407/pexels-photo-1402407.jpeg?cs=srgb&dl=pexels-lisa-fotios-1402407.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_about_us_screen1_p1_image_6daa0fbfca")
+private let p2Image = ExplorerImageAssets.url(named: "web_about_us_screen1_p2_image_18fe4f1187")
+private let p3Image = ExplorerImageAssets.url(named: "web_about_us_screen1_p3_image_19dbcf5192")

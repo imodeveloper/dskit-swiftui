@@ -129,8 +129,8 @@ struct Categories1_Previews: PreviewProvider {
     }
 }
 
-private let purpleShoes = URL(string: "https://images.pexels.com/photos/2351858/pexels-photo-2351858.jpeg?cs=srgb&dl=pexels-lorena-mart%C3%ADnez-2351858.jpg&fm=jpg")
-private let jeansPairs = URL(string: "https://images.pexels.com/photos/4210863/pexels-photo-4210863.jpeg?cs=srgb&dl=pexels-karolina-grabowska-4210863.jpg&fm=jpg")
-private let watchesOnYellowBg = URL(string: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?cs=srgb&dl=pexels-pixabay-277390.jpg&fm=jpg")
-private let pantsTrack = URL(string: "https://images.pexels.com/photos/5067705/pexels-photo-5067705.jpeg?cs=srgb&dl=pexels-anna-shvets-5067705.jpg&fm=jpg")
-private let blazers = URL(string: "https://images.pexels.com/photos/3555456/pexels-photo-3555456.jpeg?cs=srgb&dl=pexels-mikotoraw-3555456.jpg&fm=jpg")
+private let purpleShoes = ExplorerImageAssets.url(named: "web_categories1_purple_shoes_f65d339c4e")
+private let jeansPairs = ExplorerImageAssets.url(named: "web_categories1_jeans_pairs_af5545db91")
+private let watchesOnYellowBg = ExplorerImageAssets.url(named: "web_categories1_watches_on_yellow_bg_9722965ee2")
+private let pantsTrack = ExplorerImageAssets.url(named: "web_categories1_pants_track_de1d332995")
+private let blazers = ExplorerImageAssets.url(named: "web_categories1_blazers_3329d3b07e")

@@ -93,6 +93,7 @@ is_meaningful_file() {
     Carthage/*|Pods/*|vendor/*|node_modules/*) return 1 ;;
     Worktrees/*|*/SourcePackages/checkouts/*) return 1 ;;
     Content/Views.md|Content/Views/*|Content/Screens.md|Content/Screens/*) return 1 ;;
+    "DSKitExplorer/Assets.xcassets/Generated Web Images/"*) return 1 ;;
     DSKitTests/__Snapshots__/*|DSKitExplorerTests/__Snapshots__/*) return 1 ;;
     *.xcresult|*.xcarchive|*.ipa|*.app|*.dSYM|*.log) return 1 ;;
     *.png|*.jpg|*.jpeg|*.gif|*.webp|*.heic|*.pdf) return 1 ;;

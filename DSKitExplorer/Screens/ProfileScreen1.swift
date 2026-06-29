@@ -161,4 +161,4 @@ struct ProfileScreen1_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let personOnMarineBg = URL(string: "https://images.pexels.com/photos/3760852/pexels-photo-3760852.jpeg?cs=srgb&dl=pexels-sound-on-3760852.jpg&fm=jpg")
+private let personOnMarineBg = ExplorerImageAssets.url(named: "web_categories5_person_on_marine_bg_acd650b8c6")

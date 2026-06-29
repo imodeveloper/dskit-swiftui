@@ -154,7 +154,7 @@ struct CartScreen1_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/5081386/pexels-photo-5081386.jpeg?cs=srgb&dl=pexels-cottonbro-5081386.jpg&fm=jpg")
-private let p2Image = URL(string: "https://images.pexels.com/photos/2207799/pexels-photo-2207799.jpeg?cs=srgb&dl=pexels-gije-cho-2207799.jpg&fm=jpg")
-private let p3Image = URL(string: "https://images.pexels.com/photos/3945671/pexels-photo-3945671.jpeg?cs=srgb&dl=pexels-cottonbro-3945671.jpg&fm=jpg")
-private let p4Image = URL(string: "https://images.pexels.com/photos/4498450/pexels-photo-4498450.jpeg?cs=srgb&dl=pexels-karolina-grabowska-4498450.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_cart_screen1_p1_image_3f033b28a4")
+private let p2Image = ExplorerImageAssets.url(named: "web_cart_screen1_p2_image_3397fa3d58")
+private let p3Image = ExplorerImageAssets.url(named: "web_cart_screen1_p3_image_1575a15a5d")
+private let p4Image = ExplorerImageAssets.url(named: "web_cart_screen1_p4_image_cacfc47ab9")

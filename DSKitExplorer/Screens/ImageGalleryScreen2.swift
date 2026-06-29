@@ -68,8 +68,8 @@ struct ImageGalleryScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let image1 = URL(string: "https://images.unsplash.com/photo-1522512115668-c09775d6f424?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image1 = ExplorerImageAssets.url(named: "web_image_gallery_screen1_image1_9ec1edc1c4")
 
-private let image2 = URL(string: "https://images.unsplash.com/photo-1516313570236-85371711ee13?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image2 = ExplorerImageAssets.url(named: "web_image_gallery_screen1_image2_0aaf8381a4")
 
-private let image3 = URL(string: "https://images.unsplash.com/photo-1495298599282-d8920eb5009b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let image3 = ExplorerImageAssets.url(named: "web_image_gallery_screen1_image3_575b2f51e4")

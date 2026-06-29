@@ -134,6 +134,6 @@ struct ItemDetails4_Previews: PreviewProvider {
     }
 }
 // MARK: - Image Links
-private let p1Image = URL(string: "https://images.pexels.com/photos/5085329/pexels-photo-5085329.jpeg?cs=srgb&dl=pexels-jonathan-borba-5085329.jpg&fm=jpg")
-private let p2Image = URL(string: "https://images.pexels.com/photos/2122361/pexels-photo-2122361.jpeg?cs=srgb&dl=pexels-kyle-roxas-2122361.jpg&fm=jpg")
-private let p3Image = URL(string: "https://images.pexels.com/photos/2946811/pexels-photo-2946811.jpeg?cs=srgb&dl=pexels-engin-akyurt-2946811.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_item_details4_p1_image_42c14efbac")
+private let p2Image = ExplorerImageAssets.url(named: "web_item_details4_p2_image_349dea2601")
+private let p3Image = ExplorerImageAssets.url(named: "web_item_details4_p3_image_b46a1607fd")

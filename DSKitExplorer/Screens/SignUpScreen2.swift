@@ -108,4 +108,4 @@ struct SignUpScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let profileImage = URL(string: "https://images.unsplash.com/photo-1553830591-d8632a99e6ff?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1511&q=80")
+private let profileImage = ExplorerImageAssets.url(named: "web_sign_up_screen2_profile_image_9d270ce662")

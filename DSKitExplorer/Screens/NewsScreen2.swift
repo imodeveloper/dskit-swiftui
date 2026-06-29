@@ -185,8 +185,8 @@ struct NewsScreen2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let image1 = URL(string: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let image2 = URL(string: "https://images.unsplash.com/photo-1569428034239-f9565e32e224?q=80&w=3279&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let image3 = URL(string: "https://images.unsplash.com/photo-1681356382603-dc9d7b9ee0c8?q=80&w=3271&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let image4 = URL(string: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let image5 = URL(string: "https://images.unsplash.com/photo-1589149098258-3e9102cd63d3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UXVhbnR1bSUyMENvbXB1dGluZ3xlbnwwfHwwfHx8MA%3D%3D")
+private let image1 = ExplorerImageAssets.url(named: "web_news_screen1_image1_bbf7748a0a")
+private let image2 = ExplorerImageAssets.url(named: "web_news_screen1_image2_0f5a64119e")
+private let image3 = ExplorerImageAssets.url(named: "web_news_screen1_image3_4f8a83c756")
+private let image4 = ExplorerImageAssets.url(named: "web_news_screen1_image4_ba4816f935")
+private let image5 = ExplorerImageAssets.url(named: "web_news_screen1_image5_d39e86d8a0")

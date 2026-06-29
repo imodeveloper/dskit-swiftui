@@ -170,18 +170,18 @@ struct Items5_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let p0Image = URL(string: "https://images.pexels.com/photos/6417941/pexels-photo-6417941.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-6417941.jpg&fm=jpg")
+private let p0Image = ExplorerImageAssets.url(named: "web_items5_p0_image_9f6f2ac55a")
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/3760610/pexels-photo-3760610.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3760610.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_items5_p1_image_39b766ad67")
 
-private let p2Image = URL(string: "https://images.pexels.com/photos/3746314/pexels-photo-3746314.jpeg?cs=srgb&dl=pexels-anna-shvets-3746314.jpg&fm=jpg")
+private let p2Image = ExplorerImageAssets.url(named: "web_items5_p2_image_50cf662b17")
 
-private let p3Image = URL(string: "https://images.pexels.com/photos/3372595/pexels-photo-3372595.jpeg?cs=srgb&dl=pexels-aidan-roof-3372595.jpg&fm=jpg")
+private let p3Image = ExplorerImageAssets.url(named: "web_items5_p3_image_47c3cfc573")
 
-private let p4Image = URL(string: "https://images.pexels.com/photos/2096694/pexels-photo-2096694.jpeg?cs=srgb&dl=pexels-luis-quintero-2096694.jpg&fm=jpg")
+private let p4Image = ExplorerImageAssets.url(named: "web_items5_p4_image_1d9ded9ada")
 
-private let p5Image = URL(string: "https://images.pexels.com/photos/5325887/pexels-photo-5325887.jpeg?cs=srgb&dl=pexels-anna-shvets-5325887.jpg&fm=jpg")
+private let p5Image = ExplorerImageAssets.url(named: "web_items5_p5_image_1038d0342e")
 
-private let p6Image = URL(string: "https://images.pexels.com/photos/4929024/pexels-photo-4929024.jpeg?cs=srgb&dl=pexels-cottonbro-4929024.jpg&fm=jpg")
+private let p6Image = ExplorerImageAssets.url(named: "web_items5_p6_image_9c3d236726")
 
-private let p7Image = URL(string: "https://images.pexels.com/photos/5325741/pexels-photo-5325741.jpeg?cs=srgb&dl=pexels-anna-shvets-5325741.jpg&fm=jpg")
+private let p7Image = ExplorerImageAssets.url(named: "web_items5_p7_image_762016899c")

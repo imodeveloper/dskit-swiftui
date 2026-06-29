@@ -14,22 +14,22 @@
 Commit generated DSKit component and screen documentation without making per-file memory for every generated Markdown page.
 
 #### Change Summary
-Added `Content/Views/*`, `Content/Screens.md`, and `Content/Screens/*` to the helper's ignored generated-documentation paths, alongside the existing generated index exclusions.
+Added `Content/Views/*`, `Content/Screens.md`, and `Content/Screens/*` to the helper's ignored generated-documentation paths, alongside the existing generated index exclusions. Later in the same pending commit, added `DSKitExplorer/Assets.xcassets/Generated Web Images/*` so generated asset-catalog image-set metadata is treated like snapshots instead of hand-authored source.
 
 #### Rationale
-The docs refactor introduced many generated Markdown files. Treating generated component and screen pages as meaningful hand-maintained files would make memory checks noisy and misleading.
+The docs refactor introduced many generated Markdown files and generated image assets. Treating generated component pages, screen pages, or one `Contents.json` per generated image set as meaningful hand-maintained files would make memory checks noisy and misleading.
 
 #### Invariants
-Keep generated docs excluded from file-change memory. Continue tracking source scripts, routing docs, README changes, and other hand-maintained files.
+Keep generated docs, snapshots, and generated web-image asset outputs excluded from file-change memory. Continue tracking source scripts, routing docs, README changes, screen source, DSKit source, and other hand-maintained files.
 
 #### Tests Or Evidence
-Re-ran `Agents Memory/tools/agent_memory_file_changes.sh` with generated docs staged and confirmed generated Content docs were ignored while hand-maintained files still required memory.
+Re-ran `Agents Memory/tools/agent_memory_file_changes.sh` with generated docs staged and confirmed generated Content docs were ignored while hand-maintained files still required memory. Re-ran the helper against the local-image migration and confirmed generated web-image `Contents.json` files were ignored while DSKit source, Explorer source, and screen source still required memory.
 
 #### Related Files
-`Content/Views.md`, `Content/Views/*.md`, `Content/Screens.md`, `Content/Screens/*.md`, `Scripts/generate_view_docs.py`, `AGENTS.md`.
+`Content/Views.md`, `Content/Views/*.md`, `Content/Screens.md`, `Content/Screens/*.md`, `DSKitExplorer/Assets.xcassets/Generated Web Images`, `Scripts/generate_view_docs.py`, `AGENTS.md`.
 
 #### Follow-up Risks
-If other generated documentation directories are added, extend the ignore list with the same narrow path-specific approach.
+If other generated documentation or generated asset directories are added, extend the ignore list with the same narrow path-specific approach.
 
 ### 2026-05-18 21:39:14 EEST (`pending`)
 

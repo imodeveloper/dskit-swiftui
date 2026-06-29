@@ -111,11 +111,11 @@ struct Categories5_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let sneakersNeon = URL(string: "https://images.pexels.com/photos/6698232/pexels-photo-6698232.jpeg?cs=srgb&dl=pexels-smith-major-6698232.jpg&fm=jpg")
-private let personOnNeonRegBg = URL(string: "https://images.pexels.com/photos/1809393/pexels-photo-1809393.jpeg?cs=srgb&dl=pexels-garret-schappacher-1809393.jpg&fm=jpg")
-private let watchesOnYellowBg = URL(string: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?cs=srgb&dl=pexels-pixabay-277390.jpg&fm=jpg")
-private let personInWhite = URL(string: "https://images.pexels.com/photos/3622624/pexels-photo-3622624.jpeg?cs=srgb&dl=pexels-wesley-carvalho-3622624.jpg&fm=jpg")
-private let personOnOrangeBg = URL(string: "https://images.pexels.com/photos/3641363/pexels-photo-3641363.jpeg?cs=srgb&dl=pexels-mikotoraw-3641363.jpg&fm=jpg")
-private let personOnPurpleNeonBg = URL(string: "https://images.pexels.com/photos/3596555/pexels-photo-3596555.jpeg?cs=srgb&dl=pexels-yogendra-singh-3596555.jpg&fm=jpg")
-private let pantsTrack = URL(string: "https://images.pexels.com/photos/5067705/pexels-photo-5067705.jpeg?cs=srgb&dl=pexels-anna-shvets-5067705.jpg&fm=jpg")
-private let personOnMarineBg = URL(string: "https://images.pexels.com/photos/3760852/pexels-photo-3760852.jpeg?cs=srgb&dl=pexels-sound-on-3760852.jpg&fm=jpg")
+private let sneakersNeon = ExplorerImageAssets.url(named: "web_categories5_sneakers_neon_4607fa9bcb")
+private let personOnNeonRegBg = ExplorerImageAssets.url(named: "web_categories5_person_on_neon_reg_bg_1418eb0d05")
+private let watchesOnYellowBg = ExplorerImageAssets.url(named: "web_categories1_watches_on_yellow_bg_9722965ee2")
+private let personInWhite = ExplorerImageAssets.url(named: "web_categories2_person_in_white_214a08c3b5")
+private let personOnOrangeBg = ExplorerImageAssets.url(named: "web_categories2_person_on_orange_bg_97e98d1709")
+private let personOnPurpleNeonBg = ExplorerImageAssets.url(named: "web_categories5_person_on_purple_neon_bg_71ae84ffcd")
+private let pantsTrack = ExplorerImageAssets.url(named: "web_categories1_pants_track_de1d332995")
+private let personOnMarineBg = ExplorerImageAssets.url(named: "web_categories5_person_on_marine_bg_acd650b8c6")

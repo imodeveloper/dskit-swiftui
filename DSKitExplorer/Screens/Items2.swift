@@ -173,9 +173,9 @@ struct Items2_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let bootsImage = URL(string: "https://images.pexels.com/photos/267242/pexels-photo-267242.jpeg?cs=srgb&dl=pexels-pixabay-267242.jpg&fm=jpg")
-private let shoesImage = URL(string: "https://images.pexels.com/photos/1904769/pexels-photo-1904769.jpeg?cs=srgb&dl=pexels-sebastian-palomino-1904769.jpg&fm=jpg")
-private let hikingBootsImage = URL(string: "https://images.pexels.com/photos/755871/pexels-photo-755871.jpeg?cs=srgb&dl=pexels-simon-migaj-755871.jpg&fm=jpg")
-private let motocrossBootsImage = URL(string: "https://images.pexels.com/photos/718981/pexels-photo-718981.jpeg?cs=srgb&dl=pexels-aidan-jarrett-718981.jpg&fm=jpg")
-private let ridingBootsImage = URL(string: "https://images.pexels.com/photos/6410600/pexels-photo-6410600.jpeg?cs=srgb&dl=pexels-jessica-jochheim-6410600.jpg&fm=jpg")
-private let jodhpurBootsImage = URL(string: "https://images.pexels.com/photos/2682289/pexels-photo-2682289.jpeg?cs=srgb&dl=pexels-andrew-neel-2682289.jpg&fm=jpg")
+private let bootsImage = ExplorerImageAssets.url(named: "web_items1_boots_image_550b9775d4")
+private let shoesImage = ExplorerImageAssets.url(named: "web_items1_shoes_image_2b8485d1d3")
+private let hikingBootsImage = ExplorerImageAssets.url(named: "web_items1_hiking_boots_image_49c47002b6")
+private let motocrossBootsImage = ExplorerImageAssets.url(named: "web_items1_motocross_boots_image_f9750b3f91")
+private let ridingBootsImage = ExplorerImageAssets.url(named: "web_items1_riding_boots_image_a3fb43ead6")
+private let jodhpurBootsImage = ExplorerImageAssets.url(named: "web_items1_jodhpur_boots_image_e176d168d9")

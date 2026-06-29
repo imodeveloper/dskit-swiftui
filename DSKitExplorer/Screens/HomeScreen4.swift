@@ -279,7 +279,7 @@ struct HomeScreen4_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let profileOnYellowBg = URL(string: "https://images.pexels.com/photos/3783525/pexels-photo-3783525.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3783525.jpg&fm=jpg")
-private let sneakersOnWhiteBg = URL(string: "https://images.pexels.com/photos/1858404/pexels-photo-1858404.jpeg?cs=srgb&dl=pexels-athena-1858404.jpg&fm=jpg")
-private let sneakersNeon = URL(string: "https://images.unsplash.com/photo-1710643301117-4d738aeb1e69?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let sneakersWhiteOnYellowBg = URL(string: "https://images.pexels.com/photos/2421374/pexels-photo-2421374.jpeg?cs=srgb&dl=pexels-hoang-loc-2421374.jpg&fm=jpg")
+private let profileOnYellowBg = ExplorerImageAssets.url(named: "web_home_screen4_profile_on_yellow_bg_4eb46a6268")
+private let sneakersOnWhiteBg = ExplorerImageAssets.url(named: "web_cart_screen5_sneakers_on_white_bg_02b087dd14")
+private let sneakersNeon = ExplorerImageAssets.url(named: "web_home_screen4_sneakers_neon_bbaa5adb52")
+private let sneakersWhiteOnYellowBg = ExplorerImageAssets.url(named: "web_cart_screen5_sneakers_white_on_yellow_bg_100c84f711")

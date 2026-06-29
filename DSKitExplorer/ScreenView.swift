@@ -8,6 +8,13 @@
 import SwiftUI
 import DSKit
 
+enum ExplorerImageAssets {
+
+    static func url(named name: String) -> URL? {
+        URL(string: "dskit-asset://\(name)")
+    }
+}
+
 struct ScreenView: View {
 
     @Environment(\.appearance) var appearance: DSAppearance

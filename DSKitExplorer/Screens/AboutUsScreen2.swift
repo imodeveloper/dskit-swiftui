@@ -274,12 +274,12 @@ struct AboutUsScreen2_Previews: PreviewProvider {
     }
 }
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/164763/pexels-photo-164763.jpeg?cs=srgb&dl=pexels-pixabay-164763.jpg&fm=jpg")
-private let p2Image = URL(string: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?cs=srgb&dl=pexels-pixabay-264636.jpg&fm=jpg")
-private let p3Image = URL(string: "https://images.pexels.com/photos/1402407/pexels-photo-1402407.jpeg?cs=srgb&dl=pexels-lisa-fotios-1402407.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_about_us_screen2_p1_image_c39d9308ef")
+private let p2Image = ExplorerImageAssets.url(named: "web_about_us_screen1_p2_image_18fe4f1187")
+private let p3Image = ExplorerImageAssets.url(named: "web_about_us_screen1_p3_image_19dbcf5192")
 
-private let userProfile1 = URL(string: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2459&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let userProfile2 = URL(string: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let userProfile3 = URL(string: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let userProfile4 = URL(string: "https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-private let userProfile5 = URL(string: "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+private let userProfile1 = ExplorerImageAssets.url(named: "web_about_us_screen2_user_profile1_76991e04ef")
+private let userProfile2 = ExplorerImageAssets.url(named: "web_about_us_screen2_user_profile2_3c39af609a")
+private let userProfile3 = ExplorerImageAssets.url(named: "web_about_us_screen2_user_profile3_3073ed774b")
+private let userProfile4 = ExplorerImageAssets.url(named: "web_about_us_screen2_user_profile4_00cbb971c3")
+private let userProfile5 = ExplorerImageAssets.url(named: "web_about_us_screen2_user_profile5_fae256983b")

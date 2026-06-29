@@ -158,10 +158,10 @@ struct Items6_Previews: PreviewProvider {
 
 // MARK: - Image Links
 
-private let p1Image = URL(string: "https://images.pexels.com/photos/709791/pexels-photo-709791.jpeg?cs=srgb&dl=pexels-daria-shevtsova-709791.jpg&fm=jpg")
-private let p2Image = URL(string: "https://images.pexels.com/photos/4971015/pexels-photo-4971015.jpeg?cs=srgb&dl=pexels-anna-shvets-4971015.jpg&fm=jpg")
-private let p3Image = URL(string: "https://images.pexels.com/photos/5484409/pexels-photo-5484409.jpeg?cs=srgb&dl=pexels-oleg-magni-5484409.jpg&fm=jpg")
-private let p4Image = URL(string: "https://images.pexels.com/photos/2899710/pexels-photo-2899710.jpeg?cs=srgb&dl=pexels-jonathan-borba-2899710.jpg&fm=jpg")
-private let p5Image = URL(string: "https://images.pexels.com/photos/885588/pexels-photo-885588.jpeg?cs=srgb&dl=pexels-godisable-jacob-885588.jpg&fm=jpg")
-private let p6Image = URL(string: "https://images.pexels.com/photos/914472/pexels-photo-914472.jpeg?cs=srgb&dl=pexels-jt-kim-914472.jpg&fm=jpg")
-private let p7Image = URL(string: "https://images.pexels.com/photos/6417926/pexels-photo-6417926.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-6417926.jpg&fm=jpg")
+private let p1Image = ExplorerImageAssets.url(named: "web_items6_p1_image_793c19e87d")
+private let p2Image = ExplorerImageAssets.url(named: "web_items6_p2_image_6c50198658")
+private let p3Image = ExplorerImageAssets.url(named: "web_items6_p3_image_c05472dbf9")
+private let p4Image = ExplorerImageAssets.url(named: "web_items6_p4_image_21f5bb9e9f")
+private let p5Image = ExplorerImageAssets.url(named: "web_items6_p5_image_4db245b354")
+private let p6Image = ExplorerImageAssets.url(named: "web_items6_p6_image_09d404f0e9")
+private let p7Image = ExplorerImageAssets.url(named: "web_items6_p7_image_d011b48d3d")
