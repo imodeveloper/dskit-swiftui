@@ -11,10 +11,10 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 try:
-    from PIL import Image, ImageDraw, ImageFilter, PngImagePlugin
+    from PIL import Image, ImageDraw, PngImagePlugin
 except ModuleNotFoundError as error:
     raise SystemExit(
-        "Scripts/generate_view_docs.py requires Pillow to build flattened screen frame PNGs. "
+        "Scripts/generate_view_docs.py requires Pillow to build screen preview PNGs. "
         "Install it with `python3 -m pip install Pillow`, then rerun `cd Scripts && ./documentation_generator.sh`."
     ) from error
 
@@ -42,14 +42,11 @@ SCREEN_FRAME_SUFFIX = ".framed.png"
 SCREEN_GROUP_SUFFIX = ".strip.png"
 IPHONE_FRAME_DEVICE_NAME = "iPhone 15 Pro"
 IPHONE_FRAME_MODEL_IDENTIFIER = "iPhone16,1"
-IPHONE_FRAME_CHROME_IDENTIFIER = "com.apple.dt.devicekit.chrome.phone9"
+IPHONE_FRAME_CHROME_IDENTIFIER = "screen-only"
 IPHONE_FRAME_SENSOR_BAR = "sensor_bar_class_04"
 IPHONE_FRAME_SCALE = 3
 IPHONE_FRAME_SCREEN_SIZE = (1179, 2556)
 IPHONE_FRAME_SCREEN_POINTS = (393, 852)
-IPHONE_FRAME_CHROME_POINTS = (429, 888)
-IPHONE_FRAME_SCREEN_INSET_POINTS = (18, 18)
-IPHONE_FRAME_BODY_CORNER_RADIUS_POINTS = 75
 IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS = 55
 IPHONE_FRAME_DYNAMIC_ISLAND_POINTS = (126, 37)
 IPHONE_FRAME_DYNAMIC_ISLAND_TOP_POINTS = 11
@@ -417,17 +414,11 @@ def scaled_point(value: float) -> float:
 
 
 def screen_frame_output_size() -> Tuple[int, int]:
-    return (
-        IPHONE_FRAME_CHROME_POINTS[0] * IPHONE_FRAME_SCALE,
-        IPHONE_FRAME_CHROME_POINTS[1] * IPHONE_FRAME_SCALE,
-    )
+    return IPHONE_FRAME_SCREEN_SIZE
 
 
 def screen_frame_content_origin() -> Tuple[int, int]:
-    return (
-        IPHONE_FRAME_SCREEN_INSET_POINTS[0] * IPHONE_FRAME_SCALE,
-        IPHONE_FRAME_SCREEN_INSET_POINTS[1] * IPHONE_FRAME_SCALE,
-    )
+    return (0, 0)
 
 
 def screen_frame_metadata() -> str:
@@ -439,22 +430,6 @@ def screen_frame_metadata() -> str:
         f"dynamicIsland={IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[0]}x{IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[1]}pt; "
         f"sensorBar={IPHONE_FRAME_SENSOR_BAR} ({IPHONE_FRAME_SENSOR_BAR_POINTS[0]}x{IPHONE_FRAME_SENSOR_BAR_POINTS[1]}pt)"
     )
-
-
-def draw_rounded_rectangle_stroke(
-    draw: ImageDraw.ImageDraw,
-    box: Tuple[int, int, int, int],
-    radius: int,
-    fill: Tuple[int, int, int, int],
-    width: int,
-) -> None:
-    for inset in range(width):
-        draw.rounded_rectangle(
-            (box[0] + inset, box[1] + inset, box[2] - inset, box[3] - inset),
-            radius=max(radius - inset, 0),
-            outline=fill,
-            width=1,
-        )
 
 
 def write_screen_frame(snapshot_path: Path) -> Path:
@@ -470,54 +445,12 @@ def write_screen_frame(snapshot_path: Path) -> Path:
     frame_path = framed_screen_path(snapshot_path)
     view_width, view_height = screen_frame_output_size()
     screen_x, screen_y = screen_frame_content_origin()
-    body_radius = scaled_point(IPHONE_FRAME_BODY_CORNER_RADIUS_POINTS)
     screen_radius = scaled_point(IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS)
     island_width = scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[0])
     island_height = scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[1])
     island_x = screen_x + ((screen_width - island_width) / 2)
     island_y = screen_y + scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_TOP_POINTS)
     canvas = Image.new("RGBA", (view_width, view_height), (0, 0, 0, 0))
-    shadow = Image.new("RGBA", (view_width, view_height), (0, 0, 0, 0))
-    shadow_draw = ImageDraw.Draw(shadow)
-    shadow_draw.rounded_rectangle(
-        (0, 0, view_width - 1, view_height - 1),
-        radius=body_radius,
-        fill=(2, 6, 23, 60),
-    )
-    shadow = shadow.filter(ImageFilter.GaussianBlur(18))
-    canvas.alpha_composite(shadow, (0, 0))
-
-    draw = ImageDraw.Draw(canvas)
-    draw.rounded_rectangle(
-        (0, 0, view_width - 1, view_height - 1),
-        radius=body_radius,
-        fill=(7, 10, 15, 255),
-    )
-    draw_rounded_rectangle_stroke(
-        draw,
-        (6, 6, view_width - 7, view_height - 7),
-        body_radius - 6,
-        (93, 103, 117, 205),
-        6,
-    )
-    draw_rounded_rectangle_stroke(
-        draw,
-        (18, 18, view_width - 19, view_height - 19),
-        body_radius - 18,
-        (15, 23, 42, 220),
-        8,
-    )
-
-    draw.rounded_rectangle(
-        (
-            screen_x - 8,
-            screen_y - 8,
-            screen_x + screen_width + 8,
-            screen_y + screen_height + 8,
-        ),
-        radius=screen_radius + 8,
-        fill=(3, 7, 18, 255),
-    )
 
     snapshot_image = Image.open(snapshot_path).convert("RGBA")
     screen_mask = Image.new("L", (screen_width, screen_height), 0)
@@ -530,13 +463,6 @@ def write_screen_frame(snapshot_path: Path) -> Path:
     canvas.paste(snapshot_image, (screen_x, screen_y), screen_mask)
 
     draw = ImageDraw.Draw(canvas)
-    draw_rounded_rectangle_stroke(
-        draw,
-        (screen_x, screen_y, screen_x + screen_width, screen_y + screen_height),
-        screen_radius,
-        (5, 7, 10, 255),
-        6,
-    )
     draw.rounded_rectangle(
         (
             int(island_x),
@@ -898,8 +824,8 @@ def write_screen_index(docs: List[ScreenDoc]) -> None:
         "- Refresh these docs with `cd Scripts && ./documentation_generator.sh`.",
         "- Every screen page must have at least one matching snapshot image in `DSKitExplorerTests/__Snapshots__/DSKitExplorerTests`.",
         "- A screen named `ExampleScreen` uses `ExampleScreen.snapshot.png` and may also include variants such as `ExampleScreen_0.snapshot.png`.",
-        "- Framed screen previews are generated PNG files under `Content/Screens/Frames` from the source snapshot PNGs.",
-        "- Screen catalog strip previews are generated PNG files under `Content/Screens/Groups` from the framed screen previews.",
+        "- Screen preview PNG files are generated under `Content/Screens/Frames` from the source snapshot PNGs.",
+        "- Screen catalog strip previews are generated PNG files under `Content/Screens/Groups` from the screen previews.",
         "",
         "> Generated by `Scripts/documentation_generator.sh`. Use this page as the table of contents for snapshot-backed DSKitExplorer screens.",
     ])
@@ -967,7 +893,7 @@ def main() -> None:
 
     print(f"Generated {len(docs)} component pages")
     print(f"Generated {len(screen_docs)} screen pages")
-    print(f"Generated {screen_frame_count} screen frame previews")
+    print(f"Generated {screen_frame_count} screen previews")
     print(f"Generated {screen_group_count} screen catalog strip previews")
     print(f"Wrote {INDEX_FILE.relative_to(ROOT)}")
     print(f"Wrote {USAGE_INDEX_FILE.relative_to(ROOT)}")
