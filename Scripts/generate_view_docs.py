@@ -48,8 +48,6 @@ IPHONE_FRAME_SCALE = 3
 IPHONE_FRAME_SCREEN_SIZE = (1179, 2556)
 IPHONE_FRAME_SCREEN_POINTS = (393, 852)
 IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS = 55
-IPHONE_FRAME_DYNAMIC_ISLAND_POINTS = (126, 37)
-IPHONE_FRAME_DYNAMIC_ISLAND_TOP_POINTS = 11
 IPHONE_FRAME_SENSOR_BAR_POINTS = (393, 47)
 
 PRIORITY_COMPONENTS = [
@@ -427,7 +425,6 @@ def screen_frame_metadata() -> str:
         f"chrome={IPHONE_FRAME_CHROME_IDENTIFIER}; screen={IPHONE_FRAME_SCREEN_SIZE[0]}x{IPHONE_FRAME_SCREEN_SIZE[1]}px; "
         f"points={IPHONE_FRAME_SCREEN_POINTS[0]}x{IPHONE_FRAME_SCREEN_POINTS[1]}pt; scale={IPHONE_FRAME_SCALE}; "
         f"screenCornerRadius={IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS}pt; "
-        f"dynamicIsland={IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[0]}x{IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[1]}pt; "
         f"sensorBar={IPHONE_FRAME_SENSOR_BAR} ({IPHONE_FRAME_SENSOR_BAR_POINTS[0]}x{IPHONE_FRAME_SENSOR_BAR_POINTS[1]}pt)"
     )
 
@@ -446,10 +443,6 @@ def write_screen_frame(snapshot_path: Path) -> Path:
     view_width, view_height = screen_frame_output_size()
     screen_x, screen_y = screen_frame_content_origin()
     screen_radius = scaled_point(IPHONE_FRAME_SCREEN_CORNER_RADIUS_POINTS)
-    island_width = scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[0])
-    island_height = scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_POINTS[1])
-    island_x = screen_x + ((screen_width - island_width) / 2)
-    island_y = screen_y + scaled_point(IPHONE_FRAME_DYNAMIC_ISLAND_TOP_POINTS)
     canvas = Image.new("RGBA", (view_width, view_height), (0, 0, 0, 0))
 
     snapshot_image = Image.open(snapshot_path).convert("RGBA")
@@ -461,18 +454,6 @@ def write_screen_frame(snapshot_path: Path) -> Path:
         fill=255,
     )
     canvas.paste(snapshot_image, (screen_x, screen_y), screen_mask)
-
-    draw = ImageDraw.Draw(canvas)
-    draw.rounded_rectangle(
-        (
-            int(island_x),
-            int(island_y),
-            int(island_x + island_width),
-            int(island_y + island_height),
-        ),
-        radius=int(island_height / 2),
-        fill=(2, 6, 23, 245),
-    )
 
     png_info = PngImagePlugin.PngInfo()
     png_info.add_text("Description", screen_frame_metadata())
