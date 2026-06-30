@@ -75,7 +75,7 @@ struct Testable_DSText: View {
 - [CartScreen1](../Screens/CartScreen1.md) ([source](../../DSKitExplorer/Screens/CartScreen1.swift))
 - [CartScreen2](../Screens/CartScreen2.md) ([source](../../DSKitExplorer/Screens/CartScreen2.swift))
 - [CartScreen3](../Screens/CartScreen3.md) ([source](../../DSKitExplorer/Screens/CartScreen3.swift))
-- See [UsageIndex.md#dstext](UsageIndex.md#dstext) for 55 more references.
+- See [UsageIndex.md#dstext](UsageIndex.md#dstext) for 54 more references.
 
 ## Related Components
 
@@ -87,6 +87,6 @@ struct Testable_DSText: View {
 
 - Source: [DSKit/Sources/DSKit/Views/DSText.swift](../../DSKit/Sources/DSKit/Views/DSText.swift)
 - Full usage map: [UsageIndex.md#dstext](UsageIndex.md#dstext)
-- Explorer usage: 65 screen files
+- Explorer usage: 64 screen files
 - Type: Primitive
 - Snapshot: [DSText.snapshot.png](../../DSKitTests/__Snapshots__/DSKitTests/DSText.snapshot.png)

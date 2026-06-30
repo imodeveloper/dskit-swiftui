@@ -19,16 +19,13 @@ struct Order3: View {
                 .dsPadding(.bottom)
         }
         .overlay(alignment: .center, content: {
-            DSVStack(alignment: .center) {
-                Spacer()
-                DSImageView(systemName: "checkmark.circle.fill", size: 70, tint: .color(.green))
-                    .dsPadding(.bottom, 30)
-                DSText("It's Ordered").dsTextStyle(DSTypographyToken.custom(size: 30, weight: .semibold, relativeTo: .headline))
-                DSText("Hi John - thanks for your order,\nwe hope you enjoyed shopping\nwith us", alignment: .center)
-                    .dsTextStyle(.subheadline)
-                Spacer()
-                Spacer()
-            }
+            DSStatusView(
+                systemName: "checkmark.circle.fill",
+                title: "It's Ordered",
+                message: "Hi John - thanks for your order,\nwe hope you enjoyed shopping\nwith us",
+                iconTint: .color(.green),
+                titleStyle: .custom(size: 30, weight: .semibold, relativeTo: .headline)
+            )
         })
         .dsScreen()
     }

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-30 13:12:11 EEST (`pending`)
+
+- task_or_issue: `reusable-screen-pattern-components`
+
+#### Request
+Replace repeated order success-state composition with a reusable DSKit component.
+
+#### Change Summary
+Replaced the overlay's manual icon/title/message stack with `DSStatusView`, preserving the success icon, green tint, title style, and message copy.
+
+#### Rationale
+Order confirmation screens duplicated the same centered success presentation and should share the design-system status component.
+
+#### Invariants
+Keep screen-owned suggestion content outside `DSStatusView`; the reusable view only owns the status message.
+
+#### Tests Or Evidence
+Focused `testOrder4` snapshot passed on iPhone 17 Pro OS 26.5.
+
+#### Related Files
+`DSKit/Sources/DSKit/Views/DSStatusView.swift`, `DSKitExplorer/Screens/Order3.swift`, `DSKitTests/DSKitTests.swift`.
+
+#### Follow-up Risks
+If the overlay layout changes, keep the vertical placement controlled by the screen rather than adding layout-specific behavior to `DSStatusView`.
+
 ### 2026-06-29 21:45:00 EEST (`pending`)
 
 - task_or_issue: `local-explorer-image-assets`

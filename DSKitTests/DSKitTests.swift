@@ -214,6 +214,18 @@ final class DSKitTests: SnapshotTestCase {
         assertSnapshot(for: Testable_DSRadioPickerView(), named: "DSRadioPickerView", options: crossSimulatorOptions)
     }
 
+    func testDSKeyValueRow() throws {
+        assertSnapshot(for: Testable_DSKeyValueRow(), named: "DSKeyValueRow", options: crossSimulatorOptions)
+    }
+
+    func testDSPriceSummaryList() throws {
+        assertSnapshot(for: Testable_DSPriceSummaryList(), named: "DSPriceSummaryList", options: crossSimulatorOptions)
+    }
+
+    func testDSStatusView() throws {
+        assertSnapshot(for: Testable_DSStatusView(), named: "DSStatusView", options: crossSimulatorOptions)
+    }
+
     func testGeneratedComponentPreviewSnapshots() throws {
         assertSnapshot(for: ComponentPreview_DSArticleRows(), named: "DSArticleRows", options: crossSimulatorOptions)
         assertSnapshot(for: ComponentPreview_DSAuthorView(), named: "DSAuthorView", options: crossSimulatorOptions)

@@ -35,7 +35,7 @@ struct Order1: View {
                 PaymentMethod(method: viewModel.paymentMethod)
                     .dsSectionStyle(title: "Payment")
 
-                OrderInfo(orderTotals: viewModel.orderTotals)
+                DSPriceSummaryList(items: viewModel.orderTotals)
                     .dsSectionStyle(title: "Order Info")
             }
         }
@@ -54,29 +54,6 @@ struct Order1: View {
 }
 
 extension Order1 {
-    // MARK: - Order Info
-
-    struct OrderInfo: View {
-        let orderTotals: [Data]
-        var body: some View {
-            DSGroupedList(data: orderTotals, id: \.id) { total in
-                DSHStack {
-                    DSText(total.title)
-                        .dsTextStyle(total.bold ? DSTypographyToken.label : .caption1)
-                    Spacer()
-                    DSPriceView(price: total.price, size: total.bold ? DSTypographyToken.label : .caption1)
-                }.dsHeight(25)
-            }
-        }
-
-        struct Data: Identifiable {
-            let id = UUID()
-            let title: String
-            let price: DSPrice
-            var bold: Bool = false
-        }
-    }
-
     // MARK: - Payment Method
 
     struct PaymentMethod: View {
@@ -239,10 +216,10 @@ final class Order1Model: ObservableObject {
         icon: "Visa"
     )
 
-    let orderTotals: [Order1.OrderInfo.Data] = [
+    let orderTotals: [DSPriceSummaryItem] = [
         .init(title: "Subtotal", price: DSPrice(amount: "160.00", currency: "$")),
         .init(title: "Shipping", price: DSPrice(amount: "4.70", currency: "$")),
-        .init(title: "Total", price: DSPrice(amount: "164.70", currency: "$"), bold: true)
+        .init(title: "Total", price: DSPrice(amount: "164.70", currency: "$"), isEmphasized: true)
     ]
 }
 

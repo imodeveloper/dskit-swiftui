@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-30 13:12:11 EEST (`pending`)
+
+- task_or_issue: `reusable-screen-pattern-components`
+
+#### Request
+Replace repeated order price summary composition with a reusable DSKit component.
+
+#### Change Summary
+Removed the local `OrderInfo` grouped list and mapped totals to `DSPriceSummaryItem` for `DSPriceSummaryList`.
+
+#### Rationale
+This screen used the same label/price grouped summary as other order and shipping screens.
+
+#### Invariants
+Keep display totals in the view model and keep payment method UI screen-owned.
+
+#### Tests Or Evidence
+Focused `testOrder1` snapshot passed on iPhone 17 Pro OS 26.5.
+
+#### Related Files
+`DSKit/Sources/DSKit/Views/DSPriceSummaryList.swift`, `DSKit/Sources/DSKit/Views/DSKeyValueRow.swift`, `DSKitExplorer/Screens/Order2.swift`, `Shipping2.swift`.
+
+#### Follow-up Risks
+The existing duplicate payment-method title text was left untouched because it is unrelated to the extraction.
+
 ### 2026-06-29 21:45:00 EEST (`pending`)
 
 - task_or_issue: `local-explorer-image-assets`

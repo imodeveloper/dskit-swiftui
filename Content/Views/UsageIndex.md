@@ -10,10 +10,10 @@
 | [DSHStack](DSHStack.md) | 46 |
 | [DSGrid](DSGrid.md) | 16 |
 | [DSButton](DSButton.md) | 47 |
-| [DSText](DSText.md) | 65 |
+| [DSText](DSText.md) | 64 |
 | [DSHScroll](DSHScroll.md) | 8 |
 | [DSCoverFlow](DSCoverFlow.md) | 14 |
-| [DSImageView](DSImageView.md) | 61 |
+| [DSImageView](DSImageView.md) | 60 |
 | [DSArticleRows](DSArticleRows.md) | 0 |
 | [DSAuthorView](DSAuthorView.md) | 0 |
 | [DSBottomContainer](DSBottomContainer.md) | 25 |
@@ -26,10 +26,11 @@
 | [DSEntityCardRow](DSEntityCardRow.md) | 0 |
 | [DSEntityRow](DSEntityRow.md) | 2 |
 | [DSFloatingBannerView](DSFloatingBannerView.md) | 0 |
-| [DSGroupedList](DSGroupedList.md) | 3 |
+| [DSGroupedList](DSGroupedList.md) | 2 |
 | [DSIconBadgeView](DSIconBadgeView.md) | 0 |
 | [DSInfoCallout](DSInfoCallout.md) | 0 |
 | [DSInlineTagView](DSInlineTagView.md) | 0 |
+| [DSKeyValueRow](DSKeyValueRow.md) | 5 |
 | [DSLazyVStack](DSLazyVStack.md) | 0 |
 | [DSLetterBadgeView](DSLetterBadgeView.md) | 0 |
 | [DSList](DSList.md) | 54 |
@@ -37,6 +38,7 @@
 | [DSMetadataRow](DSMetadataRow.md) | 1 |
 | [DSOffsetObservingScrollView](DSOffsetObservingScrollView.md) | 0 |
 | [DSPickerView](DSPickerView.md) | 6 |
+| [DSPriceSummaryList](DSPriceSummaryList.md) | 3 |
 | [DSPriceView](DSPriceView.md) | 27 |
 | [DSQuantityPicker](DSQuantityPicker.md) | 2 |
 | [DSRadioPickerView](DSRadioPickerView.md) | 5 |
@@ -46,6 +48,7 @@
 | [DSScrollAnchorAffordance](DSScrollAnchorAffordance.md) | 0 |
 | [DSSection](DSSection.md) | 54 |
 | [DSSectionHeaderView](DSSectionHeaderView.md) | 4 |
+| [DSStatusView](DSStatusView.md) | 2 |
 | [DSTabPagingView](DSTabPagingView.md) | 0 |
 | [DSTermsAndConditions](DSTermsAndConditions.md) | 13 |
 | [DSTextField](DSTextField.md) | 8 |
@@ -293,7 +296,6 @@
 - [NotificationsScreen1](../Screens/NotificationsScreen1.md) ([source](../../DSKitExplorer/Screens/NotificationsScreen1.swift))
 - [Order1](../Screens/Order1.md) ([source](../../DSKitExplorer/Screens/Order1.swift))
 - [Order2](../Screens/Order2.md) ([source](../../DSKitExplorer/Screens/Order2.swift))
-- [Order3](../Screens/Order3.md) ([source](../../DSKitExplorer/Screens/Order3.swift))
 - [Order4](../Screens/Order4.md) ([source](../../DSKitExplorer/Screens/Order4.swift))
 - [Payment1](../Screens/Payment1.md) ([source](../../DSKitExplorer/Screens/Payment1.swift))
 - [Payment2](../Screens/Payment2.md) ([source](../../DSKitExplorer/Screens/Payment2.swift))
@@ -385,7 +387,6 @@
 - [NotificationsScreen1](../Screens/NotificationsScreen1.md) ([source](../../DSKitExplorer/Screens/NotificationsScreen1.swift))
 - [Order1](../Screens/Order1.md) ([source](../../DSKitExplorer/Screens/Order1.swift))
 - [Order2](../Screens/Order2.md) ([source](../../DSKitExplorer/Screens/Order2.swift))
-- [Order3](../Screens/Order3.md) ([source](../../DSKitExplorer/Screens/Order3.swift))
 - [Order4](../Screens/Order4.md) ([source](../../DSKitExplorer/Screens/Order4.swift))
 - [Payment1](../Screens/Payment1.md) ([source](../../DSKitExplorer/Screens/Payment1.swift))
 - [Payment2](../Screens/Payment2.md) ([source](../../DSKitExplorer/Screens/Payment2.swift))
@@ -489,7 +490,6 @@ No direct `DSKitExplorer/Screens` usage was found.
 
 - [Order1](../Screens/Order1.md) ([source](../../DSKitExplorer/Screens/Order1.swift))
 - [Order2](../Screens/Order2.md) ([source](../../DSKitExplorer/Screens/Order2.swift))
-- [Shipping2](../Screens/Shipping2.md) ([source](../../DSKitExplorer/Screens/Shipping2.swift))
 
 ## DSIconBadgeView
 
@@ -502,6 +502,14 @@ No direct `DSKitExplorer/Screens` usage was found.
 ## DSInlineTagView
 
 No direct `DSKitExplorer/Screens` usage was found.
+
+## DSKeyValueRow
+
+- [CartScreen1](../Screens/CartScreen1.md) ([source](../../DSKitExplorer/Screens/CartScreen1.swift))
+- [CartScreen2](../Screens/CartScreen2.md) ([source](../../DSKitExplorer/Screens/CartScreen2.swift))
+- [CartScreen3](../Screens/CartScreen3.md) ([source](../../DSKitExplorer/Screens/CartScreen3.swift))
+- [CartScreen4](../Screens/CartScreen4.md) ([source](../../DSKitExplorer/Screens/CartScreen4.swift))
+- [CartScreen5](../Screens/CartScreen5.md) ([source](../../DSKitExplorer/Screens/CartScreen5.swift))
 
 ## DSLazyVStack
 
@@ -588,6 +596,12 @@ No direct `DSKitExplorer/Screens` usage was found.
 - [ItemDetails3](../Screens/ItemDetails3.md) ([source](../../DSKitExplorer/Screens/ItemDetails3.swift))
 - [ItemDetails4](../Screens/ItemDetails4.md) ([source](../../DSKitExplorer/Screens/ItemDetails4.swift))
 - [ItemDetails5](../Screens/ItemDetails5.md) ([source](../../DSKitExplorer/Screens/ItemDetails5.swift))
+
+## DSPriceSummaryList
+
+- [Order1](../Screens/Order1.md) ([source](../../DSKitExplorer/Screens/Order1.swift))
+- [Order2](../Screens/Order2.md) ([source](../../DSKitExplorer/Screens/Order2.swift))
+- [Shipping2](../Screens/Shipping2.md) ([source](../../DSKitExplorer/Screens/Shipping2.swift))
 
 ## DSPriceView
 
@@ -725,6 +739,11 @@ No direct `DSKitExplorer/Screens` usage was found.
 - [HomeScreen1](../Screens/HomeScreen1.md) ([source](../../DSKitExplorer/Screens/HomeScreen1.swift))
 - [HomeScreen2](../Screens/HomeScreen2.md) ([source](../../DSKitExplorer/Screens/HomeScreen2.swift))
 - [HomeScreen3](../Screens/HomeScreen3.md) ([source](../../DSKitExplorer/Screens/HomeScreen3.swift))
+
+## DSStatusView
+
+- [Order3](../Screens/Order3.md) ([source](../../DSKitExplorer/Screens/Order3.swift))
+- [Order4](../Screens/Order4.md) ([source](../../DSKitExplorer/Screens/Order4.swift))
 
 ## DSTabPagingView
 

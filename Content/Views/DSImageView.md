@@ -113,7 +113,7 @@ struct Testable_DSImageView: View {
 - [CartScreen1](../Screens/CartScreen1.md) ([source](../../DSKitExplorer/Screens/CartScreen1.swift))
 - [CartScreen2](../Screens/CartScreen2.md) ([source](../../DSKitExplorer/Screens/CartScreen2.swift))
 - [CartScreen3](../Screens/CartScreen3.md) ([source](../../DSKitExplorer/Screens/CartScreen3.swift))
-- See [UsageIndex.md#dsimageview](UsageIndex.md#dsimageview) for 51 more references.
+- See [UsageIndex.md#dsimageview](UsageIndex.md#dsimageview) for 50 more references.
 
 ## Related Components
 
@@ -125,6 +125,6 @@ struct Testable_DSImageView: View {
 
 - Source: [DSKit/Sources/DSKit/Views/DSImageView.swift](../../DSKit/Sources/DSKit/Views/DSImageView.swift)
 - Full usage map: [UsageIndex.md#dsimageview](UsageIndex.md#dsimageview)
-- Explorer usage: 61 screen files
+- Explorer usage: 60 screen files
 - Type: Primitive
 - Snapshot: [DSImageView.snapshot.png](../../DSKitTests/__Snapshots__/DSKitTests/DSImageView.snapshot.png)

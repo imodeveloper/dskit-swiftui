@@ -12,6 +12,7 @@
 - [DSButton](../Views/DSButton.md)
 - [DSHStack](../Views/DSHStack.md)
 - [DSImageView](../Views/DSImageView.md)
+- [DSKeyValueRow](../Views/DSKeyValueRow.md)
 - [DSList](../Views/DSList.md)
 - [DSPriceView](../Views/DSPriceView.md)
 - [DSSFSymbolButton](../Views/DSSFSymbolButton.md)
@@ -28,4 +29,4 @@
 - Source: [DSKitExplorer/Screens/CartScreen4.swift](../../DSKitExplorer/Screens/CartScreen4.swift)
 - Family: Commerce
 - Snapshot preview: 1
-- DSKit views used: 12
+- DSKit views used: 13

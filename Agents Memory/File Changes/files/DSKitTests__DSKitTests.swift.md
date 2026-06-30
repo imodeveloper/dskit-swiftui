@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-30 13:12:11 EEST (`pending`)
+
+- task_or_issue: `reusable-screen-pattern-components`
+
+#### Request
+Add snapshot coverage for new reusable DSKit components extracted from Explorer screens.
+
+#### Change Summary
+Added exact component snapshot assertions for `DSKeyValueRow`, `DSPriceSummaryList`, and `DSStatusView`.
+
+#### Rationale
+Every DSKit view file must have an exact snapshot assertion and generated documentation preview.
+
+#### Invariants
+Keep assertion names aligned with component filenames and snapshot PNG names.
+
+#### Tests Or Evidence
+Focused new component snapshot tests and the generated component docs guard passed on iPhone 17 Pro OS 26.5.
+
+#### Related Files
+`DSKit/Sources/DSKit/Views/DSKeyValueRow.swift`, `DSPriceSummaryList.swift`, `DSStatusView.swift`, `DSKitTests/__Snapshots__/DSKitTests/*.snapshot.png`, `Content/Views.md`.
+
+#### Follow-up Risks
+If component snapshots are renamed or moved, update the docs guard and generator expectations together.
+
 ### 2026-06-29 14:59:01 EEST (`pending`)
 
 - task_or_issue: `component-snapshot-doc-coverage-guard`

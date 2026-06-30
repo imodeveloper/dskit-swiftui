@@ -16,7 +16,7 @@ struct Shipping2: View {
                     ShippingMethodView(method: method)
                 }
                 section(with: "Order Info") {
-                    OrderInfo(orderTotals: viewModel.orderTotals)
+                    DSPriceSummaryList(items: viewModel.orderTotals)
                 }
             }
         }.safeAreaInset(edge: .bottom) {
@@ -45,26 +45,6 @@ struct Shipping2: View {
     }
 }
 extension Shipping2 {
-    // MARK: - Order Info
-    struct OrderInfo: View {
-        let orderTotals: [Data]
-        var body: some View {
-            DSGroupedList(data: orderTotals, id: \.id) { total in
-                DSHStack {
-                    DSText(total.title)
-                        .dsTextStyle(total.bold ? DSTypographyToken.label : .caption1)
-                    Spacer()
-                    DSPriceView(price: total.price, size: total.bold ? DSTypographyToken.label : .caption1)
-                }.dsHeight(25)
-            }
-        }
-        struct Data: Identifiable {
-            let id = UUID()
-            let title: String
-            let price: DSPrice
-            var bold: Bool = false
-        }
-    }
     // MARK: - Shipping Method
     struct ShippingMethodView: View {
         let method: Data
@@ -101,10 +81,10 @@ extension Shipping2 {
 // MARK: - View Model
 @MainActor
 final class Shipping2Model: ObservableObject {
-    let orderTotals: [Shipping2.OrderInfo.Data] = [
+    let orderTotals: [DSPriceSummaryItem] = [
         .init(title: "Subtotal", price: DSPrice(amount: "160.00", currency: "$")),
         .init(title: "Shipping", price: DSPrice(amount: "4.70", currency: "$")),
-        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), bold: true)
+        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), isEmphasized: true)
     ]
     let shippingMethods: [Shipping2.ShippingMethodView.Data] = [
         .init(

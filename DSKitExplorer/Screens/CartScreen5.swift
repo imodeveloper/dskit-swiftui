@@ -26,7 +26,7 @@ struct CartScreen5: View {
                 DSHScroll(data: viewModel.suggestedProducts, id: \.id) { product in
                     SuggestedProductView(product: product)
                 }
-                TotalView(itemsCount: "4", price: DSPrice(amount: "1049.00", currency: "$"))
+                DSKeyValueRow(title: "Total", count: "4", price: DSPrice(amount: "1049.00", currency: "$"))
                 DSButton(title: "Checkout", rightSystemName: "creditcard") {
                     dismiss()
                 }
@@ -94,26 +94,7 @@ extension CartScreen5 {
         }
     }
 
-    // MARK: - Total View
-
-    struct TotalView: View {
-        let itemsCount: String
-        let price: DSPrice
-        var body: some View {
-            DSHStack {
-                DSText("Total").dsTextStyle(.headline)
-                Spacer()
-                DSHStack(alignment: .firstTextBaseline, spacing: .space4) {
-                    DSText("for").dsTextStyle(.subheadline)
-                    DSText(itemsCount).dsTextStyle(DSTypographyToken.label)
-                    DSText("items").dsTextStyle(.subheadline)
-                    DSPriceView(price: price, size: .headline)
-                }
-            }
-        }
-    }
-
-    // MARK: - Total View
+    // MARK: - Tag View
 
     struct TagView: View {
         let tag: String

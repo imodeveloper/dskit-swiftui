@@ -32,7 +32,7 @@ struct Order2: View {
                     ) {}
                 }.dsSectionStyle(title: "Promo Codes")
 
-                OrderInfo(orderTotals: viewModel.orderTotals)
+                DSPriceSummaryList(items: viewModel.orderTotals)
                     .dsSectionStyle(title: "Order Info")
             }
         }.safeAreaInset(edge: .bottom) {
@@ -90,29 +90,6 @@ extension Order2 {
         }
     }
 
-    // MARK: - Order Info
-
-    struct OrderInfo: View {
-        let orderTotals: [Data]
-        var body: some View {
-            DSGroupedList(data: orderTotals, id: \.id) { total in
-                DSHStack {
-                    DSText(total.title)
-                        .dsTextStyle(total.bold ? DSTypographyToken.label : .caption1)
-                    Spacer()
-                    DSPriceView(price: total.price, size: total.bold ? DSTypographyToken.label : .caption1)
-                }.dsHeight(25)
-            }
-        }
-
-        struct Data: Identifiable {
-            let id = UUID()
-            let title: String
-            let price: DSPrice
-            var bold: Bool = false
-        }
-    }
-
     // MARK: - Promo Code
 
     struct PromoCodeView: View {
@@ -147,12 +124,12 @@ final class Order2Model {
         .init(icon: "creditcard.fill", title: "Payment", subtitle: "MasterCard", description: "**** 8314")
     ]
 
-    let orderTotals: [Order2.OrderInfo.Data] = [
+    let orderTotals: [DSPriceSummaryItem] = [
         .init(title: "Subtotal", price: DSPrice(amount: "160.00", currency: "$")),
         .init(title: "Shipping", price: DSPrice(amount: "4.70", currency: "$")),
         .init(title: "30OFFCODE", price: DSPrice(amount: "134.70", regularAmount: "164.70", currency: "$")),
         .init(title: "FREEDELIVERY", price: DSPrice(amount: "130.00", regularAmount: "134.70", currency: "$")),
-        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), bold: true)
+        .init(title: "Total", price: DSPrice(amount: "130.0", currency: "$"), isEmphasized: true)
     ]
 
     let promoCodes: [Order2.PromoCodeView.Data] = [

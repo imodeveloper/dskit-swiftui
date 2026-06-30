@@ -22,7 +22,7 @@ struct CartScreen1: View {
         }
         .safeAreaInset(edge: .bottom) {
             DSBottomContainer {
-                TotalView(itemsCount: "4", price: DSPrice(amount: "1049.00", currency: "$"))
+                DSKeyValueRow(title: "Total", count: "4", price: DSPrice(amount: "1049.00", currency: "$"))
                 DSButton(title: "Continue to payment", rightSystemName: "arrow.right") {
                     dismiss()
                 }
@@ -74,25 +74,6 @@ extension CartScreen1 {
             let price: DSPrice
             let rating: Float
             let image: URL?
-        }
-    }
-
-    // MARK: - Total View
-
-    struct TotalView: View {
-        let itemsCount: String
-        let price: DSPrice
-        var body: some View {
-            DSHStack {
-                DSText("Total").dsTextStyle(.headline)
-                Spacer()
-                DSHStack(alignment: .firstTextBaseline, spacing: .space4) {
-                    DSText("for").dsTextStyle(.subheadline)
-                    DSText(itemsCount).dsTextStyle(DSTypographyToken.label)
-                    DSText("items").dsTextStyle(.subheadline)
-                    DSPriceView(price: price, size: .headline)
-                }
-            }
         }
     }
 }

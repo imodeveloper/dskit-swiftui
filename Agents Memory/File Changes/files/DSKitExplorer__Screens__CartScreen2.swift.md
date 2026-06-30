@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-30 13:12:11 EEST (`pending`)
+
+- task_or_issue: `reusable-screen-pattern-components`
+
+#### Request
+Replace repeated cart total composition with a reusable DSKit component.
+
+#### Change Summary
+Replaced the local `TotalView` with `DSKeyValueRow(title:count:price:)`.
+
+#### Rationale
+All cart screens used the same total row shape, so the pattern belongs in DSKit instead of per-screen helper views.
+
+#### Invariants
+Keep cart item count and price supplied by the screen; `DSKeyValueRow` should remain display-only.
+
+#### Tests Or Evidence
+Focused `testCartScreen2` snapshot passed on iPhone 17 Pro OS 26.5.
+
+#### Related Files
+`DSKit/Sources/DSKit/Views/DSKeyValueRow.swift`, `DSKitExplorer/Screens/CartScreen1.swift`, `CartScreen3.swift`, `CartScreen4.swift`, `CartScreen5.swift`.
+
+#### Follow-up Risks
+If cart totals become dynamic, preserve snapshot determinism in the test fixture.
+
 ### 2026-06-29 21:45:00 EEST (`pending`)
 
 - task_or_issue: `local-explorer-image-assets`

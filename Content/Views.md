@@ -28,6 +28,7 @@
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSIconBadgeView.snapshot.png" width="240" alt="DSIconBadgeView preview" /> | [DSIconBadgeView](Views/DSIconBadgeView.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSInfoCallout.snapshot.png" width="240" alt="DSInfoCallout preview" /> | [DSInfoCallout](Views/DSInfoCallout.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSInlineTagView.snapshot.png" width="240" alt="DSInlineTagView preview" /> | [DSInlineTagView](Views/DSInlineTagView.md) |
+| <img src="../DSKitTests/__Snapshots__/DSKitTests/DSKeyValueRow.snapshot.png" width="240" alt="DSKeyValueRow preview" /> | [DSKeyValueRow](Views/DSKeyValueRow.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSLazyVStack.snapshot.png" width="240" alt="DSLazyVStack preview" /> | [DSLazyVStack](Views/DSLazyVStack.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSLetterBadgeView.snapshot.png" width="240" alt="DSLetterBadgeView preview" /> | [DSLetterBadgeView](Views/DSLetterBadgeView.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSList.snapshot.png" width="240" alt="DSList preview" /> | [DSList](Views/DSList.md) |
@@ -35,6 +36,7 @@
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSMetadataRow.snapshot.png" width="240" alt="DSMetadataRow preview" /> | [DSMetadataRow](Views/DSMetadataRow.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSOffsetObservingScrollView.snapshot.png" width="240" alt="DSOffsetObservingScrollView preview" /> | [DSOffsetObservingScrollView](Views/DSOffsetObservingScrollView.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSPickerView.snapshot.png" width="240" alt="DSPickerView preview" /> | [DSPickerView](Views/DSPickerView.md) |
+| <img src="../DSKitTests/__Snapshots__/DSKitTests/DSPriceSummaryList.snapshot.png" width="240" alt="DSPriceSummaryList preview" /> | [DSPriceSummaryList](Views/DSPriceSummaryList.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSPriceView.snapshot.png" width="240" alt="DSPriceView preview" /> | [DSPriceView](Views/DSPriceView.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSQuantityPicker.snapshot.png" width="240" alt="DSQuantityPicker preview" /> | [DSQuantityPicker](Views/DSQuantityPicker.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSRadioPickerView.snapshot.png" width="240" alt="DSRadioPickerView preview" /> | [DSRadioPickerView](Views/DSRadioPickerView.md) |
@@ -44,6 +46,7 @@
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSScrollAnchorAffordance.snapshot.png" width="240" alt="DSScrollAnchorAffordance preview" /> | [DSScrollAnchorAffordance](Views/DSScrollAnchorAffordance.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSSection.snapshot.png" width="240" alt="DSSection preview" /> | [DSSection](Views/DSSection.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSSectionHeaderView.snapshot.png" width="240" alt="DSSectionHeaderView preview" /> | [DSSectionHeaderView](Views/DSSectionHeaderView.md) |
+| <img src="../DSKitTests/__Snapshots__/DSKitTests/DSStatusView.snapshot.png" width="240" alt="DSStatusView preview" /> | [DSStatusView](Views/DSStatusView.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSTabPagingView.snapshot.png" width="240" alt="DSTabPagingView preview" /> | [DSTabPagingView](Views/DSTabPagingView.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSTermsAndConditions.snapshot.png" width="240" alt="DSTermsAndConditions preview" /> | [DSTermsAndConditions](Views/DSTermsAndConditions.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSTextField.snapshot.png" width="240" alt="DSTextField preview" /> | [DSTextField](Views/DSTextField.md) |

@@ -15,6 +15,7 @@
 - [DSHStack](../Views/DSHStack.md)
 - [DSImageView](../Views/DSImageView.md)
 - [DSList](../Views/DSList.md)
+- [DSPriceSummaryList](../Views/DSPriceSummaryList.md)
 - [DSPriceView](../Views/DSPriceView.md)
 - [DSSFSymbolButton](../Views/DSSFSymbolButton.md)
 - [DSSection](../Views/DSSection.md)
@@ -29,4 +30,4 @@
 - Source: [DSKitExplorer/Screens/Order2.swift](../../DSKitExplorer/Screens/Order2.swift)
 - Family: Commerce
 - Snapshot preview: 1
-- DSKit views used: 13
+- DSKit views used: 14

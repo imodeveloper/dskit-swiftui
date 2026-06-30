@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-06-30 13:12:11 EEST (`pending`)
+
+- task_or_issue: `reusable-screen-pattern-components`
+
+#### Request
+Include newly extracted reusable screen-pattern components in generated component documentation.
+
+#### Change Summary
+Mapped `DSKeyValueRow`, `DSPriceSummaryList`, and `DSStatusView` into the `Rows, cards, and content` category.
+
+#### Rationale
+The generator needs explicit category mapping so new component pages appear in the right section of `Content/Views.md`.
+
+#### Invariants
+Keep generated docs updated through `Scripts/documentation_generator.sh`; do not hand-edit `Content/Views.md` or per-component generated pages.
+
+#### Tests Or Evidence
+Ran `python3 -m py_compile Scripts/generate_view_docs.py`, `Scripts/documentation_generator.sh`, `git diff --check`, and the component docs guard.
+
+#### Related Files
+`Content/Views.md`, `Content/Views/DSKeyValueRow.md`, `Content/Views/DSPriceSummaryList.md`, `Content/Views/DSStatusView.md`.
+
+#### Follow-up Risks
+If category names change, update this mapping before regenerating docs.
+
 ### 2026-06-29 20:48:40 EEST (`pending`)
 
 - task_or_issue: `showcase-style-screen-catalog`

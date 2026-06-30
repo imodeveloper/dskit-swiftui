@@ -10,10 +10,10 @@
 
 - [DSBottomContainer](../Views/DSBottomContainer.md)
 - [DSButton](../Views/DSButton.md)
-- [DSGroupedList](../Views/DSGroupedList.md)
 - [DSHStack](../Views/DSHStack.md)
 - [DSImageView](../Views/DSImageView.md)
 - [DSList](../Views/DSList.md)
+- [DSPriceSummaryList](../Views/DSPriceSummaryList.md)
 - [DSPriceView](../Views/DSPriceView.md)
 - [DSRadioPickerView](../Views/DSRadioPickerView.md)
 - [DSSection](../Views/DSSection.md)

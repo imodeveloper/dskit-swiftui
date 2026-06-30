@@ -9,8 +9,7 @@
 ## DSKit Views Used
 
 - [DSButton](../Views/DSButton.md)
-- [DSImageView](../Views/DSImageView.md)
-- [DSText](../Views/DSText.md)
+- [DSStatusView](../Views/DSStatusView.md)
 - [DSVStack](../Views/DSVStack.md)
 
 ## Reference
@@ -20,4 +19,4 @@
 - Source: [DSKitExplorer/Screens/Order3.swift](../../DSKitExplorer/Screens/Order3.swift)
 - Family: Commerce
 - Snapshot preview: 1
-- DSKit views used: 4
+- DSKit views used: 3

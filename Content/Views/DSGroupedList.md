@@ -41,7 +41,6 @@ struct Testable_DSGroupedList: View {
 
 - [Order1](../Screens/Order1.md) ([source](../../DSKitExplorer/Screens/Order1.swift))
 - [Order2](../Screens/Order2.md) ([source](../../DSKitExplorer/Screens/Order2.swift))
-- [Shipping2](../Screens/Shipping2.md) ([source](../../DSKitExplorer/Screens/Shipping2.swift))
 
 ## Related Components
 
@@ -53,6 +52,6 @@ struct Testable_DSGroupedList: View {
 
 - Source: [DSKit/Sources/DSKit/Views/DSGroupedList.swift](../../DSKit/Sources/DSKit/Views/DSGroupedList.swift)
 - Full usage map: [UsageIndex.md#dsgroupedlist](UsageIndex.md#dsgroupedlist)
-- Explorer usage: 3 screen files
+- Explorer usage: 2 screen files
 - Type: Primitive
 - Snapshot: [DSGroupedList.snapshot.png](../../DSKitTests/__Snapshots__/DSKitTests/DSGroupedList.snapshot.png)
