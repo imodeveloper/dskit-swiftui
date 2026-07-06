@@ -68,7 +68,7 @@ Related screen references: [CartScreen1](Screens/CartScreen1.md), [CartScreen2](
 
 <img src="Screens/Groups/news-1.strip.png" alt="News screen previews 1" />
 
-Related screen references: [NewsScreen1](Screens/NewsScreen1.md), [NewsScreen2](Screens/NewsScreen2.md), [NotificationsScreen1](Screens/NotificationsScreen1.md).
+Related screen references: [NewsScreen1](Screens/NewsScreen1.md), [NewsScreen2](Screens/NewsScreen2.md), [NotificationsPermissionScreen](Screens/NotificationsPermissionScreen.md), [NotificationsScreen1](Screens/NotificationsScreen1.md).
 
 ### About
 
@@ -81,6 +81,12 @@ Related screen references: [AboutUsScreen1](Screens/AboutUsScreen1.md), [AboutUs
 <img src="Screens/Groups/playgrounds-1.strip.png" alt="Playgrounds screen previews 1" />
 
 Related screen references: [DesignTokensPlaygroundScreen](Screens/DesignTokensPlaygroundScreen.md), [DynamicTypePlaygroundScreen](Screens/DynamicTypePlaygroundScreen.md).
+
+### Other screens
+
+<img src="Screens/Groups/other-screens-1.strip.png" alt="Other screens screen previews 1" />
+
+Related screen references: [LocationPermissionScreen](Screens/LocationPermissionScreen.md), [PhotosPermissionScreen](Screens/PhotosPermissionScreen.md).
 
 ## Maintenance
 

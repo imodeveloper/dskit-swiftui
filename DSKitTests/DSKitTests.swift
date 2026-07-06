@@ -230,6 +230,15 @@ final class DSKitTests: SnapshotTestCase {
         assertSnapshot(for: Testable_DSLoadingIndicator(), named: "DSLoadingIndicator", options: crossSimulatorOptions)
     }
 
+    func testExtractedMonitorComponents() throws {
+        assertSnapshot(for: Testable_DSAppIconHeroView(), named: "DSAppIconHeroView", options: crossSimulatorOptions)
+        assertSnapshot(for: Testable_DSEntityCardListView(), named: "DSEntityCardListView", options: crossSimulatorOptions)
+        assertSnapshot(for: Testable_DSEntityListRow(), named: "DSEntityListRow", options: crossSimulatorOptions)
+        assertSnapshot(for: Testable_DSOnboardingWelcomeView(), named: "DSOnboardingWelcomeView", options: crossSimulatorOptions)
+        assertSnapshot(for: Testable_DSPermissionPromptView(), named: "DSPermissionPromptView", options: crossSimulatorOptions)
+        assertSnapshot(for: Testable_DSTextParticleLoadingView(), named: "DSTextParticleLoadingView", options: crossSimulatorOptions)
+    }
+
     func testGeneratedComponentPreviewSnapshots() throws {
         assertSnapshot(for: ComponentPreview_DSArticleRows(), named: "DSArticleRows", options: crossSimulatorOptions)
         assertSnapshot(for: ComponentPreview_DSAuthorView(), named: "DSAuthorView", options: crossSimulatorOptions)

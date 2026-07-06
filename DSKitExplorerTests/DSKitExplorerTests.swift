@@ -280,6 +280,18 @@ final class DSKitExplorerTests: SnapshotTestCase {
         assertSnapshot(for: Testable_AboutUsScreen2(selectedTab: 0), named: "AboutUsScreen2_0", layout: .screen())
         assertSnapshot(for: Testable_AboutUsScreen2(selectedTab: 1), named: "AboutUsScreen2_1", layout: .screen())
     }
+
+    func testLocationPermissionScreen() throws {
+        assertSnapshot(for: Testable_LocationPermissionScreen(), named: "LocationPermissionScreen", layout: .screen())
+    }
+
+    func testNotificationsPermissionScreen() throws {
+        assertSnapshot(for: Testable_NotificationsPermissionScreen(), named: "NotificationsPermissionScreen", layout: .screen())
+    }
+
+    func testPhotosPermissionScreen() throws {
+        assertSnapshot(for: Testable_PhotosPermissionScreen(), named: "PhotosPermissionScreen", layout: .screen())
+    }
 }
 
 import SwiftUI

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-07 00:28:00 EEST (`pending`)
+
+- task_or_issue: `monitor-reusable-components-dskit-docs`
+
+#### Request
+Place the Monitor-derived reusable DSKit components in the generated component catalog.
+
+#### Change Summary
+Mapped `DSEntityCardListView`, `DSEntityListRow`, `DSAppIconHeroView`, `DSTextParticleLoadingView`, `DSOnboardingWelcomeView`, and `DSPermissionPromptView` into the generator's category table.
+
+#### Rationale
+The generator is category-driven for `Content/Views.md`; without explicit category mapping, new component pages can be generated but grouped poorly or inconsistently.
+
+#### Invariants
+Treat `Content/Views.md`, `Content/Views/*.md`, `Content/Screens.md`, and `Content/Screens/*.md` as generated outputs. Update categories in the generator, then rerun `Scripts/documentation_generator.sh`.
+
+#### Tests Or Evidence
+Ran `python3 -m py_compile Scripts/generate_view_docs.py`, `Scripts/documentation_generator.sh`, SwiftLint, `git diff --check`, and focused DSKit docs/snapshot coverage tests.
+
+#### Related Files
+`Content/Views.md`, `Content/Views/*.md`, `DSKitTests/DSKitTests.swift`, `DSKitTests/__Snapshots__/DSKitTests/*.snapshot.png`.
+
+#### Follow-up Risks
+If category names are renamed, update this mapping and regenerate the catalog in the same change.
+
 ### 2026-06-30 13:12:11 EEST (`pending`)
 
 - task_or_issue: `reusable-screen-pattern-components`

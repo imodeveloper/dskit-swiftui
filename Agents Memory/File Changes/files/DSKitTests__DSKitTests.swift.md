@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-07 00:28:00 EEST (`pending`)
+
+- task_or_issue: `monitor-reusable-components-dskit-docs`
+
+#### Request
+Finish DSKit coverage for Monitor-derived reusable components with snapshots and generated component documentation.
+
+#### Change Summary
+Added exact snapshot assertions for `DSAppIconHeroView`, `DSEntityCardListView`, `DSEntityListRow`, `DSOnboardingWelcomeView`, `DSPermissionPromptView`, and `DSTextParticleLoadingView`; recorded the missing `DSLoadingIndicator` baseline too.
+
+#### Rationale
+The strict component docs guard expects each DSKit view file to have an exact assertion, an exact PNG snapshot, a generated page, and a `Content/Views.md` preview reference.
+
+#### Invariants
+Keep assertion names, snapshot filenames, generated page names, and source filenames aligned as `<Component>`.
+
+#### Tests Or Evidence
+Ran focused Xcode tests for `testDSLoadingIndicator`, `testExtractedMonitorComponents`, and `testEveryDSKitViewHasSnapshotCoverageAndDocumentationPreview`; all passed on iPhone 17 Pro iOS 26.5.
+
+#### Related Files
+`DSKitTests/__Snapshots__/DSKitTests/*.snapshot.png`, `Content/Views.md`, `Content/Views/*.md`, `Scripts/generate_view_docs.py`.
+
+#### Follow-up Risks
+Changing extracted component visuals requires intentional snapshot updates and docs regeneration in the same commit.
+
 ### 2026-06-30 13:12:11 EEST (`pending`)
 
 - task_or_issue: `reusable-screen-pattern-components`

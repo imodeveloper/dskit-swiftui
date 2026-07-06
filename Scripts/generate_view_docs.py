@@ -136,6 +136,8 @@ CATEGORY_BY_COMPONENT = {
     "DSTermsAndConditions": "Text, forms, and controls",
     "DSArticleRows": "Rows, cards, and content",
     "DSAuthorView": "Rows, cards, and content",
+    "DSEntityCardListView": "Rows, cards, and content",
+    "DSEntityListRow": "Rows, cards, and content",
     "DSEntityRow": "Rows, cards, and content",
     "DSEntityCardRow": "Rows, cards, and content",
     "DSMetadataRow": "Rows, cards, and content",
@@ -147,6 +149,7 @@ CATEGORY_BY_COMPONENT = {
     "DSInfoCallout": "Rows, cards, and content",
     "DSFloatingBannerView": "Rows, cards, and content",
     "DSImageView": "Visuals and affordances",
+    "DSAppIconHeroView": "Visuals and affordances",
     "DSDivider": "Visuals and affordances",
     "DSChevronView": "Visuals and affordances",
     "DSChipsView": "Visuals and affordances",
@@ -155,10 +158,13 @@ CATEGORY_BY_COMPONENT = {
     "DSLetterBadgeView": "Visuals and affordances",
     "DSListSeparatorView": "Visuals and affordances",
     "DSLoadingIndicator": "Visuals and affordances",
+    "DSTextParticleLoadingView": "Visuals and affordances",
     "DSPriceView": "Visuals and affordances",
     "DSRatingView": "Visuals and affordances",
     "DSRelativeTimeTag": "Visuals and affordances",
     "DSScrollAnchorAffordance": "Visuals and affordances",
+    "DSOnboardingWelcomeView": "Other views",
+    "DSPermissionPromptView": "Other views",
 }
 
 SCREEN_FAMILY_ORDER = [
