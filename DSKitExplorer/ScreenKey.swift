@@ -74,6 +74,9 @@ enum ScreenKey: String, CaseIterable, Identifiable {
     case homeScreen3
     case homeScreen4
     case notificationsScreen1
+    case locationPermissionScreen
+    case notificationsPermissionScreen
+    case photosPermissionScreen
     case aboutUsScreen1
     case aboutUsScreen2
 
@@ -133,6 +136,9 @@ enum ScreenKey: String, CaseIterable, Identifiable {
         case .logInScreen3: return "Log In Screen 3"
         case .logInScreen4: return "Log In Screen 4"
         case .notificationsScreen1: return "Notifications Screen 1"
+        case .locationPermissionScreen: return "Location Permission"
+        case .notificationsPermissionScreen: return "Notifications Permission"
+        case .photosPermissionScreen: return "Photos Permission"
         case .aboutUsScreen1: return "About us 1"
         case .newsScreen1: return "News Screen 1"
         case .newsScreen2: return "News Screen 2"

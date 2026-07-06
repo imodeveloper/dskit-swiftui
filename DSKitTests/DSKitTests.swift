@@ -226,6 +226,10 @@ final class DSKitTests: SnapshotTestCase {
         assertSnapshot(for: Testable_DSStatusView(), named: "DSStatusView", options: crossSimulatorOptions)
     }
 
+    func testDSLoadingIndicator() throws {
+        assertSnapshot(for: Testable_DSLoadingIndicator(), named: "DSLoadingIndicator", options: crossSimulatorOptions)
+    }
+
     func testGeneratedComponentPreviewSnapshots() throws {
         assertSnapshot(for: ComponentPreview_DSArticleRows(), named: "DSArticleRows", options: crossSimulatorOptions)
         assertSnapshot(for: ComponentPreview_DSAuthorView(), named: "DSAuthorView", options: crossSimulatorOptions)

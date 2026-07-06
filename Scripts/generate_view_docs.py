@@ -154,6 +154,7 @@ CATEGORY_BY_COMPONENT = {
     "DSInlineTagView": "Visuals and affordances",
     "DSLetterBadgeView": "Visuals and affordances",
     "DSListSeparatorView": "Visuals and affordances",
+    "DSLoadingIndicator": "Visuals and affordances",
     "DSPriceView": "Visuals and affordances",
     "DSRatingView": "Visuals and affordances",
     "DSRelativeTimeTag": "Visuals and affordances",

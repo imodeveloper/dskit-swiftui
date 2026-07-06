@@ -180,6 +180,18 @@ struct ScreenView: View {
                 .navigationTitle("Settings")
                 .platformBasedNavigationBarTitleDisplayModeInline()
                 .environment(\.appearance, appearance)
+        case .locationPermissionScreen:
+            LocationPermissionScreen()
+                .plaftormBasedNavigationBarHidden(true)
+                .environment(\.appearance, appearance)
+        case .notificationsPermissionScreen:
+            NotificationsPermissionScreen()
+                .plaftormBasedNavigationBarHidden(true)
+                .environment(\.appearance, appearance)
+        case .photosPermissionScreen:
+            PhotosPermissionScreen()
+                .plaftormBasedNavigationBarHidden(true)
+                .environment(\.appearance, appearance)
         case .aboutUsScreen1:
             AboutUsScreen1()
                 .navigationTitle("About us")
