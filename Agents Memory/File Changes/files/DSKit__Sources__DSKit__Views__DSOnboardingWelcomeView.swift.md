@@ -6,6 +6,32 @@
 
 ## Changes
 
+### 2026-07-07 17:15:00 EEST (`welcome-headline-brand-legal-link`)
+
+- task_or_issue: `Welcome title and legal link should follow requested styling`
+- change_id: `welcome-headline-brand-legal-link`
+
+#### Request
+Make the welcome screen title bold and make the terms link use the current appearance main/brand color.
+
+#### Change Summary
+The headline now uses a bold custom large-title style, and the terms link underline/foreground resolve `DSColorToken.text(.brand)` from the active appearance and surface style.
+
+#### Rationale
+Using `.tint`/accent color can diverge from DSKit appearance branding, while the welcome headline needed explicit bold weight.
+
+#### Invariants
+Keep legal-link color driven by DSKit appearance tokens, not global SwiftUI tint. Keep the component generic over its hero view.
+
+#### Tests Or Evidence
+Focused DSKit snapshot test `testDSOnboardingWelcomeViewUsesAppearanceBrandForLegalLinkAndBoldHeadline` passed and records `DSOnboardingWelcomeView_BrandLegalLink`.
+
+#### Related Files
+`DSKitTests/DSKitTests.swift`, `Content/Views/DSOnboardingWelcomeView.md`.
+
+#### Follow-up Risks
+If DSKit token names change, preserve the semantic brand-color behavior rather than reverting to accent/tint.
+
 ### 2026-07-07 00:25:17 EEST (`pending`)
 
 - task_or_issue: `monitor-reusable-components-dskit-docs`

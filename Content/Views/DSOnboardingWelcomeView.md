@@ -50,10 +50,11 @@ struct Testable_DSOnboardingWelcomeView: View {
             termsLinkTitle: "Terms and Conditions",
             ctaTitle: "Continue",
             onTermsTap: {},
-            onContinue: {}
-        ) {
-            Testable_DSAppIconHeroView()
-        }
+            onContinue: {},
+            hero: {
+                Testable_DSAppIconHeroView()
+            }
+        )
     }
 }
 ```

@@ -239,6 +239,51 @@ final class DSKitTests: SnapshotTestCase {
         assertSnapshot(for: Testable_DSTextParticleLoadingView(), named: "DSTextParticleLoadingView", options: crossSimulatorOptions)
     }
 
+    func testDSOnboardingWelcomeViewUsesAppearanceBrandForLegalLinkAndBoldHeadline() throws {
+        assertSnapshot(
+            for: Testable_DSOnboardingWelcomeView(),
+            named: "DSOnboardingWelcomeView_BrandLegalLink",
+            layout: .screen(appearance: PeachAppearance()),
+            options: crossSimulatorOptions
+        )
+    }
+
+    func testDSTextParticleLoadingModelTravelsSideToSideTopToBottom() {
+        let viewport = CGSize(width: 390, height: 240)
+        let texts = ["Adevărul", "Radio Chișinău", "NewsMaker"]
+
+        for slot in 0 ..< DSTextParticleLoadingModel.activeParticleCount {
+            for cycle in 0 ..< 4 {
+                let particle = DSTextParticleLoadingModel.particle(
+                    slot: slot,
+                    cycle: cycle,
+                    viewport: viewport,
+                    texts: texts
+                )
+                let travelsLeftToRight = particle.start.x < 0 && particle.end.x > viewport.width
+                let travelsRightToLeft = particle.start.x > viewport.width && particle.end.x < 0
+                let cycleEndDate = Date(
+                    timeIntervalSinceReferenceDate: Double(slot) * 0.72
+                        + Double(cycle) * DSTextParticleLoadingModel.cycleDuration
+                        + DSTextParticleLoadingModel.cycleDuration
+                        - 0.01
+                )
+                let cycleEndSample = DSTextParticleLoadingModel.sample(
+                    slot: slot,
+                    date: cycleEndDate,
+                    viewport: viewport,
+                    texts: texts
+                )
+
+                XCTAssertLessThan(particle.start.y, 0)
+                XCTAssertGreaterThan(particle.end.y, viewport.height)
+                XCTAssertTrue(travelsLeftToRight || travelsRightToLeft)
+                XCTAssertLessThanOrEqual(particle.duration, DSTextParticleLoadingModel.cycleDuration)
+                XCTAssertGreaterThan(cycleEndSample.progress, 0.95)
+            }
+        }
+    }
+
     func testGeneratedComponentPreviewSnapshots() throws {
         assertSnapshot(for: ComponentPreview_DSArticleRows(), named: "DSArticleRows", options: crossSimulatorOptions)
         assertSnapshot(for: ComponentPreview_DSAuthorView(), named: "DSAuthorView", options: crossSimulatorOptions)

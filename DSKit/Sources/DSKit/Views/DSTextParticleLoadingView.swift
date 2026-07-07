@@ -136,6 +136,8 @@ public struct DSTextParticleSample: Equatable {
 
 public enum DSTextParticleLoadingModel {
     public static let activeParticleCount = 7
+    private static let movementDurationScale = 1.2
+    static let cycleDuration: TimeInterval = 6.5 * movementDurationScale
     private static let textStyleCount = 4
 
     public static func particle(
@@ -149,19 +151,27 @@ public enum DSTextParticleLoadingModel {
         let textIndex = Int(random(seed: seed, salt: 1) * Double(labels.count)) % max(1, labels.count)
         let width = max(1, viewport.width)
         let height = max(1, viewport.height)
+        let horizontalTravel = max(80, width * 0.18)
+        let travelsLeftToRight = random(seed: seed, salt: 11) < 0.5
+        let startXRange: ClosedRange<CGFloat> = travelsLeftToRight
+            ? ClosedRange(uncheckedBounds: (lower: -horizontalTravel, upper: -40))
+            : ClosedRange(uncheckedBounds: (lower: width + 40, upper: width + horizontalTravel))
+        let endXRange: ClosedRange<CGFloat> = travelsLeftToRight
+            ? ClosedRange(uncheckedBounds: (lower: width + 40, upper: width + horizontalTravel))
+            : ClosedRange(uncheckedBounds: (lower: -horizontalTravel, upper: -40))
         let start = CGPoint(
-            x: randomRange(seed: seed, salt: 2, min: -40, max: width + 40),
+            x: randomRange(seed: seed, salt: 2, in: startXRange),
             y: randomRange(seed: seed, salt: 3, min: -120, max: -40)
         )
         let apogee = CGPoint(
-            x: width * 0.5 + randomRange(seed: seed, salt: 4, min: -60, max: 60),
+            x: randomRange(seed: seed, salt: 4, min: width * 0.18, max: width * 0.82),
             y: height * 0.48 + randomRange(seed: seed, salt: 5, min: -80, max: 80)
         )
         let end = CGPoint(
-            x: randomRange(seed: seed, salt: 6, min: -40, max: width + 40),
+            x: randomRange(seed: seed, salt: 6, in: endXRange),
             y: height + randomRange(seed: seed, salt: 7, min: 40, max: 140)
         )
-        let duration = randomRange(seed: seed, salt: 8, min: TimeInterval(4.0), max: TimeInterval(6.5))
+        let duration = randomRange(seed: seed, salt: 8, min: TimeInterval(4.0 * movementDurationScale), max: cycleDuration)
         let delay = randomRange(seed: seed, salt: 9, min: TimeInterval(0.45), max: TimeInterval(0.9)) * Double(slot)
         let textStyleIndex = Int(random(seed: seed, salt: 10) * Double(textStyleCount)) % textStyleCount
 
@@ -183,11 +193,10 @@ public enum DSTextParticleLoadingModel {
         viewport: CGSize,
         texts: [String]
     ) -> DSTextParticleSample {
-        let baseDuration: TimeInterval = 5.4
         let phase = max(0, date.timeIntervalSinceReferenceDate - Double(slot) * 0.72)
-        let cycle = Int(floor(phase / baseDuration))
+        let cycle = Int(floor(phase / cycleDuration))
         let particle = particle(slot: slot, cycle: cycle, viewport: viewport, texts: texts)
-        let local = (phase - Double(cycle) * baseDuration).truncatingRemainder(dividingBy: particle.duration)
+        let local = min(phase - Double(cycle) * cycleDuration, particle.duration)
         let rawProgress = CGFloat(local / particle.duration)
         let progress = smoothSpringEaseInOut(rawProgress)
         return DSTextParticleSample(
@@ -230,6 +239,10 @@ public enum DSTextParticleLoadingModel {
         min + CGFloat(random(seed: seed, salt: salt)) * (max - min)
     }
 
+    private static func randomRange(seed: UInt64, salt: UInt64, in range: ClosedRange<CGFloat>) -> CGFloat {
+        randomRange(seed: seed, salt: salt, min: range.lowerBound, max: range.upperBound)
+    }
+
     private static func randomRange(seed: UInt64, salt: UInt64, min: TimeInterval, max: TimeInterval) -> TimeInterval {
         min + random(seed: seed, salt: salt) * (max - min)
     }
@@ -254,7 +267,7 @@ struct Testable_DSTextParticleLoadingView: View {
         DSTextParticleLoadingView(
             texts: ["Adevărul", "Radio Chișinău", "NewsMaker", "Moldova 1", "Agora"],
             isActive: true,
-            staticDate: Date(timeIntervalSinceReferenceDate: 6_600)
+            staticDate: Date(timeIntervalSinceReferenceDate: 6_682.5)
         )
         .frame(height: 240)
         .background(Color.accentColor.opacity(0.08))

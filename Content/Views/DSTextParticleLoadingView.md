@@ -22,7 +22,7 @@ struct Testable_DSTextParticleLoadingView: View {
         DSTextParticleLoadingView(
             texts: ["Adevărul", "Radio Chișinău", "NewsMaker", "Moldova 1", "Agora"],
             isActive: true,
-            staticDate: Date(timeIntervalSinceReferenceDate: 6_600)
+            staticDate: Date(timeIntervalSinceReferenceDate: 6_682.5)
         )
         .frame(height: 240)
         .background(Color.accentColor.opacity(0.08))

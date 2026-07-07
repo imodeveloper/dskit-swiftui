@@ -50,6 +50,9 @@ public struct DSOnboardingWelcomeFeature: Identifiable, Hashable, Sendable {
 }
 
 public struct DSOnboardingWelcomeView<Hero: View>: View {
+    @Environment(\.appearance) private var appearance
+    @Environment(\.surfaceStyle) private var surfaceStyle
+
     private let headline: String
     private let subtitle: String
     private let features: [DSOnboardingWelcomeFeature]
@@ -94,7 +97,7 @@ public struct DSOnboardingWelcomeView<Hero: View>: View {
                     .padding(.bottom, 40)
 
                 DSText(headline)
-                    .dsTextStyle(.largeTitle)
+                    .dsTextStyle(.custom(size: 34, weight: .bold, relativeTo: .largeTitle))
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                     .minimumScaleFactor(0.84)
@@ -129,8 +132,8 @@ public struct DSOnboardingWelcomeView<Hero: View>: View {
                     Button(action: onTermsTap) {
                         Text(termsLinkTitle)
                             .font(.footnote)
-                            .underline(true, color: .accentColor)
-                            .foregroundStyle(.tint)
+                            .underline(true, color: DSColorToken.text(.brand).color(for: appearance, in: surfaceStyle))
+                            .foregroundStyle(DSColorToken.text(.brand).color(for: appearance, in: surfaceStyle))
                             .lineLimit(1)
                             .allowsTightening(true)
                             .minimumScaleFactor(0.88)

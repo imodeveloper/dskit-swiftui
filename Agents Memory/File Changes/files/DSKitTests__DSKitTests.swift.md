@@ -6,6 +6,32 @@
 
 ## Changes
 
+### 2026-07-07 17:15:00 EEST (`onboarding-and-particle-snapshots`)
+
+- task_or_issue: `DSKit visual changes need deterministic snapshot coverage`
+- change_id: `onboarding-and-particle-snapshots`
+
+#### Request
+Review DSKit changes from the Monitor UI polish session and fix regressions before commit.
+
+#### Change Summary
+Replaced brittle onboarding source-string checks with a rendered brand/legal-link snapshot, updated the text-particle loading snapshot for side-to-side top-to-bottom travel, and added a direct particle-model invariant test for side crossing and cycle completion.
+
+#### Rationale
+Rendered snapshots prove the visible behavior more directly than source substrings and catch deterministic particle-model changes.
+
+#### Invariants
+Keep snapshot assertions deterministic. Regenerate docs after DSKit visual component changes.
+
+#### Tests Or Evidence
+Focused DSKit test run passed for `testExtractedMonitorComponents`, `testDSOnboardingWelcomeViewUsesAppearanceBrandForLegalLinkAndBoldHeadline`, `testDSTextParticleLoadingModelTravelsSideToSideTopToBottom`, and `testDSLoadingIndicator`.
+
+#### Related Files
+`DSKit/Sources/DSKit/Views/DSOnboardingWelcomeView.swift`, `DSKit/Sources/DSKit/Views/DSTextParticleLoadingView.swift`, `Content/Views/DSOnboardingWelcomeView.md`.
+
+#### Follow-up Risks
+Avoid adding new source-string tests when a rendered snapshot can verify the behavior.
+
 ### 2026-07-07 00:28:00 EEST (`pending`)
 
 - task_or_issue: `monitor-reusable-components-dskit-docs`
