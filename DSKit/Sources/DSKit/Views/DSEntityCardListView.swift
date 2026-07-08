@@ -71,7 +71,7 @@ public struct DSEntityCardListView: View {
     }
 
     public var body: some View {
-        DSVStack(spacing: .space4) {
+        DSVStack(spacing: .space2) {
             if shouldShowPlaceholders {
                 ForEach(Self.placeholderItems(count: max(placeholderCount, 1))) { item in
                     DSEntityCardListRow(item: item)

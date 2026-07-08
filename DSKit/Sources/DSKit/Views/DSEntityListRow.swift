@@ -43,8 +43,8 @@ public enum DSEntityListRowLayout {
     public static var leadingSize: DSSize { .size(.token(.space40)) }
     public static var peopleAvatarSize: DSSize {
         .size(
-            width: .token(.space40),
-            height: .custom(DSSpatialToken.space48.value + DSSpatialToken.space2.value)
+            width: .custom(DSSpatialToken.space40.value * 1.1),
+            height: .custom((DSSpatialToken.space48.value + DSSpatialToken.space2.value) * 1.1)
         )
     }
     public static var minHeight: DSDimension { .token(.space64) }
@@ -94,12 +94,18 @@ public struct DSEntityListRow<Leading: View>: View {
                 DSText(title)
                     .dsTextStyle(.label)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.85)
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
 
                 if let subtitle, subtitle.isEmpty == false {
                     DSText(subtitle)
                         .dsTextStyle(.caption1, .text(.caption1))
-                        .lineLimit(1)
+                        .lineLimit(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .transaction { transaction in
+                            transaction.animation = nil
+                        }
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -119,7 +125,7 @@ public struct DSEntityListRow<Leading: View>: View {
             if let accessorySystemName {
                 DSImageView(
                     systemName: accessorySystemName,
-                    size: .font(.caption1),
+                    size: .font(.title2),
                     tint: .text(.caption2)
                 )
             }
