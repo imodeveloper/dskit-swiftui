@@ -14,10 +14,10 @@
 Stabilize article-detail preview/data behavior, add source navigation from article details, refine Focus people/source card visuals, and commit the current development branch changes.
 
 #### Change Summary
-Reduced entity card list spacing from `.space4` to `.space2`.
+Reduced entity card list spacing from `.space4` to `.space2` and added item-level reserved subtitle line count plumbing.
 
 #### Rationale
-Focus people cards use this component and needed tighter vertical spacing between items.
+Focus people cards use this component and needed tighter vertical spacing plus stable row height while metadata arrives asynchronously.
 
 #### Invariants
 Keep spacing token-based and avoid wrapping large list content in a way that breaks virtualization.

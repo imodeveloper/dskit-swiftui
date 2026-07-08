@@ -20,7 +20,9 @@ Initializes a list row with title, optional subtitle, count text, accessibility 
 - `countText`: Optional compact count pill text.
 - `countAccessibilityLabel`: Optional accessibility label for the count pill.
 - `leadingSize`: Fixed DSKit size applied to the leading view.
+- `height`: Fixed DSKit height applied to the row.
 - `accessorySystemName`: Optional trailing SF Symbol.
+- `reservedSubtitleLineCount`: Optional reserved subtitle height for async metadata updates.
 - `leading`: Leading icon, avatar, or badge content.
 - `onTap`: Optional tap action.
 
@@ -47,6 +49,8 @@ public enum DSEntityListRowLayout {
             height: .custom((DSSpatialToken.space48.value + DSSpatialToken.space2.value) * 1.1)
         )
     }
+    public static var height: DSDimension { .custom(84) }
+    public static var compactHeight: DSDimension { .token(.space64) }
     public static var minHeight: DSDimension { .token(.space64) }
     public static var horizontalPadding: DSSpatialToken { .space16 }
     public static var verticalPadding: DSSpatialToken { .space12 }
@@ -62,7 +66,9 @@ public struct DSEntityListRow<Leading: View>: View {
     private let countAccessibilityLabel: String?
     private let leading: Leading
     private let leadingSize: DSSize
+    private let height: DSDimension
     private let accessorySystemName: String?
+    private let reservedSubtitleLineCount: Int?
     private let onTap: (() -> Void)?
 
     public init(
@@ -71,7 +77,9 @@ public struct DSEntityListRow<Leading: View>: View {
         countText: String? = nil,
         countAccessibilityLabel: String? = nil,
         leadingSize: DSSize = DSEntityListRowLayout.leadingSize,
+        height: DSDimension = DSEntityListRowLayout.height,
         accessorySystemName: String? = nil,
+        reservedSubtitleLineCount: Int? = nil,
         @ViewBuilder leading: () -> Leading,
         onTap: (() -> Void)? = nil
     ) {
@@ -80,7 +88,9 @@ public struct DSEntityListRow<Leading: View>: View {
         self.countText = countText
         self.countAccessibilityLabel = countAccessibilityLabel
         self.leadingSize = leadingSize
+        self.height = height
         self.accessorySystemName = accessorySystemName
+        self.reservedSubtitleLineCount = reservedSubtitleLineCount
         self.leading = leading()
         self.onTap = onTap
     }
@@ -90,25 +100,8 @@ public struct DSEntityListRow<Leading: View>: View {
             leading
                 .dsSize(leadingSize)
 
-            DSVStack(spacing: .space2) {
-                DSText(title)
-                    .dsTextStyle(.label)
-                    .lineLimit(1)
-                    .transaction { transaction in
-                        transaction.animation = nil
-                    }
-
-                if let subtitle, subtitle.isEmpty == false {
-                    DSText(subtitle)
-                        .dsTextStyle(.caption1, .text(.caption1))
-                        .lineLimit(3)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .transaction { transaction in
-                            transaction.animation = nil
-                        }
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            textColumn
+                .frame(maxWidth: .infinity, alignment: .leading)
 
             Spacer(minLength: 0)
 
@@ -132,12 +125,55 @@ public struct DSEntityListRow<Leading: View>: View {
         }
         .dsPadding(.horizontal, DSEntityListRowLayout.horizontalPadding)
         .dsPadding(.vertical, DSEntityListRowLayout.verticalPadding)
-        .dsMinHeight(DSEntityListRowLayout.minHeight)
+        .dsHeight(height)
         .dsCardStyle(padding: .space0)
         .contentShape(Rectangle())
         .onTap {
             onTap?()
         }
+    }
+
+    @ViewBuilder
+    private var textColumn: some View {
+        let reservedLineCount = clampedReservedSubtitleLineCount
+
+        ZStack(alignment: .leading) {
+            if reservedLineCount > 0 {
+                textContent(subtitle: Self.subtitleReservationText(lineCount: reservedLineCount))
+                    .opacity(0)
+                    .accessibilityHidden(true)
+            }
+
+            textContent(subtitle: subtitle)
+                .transaction { transaction in
+                    transaction.animation = nil
+                }
+        }
+    }
+
+    private func textContent(subtitle: String?) -> some View {
+        DSVStack(spacing: .space2) {
+            DSText(title)
+                .dsTextStyle(.label)
+                .lineLimit(1)
+
+            if let subtitle, subtitle.isEmpty == false {
+                DSText(subtitle)
+                    .dsTextStyle(.caption1, .text(.caption1))
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.5)
+                    .allowsTightening(true)
+            }
+        }
+    }
+
+    private var clampedReservedSubtitleLineCount: Int {
+        guard let reservedSubtitleLineCount else { return 0 }
+        return min(max(reservedSubtitleLineCount, 0), 2)
+    }
+
+    private static func subtitleReservationText(lineCount: Int) -> String {
+        Array(repeating: "X", count: lineCount).joined(separator: "\n")
     }
 }
 

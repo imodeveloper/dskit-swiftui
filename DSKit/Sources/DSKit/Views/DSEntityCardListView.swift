@@ -11,6 +11,7 @@ import SwiftUI
 ## DSEntityCardListView
 
 `DSEntityCardListView` renders a vertical list of entity cards with optional loading placeholders. It is a display-only component for people, organizations, sources, categories, or any named entity list.
+`DSEntityCardListItem.reservedSubtitleLineCount` can reserve secondary-text height for rows that receive metadata after initial render.
 
 #### Initialization:
 Initializes the card list with display-ready items and optional placeholder state.
@@ -32,6 +33,7 @@ public struct DSEntityCardListItem: Identifiable, Equatable, Sendable {
     public let countText: String?
     public let countAccessibilityLabel: String?
     public let accessorySystemName: String?
+    public let reservedSubtitleLineCount: Int?
 
     public init(
         id: String,
@@ -40,7 +42,8 @@ public struct DSEntityCardListItem: Identifiable, Equatable, Sendable {
         imageURL: URL? = nil,
         countText: String? = nil,
         countAccessibilityLabel: String? = nil,
-        accessorySystemName: String? = nil
+        accessorySystemName: String? = nil,
+        reservedSubtitleLineCount: Int? = nil
     ) {
         self.id = id
         self.title = title
@@ -49,6 +52,7 @@ public struct DSEntityCardListItem: Identifiable, Equatable, Sendable {
         self.countText = countText
         self.countAccessibilityLabel = countAccessibilityLabel
         self.accessorySystemName = accessorySystemName
+        self.reservedSubtitleLineCount = reservedSubtitleLineCount
     }
 }
 
@@ -114,6 +118,7 @@ private struct DSEntityCardListRow: View {
             countAccessibilityLabel: item.countAccessibilityLabel,
             leadingSize: DSEntityListRowLayout.peopleAvatarSize,
             accessorySystemName: item.accessorySystemName,
+            reservedSubtitleLineCount: item.reservedSubtitleLineCount,
             leading: {
                 DSEntityAvatarView(
                     imageURL: item.imageURL,
