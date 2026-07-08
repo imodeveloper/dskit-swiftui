@@ -125,6 +125,7 @@ public struct DSArticleThreadRow<Trailing: View>: View {
 
             trailing
         }
+        .contentShape(Rectangle())
         .onTap {
             onTap?()
         }

@@ -45,15 +45,15 @@ public enum DSEntityListRowLayout {
     public static var leadingSize: DSSize { .size(.token(.space40)) }
     public static var peopleAvatarSize: DSSize {
         .size(
-            width: .custom(DSSpatialToken.space40.value * 1.1),
-            height: .custom((DSSpatialToken.space48.value + DSSpatialToken.space2.value) * 1.1)
+            width: .custom(DSSpatialToken.space40.value * 0.99),
+            height: .custom((DSSpatialToken.space48.value + DSSpatialToken.space2.value) * 0.99)
         )
     }
-    public static var height: DSDimension { .custom(84) }
-    public static var compactHeight: DSDimension { .token(.space64) }
-    public static var minHeight: DSDimension { .token(.space64) }
+    public static var height: DSDimension { .custom(72) }
+    public static var compactHeight: DSDimension { .custom(56) }
+    public static var minHeight: DSDimension { .custom(56) }
     public static var horizontalPadding: DSSpatialToken { .space16 }
-    public static var verticalPadding: DSSpatialToken { .space12 }
+    public static var verticalPadding: DSSpatialToken { .space8 }
     public static var contentSpacing: DSSpatialToken { .space12 }
     public static var pillHorizontalPadding: DSSpatialToken { .space8 }
     public static var pillVerticalPadding: DSSpatialToken { .space4 }
@@ -201,6 +201,7 @@ public struct DSEntityInitialsCircleView: View {
                 .dsTextStyle(.label, .color(.white))
                 .lineLimit(1)
                 .minimumScaleFactor(0.65)
+                .scaleEffect(0.9)
         }
     }
 

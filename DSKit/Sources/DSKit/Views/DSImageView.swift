@@ -189,6 +189,7 @@ public struct DSImageView: View {
 
 private struct DSRemoteImageView: View {
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var currentWidth: CGFloat = 0
     @State private var resolvedAspectRatio: CGFloat?
 
@@ -201,27 +202,9 @@ private struct DSRemoteImageView: View {
 
             Group {
                 LazyImage(url: url) { state in
-                    Group {
-                        if let uiImage = state.image {
-                            Color.gray.opacity(0.1)
-                                .overlay(alignment: .center) {
-                                    uiImage
-                                        .resizable()
-                                        .setContentMode(mode: image.contentMode)
-                                        .transition(.opacity)
-                                }
-                                .setDisplayShape(shape: image.displayShape)
-                                .onAppear { registerMetadata(from: state) }
-                                .onChange(of: state.isLoading) { isLoading in
-                                    if !isLoading { registerMetadata(from: state) }
-                                }
-                        } else if state.error != nil {
-                            failurePlaceholderView(for: layoutSize)
-                        } else {
-                            loadingView()
-                        }
-                    }
-                    .animation(.default, value: state.image != nil)
+                    remoteImageContent(state: state, layoutSize: layoutSize)
+                        .animation(remoteImageTransitionAnimation, value: state.image != nil)
+                        .animation(remoteImageTransitionAnimation, value: state.error != nil)
                 }
             }
             .onAppear {
@@ -240,6 +223,34 @@ private struct DSRemoteImageView: View {
     }
 
     @ViewBuilder
+    private func remoteImageContent(state: LazyImageState, layoutSize: CGSize) -> some View {
+        ZStack {
+            loadingView(for: layoutSize)
+                .opacity(state.image == nil && state.error == nil ? 1 : 0)
+
+            if state.error != nil {
+                failurePlaceholderView(for: layoutSize)
+                    .transition(.opacity)
+            }
+
+            if let uiImage = state.image {
+                Color.gray.opacity(0.1)
+                    .overlay(alignment: .center) {
+                        uiImage
+                            .resizable()
+                            .setContentMode(mode: image.contentMode)
+                    }
+                    .setDisplayShape(shape: image.displayShape)
+                    .transition(.opacity)
+                    .onAppear { registerMetadata(from: state) }
+                    .onChange(of: state.isLoading) { isLoading in
+                        if !isLoading { registerMetadata(from: state) }
+                    }
+            }
+        }
+    }
+
+    @ViewBuilder
     private func failurePlaceholderView(for layoutSize: CGSize) -> some View {
         let placeholderIconSize = adaptivePlaceholderIconSize(for: layoutSize)
 
@@ -254,9 +265,23 @@ private struct DSRemoteImageView: View {
             .setDisplayShape(shape: image.displayShape)
     }
 
-    private func loadingView() -> some View {
-        Color.gray.opacity(0.1)
+    private func loadingView(for layoutSize: CGSize) -> some View {
+        let placeholderIconSize = adaptivePlaceholderIconSize(for: layoutSize)
+
+        return Color.gray.opacity(0.1)
+            .overlay(alignment: .center) {
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundStyle(.secondary.opacity(0.72))
+                    .frame(width: placeholderIconSize, height: placeholderIconSize)
+                    .accessibilityHidden(true)
+            }
             .setDisplayShape(shape: image.displayShape)
+    }
+
+    private var remoteImageTransitionAnimation: Animation? {
+        reduceMotion ? nil : .easeInOut(duration: 0.22)
     }
 
     private func updateLayoutState(for size: CGSize) {

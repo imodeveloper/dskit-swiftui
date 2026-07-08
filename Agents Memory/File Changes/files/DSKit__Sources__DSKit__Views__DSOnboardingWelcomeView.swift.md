@@ -6,6 +6,25 @@
 
 ## Changes
 
+### 2026-07-08 23:55:00 EEST (`pending`)
+
+- task_or_issue: `Welcome CTA needs same-size loading pulse state`
+
+#### Request
+When Monitor waits for first-install content readiness, replace the Continue button with a same-size pulsing dots control using the same corner radius and position.
+
+#### Change Summary
+Added `isContinueLoading` and loading accessibility support to DSKit's onboarding welcome view, rendering the DS loading indicator inside the button-sized accent container.
+
+#### Rationale
+The app-level Welcome screen owns readiness, but DSKit owns the reusable CTA/loading visual contract.
+
+#### Invariants
+Keep the loading container geometry identical to the button geometry and avoid nested pill styling.
+
+#### Tests Or Evidence
+Targeted DSKit onboarding welcome tests passed; Monitor welcome tests, full Monitor iOS tests, and dev/prod observations passed.
+
 ### 2026-07-07 17:15:00 EEST (`welcome-headline-brand-legal-link`)
 
 - task_or_issue: `Welcome title and legal link should follow requested styling`

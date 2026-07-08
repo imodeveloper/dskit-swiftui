@@ -60,6 +60,8 @@ public struct DSOnboardingWelcomeView<Hero: View>: View {
     private let termsLinkTitle: String
     private let termsLinkAccessibilityHint: String?
     private let ctaTitle: String
+    private let isContinueLoading: Bool
+    private let continueLoadingAccessibilityLabel: String
     private let onTermsTap: () -> Void
     private let onContinue: () -> Void
     private let hero: Hero
@@ -72,6 +74,8 @@ public struct DSOnboardingWelcomeView<Hero: View>: View {
         termsLinkTitle: String,
         termsLinkAccessibilityHint: String? = nil,
         ctaTitle: String,
+        isContinueLoading: Bool = false,
+        continueLoadingAccessibilityLabel: String = "Loading",
         onTermsTap: @escaping () -> Void,
         onContinue: @escaping () -> Void,
         @ViewBuilder hero: () -> Hero
@@ -83,6 +87,8 @@ public struct DSOnboardingWelcomeView<Hero: View>: View {
         self.termsLinkTitle = termsLinkTitle
         self.termsLinkAccessibilityHint = termsLinkAccessibilityHint
         self.ctaTitle = ctaTitle
+        self.isContinueLoading = isContinueLoading
+        self.continueLoadingAccessibilityLabel = continueLoadingAccessibilityLabel
         self.onTermsTap = onTermsTap
         self.onContinue = onContinue
         self.hero = hero()
@@ -144,17 +150,44 @@ public struct DSOnboardingWelcomeView<Hero: View>: View {
                 .frame(maxWidth: .infinity)
                 .accessibilityElement(children: .combine)
 
-                DSButton(
-                    title: ctaTitle,
-                    style: .default,
-                    titleFont: .headline,
-                    action: onContinue
-                )
+                continueActionView
             }
             .padding(.bottom, 10)
         }
         .padding(.horizontal, 32)
         .dsScreen()
+    }
+
+    private var continueActionView: some View {
+        ZStack {
+            DSButton(
+                title: ctaTitle,
+                style: .default,
+                titleFont: .headline,
+                action: onContinue
+            )
+            .opacity(isContinueLoading ? 0 : 1)
+            .allowsHitTesting(isContinueLoading == false)
+            .accessibilityHidden(isContinueLoading)
+
+            DSLoadingIndicator(
+                style: .pulsingDots,
+                width: 78,
+                height: 40,
+                dotSize: 5,
+                dotSpacing: 6,
+                tint: .text(.brandOnBold),
+                containerColor: nil
+            )
+            .frame(maxWidth: .infinity)
+            .frame(height: appearance.actionElementHeight)
+            .background(Color(appearance.viewAppearance(for: surfaceStyle).button.accentColor))
+            .dsCornerRadius()
+            .opacity(isContinueLoading ? 1 : 0)
+            .accessibilityHidden(isContinueLoading == false)
+            .accessibilityLabel(continueLoadingAccessibilityLabel)
+        }
+        .animation(.easeInOut(duration: 0.24), value: isContinueLoading)
     }
 }
 

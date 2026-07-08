@@ -6,6 +6,28 @@
 
 ## Changes
 
+### 2026-07-08 23:55:00 EEST (`pending`)
+
+- task_or_issue: `Entity rows should be shorter and stable after Focus polish`
+
+#### Request
+Reduce person image containers by 10 percent, reduce source letter badges, and make people/source row heights fit their content better.
+
+#### Change Summary
+Tightened entity row heights and vertical padding, reduced the previously enlarged people avatar/container scale to 0.99x, and kept source rows on compact static sizing.
+
+#### Rationale
+The previous row geometry left too much vertical space for both people and sources after visual review.
+
+#### Invariants
+Keep row height stable during metadata updates and keep title sizing fixed; do not reintroduce animated title growth.
+
+#### Tests Or Evidence
+Targeted DSKit component tests passed; Monitor focus snapshots, full Monitor iOS tests, and dev/prod observations passed.
+
+#### Related Files
+Monitor `EntityListRowView.swift` supplies app-specific source badge scale on top of these DSKit row tokens.
+
 ### 2026-07-08 15:17:30 EEST (`pending`)
 
 - task_or_issue: `Article details source navigation and Focus people/source polish`

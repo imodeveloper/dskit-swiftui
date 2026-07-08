@@ -6,6 +6,25 @@
 
 ## Changes
 
+### 2026-07-08 23:55:00 EEST (`pending`)
+
+- task_or_issue: `Remote images should crossfade from placeholder to loaded image`
+
+#### Request
+DSImageView must crossfade loaded images instead of instantly switching from placeholder to image.
+
+#### Change Summary
+Remote image rendering now layers placeholder/failure/image states in a ZStack and animates opacity changes, respecting reduce-motion.
+
+#### Rationale
+Instant image swaps are visually harsher than the crossfade used elsewhere in Monitor loading states.
+
+#### Invariants
+Keep placeholder/failure accessibility neutral and do not animate when reduced motion is enabled.
+
+#### Tests Or Evidence
+Targeted DSKit `DSImageView` tests passed; full Monitor iOS tests and dev/prod observations passed.
+
 ### 2026-06-29 21:45:00 EEST (`pending`)
 
 - task_or_issue: `local-explorer-image-assets`
