@@ -2,6 +2,14 @@
 
 This repo is treated as an agent-first workspace: `AGENTS.md` is a map, not the full manual.
 
+## Branching And Release Process
+- Default working branch is `development`.
+- `main` is release-only. Do not commit normal component, demo, doc, or snapshot work directly to `main`.
+- Start new work by fetching and switching to `development`, then keep it current with `origin/development`.
+- Release preparation means reviewing the full `development` diff against `main`, validating DSKit, DSKitExplorer, snapshots, and generated docs, then merging `development` into `main` only when ready.
+- After the release merge, tag the release version on `main`, push `main`, `development`, and the tag.
+- If DSKit ships with Monitor or website changes, coordinate the merge/tag version with the other affected workspace repos before shipping.
+
 ## Read first (30–60 seconds)
 - `Agents Memory/ARCHITECTURE.md`
 - `Agents Memory/PROJECT_ANALYSIS.md`

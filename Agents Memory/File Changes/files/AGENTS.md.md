@@ -6,6 +6,26 @@
 
 ## Changes
 
+### 2026-07-08 14:20 EEST (`development-branch-release-process`)
+
+- task_or_issue: `Workspace release flow moved from direct main work to development branch integration`
+- change_id: `development-branch-release-process`
+
+#### Request
+Document that DSKit work should happen on `development`, while `main` is reserved for reviewed releases and version tags.
+
+#### Change Summary
+Added a Branching And Release Process section to the repo guide. It makes `development` the default working branch, keeps `main` release-only, and requires release review/validation before merging to `main` and tagging.
+
+#### Rationale
+DSKit changes often ship with Monitor and website updates. A shared development-to-main release flow keeps multi-repo release state consistent.
+
+#### Invariants
+Generated docs and snapshots still need normal DSKit validation before release. Multi-repo releases coordinate the same release version across affected repos.
+
+#### Tests Or Evidence
+Documentation-only change.
+
 ### 2026-06-29 20:48:40 EEST (`pending`)
 
 - task_or_issue: `showcase-style-screen-catalog`
