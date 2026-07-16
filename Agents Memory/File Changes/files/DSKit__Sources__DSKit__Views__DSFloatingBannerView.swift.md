@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-16 (`passive-floating-banner-gesture-throughput`)
+
+- task_or_issue: `Let passive floating banners pass gestures through`
+
+#### Request
+Prevent a noninteractive loading banner from temporarily blocking the list and navigation gestures underneath it.
+
+#### Change Summary
+Root hit testing now requires both a presented banner and interactive content. Passive and hidden overlays pass gestures through; presented action banners remain tappable.
+
+#### Rationale
+The banner host fills the screen, so enabling root hit testing for passive status content intercepted scrolling and swipe-back input outside the capsule.
+
+#### Invariants
+Hidden and passive banners do not hit test. Presented interactive banners continue to hit test and invoke their action.
+
+#### Tests Or Evidence
+Focused interaction tests cover presented passive, presented interactive, and hidden banner states.
+
+#### Related Files
+`DSKitTests/DSFloatingBannerInteractionTests.swift` and Monitor's screen-local floating-banner hosts.
+
+#### Follow-up Risks
+New passive banner styles must keep `isInteractive` false; otherwise the full overlay intentionally becomes interactive again.
+
 ### 2026-07-16 19:00:05 EEST (`monitor-sync-pulse-and-compact-banner`)
 
 - task_or_issue: `Support continuous production sync pulses and a smaller scroll-to-top banner`
