@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-16 23:11:14 EEST (`continuous-loading-animation-identity`)
+
+- task_or_issue: `Keep the floating loading banner mounted across phase color changes`
+
+#### Request
+Prevent the production sync banner and loading pulse from visibly disappearing and reappearing when a loading phase changes its title or tint.
+
+#### Change Summary
+Loading content now drives banner-wide animation from a canonical identity made only from its stable `transitionID`. Title and tint updates therefore leave the liquid surface and `DSLoadingIndicator` branch mounted, while the indicator receives the new color value.
+
+#### Rationale
+Animating the entire `DSFloatingBannerContent` treated every loading phase value as a replacement presentation and restarted the transition, which made the pulse flicker.
+
+#### Invariants
+All phases of one continuous loading operation must reuse one `transitionID`. A genuine presentation change, such as loading to failure, must still receive a different identity and transition normally.
+
+#### Tests Or Evidence
+Focused interaction tests compare distinct orange, yellow, and brand loading content and prove they share one animation identity while loading and failure do not.
+
+#### Related Files
+`DSKitTests/DSFloatingBannerInteractionTests.swift`, `DSLoadingIndicator.swift`, and Monitor's floating-banner phase mapping.
+
+#### Follow-up Risks
+Do not add title, tint, or the full loading content value back into the loading animation identity; doing so will reintroduce the phase-change flicker.
+
 ### 2026-07-16 (`passive-floating-banner-gesture-throughput`)
 
 - task_or_issue: `Let passive floating banners pass gestures through`

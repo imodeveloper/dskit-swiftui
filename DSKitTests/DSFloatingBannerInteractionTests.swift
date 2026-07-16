@@ -9,6 +9,66 @@
 import Testing
 
 struct DSFloatingBannerInteractionTests {
+    @Test("Loading phase changes keep one banner animation identity")
+    func loadingPhaseChangesKeepOneBannerAnimationIdentity() {
+        let orange = DSFloatingBannerView(
+            isPresented: true,
+            content: DSFloatingBannerContent(
+                title: "Citim sursele RSS",
+                style: .loading(tint: .orange),
+                transitionID: "Monitor.FloatingBanner.SyncProgress",
+                isInteractive: false
+            )
+        )
+        let yellow = DSFloatingBannerView(
+            isPresented: true,
+            content: DSFloatingBannerContent(
+                title: "Analizăm articolele",
+                style: .loading(tint: .yellow),
+                transitionID: "Monitor.FloatingBanner.SyncProgress",
+                isInteractive: false
+            )
+        )
+        let brand = DSFloatingBannerView(
+            isPresented: true,
+            content: DSFloatingBannerContent(
+                title: "Publicăm articolele",
+                style: .loading(tint: .brand),
+                transitionID: "Monitor.FloatingBanner.SyncProgress",
+                isInteractive: false
+            )
+        )
+
+        #expect(orange.content != yellow.content)
+        #expect(yellow.content != brand.content)
+        #expect(orange.contentAnimationIdentity == yellow.contentAnimationIdentity)
+        #expect(yellow.contentAnimationIdentity == brand.contentAnimationIdentity)
+    }
+
+    @Test("A genuine banner presentation change gets a new animation identity")
+    func presentationChangeGetsNewAnimationIdentity() {
+        let loading = DSFloatingBannerView(
+            isPresented: true,
+            content: DSFloatingBannerContent(
+                title: "Analizăm articolele",
+                style: .loading(tint: .yellow),
+                transitionID: "Monitor.FloatingBanner.SyncProgress",
+                isInteractive: false
+            )
+        )
+        let failed = DSFloatingBannerView(
+            isPresented: true,
+            content: DSFloatingBannerContent(
+                title: "Nu s-a actualizat",
+                style: .status(systemImage: "exclamationmark.triangle.fill"),
+                transitionID: "Monitor.FloatingBanner.SyncFailed",
+                isInteractive: false
+            )
+        )
+
+        #expect(loading.contentAnimationIdentity != failed.contentAnimationIdentity)
+    }
+
     @Test("Presented noninteractive loading banners pass gestures through to content")
     func noninteractiveLoadingBannerPassesGesturesThrough() {
         let banner = DSFloatingBannerView(

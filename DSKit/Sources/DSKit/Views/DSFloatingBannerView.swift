@@ -14,7 +14,7 @@ import SwiftUI
 
 #### Usage:
 - Provide a `DSFloatingBannerContent` value describing the title, accessory style, accessibility, and interaction behavior.
-- Use `.loading(tint:)` for a continuous `DSLoadingIndicator` pulse whose stable transition identity survives tint changes.
+- Use `.loading(tint:)` for a continuous `DSLoadingIndicator` pulse. Keep one `transitionID` across phase title/tint updates so the banner and its timeline-driven loader stay mounted while only the tint changes.
 - Set content size to `.compact` for a smaller footnote label and reduced capsule padding.
 - Set `isInteractive` to `false` to make the full presented overlay hit-testing transparent while underlying scrolling and navigation gestures remain available.
 - Mount the banner through `dsFloatingBanner(...)` to overlay it on top of any screen content.
@@ -153,11 +153,15 @@ public struct DSFloatingBannerView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .allowsHitTesting(shouldAllowHitTesting)
         .animation(showHideAnimation, value: isPresented)
-        .animation(contentAnimation, value: content)
+        .animation(contentAnimation, value: contentAnimationIdentity)
     }
 
     var shouldAllowHitTesting: Bool {
         isPresented && content.isInteractive
+    }
+
+    var contentAnimationIdentity: DSFloatingBannerContentAnimationIdentity {
+        content.animationIdentity
     }
 
     private var bannerButton: some View {
@@ -181,10 +185,10 @@ public struct DSFloatingBannerView: View {
             }
             .glassEffectUnion(id: "DSFloatingBanner.Union", namespace: glassNamespace)
             .glassEffectTransition(.matchedGeometry)
-            .animation(contentAnimation, value: content)
+            .animation(contentAnimation, value: contentAnimationIdentity)
         } else {
             contentSwitcherStack
-                .animation(contentAnimation, value: content)
+                .animation(contentAnimation, value: contentAnimationIdentity)
         }
     }
 
@@ -316,6 +320,21 @@ public struct DSFloatingBannerView: View {
         case .success:
             return .green
         }
+    }
+}
+
+enum DSFloatingBannerContentAnimationIdentity: Hashable {
+    case loading(transitionID: String)
+    case content(DSFloatingBannerContent)
+}
+
+private extension DSFloatingBannerContent {
+    var animationIdentity: DSFloatingBannerContentAnimationIdentity {
+        if case .loading = style {
+            return .loading(transitionID: transitionID)
+        }
+
+        return .content(self)
     }
 }
 

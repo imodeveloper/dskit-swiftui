@@ -6,7 +6,7 @@
 
 #### Usage:
 - Provide a `DSFloatingBannerContent` value describing the title, accessory style, accessibility, and interaction behavior.
-- Use `.loading(tint:)` for a continuous `DSLoadingIndicator` pulse whose stable transition identity survives tint changes.
+- Use `.loading(tint:)` for a continuous `DSLoadingIndicator` pulse. Keep one `transitionID` across phase title/tint updates so the banner and its timeline-driven loader stay mounted while only the tint changes.
 - Set content size to `.compact` for a smaller footnote label and reduced capsule padding.
 - Set `isInteractive` to `false` to make the full presented overlay hit-testing transparent while underlying scrolling and navigation gestures remain available.
 - Mount the banner through `dsFloatingBanner(...)` to overlay it on top of any screen content.
