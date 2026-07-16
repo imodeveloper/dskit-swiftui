@@ -14,6 +14,8 @@ import SwiftUI
 
 #### Usage:
 - Provide a `DSFloatingBannerContent` value describing the title, accessory style, accessibility, and interaction behavior.
+- Use `.loading(tint:)` for a continuous `DSLoadingIndicator` pulse whose stable transition identity survives tint changes.
+- Set content size to `.compact` for a smaller footnote label and reduced capsule padding.
 - Mount the banner through `dsFloatingBanner(...)` to overlay it on top of any screen content.
 - Keep domain-specific state machines outside DSKit and map them into generic banner content values.
 */
@@ -29,6 +31,28 @@ public enum DSFloatingBannerAccessoryEmphasis: String, Hashable, Sendable {
     case success
 }
 
+public enum DSFloatingBannerLoadingTint: String, Hashable, Sendable {
+    case orange
+    case yellow
+    case brand
+
+    var colorToken: DSColorToken {
+        switch self {
+        case .orange:
+            .color(.orange)
+        case .yellow:
+            .color(.yellow)
+        case .brand:
+            .icon(.brand)
+        }
+    }
+}
+
+public enum DSFloatingBannerSize: Hashable, Sendable {
+    case regular
+    case compact
+}
+
 public enum DSFloatingBannerStyle: Hashable, Sendable {
     case label(
         systemImage: String? = nil,
@@ -36,6 +60,7 @@ public enum DSFloatingBannerStyle: Hashable, Sendable {
         emphasis: DSFloatingBannerAccessoryEmphasis = .secondary
     )
     case progress
+    case loading(tint: DSFloatingBannerLoadingTint)
     case status(systemImage: String, emphasis: DSFloatingBannerAccessoryEmphasis = .success)
 }
 
@@ -47,6 +72,7 @@ public struct DSFloatingBannerContent: Hashable, Sendable {
     public let accessibilityHint: String?
     public let isInteractive: Bool
     public let titleUsesMonospacedDigits: Bool
+    public let size: DSFloatingBannerSize
 
     public init(
         title: String,
@@ -55,7 +81,8 @@ public struct DSFloatingBannerContent: Hashable, Sendable {
         accessibilityLabel: String? = nil,
         accessibilityHint: String? = nil,
         isInteractive: Bool = true,
-        titleUsesMonospacedDigits: Bool = false
+        titleUsesMonospacedDigits: Bool = false,
+        size: DSFloatingBannerSize = .regular
     ) {
         self.title = title
         self.style = style
@@ -64,6 +91,7 @@ public struct DSFloatingBannerContent: Hashable, Sendable {
         self.accessibilityHint = accessibilityHint
         self.isInteractive = isInteractive
         self.titleUsesMonospacedDigits = titleUsesMonospacedDigits
+        self.size = size
     }
 }
 
@@ -179,6 +207,22 @@ public struct DSFloatingBannerView: View {
                 .transition(liquidContentTransition)
             }
 
+            if case let .loading(tint) = content.style {
+                surfaceContent {
+                    DSLoadingIndicator(
+                        style: .pulsingDots,
+                        width: 52,
+                        height: 24,
+                        dotSize: 5,
+                        dotSpacing: 6,
+                        tint: tint.colorToken,
+                        containerColor: nil
+                    )
+                }
+                .modifier(LiquidGlassSurfaceMorphModifier(surfaceID: content.transitionID, namespace: glassNamespace))
+                .transition(liquidContentTransition)
+            }
+
             if case let .status(systemImage, emphasis) = content.style {
                 surfaceContent {
                     HStack(spacing: 10) {
@@ -226,14 +270,14 @@ public struct DSFloatingBannerView: View {
             return Text(content.title)
                 .monospacedDigit()
                 .contentTransition(content.titleUsesMonospacedDigits ? .numericText() : .identity)
-                .font(.subheadline.weight(.semibold))
+                .font(titleFont)
                 .lineLimit(1)
                 .minimumScaleFactor(minimumScaleFactor)
                 .foregroundStyle(.primary)
         } else {
             return Text(content.title)
                 .monospacedDigit()
-                .font(.subheadline.weight(.semibold))
+                .font(titleFont)
                 .lineLimit(1)
                 .minimumScaleFactor(minimumScaleFactor)
                 .foregroundStyle(.primary)
@@ -242,11 +286,20 @@ public struct DSFloatingBannerView: View {
 
     private func surfaceContent<Inner: View>(@ViewBuilder _ inner: () -> Inner) -> some View {
         inner()
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .frame(minHeight: 40)
+            .padding(.horizontal, content.size == .compact ? 10 : 14)
+            .padding(.vertical, content.size == .compact ? 7 : 10)
+            .frame(minHeight: content.size == .compact ? 32 : 40)
             .modifier(FloatingBannerMaterial())
             .contentShape(.capsule)
+    }
+
+    private var titleFont: Font {
+        switch content.size {
+        case .regular:
+            .subheadline.weight(.semibold)
+        case .compact:
+            .footnote.weight(.semibold)
+        }
     }
 
     private func color(for emphasis: DSFloatingBannerAccessoryEmphasis) -> Color {
@@ -269,6 +322,8 @@ private extension DSFloatingBannerStyle {
             return "DSFloatingBanner.label.\(resolvedImage).\(placement).\(emphasis.rawValue)"
         case .progress:
             return "DSFloatingBanner.progress"
+        case .loading:
+            return "DSFloatingBanner.loading"
         case let .status(systemImage, emphasis):
             return "DSFloatingBanner.status.\(systemImage).\(emphasis.rawValue)"
         }
@@ -359,6 +414,11 @@ private struct Testable_DSFloatingBannerView: View {
         DSFloatingBannerContent(
             title: "Syncing...",
             style: .progress,
+            isInteractive: false
+        ),
+        DSFloatingBannerContent(
+            title: "Syncing...",
+            style: .loading(tint: .orange),
             isInteractive: false
         ),
         DSFloatingBannerContent(

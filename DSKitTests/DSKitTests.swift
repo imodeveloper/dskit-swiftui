@@ -411,6 +411,61 @@ final class DSKitTests: SnapshotTestCase {
         )
     }
 
+    func testBrandColorTokensUseAppearanceBrandColor() {
+        let brandColor = DSUIColor(0xCC4A8D)
+        let appearance = LightBlueAppearance(brandColor: brandColor)
+        let brandTokens: [DSColorToken] = [
+            .background(.brand),
+            .background(.brandHover),
+            .background(.brandPressed),
+            .text(.brand),
+            .icon(.brand),
+            .border(.brand),
+            .border(.focused)
+        ]
+
+        for token in brandTokens {
+            XCTAssertTrue(
+                appearance.uiColor(for: token, surfaceStyle: .surface).isEqual(brandColor),
+                "\(token) should resolve to the appearance brand color"
+            )
+        }
+    }
+
+    func testLightBlueAppearanceUsesRequestedSecondaryLightBackground() {
+        let appearance = LightBlueAppearance()
+        let lightColor = appearance.secondaryView.background.resolvedColor(
+            with: UITraitCollection(userInterfaceStyle: .light)
+        )
+
+        XCTAssertTrue(lightColor.isEqual(DSUIColor(0xF9F9F9)))
+    }
+
+    func testFloatingBannerSupportsDSLoadingIndicatorPulseAccessory() throws {
+        let sourceURL = repositoryRoot
+            .appendingPathComponent("DSKit/Sources/DSKit/Views/DSFloatingBannerView.swift")
+        let source = try String(contentsOf: sourceURL, encoding: .utf8)
+
+        XCTAssertTrue(source.contains("DSLoadingIndicator("))
+        XCTAssertTrue(source.contains("style: .pulsingDots"))
+
+        let orange = DSFloatingBannerContent(
+            title: "Starting",
+            style: .loading(tint: .orange)
+        )
+        let yellow = DSFloatingBannerContent(
+            title: "Processing",
+            style: .loading(tint: .yellow)
+        )
+
+        XCTAssertEqual(orange.transitionID, yellow.transitionID)
+        XCTAssertEqual(orange.transitionID, "DSFloatingBanner.loading")
+        XCTAssertEqual(
+            DSFloatingBannerContent(title: "Scroll to top", style: .label(), size: .compact).size,
+            .compact
+        )
+    }
+
     func testDSSectionHeaderRoleBottomInsetIgnoresSectionSpacing() {
         let appearance = LightBlueAppearance()
 

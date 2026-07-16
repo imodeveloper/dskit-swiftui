@@ -69,7 +69,7 @@ public struct LightBlueAppearance: DSAppearance {
             button: secondaryButton,
             text: text,
             textField: secondaryTextField,
-            background: .dynamic(light: 0xF3F4F2, dark: 0x101A24),
+            background: .dynamic(light: 0xF9F9F9, dark: 0x101A24),
             separator: .dynamic(light: 0xD0DBE3, dark: 0x15202B),
             cornerRadius: 10
         )

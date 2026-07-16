@@ -68,8 +68,12 @@ extension DSAppearance {
                  .neutral, .neutralHover, .neutralPressed,
                  .selected, .selectedHover, .selectedPressed:
                 return secondaryView.background
-            case .brand, .brandHover, .brandPressed:
-                return viewAppearance.button.accentColor
+            case .brand:
+                return colors.background.brand
+            case .brandHover:
+                return colors.background.brandHover
+            case .brandPressed:
+                return colors.background.brandPressed
             case .success:
                 return .dynamic(light: 0x1F845A, dark: 0x4BCE97)
             case .successSubtle:
@@ -102,7 +106,7 @@ extension DSAppearance {
             case .inverse:
                 return primaryView.button.supportColor
             case .brand:
-                return viewAppearance.button.accentColor
+                return colors.text.brand
             case .brandOnBold:
                 return viewAppearance.button.supportColor
             case .success:
@@ -127,7 +131,7 @@ extension DSAppearance {
             case .inverse:
                 return resolvedUIColor(for: .text(.inverse), in: surfaceStyle)
             case .brand:
-                return resolvedUIColor(for: .text(.brand), in: surfaceStyle)
+                return colors.icon.brand
             case .brandOnBold:
                 return resolvedUIColor(for: .text(.brandOnBold), in: surfaceStyle)
             case .success:
@@ -149,8 +153,10 @@ extension DSAppearance {
                 return viewAppearance.text.headline
             case .inverse:
                 return primaryView.button.supportColor
-            case .brand, .focused:
-                return viewAppearance.button.accentColor
+            case .brand:
+                return colors.border.brand
+            case .focused:
+                return colors.border.focused
             case .success:
                 return .dynamic(light: 0x1F845A, dark: 0x4BCE97)
             case .warning:

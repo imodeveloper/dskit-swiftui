@@ -3,6 +3,7 @@
 ## Overview
 
 `DSEntityCardListView` renders a vertical list of entity cards with optional loading placeholders. It is a display-only component for people, organizations, sources, categories, or any named entity list.
+`DSEntityCardListItem.reservedSubtitleLineCount` can reserve secondary-text height for rows that receive metadata after initial render.
 
 #### Initialization:
 Initializes the card list with display-ready items and optional placeholder state.

@@ -36,7 +36,7 @@ public struct DSCornerRadiusModifier: ViewModifier {
         if parentCornerRadius == 0 {
             return appearance.cornerRadius
         } else {
-            return max(parentCornerRadius - parentPadding, 2)
+            return max(parentCornerRadius - parentPadding, min(6, appearance.cornerRadius))
         }
     }
 }

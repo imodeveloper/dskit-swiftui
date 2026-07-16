@@ -69,7 +69,7 @@ No direct `DSKitExplorer/Screens` usage was found.
 
 ## Related Components
 
-[DSAppIconHeroView](DSAppIconHeroView.md), [DSButton](DSButton.md), [DSImageView](DSImageView.md), [DSText](DSText.md)
+[DSAppIconHeroView](DSAppIconHeroView.md), [DSButton](DSButton.md), [DSImageView](DSImageView.md), [DSLoadingIndicator](DSLoadingIndicator.md), [DSText](DSText.md)
 
 ## Reference
 

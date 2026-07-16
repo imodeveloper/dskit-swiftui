@@ -38,30 +38,33 @@ public struct DSArticleSummaryRow<Metadata: View>: View {
     }
 
     public var body: some View {
-        DSHStack(alignment: .center, spacing: .space16) {
-            DSVStack(spacing: .space8) {
-                if let authorName {
-                    DSAuthorView(
-                        name: authorName,
-                        badgeColor: DSLetterBadgeView.generatedColor(for: authorName),
-                        textStyle: authorTextStyle,
-                        textColor: .text(.primary)
-                    )
+
+        DSVStack(spacing: .space8) {
+            DSHStack(alignment: .center, spacing: .space16) {
+                DSVStack(spacing: .space8) {
+                    if let authorName {
+                        DSAuthorView(
+                            name: authorName,
+                            badgeColor: DSLetterBadgeView.generatedColor(for: authorName),
+                            textStyle: authorTextStyle,
+                            textColor: .text(.primary)
+                        )
+                    }
+
+                    DSText(title.trimmingCharacters(in: .newlines))
+                        .dsTextStyle(titleTextStyle)
+                        .dsFullWidth()
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
-                DSText(title.trimmingCharacters(in: .newlines))
-                    .dsTextStyle(titleTextStyle)
-                    .dsFullWidth()
-                    .fixedSize(horizontal: false, vertical: true)
-
-                metadata
+                if let imageURL {
+                    DSImageView(url: imageURL, style: .none, size: imageSize)
+                        .dsCornerRadius()
+                        .padding(Edge.Set.top, imageTopPadding)
+                }
             }
 
-            if let imageURL {
-                DSImageView(url: imageURL, style: .none, size: imageSize)
-                    .dsCornerRadius()
-                    .padding(Edge.Set.top, imageTopPadding)
-            }
+            metadata
         }
     }
 }

@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-16 19:00:05 EEST (`appearance-and-floating-banner-contracts`)
+
+- task_or_issue: `Cover appearance brand resolution, requested backgrounds, and floating-banner APIs`
+
+#### Request
+Use TDD for the appearance and production sync-banner changes and preserve intentional existing visual adjustments.
+
+#### Change Summary
+Added tests for semantic brand token resolution, the `0xF9F9F9` secondary light surface, DSLoadingIndicator-backed banner loading, tint-independent transition identity, and compact banner size. Updated only the DSKeyValueRow snapshot affected by the existing label/corner changes after visual review.
+
+#### Rationale
+The behavior crosses semantic tokens and generic component presentation, so direct contracts prevent future Monitor-specific regressions or loading-surface restarts.
+
+#### Invariants
+Do not update unrelated snapshots merely to make a suite pass. Snapshot updates must correspond to an intentional requested component/token change and be visually reviewed.
+
+#### Tests Or Evidence
+The full `DSKitTests` suite passed on Capone; component documentation regenerated successfully with 55 component pages and 71 screen pages.
+
+#### Related Files
+`DSKitAppearance.swift`, `DSAppearance.swift`, `DSTypographyToken.swift`, `DSCornerRadiusModifier.swift`, `DSFloatingBannerView.swift`, and `DSKeyValueRow.snapshot.png`.
+
+#### Follow-up Risks
+Global typography and corner tokens can surface additional intentional snapshot differences when previously unexercised components are rendered.
+
 ### 2026-07-07 17:15:00 EEST (`onboarding-and-particle-snapshots`)
 
 - task_or_issue: `DSKit visual changes need deterministic snapshot coverage`

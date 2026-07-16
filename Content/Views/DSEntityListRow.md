@@ -12,7 +12,9 @@ Initializes a list row with title, optional subtitle, count text, accessibility 
 - `countText`: Optional compact count pill text.
 - `countAccessibilityLabel`: Optional accessibility label for the count pill.
 - `leadingSize`: Fixed DSKit size applied to the leading view.
+- `height`: Fixed DSKit height applied to the row.
 - `accessorySystemName`: Optional trailing SF Symbol.
+- `reservedSubtitleLineCount`: Optional reserved subtitle height for async metadata updates.
 - `leading`: Leading icon, avatar, or badge content.
 - `onTap`: Optional tap action.
 

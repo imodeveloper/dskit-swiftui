@@ -6,6 +6,8 @@
 
 #### Usage:
 - Provide a `DSFloatingBannerContent` value describing the title, accessory style, accessibility, and interaction behavior.
+- Use `.loading(tint:)` for a continuous `DSLoadingIndicator` pulse whose stable transition identity survives tint changes.
+- Set content size to `.compact` for a smaller footnote label and reduced capsule padding.
 - Mount the banner through `dsFloatingBanner(...)` to overlay it on top of any screen content.
 - Keep domain-specific state machines outside DSKit and map them into generic banner content values.
 
@@ -28,6 +30,11 @@ private struct Testable_DSFloatingBannerView: View {
         DSFloatingBannerContent(
             title: "Syncing...",
             style: .progress,
+            isInteractive: false
+        ),
+        DSFloatingBannerContent(
+            title: "Syncing...",
+            style: .loading(tint: .orange),
             isInteractive: false
         ),
         DSFloatingBannerContent(
@@ -73,7 +80,7 @@ No direct `DSKitExplorer/Screens` usage was found.
 
 ## Related Components
 
-[DSButton](DSButton.md)
+[DSButton](DSButton.md), [DSLoadingIndicator](DSLoadingIndicator.md)
 
 ## Reference
 
