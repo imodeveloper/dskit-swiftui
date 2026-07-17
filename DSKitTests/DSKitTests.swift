@@ -455,13 +455,13 @@ final class DSKitTests: SnapshotTestCase {
         }
     }
 
-    func testLightBlueAppearanceUsesRequestedSecondaryLightBackground() {
+    func testLightBlueAppearanceUsesConfiguredSecondaryLightBackground() {
         let appearance = LightBlueAppearance()
         let lightColor = appearance.secondaryView.background.resolvedColor(
             with: UITraitCollection(userInterfaceStyle: .light)
         )
 
-        XCTAssertTrue(lightColor.isEqual(DSUIColor(0xF9F9F9)))
+        XCTAssertTrue(lightColor.isEqual(DSUIColor(0xF3F4F2)))
     }
 
     func testFloatingBannerSupportsDSLoadingIndicatorPulseAccessory() throws {

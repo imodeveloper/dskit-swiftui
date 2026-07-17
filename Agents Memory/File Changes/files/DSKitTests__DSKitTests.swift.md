@@ -6,6 +6,32 @@
 
 ## Changes
 
+### 2026-07-17 18:55:00 EEST (`article-presentation-snapshot-reconciliation`)
+
+- task_or_issue: `Align DSKit contracts and visual baselines with the delivered article presentation tuning`
+- change_id: `article-presentation-snapshot-reconciliation`
+
+#### Request
+After delivering the authored source changes unchanged, update tests and snapshots only where the intentional appearance, article image, or letter-badge behavior changed.
+
+#### Change Summary
+Updated the LightBlue secondary-light-background assertion from `0xF9F9F9` to `0xF3F4F2`; refreshed the seven component baselines affected by the 48-point article image default and tighter/larger letter badges; and refreshed the 19 visually reviewed Explorer screen baselines plus their generated frames and catalog strips affected by the LightBlue palette.
+
+#### Rationale
+The source commit intentionally changed these shared DSKit contracts. Keeping the previous expectation and goldens would reject the shipped design rather than detect a regression.
+
+#### Invariants
+Keep snapshot recording disabled in committed test runs. Do not refresh unrelated baselines, and continue honoring explicit article image-size overrides independently of the 48-point default.
+
+#### Tests Or Evidence
+All five focused component contract and snapshot tests and all 19 focused Explorer screen tests passed after recording was disabled. The full DSKit scheme then passed 71 Explorer tests, 50 component tests, and 6 Swift Testing interaction tests with zero failures; documentation generation completed successfully.
+
+#### Related Files
+`DSKitAppearance.swift`, `DSArticleRows.swift`, `DSLetterBadgeView.swift`, the affected component and Explorer snapshots, and generated screen frames/catalog strips.
+
+#### Follow-up Risks
+Shared badge geometry can legitimately affect any downstream view embedding `DSLetterBadgeView`; future updates should prove each changed baseline visually instead of bulk-accepting snapshots.
+
 ### 2026-07-17 15:14:00 EEST (`thread-terminal-connector-fade`)
 
 - task_or_issue: `The final connector fade needed meaningful exact visual coverage`
