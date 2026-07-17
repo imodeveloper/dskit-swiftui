@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-17 13:15:22 EEST (`compact-loading-capsule-padding`)
+
+- task_or_issue: `Protect loading-only compact surface metrics`
+
+#### Request
+Add regression coverage for the smaller compact loading capsule without permitting unrelated banner dimensions to change.
+
+#### Change Summary
+Added a focused metric matrix asserting compact loading at 8/4/32, compact label and progress at 10/7/32, and regular loading at 14/10/40.
+
+#### Rationale
+The requested difference is style-specific and too small for the existing regular-label snapshot to prove; direct metric coverage makes the boundary deterministic.
+
+#### Invariants
+Only compact `.loading` receives the tighter padding. Compact `.label`, compact `.progress`, and every regular style remain unchanged.
+
+#### Tests Or Evidence
+The new test failed against the previous shared compact 10/7 metrics and passes after the production loading branch was tightened.
+
+#### Related Files
+`DSKit/Sources/DSKit/Views/DSFloatingBannerView.swift` and generated `Content/Views/DSFloatingBannerView.md`.
+
+#### Follow-up Risks
+If surface metrics move into a token or modifier, retain the same four-way control matrix at the new boundary.
+
 ### 2026-07-16 23:11:14 EEST (`continuous-loading-animation-identity`)
 
 - task_or_issue: `Lock continuous loading identity behavior with focused tests`

@@ -9,6 +9,46 @@
 import Testing
 
 struct DSFloatingBannerInteractionTests {
+    @Test("Compact loading uses tighter capsule padding without resizing other banners")
+    func compactLoadingUsesTighterCapsulePadding() {
+        let compactLoading = DSFloatingBannerContent(
+            title: "Loading",
+            style: .loading(tint: .orange),
+            size: .compact
+        )
+        let compactLabel = DSFloatingBannerContent(
+            title: "Mergi sus",
+            style: .label(systemImage: "arrow.up"),
+            size: .compact
+        )
+        let compactProgress = DSFloatingBannerContent(
+            title: "Loading",
+            style: .progress,
+            size: .compact
+        )
+        let regularLoading = DSFloatingBannerContent(
+            title: "Loading",
+            style: .loading(tint: .orange)
+        )
+
+        #expect(compactLoading.surfaceMetrics == DSFloatingBannerSurfaceMetrics(
+            horizontalPadding: 8,
+            verticalPadding: 4,
+            minimumHeight: 32
+        ))
+        #expect(compactLabel.surfaceMetrics == DSFloatingBannerSurfaceMetrics(
+            horizontalPadding: 10,
+            verticalPadding: 7,
+            minimumHeight: 32
+        ))
+        #expect(compactProgress.surfaceMetrics == compactLabel.surfaceMetrics)
+        #expect(regularLoading.surfaceMetrics == DSFloatingBannerSurfaceMetrics(
+            horizontalPadding: 14,
+            verticalPadding: 10,
+            minimumHeight: 40
+        ))
+    }
+
     @Test("Loading phase changes keep one banner animation identity")
     func loadingPhaseChangesKeepOneBannerAnimationIdentity() {
         let orange = DSFloatingBannerView(

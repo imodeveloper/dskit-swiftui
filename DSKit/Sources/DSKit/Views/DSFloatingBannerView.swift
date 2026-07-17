@@ -16,6 +16,7 @@ import SwiftUI
 - Provide a `DSFloatingBannerContent` value describing the title, accessory style, accessibility, and interaction behavior.
 - Use `.loading(tint:)` for a continuous `DSLoadingIndicator` pulse. Keep one `transitionID` across phase title/tint updates so the banner and its timeline-driven loader stay mounted while only the tint changes.
 - Set content size to `.compact` for a smaller footnote label and reduced capsule padding.
+- Compact loading surfaces use tighter loading-only padding without changing the loading indicator or other compact banner styles.
 - Set `isInteractive` to `false` to make the full presented overlay hit-testing transparent while underlying scrolling and navigation gestures remain available.
 - Mount the banner through `dsFloatingBanner(...)` to overlay it on top of any screen content.
 - Keep domain-specific state machines outside DSKit and map them into generic banner content values.
@@ -93,6 +94,25 @@ public struct DSFloatingBannerContent: Hashable, Sendable {
         self.isInteractive = isInteractive
         self.titleUsesMonospacedDigits = titleUsesMonospacedDigits
         self.size = size
+    }
+}
+
+struct DSFloatingBannerSurfaceMetrics: Equatable {
+    let horizontalPadding: CGFloat
+    let verticalPadding: CGFloat
+    let minimumHeight: CGFloat
+}
+
+extension DSFloatingBannerContent {
+    var surfaceMetrics: DSFloatingBannerSurfaceMetrics {
+        switch (size, style) {
+        case (.regular, _):
+            DSFloatingBannerSurfaceMetrics(horizontalPadding: 14, verticalPadding: 10, minimumHeight: 40)
+        case (.compact, .loading):
+            DSFloatingBannerSurfaceMetrics(horizontalPadding: 8, verticalPadding: 4, minimumHeight: 32)
+        case (.compact, _):
+            DSFloatingBannerSurfaceMetrics(horizontalPadding: 10, verticalPadding: 7, minimumHeight: 32)
+        }
     }
 }
 
@@ -294,10 +314,11 @@ public struct DSFloatingBannerView: View {
     }
 
     private func surfaceContent<Inner: View>(@ViewBuilder _ inner: () -> Inner) -> some View {
-        inner()
-            .padding(.horizontal, content.size == .compact ? 10 : 14)
-            .padding(.vertical, content.size == .compact ? 7 : 10)
-            .frame(minHeight: content.size == .compact ? 32 : 40)
+        let metrics = content.surfaceMetrics
+        return inner()
+            .padding(.horizontal, metrics.horizontalPadding)
+            .padding(.vertical, metrics.verticalPadding)
+            .frame(minHeight: metrics.minimumHeight)
             .modifier(FloatingBannerMaterial())
             .contentShape(.capsule)
     }

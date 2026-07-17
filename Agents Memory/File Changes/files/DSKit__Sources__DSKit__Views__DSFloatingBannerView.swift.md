@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-17 13:15:22 EEST (`compact-loading-capsule-padding`)
+
+- task_or_issue: `Reduce padding around the compact production loading pulse`
+
+#### Request
+Make the glass capsule around the production three-dot loading indicator a little smaller without changing other banner UI.
+
+#### Change Summary
+Added style-aware surface metrics and changed only compact `.loading` content to 8-point horizontal padding, 4-point vertical padding, and a 32-point minimum height. Compact labels and progress remain at 10/7/32, while every regular style remains at 14/10/40.
+
+#### Rationale
+The loading indicator already has the intended 52-by-24-point footprint; applying the shared compact padding made its capsule visibly roomier than necessary.
+
+#### Invariants
+Keep the indicator frame, dot size and spacing, stable transition identity, interaction policy, `Mergi sus`, development progress, and regular banner metrics unchanged.
+
+#### Tests Or Evidence
+A red-first focused metric test failed at the former compact 10/7 values and passes at 8/4 while asserting the unchanged control styles. The existing regular-label snapshot does not exercise this loading-only branch and was not rerecorded.
+
+#### Related Files
+`DSKitTests/DSFloatingBannerInteractionTests.swift`, generated `Content/Views/DSFloatingBannerView.md`, and Monitor's floating-banner presentation specification.
+
+#### Follow-up Risks
+Future compact styles should select metrics deliberately; do not collapse loading back into shared compact padding without checking the indicator's fixed footprint.
+
 ### 2026-07-16 23:11:14 EEST (`continuous-loading-animation-identity`)
 
 - task_or_issue: `Keep the floating loading banner mounted across phase color changes`
