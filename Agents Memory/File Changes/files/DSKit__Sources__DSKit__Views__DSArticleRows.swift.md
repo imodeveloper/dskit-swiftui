@@ -6,6 +6,32 @@
 
 ## Changes
 
+### 2026-07-17 18:21:20 EEST (`article-summary-default-image-48`)
+
+- task_or_issue: `Article summary thumbnails needed the authored smaller default`
+- change_id: `article-summary-default-image-48`
+
+#### Request
+Preserve the current authored article-summary image-size change exactly as it is.
+
+#### Change Summary
+Changed `DSArticleSummaryRow`'s default image size from the 64-point token to the 48-point token.
+
+#### Rationale
+The smaller default gives article text more horizontal room and establishes the final shared thumbnail scale without preventing caller overrides.
+
+#### Invariants
+Keep `imageSize` publicly overridable and preserve the existing title/image horizontal layout plus full-width metadata footer.
+
+#### Tests Or Evidence
+`git diff --check` passes. Component and consuming Monitor snapshot reconciliation is intentionally deferred until after the requested Dev and Prod deliveries.
+
+#### Related Files
+`Monitor/UI/Shared/Views/ArticleRegularRowView.swift`, DSKit article-row snapshots, and Monitor screen snapshots.
+
+#### Follow-up Risks
+Callers relying on the previous implicit 64-point default will render smaller images and may need intentional baseline updates.
+
 ### 2026-07-16 19:00:05 EEST (`article-metadata-below-content-row`)
 
 - task_or_issue: `Article metadata must span beneath the title and optional image`

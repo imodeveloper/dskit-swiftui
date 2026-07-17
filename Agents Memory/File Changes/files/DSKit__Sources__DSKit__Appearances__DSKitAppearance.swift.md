@@ -6,6 +6,32 @@
 
 ## Changes
 
+### 2026-07-17 18:21:20 EEST (`light-blue-final-color-tuning`)
+
+- task_or_issue: `The Light Blue appearance needed the authored final text and surface colors`
+- change_id: `light-blue-final-color-tuning`
+
+#### Request
+Preserve the current authored Light Blue appearance changes exactly as they are.
+
+#### Change Summary
+Changed the light large-title, title, headline, and body colors from `0x14171A` to pure black and changed the secondary light background from `0xF9F9F9` to `0xF3F4F2`.
+
+#### Rationale
+The final Monitor appearance uses stronger primary-text contrast over a slightly darker neutral secondary surface.
+
+#### Invariants
+Keep the change scoped to Light Blue light mode. Preserve all existing dark-mode color values and semantic token routing.
+
+#### Tests Or Evidence
+`git diff --check` passes. DSKit and Monitor snapshot reconciliation is intentionally deferred until after the requested Dev and Prod deliveries.
+
+#### Related Files
+`DSKitTests/DSKitTests.swift`, DSKit component snapshots, and Monitor screen snapshots.
+
+#### Follow-up Risks
+This shared appearance affects many light-mode surfaces, so visual baselines may need intentional refreshes.
+
 ### 2026-07-16 19:00:05 EEST (`monitor-article-presentation-banner-release`)
 
 - task_or_issue: `Monitor appearance surfaces must use the requested light background`

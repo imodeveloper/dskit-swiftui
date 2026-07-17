@@ -26,13 +26,13 @@ public struct LightBlueAppearance: DSAppearance {
     public init(brandColor: DSUIColor? = nil) {
         self.title = "Light Blue"
         let text = DSTextAppearance(
-            largeTitle: .dynamic(light: 0x14171A, dark: 0xFEFFFE),
-            title1: .dynamic(light: 0x14171A, dark: 0xFEFFFE),
-            title2: .dynamic(light: 0x14171A, dark: 0xFEFFFE),
-            title3: .dynamic(light: 0x14171A, dark: 0xFEFFFE),
-            headline: .dynamic(light: 0x14171A, dark: 0xFEFFFE),
+            largeTitle: .dynamic(light: 0x000000, dark: 0xFEFFFE),
+            title1: .dynamic(light: 0x000000, dark: 0xFEFFFE),
+            title2: .dynamic(light: 0x000000, dark: 0xFEFFFE),
+            title3: .dynamic(light: 0x000000, dark: 0xFEFFFE),
+            headline: .dynamic(light: 0x000000, dark: 0xFEFFFE),
             subheadline: .dynamic(light: 0x5B7083, dark: 0x8899A6),
-            body: .dynamic(light: 0x14171A, dark: 0xFEFFFE),
+            body: .dynamic(light: 0x000000, dark: 0xFEFFFE),
             callout: .dynamic(light: 0x5B7083, dark: 0x8899A6),
             caption1: .dynamic(light: 0x5B7083, dark: 0x8899A6),
             caption2: .dynamic(light: 0x5B7083, dark: 0x8899A6),
@@ -69,7 +69,7 @@ public struct LightBlueAppearance: DSAppearance {
             button: secondaryButton,
             text: text,
             textField: secondaryTextField,
-            background: .dynamic(light: 0xF9F9F9, dark: 0x101A24),
+            background: .dynamic(light: 0xF3F4F2, dark: 0x101A24),
             separator: .dynamic(light: 0xD0DBE3, dark: 0x15202B),
             cornerRadius: 10
         )

@@ -23,7 +23,7 @@ public struct DSArticleSummaryRow<Metadata: View>: View {
         title: String,
         titleTextStyle: DSTypographyToken = .body,
         imageURL: URL? = nil,
-        imageSize: DSSize = .size(.token(.space64)),
+        imageSize: DSSize = .size(.token(.space48)),
         imageTopPadding: CGFloat = 0,
         @ViewBuilder metadata: () -> Metadata
     ) {

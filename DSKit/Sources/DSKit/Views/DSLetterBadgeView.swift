@@ -60,14 +60,14 @@ public struct DSLetterBadgeView: View {
 
     private var badgeTextStyle: DSTypographyToken {
         .custom(
-            size: max(9, min(resolvedFont.pointSize, resolvedFont.capHeight * 1.05)),
+            size: max(9, min(resolvedFont.pointSize, resolvedFont.capHeight * 1.15)),
             weight: textWeight,
             relativeTo: textStyle
         )
     }
 
     private var badgeHeight: CGFloat {
-        max(16, resolvedFont.lineHeight * 1.08)
+        max(15, resolvedFont.lineHeight * 0.9)
     }
 
     private var resolvedFont: DSFont {
