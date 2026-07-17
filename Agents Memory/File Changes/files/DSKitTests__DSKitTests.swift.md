@@ -6,6 +6,32 @@
 
 ## Changes
 
+### 2026-07-17 15:14:00 EEST (`thread-terminal-connector-fade`)
+
+- task_or_issue: `The final connector fade needed meaningful exact visual coverage`
+- change_id: `thread-terminal-connector-fade`
+
+#### Request
+Protect one final connector, zero spacing under its badge, and the 32-point opacity transition without accepting the obsolete overlapping footer line.
+
+#### Change Summary
+Added a dedicated full-screen `DSThreadSectionTerminalFade` fixture and golden. Its assertion uses exact pixel and perceptual precision with zero retries so the small connector geometry cannot pass through a relaxed whole-screen tolerance.
+
+#### Rationale
+The pre-existing component-sized thread snapshot compresses `DSList` into a blank strip and cannot prove the requested geometry. A deterministic screen-sized fixture exposes all three connectors and the final fade directly.
+
+#### Invariants
+Keep recording disabled in committed test code. Do not weaken the focused assertion or replace the fixed opacity steps with a nondeterministic gradient.
+
+#### Tests Or Evidence
+The test failed red against the old final-badge geometry, the refreshed 1179 by 2556 golden was visually inspected, and both the new exact snapshot and existing thread-section snapshot passed twice on Capone.
+
+#### Related Files
+`DSKit/Sources/DSKit/Views/DSThread.swift` and `DSKitTests/__Snapshots__/DSKitTests/DSThreadSectionTerminalFade.snapshot.png`.
+
+#### Follow-up Risks
+Snapshot recording reports an expected XCTest failure; always turn recording off and rerun twice before commit.
+
 ### 2026-07-16 19:00:05 EEST (`appearance-and-floating-banner-contracts`)
 
 - task_or_issue: `Cover appearance brand resolution, requested backgrounds, and floating-banner APIs`

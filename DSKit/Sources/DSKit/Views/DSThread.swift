@@ -129,6 +129,7 @@ public struct DSThreadSection<Data, ID, Content, Header, Footer>: View where Dat
     let headerSpacing: DSSpatialToken
     let threadContentSpacing: CGFloat
     let threadLeftPadding: CGFloat
+    let terminalLineFadeLength: DSSpatialToken?
     let data: Data
     let content: (Data.Element, DSThreadPosition) -> Content
     let header: (Data.Element, DSThreadPosition) -> Header
@@ -139,6 +140,7 @@ public struct DSThreadSection<Data, ID, Content, Header, Footer>: View where Dat
         headerSpacing: DSSpatialToken = .space8,
         threadContentSpacing: CGFloat = 10,
         threadLeftPadding: CGFloat = 10,
+        terminalLineFadeLength: DSSpatialToken? = nil,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder header: @escaping (Data.Element, DSThreadPosition) -> Header,
@@ -149,6 +151,7 @@ public struct DSThreadSection<Data, ID, Content, Header, Footer>: View where Dat
         self.headerSpacing = headerSpacing
         self.threadContentSpacing = threadContentSpacing
         self.threadLeftPadding = threadLeftPadding
+        self.terminalLineFadeLength = terminalLineFadeLength
         self.id = id
         self.content = content
         self.header = header
@@ -223,13 +226,33 @@ public struct DSThreadSection<Data, ID, Content, Header, Footer>: View where Dat
             content(element, position)
             .padding(.leading, threadLeftPadding + threadContentSpacing)
             .overlay(alignment: .leading) {
-                threadLine
-                    .frame(maxHeight: .infinity)
-                    .padding(.top, -headerVerticalPadding)
+                contentThreadLine(
+                    isLast: isLast,
+                    headerVerticalPadding: headerVerticalPadding
+                )
                     .zIndex(0)
                     .opacity(showsThreadLineToFooter ? 0.1 : 0)
                     .padding(.leading, threadLeftPadding)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func contentThreadLine(
+        isLast: Bool,
+        headerVerticalPadding: CGFloat
+    ) -> some View {
+        let line = threadLine
+            .frame(maxHeight: .infinity)
+
+        if isLast, let length = terminalLineFadeLength {
+            line.mask {
+                DSThreadTerminalLineFadeMask(length: length)
+            }
+            .padding(.top, -headerVerticalPadding)
+        } else {
+            line
+                .padding(.top, -headerVerticalPadding)
         }
     }
 
@@ -273,6 +296,7 @@ public extension DSThreadSection where Footer == EmptyView {
         headerSpacing: DSSpatialToken = .space8,
         threadContentSpacing: CGFloat = 10,
         threadLeftPadding: CGFloat = 10,
+        terminalLineFadeLength: DSSpatialToken? = nil,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder header: @escaping (Data.Element, DSThreadPosition) -> Header,
@@ -282,12 +306,42 @@ public extension DSThreadSection where Footer == EmptyView {
             headerSpacing: headerSpacing,
             threadContentSpacing: threadContentSpacing,
             threadLeftPadding: threadLeftPadding,
+            terminalLineFadeLength: terminalLineFadeLength,
             data: data,
             id: id,
             header: header,
             content: content,
             footer: { EmptyView() }
         )
+    }
+}
+
+private struct DSThreadTerminalLineFadeMask: View {
+    let length: DSSpatialToken
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Color.black
+
+            ForEach(0..<fadeStepCount, id: \.self) { step in
+                Color.black
+                    .frame(height: fadeStepHeight)
+                    .opacity(fadeOpacity(for: step))
+            }
+        }
+    }
+
+    private var fadeStepCount: Int {
+        max(Int(length.value.rounded(.up)), 1)
+    }
+
+    private var fadeStepHeight: CGFloat {
+        length.value / CGFloat(fadeStepCount)
+    }
+
+    private func fadeOpacity(for step: Int) -> Double {
+        guard fadeStepCount > 1 else { return 0 }
+        return Double(fadeStepCount - 1 - step) / Double(fadeStepCount - 1)
     }
 }
 
@@ -413,12 +467,45 @@ struct Testable_DSThreadSection: View {
     }
 }
 
+struct Testable_DSThreadSectionTerminalFade: View {
+    let colors: [ThreadItem] = [
+        ThreadItem(item: SomeColor(title: "red", color: Color.red)),
+        ThreadItem(item: SomeColor(title: "green", color: Color.green)),
+        ThreadItem(item: SomeColor(title: "purple", color: Color.purple))
+    ]
+
+    var body: some View {
+        DSList {
+            DSThreadSection(
+                threadContentSpacing: 4,
+                threadLeftPadding: 6,
+                terminalLineFadeLength: .space32,
+                data: colors,
+                id: \.self
+            ) { threadItem, _ in
+                DSHStack {
+                    Circle()
+                        .fill(threadItem.item.color)
+                        .frame(width: 24, height: 24)
+
+                    Text(threadItem.item.title)
+                }
+            } content: { threadItem, _ in
+                threadItem.item.color
+                    .frame(height: 60)
+                    .clipShape(.rect(cornerRadius: 12))
+            }
+        }
+    }
+}
+
 struct DSThread_Previews: PreviewProvider {
     static var previews: some View {
         DSPreviewForEachAppearance {
             DSPreview {
                 Testable_DSThread()
                 Testable_DSThreadSection()
+                Testable_DSThreadSectionTerminalFade()
             }
         }
     }

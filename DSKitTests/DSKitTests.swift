@@ -46,6 +46,20 @@ final class DSKitTests: SnapshotTestCase {
         )
     }
 
+    private var exactSnapshotOptions: SnapshotAssertionOptions {
+        SnapshotAssertionOptions(
+            recordDelay: 0.5,
+            retries: 0,
+            retryDelay: 0,
+            precision: 1,
+            perceptualPrecision: 1,
+            minimumPrecision: 1,
+            minimumPerceptualPrecision: 1,
+            precisionStep: 0,
+            perceptualPrecisionStep: 0
+        )
+    }
+
     func testDSCustomBackgroundModifier() throws {
         assertSnapshot(for: Testable_DSBackgroundModifier(), named: "DSBackgroundModifier", options: crossSimulatorOptions)
     }
@@ -113,6 +127,15 @@ final class DSKitTests: SnapshotTestCase {
             for: Testable_DSThreadSection(),
             named: "DSThreadSection",
             options: crossSimulatorOptions
+        )
+    }
+
+    func testDSThreadSectionTerminalFade() throws {
+        assertSnapshot(
+            for: Testable_DSThreadSectionTerminalFade(),
+            named: "DSThreadSectionTerminalFade",
+            layout: .screen(),
+            options: exactSnapshotOptions
         )
     }
 
