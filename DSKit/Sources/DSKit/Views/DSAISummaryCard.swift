@@ -66,7 +66,7 @@ public struct DSAISummaryCard: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 DSText(summary)
-                    .dsTextStyle(.bodySmall, .text(.secondary))
+                    .dsTextStyle(.caption1, .text(.primary))
                     .fixedSize(horizontal: false, vertical: true)
             }
 
@@ -76,14 +76,28 @@ public struct DSAISummaryCard: View {
         .accessibilityElement(children: .contain)
     }
 
+    @ViewBuilder
     private var disclosureView: some View {
-        DSVStack(alignment: .leading, spacing: .space12) {
-            DSHStack(alignment: .center, spacing: .space12) {
-                DSImageView(
-                    systemName: "sparkles",
-                    size: .font(.body),
-                    tint: .icon(.secondary)
-                )
+        if sources.isEmpty {
+            disclosureContent
+                .dsCardStyle(padding: .space8, background: .primary)
+        } else {
+            Button(action: toggleSources) {
+                disclosureContent
+                    .dsCardStyle(padding: .space8, background: .primary)
+            }
+            .buttonStyle(.plain)
+            .contentShape(.rect)
+            .dsFullWidth()
+            .accessibilityLabel(areSourcesExpanded ? "Collapse sources" : "Expand sources")
+            .accessibilityValue("\(sources.count) sources")
+        }
+    }
+
+    private var disclosureContent: some View {
+        DSVStack(alignment: .leading, spacing: .custom(6)) {
+            DSHStack(alignment: .center, spacing: .custom(6)) {
+                DSAISummarySparkleIcon()
                 .accessibilityHidden(true)
 
                 DSText(disclosure)
@@ -93,27 +107,21 @@ public struct DSAISummaryCard: View {
             }
 
             if sources.isEmpty == false {
-                sourcesControl
+                sourcesPresentation
             }
         }
-        .dsCardStyle(background: .primary)
     }
 
-    private var sourcesControl: some View {
-        Button(action: toggleSources) {
-            if areSourcesExpanded {
-                expandedSources
-                    .transition(.move(edge: .top).combined(with: .opacity))
-            } else {
-                sourceBadges
-                    .transition(.opacity)
-            }
+    @ViewBuilder
+    private var sourcesPresentation: some View {
+        if areSourcesExpanded {
+            expandedSources
+                .clipped()
+                .transition(.opacity)
+        } else {
+            sourceBadges
+                .transition(.opacity)
         }
-        .buttonStyle(.plain)
-        .contentShape(.rect)
-        .dsFullWidth()
-        .accessibilityLabel(areSourcesExpanded ? "Collapse sources" : "Expand sources")
-        .accessibilityValue("\(sources.count) sources")
     }
 
     private var sourceBadges: some View {
@@ -178,6 +186,49 @@ public struct DSAISummaryCard: View {
     }
 }
 
+private struct DSAISummarySparkleIcon: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private let shimmerInterval: TimeInterval = 3
+    private let shimmerDuration: TimeInterval = 0.7
+    private let unitTestMode = ProcessInfo.processInfo.arguments.contains("TESTMODE")
+
+    var body: some View {
+        TimelineView(
+            .animation(
+                minimumInterval: 1.0 / 30.0,
+                paused: reduceMotion || unitTestMode
+            )
+        ) { timeline in
+            let progress = shimmerProgress(at: timeline.date)
+            let intensity = sin(progress * .pi)
+
+            ZStack {
+                sparkle(tint: .icon(.warning))
+
+                sparkle(tint: .color(.white))
+                    .opacity(intensity * 0.75)
+            }
+            .scaleEffect(1 + (intensity * 0.08))
+        }
+    }
+
+    private func sparkle(tint: DSColorToken) -> some View {
+        DSImageView(
+            systemName: "sparkles",
+            size: .font(.body),
+            tint: tint
+        )
+    }
+
+    private func shimmerProgress(at date: Date) -> Double {
+        guard reduceMotion == false, unitTestMode == false else { return 0 }
+        let elapsed = date.timeIntervalSinceReferenceDate
+            .truncatingRemainder(dividingBy: shimmerInterval)
+        return min(max(elapsed / shimmerDuration, 0), 1)
+    }
+}
+
 private struct DSAISummaryOverflowBadge: View {
     @Environment(\.appearance) private var appearance
     @Environment(\.surfaceStyle) private var surfaceStyle
@@ -188,7 +239,7 @@ private struct DSAISummaryOverflowBadge: View {
         DSLetterBadgeView(
             text: "+\(hiddenSourceCount)",
             backgroundColor: appearance.color(
-                for: .background(.surface),
+                for: .background(.brand),
                 surfaceStyle: surfaceStyle
             ),
             textStyle: .label

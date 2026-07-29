@@ -6,6 +6,10 @@
 
 ## Changes
 
+### 2026-07-29 (`compact-entity-accessory`)
+
+- Added a default-disabled compact accessory presentation that renders trailing symbols at `bodySmall` instead of `title2`.
+
 ### 2026-07-08 23:55:00 EEST (`pending`)
 
 - task_or_issue: `Entity rows should be shorter and stable after Focus polish`

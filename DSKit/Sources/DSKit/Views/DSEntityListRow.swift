@@ -68,6 +68,7 @@ public struct DSEntityListRow<Leading: View>: View {
     private let leadingSize: DSSize
     private let height: DSDimension
     private let accessorySystemName: String?
+    private let usesCompactAccessory: Bool
     private let reservedSubtitleLineCount: Int?
     private let onTap: (() -> Void)?
 
@@ -79,6 +80,7 @@ public struct DSEntityListRow<Leading: View>: View {
         leadingSize: DSSize = DSEntityListRowLayout.leadingSize,
         height: DSDimension = DSEntityListRowLayout.height,
         accessorySystemName: String? = nil,
+        usesCompactAccessory: Bool = false,
         reservedSubtitleLineCount: Int? = nil,
         @ViewBuilder leading: () -> Leading,
         onTap: (() -> Void)? = nil
@@ -90,6 +92,7 @@ public struct DSEntityListRow<Leading: View>: View {
         self.leadingSize = leadingSize
         self.height = height
         self.accessorySystemName = accessorySystemName
+        self.usesCompactAccessory = usesCompactAccessory
         self.reservedSubtitleLineCount = reservedSubtitleLineCount
         self.leading = leading()
         self.onTap = onTap
@@ -118,7 +121,7 @@ public struct DSEntityListRow<Leading: View>: View {
             if let accessorySystemName {
                 DSImageView(
                     systemName: accessorySystemName,
-                    size: .font(.title2),
+                    size: .font(usesCompactAccessory ? .bodySmall : .title2),
                     tint: .text(.caption2)
                 )
             }

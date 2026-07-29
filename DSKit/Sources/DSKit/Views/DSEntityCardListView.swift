@@ -33,6 +33,7 @@ public struct DSEntityCardListItem: Identifiable, Equatable, Sendable {
     public let countText: String?
     public let countAccessibilityLabel: String?
     public let accessorySystemName: String?
+    public let usesCompactAccessory: Bool
     public let reservedSubtitleLineCount: Int?
 
     public init(
@@ -43,6 +44,7 @@ public struct DSEntityCardListItem: Identifiable, Equatable, Sendable {
         countText: String? = nil,
         countAccessibilityLabel: String? = nil,
         accessorySystemName: String? = nil,
+        usesCompactAccessory: Bool = false,
         reservedSubtitleLineCount: Int? = nil
     ) {
         self.id = id
@@ -52,6 +54,7 @@ public struct DSEntityCardListItem: Identifiable, Equatable, Sendable {
         self.countText = countText
         self.countAccessibilityLabel = countAccessibilityLabel
         self.accessorySystemName = accessorySystemName
+        self.usesCompactAccessory = usesCompactAccessory
         self.reservedSubtitleLineCount = reservedSubtitleLineCount
     }
 }
@@ -118,6 +121,7 @@ private struct DSEntityCardListRow: View {
             countAccessibilityLabel: item.countAccessibilityLabel,
             leadingSize: DSEntityListRowLayout.peopleAvatarSize,
             accessorySystemName: item.accessorySystemName,
+            usesCompactAccessory: item.usesCompactAccessory,
             reservedSubtitleLineCount: item.reservedSubtitleLineCount,
             leading: {
                 DSEntityAvatarView(

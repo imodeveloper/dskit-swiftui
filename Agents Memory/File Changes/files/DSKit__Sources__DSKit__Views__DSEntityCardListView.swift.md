@@ -6,6 +6,10 @@
 
 ## Changes
 
+### 2026-07-29 (`compact-entity-accessory`)
+
+- Entity-card items can opt into a compact trailing accessory without changing the row or its tap target.
+
 ### 2026-07-08 15:17:30 EEST (`pending`)
 
 - task_or_issue: `Article details source navigation and Focus people/source polish`
