@@ -12,6 +12,7 @@
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSHScroll.snapshot.png" width="240" alt="DSHScroll preview" /> | [DSHScroll](Views/DSHScroll.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSCoverFlow.snapshot.png" width="240" alt="DSCoverFlow preview" /> | [DSCoverFlow](Views/DSCoverFlow.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSImageView.snapshot.png" width="240" alt="DSImageView preview" /> | [DSImageView](Views/DSImageView.md) |
+| <img src="../DSKitTests/__Snapshots__/DSKitTests/DSAISummaryCard.snapshot.png" width="240" alt="DSAISummaryCard preview" /> | [DSAISummaryCard](Views/DSAISummaryCard.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSAppIconHeroView.snapshot.png" width="240" alt="DSAppIconHeroView preview" /> | [DSAppIconHeroView](Views/DSAppIconHeroView.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSArticleRows.snapshot.png" width="240" alt="DSArticleRows preview" /> | [DSArticleRows](Views/DSArticleRows.md) |
 | <img src="../DSKitTests/__Snapshots__/DSKitTests/DSAuthorView.snapshot.png" width="240" alt="DSAuthorView preview" /> | [DSAuthorView](Views/DSAuthorView.md) |

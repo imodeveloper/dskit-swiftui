@@ -114,6 +114,38 @@ final class DSKitTests: SnapshotTestCase {
         )
     }
 
+    func testDSAISummaryCard() throws {
+        assertSnapshot(
+            for: Testable_DSAISummaryCard(),
+            named: "DSAISummaryCard",
+            options: crossSimulatorOptions
+        )
+    }
+
+    func testDSAISummaryCardWithoutSources() throws {
+        assertSnapshot(
+            for: Testable_DSAISummaryCardWithoutSources(),
+            named: "DSAISummaryCardWithoutSources",
+            options: crossSimulatorOptions
+        )
+    }
+
+    func testDSAISummaryCardExpanded() throws {
+        assertSnapshot(
+            for: Testable_DSAISummaryCardExpanded(),
+            named: "DSAISummaryCardExpanded",
+            options: crossSimulatorOptions
+        )
+    }
+
+    func testDSAISummaryCardWithManySources() throws {
+        assertSnapshot(
+            for: Testable_DSAISummaryCardWithManySources(),
+            named: "DSAISummaryCardWithManySources",
+            options: crossSimulatorOptions
+        )
+    }
+
     func testDSArticleThreadComponents() throws {
         assertSnapshot(
             for: Testable_DSArticleThreadComponents(),

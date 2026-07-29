@@ -6,6 +6,31 @@
 
 ## Changes
 
+### 2026-07-29 11:38:27 EEST (`pending`)
+
+- task_or_issue: `ai-summary-card-snapshots`
+
+#### Request
+Protect every supported AI-summary card state with deterministic visual evidence.
+
+#### Change Summary
+Added exact snapshot assertions for the normal, no-sources, expanded, and many-sources variants.
+
+#### Rationale
+The component changes height and hierarchy substantially when sources expand, so one baseline would not cover its public states.
+
+#### Invariants
+Keep recording disabled and retain exact snapshot names aligned with generated documentation.
+
+#### Tests Or Evidence
+All four new snapshots and the documentation coverage guard pass on Capone.
+
+#### Related Files
+`DSAISummaryCard.swift`, its four PNG goldens, and `Content/Views/DSAISummaryCard.md`.
+
+#### Follow-up Risks
+Any intentional shared typography, badge, or surface change may require visual review of all four baselines.
+
 ### 2026-07-17 18:55:00 EEST (`article-presentation-snapshot-reconciliation`)
 
 - task_or_issue: `Align DSKit contracts and visual baselines with the delivered article presentation tuning`
