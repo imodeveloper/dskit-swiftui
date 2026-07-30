@@ -6,6 +6,11 @@
 
 ## Changes
 
+### 2026-07-30 (`larger-compact-person-accessory`)
+
+- Increases opt-in compact accessory symbols from `bodySmall` (14 points) to `bodyLarge` (18 points).
+- Monitor uses this opt-in presentation only for person Wikipedia/Google accessories, providing the requested four-point increase without changing standard entity accessories.
+
 ### 2026-07-29 (`compact-entity-accessory`)
 
 - Added a default-disabled compact accessory presentation that renders trailing symbols at `bodySmall` instead of `title2`.
