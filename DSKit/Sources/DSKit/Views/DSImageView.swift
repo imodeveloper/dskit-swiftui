@@ -17,7 +17,9 @@ import NukeUI
  The `DSImageView` can be initialized with various types of image sources:
  - System symbols with optional tinting.
  - Local UI images with optional display shapes and tinting.
- - Remote image URLs with automatic fetching and display.
+ - Remote image URLs with automatic fetching and display. While a remote image
+   loads, its shaped background remains visible without an icon; a failed load
+   shows `photo.badge.exclamationmark`.
  - Each initializer configures the view to handle specific image requirements such as scaling, aspect ratio, and shape.
 
  #### Usage:
@@ -225,7 +227,7 @@ private struct DSRemoteImageView: View {
     @ViewBuilder
     private func remoteImageContent(state: LazyImageState, layoutSize: CGSize) -> some View {
         ZStack {
-            loadingView(for: layoutSize)
+            loadingView()
                 .opacity(state.image == nil && state.error == nil ? 1 : 0)
 
             if state.error != nil {
@@ -265,18 +267,8 @@ private struct DSRemoteImageView: View {
             .setDisplayShape(shape: image.displayShape)
     }
 
-    private func loadingView(for layoutSize: CGSize) -> some View {
-        let placeholderIconSize = adaptivePlaceholderIconSize(for: layoutSize)
-
-        return Color.gray.opacity(0.1)
-            .overlay(alignment: .center) {
-                Image(systemName: "photo")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundStyle(.secondary.opacity(0.72))
-                    .frame(width: placeholderIconSize, height: placeholderIconSize)
-                    .accessibilityHidden(true)
-            }
+    private func loadingView() -> some View {
+        Color.gray.opacity(0.1)
             .setDisplayShape(shape: image.displayShape)
     }
 

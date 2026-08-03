@@ -6,6 +6,11 @@
 
 ## Changes
 
+### 2026-08-03 (`remote-image-iconless-loading-state`)
+
+- Remote image loading now shows only the shaped placeholder background; the failure state keeps `photo.badge.exclamationmark`.
+
+
 ### 2026-07-08 23:55:00 EEST (`pending`)
 
 - task_or_issue: `Remote images should crossfade from placeholder to loaded image`

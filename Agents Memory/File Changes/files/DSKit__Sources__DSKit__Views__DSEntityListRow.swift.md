@@ -6,6 +6,11 @@
 
 ## Changes
 
+### 2026-08-03 (`compact-accessory-matches-source-badge`)
+
+- Compact external-link accessories use the label token so their visual size matches source badges in Monitor person rows.
+
+
 ### 2026-07-30 (`larger-compact-person-accessory`)
 
 - Increases opt-in compact accessory symbols from `bodySmall` (14 points) to `bodyLarge` (18 points).

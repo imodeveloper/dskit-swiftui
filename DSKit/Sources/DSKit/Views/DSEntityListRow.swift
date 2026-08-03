@@ -121,7 +121,7 @@ public struct DSEntityListRow<Leading: View>: View {
             if let accessorySystemName {
                 DSImageView(
                     systemName: accessorySystemName,
-                    size: .font(usesCompactAccessory ? .bodyLarge : .title2),
+                    size: .font(usesCompactAccessory ? .label : .title2),
                     tint: .text(.caption2)
                 )
             }

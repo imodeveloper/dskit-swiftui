@@ -8,7 +8,9 @@
 The `DSImageView` can be initialized with various types of image sources:
 - System symbols with optional tinting.
 - Local UI images with optional display shapes and tinting.
-- Remote image URLs with automatic fetching and display.
+- Remote image URLs with automatic fetching and display. While a remote image
+loads, its shaped background remains visible without an icon; a failed load
+shows `photo.badge.exclamationmark`.
 - Each initializer configures the view to handle specific image requirements such as scaling, aspect ratio, and shape.
 
 #### Usage:
