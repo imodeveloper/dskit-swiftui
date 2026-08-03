@@ -6,6 +6,12 @@
 
 ## Changes
 
+### 2026-08-03 (`diagonal-source-badge-gradients`)
+
+- Letter and source badges now use a lower-left to upper-right gradient from the assigned source color at 80% opacity to the same color at full opacity.
+- This preserves deterministic source-color assignment while applying the shared visual treatment in article rows, author headers, and AI-summary source badges.
+
+
 ### 2026-07-17 18:21:20 EEST (`letter-badge-compact-balance`)
 
 - task_or_issue: `Letter badges needed the authored smaller circle and larger initial balance`

@@ -51,11 +51,19 @@ public struct DSLetterBadgeView: View {
             .frame(minWidth: badgeHeight, minHeight: badgeHeight)
             .background {
                 if isCircular {
-                    Circle().fill(backgroundColor)
+                    Circle().fill(badgeGradient)
                 } else {
-                    Capsule().fill(backgroundColor)
+                    Capsule().fill(badgeGradient)
                 }
             }
+    }
+
+    private var badgeGradient: LinearGradient {
+        LinearGradient(
+            colors: [backgroundColor.opacity(0.8), backgroundColor],
+            startPoint: .bottomLeading,
+            endPoint: .topTrailing
+        )
     }
 
     private var badgeTextStyle: DSTypographyToken {
