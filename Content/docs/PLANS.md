@@ -1,29 +1,40 @@
-# DSKit Execution & Debt Plan Register
+# DSKit execution plans
 
-## Plan folders
-
-- Active plans: `Content/docs/exec-plans/active/`
-- Completed plans: `Content/docs/exec-plans/completed/`
-- Debt tracker: `Content/docs/tech-debt-tracker.md` (create when recurring drift is identified)
-
-## Plan format
-- Keep each plan short:
-  - Goal
-  - Scope/Files
-  - Constraints
-  - Exit criteria
-  - Validation done
-- One plan per significant non-trivial change (UI system-level change, snapshot contract change, doc generator update, dependency bump).
+- Status: current
+- Read when: work spans multiple directories, public API, snapshot contracts,
+  release, or migration behavior
+- Last reviewed: 2026-08-07
 
 ## When to use a plan
 
-- Use only for work that will touch:
-  - multiple directories
-  - snapshot expectations
-  - public API surface
-  - release or migration behavior
+Routine component, example, snapshot, or documentation edits use the request,
+source, focused tests, and generated-doc gate directly. Use a plan only when
+sequencing or resumability would otherwise be unclear.
 
-## When to close a plan
+Do not use a plan as architectural history. Add a standalone ADR only when the
+decision is costly or risky to reverse, would surprise a future maintainer, and
+records a real rejected alternative. Accepted ADRs are preserved; a later
+decision creates a replacement and marks the old record superseded.
 
-- Move completed plan files to `Content/docs/exec-plans/completed/`.
-- Include final decision logs and any follow-up debt items before close.
+Keep plans in an OS temporary directory by default. A repository-visible plan
+is exceptional and belongs in `Content/docs/exec-plans/active/` only while work
+is genuinely active.
+
+## Required shape
+
+A tracked plan must stay compact and contain:
+
+- `Status: active`
+- `Last reviewed: YYYY-MM-DD`
+- `Review by: YYYY-MM-DD`
+- goal and stable acceptance IDs when a governing specification provides them;
+- scope/files and constraints;
+- Red -> Green -> Refactor seam or characterization reason;
+- validation and the exact resume trigger when paused.
+
+## Completion
+
+Delete a completed or abandoned plan after folding lasting behavior into
+source, tests, generated documentation, a current specification, or a rare ADR.
+Do not maintain a completed-plan archive; Git history preserves it. Record
+recurring unresolved work in the issue tracker, not in agent memory.

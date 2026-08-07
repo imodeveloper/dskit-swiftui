@@ -8,6 +8,7 @@ max_index_lines=80
 max_topic_lines=250
 max_total_lines=2000
 max_agents_lines=220
+max_plans_index_lines=80
 errors=0
 
 fail() {
@@ -56,8 +57,9 @@ agents_lines="$(wc -l < "$repo_root/AGENTS.md" | tr -d ' ')"
   fail "AGENTS.md has $agents_lines lines; limit is $max_agents_lines"
 
 if rg -n '/Users/[^/]+/' "$repo_root/AGENTS.md" "$memory_dir" \
-  -g '*.md' >/dev/null; then
-  fail "personal absolute path found in AGENTS.md or memory"
+  "$repo_root/Content/docs" "$repo_root/Content/AGENTS.md" \
+  "$repo_root/Scripts/AGENTS.md" -g '*.md' >/dev/null; then
+  fail "personal absolute path found in agent-facing documentation"
 fi
 
 check_markdown_paths() {
@@ -68,21 +70,59 @@ check_markdown_paths() {
 
   while IFS= read -r path; do
     [[ -n "$path" ]] || continue
+    path="${path%%#*}"
     [[ "$path" != *'<'* && "$path" != *'>'* && "$path" != *'*'* ]] || continue
     [[ "$path" != "CHANGELOG.md" && "$path" != "Agents Memory/CHANGELOG.md" ]] || continue
     [[ "$path" != com.* ]] || continue
     [[ -e "$repo_root/$path" || -e "$source_dir/$path" ]] ||
       fail "${source#"$repo_root/"} routes to missing $path"
-  done < <(rg -o '`[^`]+\.md`' "$source" | tr -d '`' | sort -u)
+  done < <(
+    {
+      rg -o '`[^`]+\.md`' "$source" | tr -d '`' || true
+      rg -o '\([^()]+\.md(#[^()]*)?\)' "$source" | tr -d '()' || true
+    } | sort -u
+  )
 }
 
 check_markdown_paths "$repo_root/AGENTS.md"
 check_markdown_paths "$memory_dir/README.md"
+check_markdown_paths "$repo_root/Content/docs/PLANS.md"
+check_markdown_paths "$repo_root/Content/docs/exec-plans/active/README.md"
 
-if rg -n 'update Agents Memory/CHANGELOG|add .*Agents Memory/CHANGELOG|agent_memory_file_changes\.sh' \
-  "$repo_root" -g '!Build/reports/**' -g '!**/agent_memory_audit.sh' >/dev/null; then
+if rg -n 'update.*Agents Memory/CHANGELOG|add .*Agents Memory/CHANGELOG|update.*[Ff]ile-change memory|[Ff]ile-change memory is updated|agent memory/change log|agent_memory_file_changes\.sh' \
+  "$repo_root/AGENTS.md" "$memory_dir" "$repo_root/Content/docs" \
+  "$repo_root/Content/AGENTS.md" "$repo_root/Scripts/AGENTS.md" \
+  -g '*.md' -g '!**/agent_memory_audit.sh' >/dev/null; then
   fail "active source still requires a retired memory journal"
 fi
+
+plans_index="$repo_root/Content/docs/PLANS.md"
+if [[ -f "$plans_index" ]]; then
+  plans_index_lines="$(wc -l < "$plans_index" | tr -d ' ')"
+  (( plans_index_lines <= max_plans_index_lines )) ||
+    fail "Content/docs/PLANS.md has $plans_index_lines lines; limit is $max_plans_index_lines"
+fi
+
+completed_plans="$repo_root/Content/docs/exec-plans/completed"
+if [[ -d "$completed_plans" ]] &&
+   [[ -n "$(find "$completed_plans" -type f -name '*.md' -print -quit)" ]]; then
+  fail "completed execution-plan archive exists; fold durable outcomes and rely on Git history"
+fi
+
+today="$(date +%F)"
+for plan in "$repo_root"/Content/docs/exec-plans/active/*.md; do
+  [[ -e "$plan" ]] || continue
+  [[ "$(basename "$plan")" != "README.md" ]] || continue
+  grep -q '^Status: active$' "$plan" ||
+    fail "${plan#"$repo_root/"} lacks Status: active"
+  grep -Eq '^Last reviewed: `[0-9]{4}-[0-9]{2}-[0-9]{2}`$' "$plan" ||
+    fail "${plan#"$repo_root/"} lacks Last reviewed metadata"
+  grep -Eq '^Review by: `[0-9]{4}-[0-9]{2}-[0-9]{2}`$' "$plan" ||
+    fail "${plan#"$repo_root/"} lacks Review by metadata"
+  review_by="$(sed -n 's/^Review by: `\([0-9-]*\)`$/\1/p' "$plan")"
+  [[ -z "$review_by" || "$review_by" > "$today" || "$review_by" == "$today" ]] ||
+    fail "${plan#"$repo_root/"} expired on $review_by"
+done
 
 if find "$memory_dir" -type f \( -name '*.p8' -o -name '*.pem' -o \
   -name '*.p12' -o -name '*.mobileprovision' \) -print -quit | grep -q .; then

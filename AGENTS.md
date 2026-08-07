@@ -28,12 +28,16 @@ Read only the nearest guide for the task:
 - screen snapshots: `DSKitExplorerTests/AGENTS.md`
 - generator/tooling: `Scripts/AGENTS.md`
 - hand-written/generated docs: `Content/AGENTS.md`
+- multi-directory, public-API, snapshot-contract, release, or migration plan:
+  `Content/docs/PLANS.md`
 
 Then inspect the target source and matching generated page or snapshot. Do not
 preload every design, workflow, quality, plan, or memory document.
 
 Open `Agents Memory/README.md` only when the task needs durable architecture
 background. Start with the single routed document it names.
+
+Routine component and documentation edits do not require an execution plan.
 
 ## Durable Memory
 
