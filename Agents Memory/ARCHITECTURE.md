@@ -1,5 +1,11 @@
 # DSKit Architecture
 
+- Status: current supporting reference
+- Read when: changing cross-project ownership, package/app/test/doc boundaries,
+  or Monitor integration
+- Last reviewed: 2026-08-07 for routing
+- Current source and nearest `AGENTS.md` files are authoritative
+
 ## 1) Domain map
 
 - `DSKit/`
