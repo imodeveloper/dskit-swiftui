@@ -10,7 +10,9 @@ The `DSImageView` can be initialized with various types of image sources:
 - Local UI images with optional display shapes and tinting.
 - Remote image URLs with automatic fetching and display. While a remote image
 loads, its shaped background remains visible without an icon; a failed load
-shows `photo.badge.exclamationmark`.
+shows `photo.badge.exclamationmark`. Remote assets are decoded into a
+display-sized thumbnail and cached by that pixel size rather than retaining
+the full decoded source bitmap in scrolling surfaces.
 - Each initializer configures the view to handle specific image requirements such as scaling, aspect ratio, and shape.
 
 #### Usage:

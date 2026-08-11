@@ -19,7 +19,9 @@ import NukeUI
  - Local UI images with optional display shapes and tinting.
  - Remote image URLs with automatic fetching and display. While a remote image
    loads, its shaped background remains visible without an icon; a failed load
-   shows `photo.badge.exclamationmark`.
+   shows `photo.badge.exclamationmark`. Remote assets are decoded into a
+   display-sized thumbnail and cached by that pixel size rather than retaining
+   the full decoded source bitmap in scrolling surfaces.
  - Each initializer configures the view to handle specific image requirements such as scaling, aspect ratio, and shape.
 
  #### Usage:
@@ -192,6 +194,7 @@ public struct DSImageView: View {
 private struct DSRemoteImageView: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.displayScale) private var displayScale
     @State private var currentWidth: CGFloat = 0
     @State private var resolvedAspectRatio: CGFloat?
 
@@ -203,7 +206,14 @@ private struct DSRemoteImageView: View {
             let layoutSize = effectiveLayoutSize(from: geometry.size)
 
             Group {
-                LazyImage(url: url) { state in
+                LazyImage(
+                    request: DSRemoteImageRequest.make(
+                        url: url,
+                        layoutSize: layoutSize,
+                        displayScale: displayScale,
+                        contentMode: image.contentMode
+                    )
+                ) { state in
                     remoteImageContent(state: state, layoutSize: layoutSize)
                         .animation(remoteImageTransitionAnimation, value: state.image != nil)
                         .animation(remoteImageTransitionAnimation, value: state.error != nil)
