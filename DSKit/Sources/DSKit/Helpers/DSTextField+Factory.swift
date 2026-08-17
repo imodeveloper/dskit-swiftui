@@ -8,6 +8,47 @@
 import SwiftUI
 
 public extension DSTextField {
+    /// Creates a general-purpose text input with DSKit styling.
+    static func text(
+        value: DSTextFieldValue,
+        placeholder: String,
+        leftSystemName: String? = "textformat"
+    ) -> DSTextField {
+        DSTextField(
+            model: value,
+            placeholder: placeholder,
+            isSecureEntry: false,
+            keyboardType: .default,
+            textContentType: nil,
+            autocapitalizationType: .sentences,
+            validationPattern: "",
+            leftSystemName: leftSystemName,
+            validateMinimumLength: 1,
+            validateMaximumLength: 250,
+            validateEmptyTextField: false
+        )
+    }
+
+    /// Creates an HTTP or HTTPS URL input with DSKit styling.
+    static func url(
+        value: DSTextFieldValue,
+        placeholder: String = "https://example.com"
+    ) -> DSTextField {
+        DSTextField(
+            model: value,
+            placeholder: placeholder,
+            isSecureEntry: false,
+            keyboardType: .URL,
+            textContentType: .URL,
+            autocapitalizationType: .none,
+            validationPattern: "^https?://\\S+$",
+            leftSystemName: "link",
+            validateMinimumLength: 8,
+            validateMaximumLength: 2_048,
+            validateEmptyTextField: false
+        )
+    }
+
     // Email TextField
     static func email(value: DSTextFieldValue, placeholder: String = "Email") -> DSTextField {
         if #available(macOS 14.0, *) {

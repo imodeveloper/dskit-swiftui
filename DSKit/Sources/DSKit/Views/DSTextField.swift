@@ -10,7 +10,7 @@ import SwiftUI
 /*
 ## DSTextField
 
-`DSTextField` is a customizable SwiftUI component within the DSKit framework designed to handle user input, integrating essential functionalities such as security, validation, and appearance customization. It supports text input, secure entry for passwords, and validation based on various criteria.
+`DSTextField` is a customizable SwiftUI component within the DSKit framework designed to handle user input, integrating essential functionalities such as security, validation, and appearance customization. It supports general text and URL input alongside secure entry, contact fields, search, and validation-based factories.
 
 #### Initialization:
 Initializes a `DSTextField` with various options for handling different types of input and validation.
