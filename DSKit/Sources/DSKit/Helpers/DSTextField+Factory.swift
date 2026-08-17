@@ -12,9 +12,10 @@ public extension DSTextField {
     static func text(
         value: DSTextFieldValue,
         placeholder: String,
-        leftSystemName: String? = "textformat"
+        leftSystemName: String? = "textformat",
+        inactiveContentTint: DSColorToken = .text(.secondary)
     ) -> DSTextField {
-        DSTextField(
+        var textField = DSTextField(
             model: value,
             placeholder: placeholder,
             isSecureEntry: false,
@@ -27,14 +28,17 @@ public extension DSTextField {
             validateMaximumLength: 250,
             validateEmptyTextField: false
         )
+        textField.inactiveContentTint = inactiveContentTint
+        return textField
     }
 
     /// Creates an HTTP or HTTPS URL input with DSKit styling.
     static func url(
         value: DSTextFieldValue,
-        placeholder: String = "https://example.com"
+        placeholder: String = "https://example.com",
+        inactiveContentTint: DSColorToken = .text(.secondary)
     ) -> DSTextField {
-        DSTextField(
+        var textField = DSTextField(
             model: value,
             placeholder: placeholder,
             isSecureEntry: false,
@@ -47,6 +51,8 @@ public extension DSTextField {
             validateMaximumLength: 2_048,
             validateEmptyTextField: false
         )
+        textField.inactiveContentTint = inactiveContentTint
+        return textField
     }
 
     // Email TextField

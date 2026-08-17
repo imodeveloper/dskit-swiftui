@@ -17,6 +17,7 @@ struct DSCustomUITextField: DSViewRepresentable {
     @Binding var isEditing: Bool
 
     var placeholder: String
+    var placeholderTint: DSColorToken
 
     // Use the cross-platform types
     var keyboardType: DSKeyboardType
@@ -35,14 +36,12 @@ struct DSCustomUITextField: DSViewRepresentable {
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
         uiView.isSecureTextEntry = isSecureEntry
+        uiView.attributedPlaceholder = attributedPlaceholder
     }
 
     private func configureUITextField(_ textField: UITextField, context: Context) {
         textField.placeholder = placeholder
-        textField.attributedPlaceholder = NSAttributedString(
-            string: placeholder,
-            attributes: [NSAttributedString.Key.foregroundColor: appearance.uiColor(for: .text(.secondary), surfaceStyle: surfaceStyle)]
-        )
+        textField.attributedPlaceholder = attributedPlaceholder
         textField.font = appearance.typography.subheadline
         textField.adjustsFontForContentSizeCategory = true
         textField.isSecureTextEntry = isSecureEntry
@@ -51,6 +50,16 @@ struct DSCustomUITextField: DSViewRepresentable {
         textField.autocapitalizationType = autocapitalizationType
         textField.delegate = context.coordinator
         textField.textColor = appearance.uiColor(for: .text(.primary), surfaceStyle: surfaceStyle)
+    }
+
+    private var attributedPlaceholder: NSAttributedString {
+        NSAttributedString(
+            string: placeholder,
+            attributes: [
+                NSAttributedString.Key.foregroundColor:
+                    appearance.uiColor(for: placeholderTint, surfaceStyle: surfaceStyle)
+            ]
+        )
     }
     #elseif canImport(AppKit)
     func makeNSView(context: Context) -> NSTextField {

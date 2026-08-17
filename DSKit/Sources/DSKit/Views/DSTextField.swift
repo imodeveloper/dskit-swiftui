@@ -47,6 +47,7 @@ public struct DSTextField: View {
     let autocapitalizationType: DSAutocapitalizationType
     let validationPattern: String
     let leftSystemName: String?
+    var inactiveContentTint: DSColorToken = .text(.secondary)
     let validateMinimumLength: Int
     let validateMaximumLength: Int
     let validateEmptyTextField: Bool
@@ -57,7 +58,7 @@ public struct DSTextField: View {
                 DSImageView(
                     systemName: symbolName,
                     size: .font(.subheadline),
-                    tint: hasText ? .text(.primary) : .text(.secondary)
+                    tint: hasText ? .text(.primary) : inactiveContentTint
                 )
             }
 
@@ -67,6 +68,7 @@ public struct DSTextField: View {
                 isSecureEntry: $isSecureEntryVisible,
                 isEditing: $isEditing,
                 placeholder: placeholder,
+                placeholderTint: inactiveContentTint,
                 keyboardType: keyboardType,
                 textContentType: textContentType,
                 autocapitalizationType: autocapitalizationType
@@ -170,6 +172,28 @@ struct Testable_DSTextField: View {
                 }
             }
         }
+    }
+}
+
+struct Testable_DSTextFieldPrimaryInactiveContent: View {
+
+    @State private var name = DSTextFieldValue()
+    @State private var url = DSTextFieldValue()
+
+    var body: some View {
+        DSVStack {
+            DSTextField.text(
+                value: name,
+                placeholder: "Name",
+                inactiveContentTint: .text(.primary)
+            )
+            DSTextField.url(
+                value: url,
+                placeholder: "https://example.com/feed.xml",
+                inactiveContentTint: .text(.primary)
+            )
+        }
+        .dsPadding()
     }
 }
 

@@ -215,12 +215,28 @@ final class DSKitTests: SnapshotTestCase {
         assertSnapshot(for: Testable_DSTextField(), named: "DSTextField", options: crossSimulatorOptions)
     }
 
+    func testDSTextFieldPrimaryInactiveContent() throws {
+        assertSnapshot(
+            for: Testable_DSTextFieldPrimaryInactiveContent(),
+            named: "DSTextFieldPrimaryInactiveContent",
+            options: crossSimulatorOptions
+        )
+    }
+
     func testDSTextFieldGeneralAndURLFactoriesAreAvailable() {
         let name = DSTextFieldValue(value: "Monitor independent")
         let url = DSTextFieldValue(value: "https://monitor.md/feed.xml")
 
-        _ = DSTextField.text(value: name, placeholder: "Name")
-        _ = DSTextField.url(value: url, placeholder: "Feed URL")
+        _ = DSTextField.text(
+            value: name,
+            placeholder: "Name",
+            inactiveContentTint: .text(.primary)
+        )
+        _ = DSTextField.url(
+            value: url,
+            placeholder: "Feed URL",
+            inactiveContentTint: .text(.primary)
+        )
     }
 
     func testDSTextField_DynamicType() throws {
