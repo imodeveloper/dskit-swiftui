@@ -20,6 +20,8 @@ Initializes a `DSTextField` with various options for handling different types of
 
 #### Usage:
 `DSTextField` is suitable for forms, login screens, and any interface where user input is required. The secure entry option and input validation make it particularly useful for handling sensitive information.
+
+Use the factory `background` parameter when a field needs a semantic fill that differs from its containing surface. The default remains `surfaceSunken`.
 */
 
 public struct DSTextField: View {
@@ -48,6 +50,7 @@ public struct DSTextField: View {
     let validationPattern: String
     let leftSystemName: String?
     var inactiveContentTint: DSColorToken = .text(.secondary)
+    var background: DSColorToken = .background(.surfaceSunken)
     let validateMinimumLength: Int
     let validateMaximumLength: Int
     let validateEmptyTextField: Bool
@@ -89,7 +92,7 @@ public struct DSTextField: View {
         }
         .dsHeight(.custom(appearance.actionElementHeight))
         .dsPadding(.horizontal, .custom(appearance.spacing.value(for: .space16) - 1))
-        .dsBackground(.background(.surfaceSunken))
+        .dsBackground(background)
         .dsCornerRadius()
         .overlay(
             // Outlines the text field in red if the content is invalid
@@ -194,6 +197,29 @@ struct Testable_DSTextFieldPrimaryInactiveContent: View {
             )
         }
         .dsPadding()
+    }
+}
+
+struct Testable_DSTextFieldPrimaryBackground: View {
+
+    @State private var name = DSTextFieldValue()
+    @State private var url = DSTextFieldValue()
+
+    var body: some View {
+        DSVStack {
+            DSTextField.text(
+                value: name,
+                placeholder: "Name",
+                background: .background(.canvas)
+            )
+            DSTextField.url(
+                value: url,
+                placeholder: "https://example.com/feed.xml",
+                background: .background(.canvas)
+            )
+        }
+        .dsPadding()
+        .dsBackground(.secondary)
     }
 }
 

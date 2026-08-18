@@ -223,6 +223,14 @@ final class DSKitTests: SnapshotTestCase {
         )
     }
 
+    func testDSTextFieldPrimaryBackground() throws {
+        assertSnapshot(
+            for: Testable_DSTextFieldPrimaryBackground(),
+            named: "DSTextFieldPrimaryBackground",
+            options: crossSimulatorOptions
+        )
+    }
+
     func testDSTextFieldGeneralAndURLFactoriesAreAvailable() {
         let name = DSTextFieldValue(value: "Monitor independent")
         let url = DSTextFieldValue(value: "https://monitor.md/feed.xml")
@@ -230,12 +238,14 @@ final class DSKitTests: SnapshotTestCase {
         _ = DSTextField.text(
             value: name,
             placeholder: "Name",
-            inactiveContentTint: .text(.primary)
+            inactiveContentTint: .text(.primary),
+            background: .background(.canvas)
         )
         _ = DSTextField.url(
             value: url,
             placeholder: "Feed URL",
-            inactiveContentTint: .text(.primary)
+            inactiveContentTint: .text(.primary),
+            background: .background(.canvas)
         )
     }
 

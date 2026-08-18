@@ -13,7 +13,8 @@ public extension DSTextField {
         value: DSTextFieldValue,
         placeholder: String,
         leftSystemName: String? = "textformat",
-        inactiveContentTint: DSColorToken = .text(.secondary)
+        inactiveContentTint: DSColorToken = .text(.secondary),
+        background: DSColorToken = .background(.surfaceSunken)
     ) -> DSTextField {
         var textField = DSTextField(
             model: value,
@@ -29,6 +30,7 @@ public extension DSTextField {
             validateEmptyTextField: false
         )
         textField.inactiveContentTint = inactiveContentTint
+        textField.background = background
         return textField
     }
 
@@ -36,7 +38,8 @@ public extension DSTextField {
     static func url(
         value: DSTextFieldValue,
         placeholder: String = "https://example.com",
-        inactiveContentTint: DSColorToken = .text(.secondary)
+        inactiveContentTint: DSColorToken = .text(.secondary),
+        background: DSColorToken = .background(.surfaceSunken)
     ) -> DSTextField {
         var textField = DSTextField(
             model: value,
@@ -52,6 +55,7 @@ public extension DSTextField {
             validateEmptyTextField: false
         )
         textField.inactiveContentTint = inactiveContentTint
+        textField.background = background
         return textField
     }
 

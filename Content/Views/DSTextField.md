@@ -13,6 +13,8 @@ Initializes a `DSTextField` with various options for handling different types of
 #### Usage:
 `DSTextField` is suitable for forms, login screens, and any interface where user input is required. The secure entry option and input validation make it particularly useful for handling sensitive information.
 
+Use the factory `background` parameter when a field needs a semantic fill that differs from its containing surface. The default remains `surfaceSunken`.
+
 ## Example
 
 ```swift
