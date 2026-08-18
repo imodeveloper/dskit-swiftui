@@ -234,6 +234,7 @@ final class DSKitTests: SnapshotTestCase {
     func testDSTextFieldGeneralAndURLFactoriesAreAvailable() {
         let name = DSTextFieldValue(value: "Monitor independent")
         let url = DSTextFieldValue(value: "https://monitor.md/feed.xml")
+        let schemeLessURL = DSTextFieldValue(value: "news.yam.md/ro/rss")
 
         _ = DSTextField.text(
             value: name,
@@ -241,11 +242,29 @@ final class DSKitTests: SnapshotTestCase {
             inactiveContentTint: .text(.primary),
             background: .background(.canvas)
         )
-        _ = DSTextField.url(
+        let strictURLField = DSTextField.url(
             value: url,
             placeholder: "Feed URL",
             inactiveContentTint: .text(.primary),
             background: .background(.canvas)
+        )
+        let schemeLessField = DSTextField.url(
+            value: schemeLessURL,
+            placeholder: "Feed URL",
+            allowsMissingScheme: true
+        )
+
+        XCTAssertTrue(
+            DSTextfieldValidator.validate(
+                string: schemeLessURL.text,
+                pattern: schemeLessField.validationPattern
+            )
+        )
+        XCTAssertFalse(
+            DSTextfieldValidator.validate(
+                string: schemeLessURL.text,
+                pattern: strictURLField.validationPattern
+            )
         )
     }
 

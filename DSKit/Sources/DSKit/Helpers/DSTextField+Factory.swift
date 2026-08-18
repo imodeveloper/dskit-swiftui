@@ -39,7 +39,8 @@ public extension DSTextField {
         value: DSTextFieldValue,
         placeholder: String = "https://example.com",
         inactiveContentTint: DSColorToken = .text(.secondary),
-        background: DSColorToken = .background(.surfaceSunken)
+        background: DSColorToken = .background(.surfaceSunken),
+        allowsMissingScheme: Bool = false
     ) -> DSTextField {
         var textField = DSTextField(
             model: value,
@@ -48,7 +49,9 @@ public extension DSTextField {
             keyboardType: .URL,
             textContentType: .URL,
             autocapitalizationType: .none,
-            validationPattern: "^https?://\\S+$",
+            validationPattern: allowsMissingScheme
+                ? "^(?:https?://)?[^\\s/]+(?:/\\S*)?$"
+                : "^https?://\\S+$",
             leftSystemName: "link",
             validateMinimumLength: 8,
             validateMaximumLength: 2_048,

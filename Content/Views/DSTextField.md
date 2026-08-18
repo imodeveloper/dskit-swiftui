@@ -15,6 +15,8 @@ Initializes a `DSTextField` with various options for handling different types of
 
 Use the factory `background` parameter when a field needs a semantic fill that differs from its containing surface. The default remains `surfaceSunken`.
 
+URL fields require an HTTP or HTTPS scheme by default. Set `allowsMissingScheme` when the host app normalizes scheme-less addresses before use.
+
 ## Example
 
 ```swift
